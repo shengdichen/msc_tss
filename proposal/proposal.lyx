@@ -1,0 +1,720 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass amsart
+\begin_preamble
+% \renewcommand{\headrulewidth}{0.7pt}
+
+%\usepackage[%
+%	skip=0pt plus7pt minus7pt,%
+%	tocskip=10pt plus1pt minu1pt,%
+%	indent=13pt,%
+%]{parskip}
+\end_preamble
+\use_default_options true
+\begin_removed_modules
+theorems-ams
+\end_removed_modules
+\begin_modules
+eqs-within-sections
+figs-within-sections
+tabs-within-sections
+theorems-ams-chap-bytype
+theorems-ams-extended-chap-bytype
+algorithm2e
+customHeadersFooters
+enumitem
+logicalmkup
+todonotes
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "Libertinus Serif"
+\font_sans "default" "Avenir LT Std"
+\font_typewriter "default" "Source Code Pro"
+\font_math "auto" "default"
+\font_default_family default
+\use_non_tex_fonts true
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 93
+\use_microtype true
+\use_dash_ligatures true
+\graphics default
+\default_output_format pdf5
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing other 1.1
+\use_hyperref true
+\pdf_title "Curriculum Vitae"
+\pdf_author "Shengdi Chen"
+\pdf_subject "Curriculum Vitae of Shengdi »shc« Chen"
+\pdf_keywords "CV"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered true
+\pdf_bookmarksopen true
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle false
+\pdf_quoted_options "linkcolor=black,  frenchlinks=true, citecolor=black, urlcolor=blue, filecolor=blue, pdfpagelayout=OneColumn, pdfnewwindow=true, pdfstartview=XYZ, plainpages=false"
+\papersize a4paper
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine biblatex
+\cite_engine_type numerical
+\biblatex_bibstyle nature
+\biblatex_citestyle alphabetic-verb
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2.5cm
+\topmargin 2.5cm
+\rightmargin 2.5cm
+\bottommargin 2.5cm
+\headsep 0.3in
+\footskip 0.3in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side right
+\quotes_style danish
+\dynamic_quotes 1
+\papercolumns 1
+\papersides 1
+\paperpagestyle empty
+\listings_params "basicstyle={\ttfamily\normalsize},commentstyle={\sffamily},columns=fullflexible,numbers=left,numberstyle={\ttfamily\scriptsize},stepnumber=1,numberblanklines=false,firstline=1,numbersep=9pt,frame=tlb,framexleftmargin=3pt,framextopmargin=2pt,framexbottommargin=1pt,aboveskip={\medskipamount},belowskip={\medskipamount},captionpos=b,floatplacement=tbp,tabsize=4,resetmargins=false,breaklines=true,breakatwhitespace=false,breakautoindent=true,breakindent=0pt,prebreak={...},postbreak={...},extendedchars=true"
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Structural Injections into Convolutional Neural Operators
+\begin_inset Newline newline
+\end_inset
+
+for robust and accurate PDE-Learning
+\end_layout
+
+\begin_layout Author
+Shengdi Chen
+\end_layout
+
+\begin_layout Standard
+Despite success stories in traditional machine-learning (ML) settings such
+ as image classification and object detection, convolutional neural-networks
+ (CNN) have seen limited application for retrieving solution operators of
+ partial differential equations (PDEs).
+ One notable adaptation of CNN in this context 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "raonić2023convolutional"
+literal "false"
+
+\end_inset
+
+ proposes the novel convolutional neural operators (CNOs) architecture,
+ achieving admirable results on various well-studied sample PDEs under several
+ comparisons conditions.
+\end_layout
+
+\begin_layout Standard
+This master-thesis shall primarily extend the CNO architecture through structura
+l enrichment of its underlying model, in particular, the injection of establishe
+d solutions in other branches of ML such as the Transformer architecture
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "vaswani2023attention"
+literal "false"
+
+\end_inset
+
+, representative of the attention mechanism, shall be studied to determine
+ adaptability and flexibility of CNO, as well as to further improve its
+ performance.
+ The 
+\begin_inset Quotes xld
+\end_inset
+
+benchmarking suite
+\begin_inset Quotes xrd
+\end_inset
+
+ as proposed by the authors of CNO could also be studied to determine its
+ adequacy in gauging both the accuracy and robustness of operator-learning
+ algorithms in the backdrop of PDE-solving: new sample PDEs models could
+ be added, training conditions and hyper-parameters modified, and performance
+ comparison criteria extended.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace 75baselineskip%
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The programming component of this thesis is executed in the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+python
+\end_layout
+
+\end_inset
+
+ programming language using various external Deep Learning (DL) libraries.
+ The theoretical work pertains to PDE analysis, continuous structure preservatio
+n, as well as robustness and accuracy benchmarking of solution operators
+ for PDE-learning.
+\end_layout
+
+\begin_layout Standard
+This project, conducted under the supervision of 
+\begin_inset CommandInset href
+LatexCommand href
+name "Prof. Dr. S. Mishra"
+target "siddhartha.mishra@sam.math.ethz.ch"
+type "mailto:"
+literal "false"
+
+\end_inset
+
+, is executed within the framework of a Master-Thesis under the catalogue
+ identifier 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+401-4990-01L
+\end_layout
+
+\end_inset
+
+ at ETH Zürich.
+ 
+\begin_inset CommandInset href
+LatexCommand href
+name "Bogdan Raonić"
+target "bogdan.raonic@ai.ethz.ch"
+type "mailto:"
+literal "false"
+
+\end_inset
+
+ is the project advisor and primary correspondent.
+ The project is scheduled to commence on 
+\begin_inset Flex Strong
+status open
+
+\begin_layout Plain Layout
+04.12.2023
+\end_layout
+
+\end_inset
+
+, with a nonnegotiable duration of six (
+\begin_inset Flex Strong
+status open
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+
+) months and the following projected timeline of major milestones:
+\begin_inset VSpace 50baselineskip%
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="5">
+<features booktabs="true" islongtable="true" longtabularalignment="center">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="center" valignment="top">
+<column alignment="right" valignment="top" width="0pt">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Activities
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\qquad$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Duration (
+\begin_inset Formula $\times$
+\end_inset
+
+weeks)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Initial planning; project structuring
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $3$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Literature survey; ML hardware lab setup
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $3$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Inspection and trial run of existing libraries
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $3$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Initial coding and testing
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $3$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Theoretical formulation; bulk implementation work
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $6$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Benchmarking; results collection
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $2$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Final code review; thesis drafting
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $4$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Definition
+Registration Details
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintAll"
+bibfiles "main"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
