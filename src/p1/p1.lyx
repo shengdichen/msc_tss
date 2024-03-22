@@ -115,11 +115,591 @@ todonotes
 \begin_body
 
 \begin_layout Section
-Sample Section
+Quick Start
 \end_layout
 
 \begin_layout Standard
-Here is some sample text.
+Partial Differential Equations (PDEs) describe and model a multitude of
+ phenomenon in diverse regimens of science and engineering.
+ Historically, numerical methods distilled from traditional applied mathematics
+ have been used to obtain their solutions 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "königsberger,numerical-approx-pde"
+literal "false"
+
+\end_inset
+
+.
+ With the advent of machine-learning as a whole, the novel direction of
+ research for solving PDEs has gravitated towards operator learning using
+ deep neural networks.
+ Notable success stories include the DeepONet 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "deeponet"
+literal "false"
+
+\end_inset
+
+, DeepM&Mnet 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "deepmmnet"
+literal "false"
+
+\end_inset
+
+, KNO 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "kno,kno-publish"
+literal "false"
+
+\end_inset
+
+, FNO 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fno,fno-neural-operator"
+literal "false"
+
+\end_inset
+
+ and CNO 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cno"
+literal "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+While traditional researches in machine-learning have generally been based
+ on the assumption of data afflicted by some distribution-governed noise,
+ an emerging trend is the attempt of incorporating such noisy data further
+ deliberated tainted with 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+masks
+\end_layout
+
+\end_inset
+
+.
+ In the field of image classification and object detection, such masks would
+ translate to patches of value 
+\begin_inset Formula $0$
+\end_inset
+
+ (zero) randomly applied to sections of the input channels, as seen in researche
+s such as 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "multimae,videomae,videomae-published"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This project attempts to unify existing frameworks for PDE learning under
+ the backdrop of datasets post-processed with different types and varying
+ proportions of masking.
+\end_layout
+
+\begin_layout Standard
+A range of prototypical PDE models are targeted for evaluation: the steady-state
+ Poisson Equation and its immediate derivatives are studied in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Poisson-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, time-dependent models including the Heat Equation and the Wave Equation
+ are investigated in later chapters.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Despite success stories in traditional machine-learning (ML) settings such
+ as image classification and object detection, convolutional neural-networks
+ (CNN) have seen limited application for retrieving solution operators of
+ partial differential equations (PDEs).
+ One notable adaptation of CNN in this context 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "raonić2023convolutional"
+literal "false"
+
+\end_inset
+
+ proposes the novel convolutional neural operators (CNOs) architecture,
+ achieving admirable results on various well-studied sample PDEs under several
+ comparisons conditions.
+\end_layout
+
+\begin_layout Plain Layout
+This master-thesis shall primarily extend the CNO architecture through structura
+l enrichment of its underlying model, in particular, the injection of establishe
+d solutions in other branches of ML such as the Transformer architecture
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "vaswani2023attention"
+literal "false"
+
+\end_inset
+
+, representative of the attention mechanism, shall be studied to determine
+ adaptability and flexibility of CNO, as well as to further improve its
+ performance.
+ The 
+\begin_inset Quotes xld
+\end_inset
+
+benchmarking suite
+\begin_inset Quotes xrd
+\end_inset
+
+ as proposed by the authors of CNO could also be studied to determine its
+ adequacy in gauging both the accuracy and robustness of operator-learning
+ algorithms in the backdrop of PDE-solving: new sample PDEs models could
+ be added, training conditions and hyper-parameters modified, and performance
+ comparison criteria extended.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Related research
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Greyedout
+status open
+
+\begin_layout Plain Layout
+Learning algorithms directly studied in this thesis include, but are not
+ limited to: the Fourier Neural Operator (FNO) as introduced in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fno,fno-neural-operator"
+literal "false"
+
+\end_inset
+
+, the Convolutional Neural Operators (CNO) as devised in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cno"
+literal "false"
+
+\end_inset
+
+.
+ Tutorials such as 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "operator-learning-intro"
+literal "false"
+
+\end_inset
+
+ provide general introductions to operator-learning.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+\begin_inset VSpace 75baselineskip%
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+The programming component of this thesis is executed in the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+python
+\end_layout
+
+\end_inset
+
+ programming language using various external Deep Learning (DL) libraries.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+This project, conducted under the supervision of 
+\begin_inset CommandInset href
+LatexCommand href
+name "Prof. Dr. S. Mishra"
+target "siddhartha.mishra@sam.math.ethz.ch"
+type "mailto:"
+literal "false"
+
+\end_inset
+
+, is executed within the framework of a Master-Thesis under the catalogue
+ identifier 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+401-4990-01L
+\end_layout
+
+\end_inset
+
+ at ETH Zürich.
+ 
+\begin_inset CommandInset href
+LatexCommand href
+name "Bogdan Raonić"
+target "bogdan.raonic@ai.ethz.ch"
+type "mailto:"
+literal "false"
+
+\end_inset
+
+ is the project advisor and primary correspondent.
+ The project is scheduled to commence on 
+\begin_inset Flex Strong
+status open
+
+\begin_layout Plain Layout
+04.12.2023
+\end_layout
+
+\end_inset
+
+, with a nonnegotiable duration of six (
+\begin_inset Flex Strong
+status open
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+
+) months and the following projected timeline of major milestones:
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Technical Details
+\end_layout
+
+\begin_layout Subsection
+Programming
+\end_layout
+
+\begin_layout Standard
+The source-code is packaged in one monolithic repository, including the
+ dataset generation, testing-environment, as well as statistical and visual
+ analysis modules.
+ 
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
+an adapated implementation of the PW-IL algorithm based on the original
+ open-source code published by the authors in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "main-paper-code"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The programming is performed with the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+Python
+\end_layout
+
+\end_inset
+
+ language with global type-hinting.
+ A virtual environment is provided with 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+poetry
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+REF
+\end_layout
+
+\end_inset
+
+.
+ Python versions no earlier than 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+3.9
+\end_layout
+
+\end_inset
+
+ is required
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+name "Version requirement"
+target "https://docs.python.org/3/library/typing.html#module-contents"
+literal "false"
+
+\end_inset
+
+ of 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+Python
+\end_layout
+
+\end_inset
+
+'s 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+typing
+\end_layout
+
+\end_inset
+
+-Module
+\end_layout
+
+\end_inset
+
+.
+ The source-code is consistently processed by the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+black
+\end_layout
+
+\end_inset
+
+-formatter 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "black"
+literal "false"
+
+\end_inset
+
+ and thus implicitly conforms to the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+PEP8
+\end_layout
+
+\end_inset
+
+ standard.
+\end_layout
+
+\begin_layout Standard
+Implementations of the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+FNO
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fno,fno-neural-operator"
+literal "false"
+
+\end_inset
+
+ and 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+CNO
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cno"
+literal "false"
+
+\end_inset
+
+ algorithms are adapted from the original implementations when published.
+\end_layout
+
+\begin_layout Subsection
+Formatting and Typesetting
+\end_layout
+
+\begin_layout Standard
+This paper is compiled by the Lua\SpecialChar TeX
+ typesetting-engine featuring the open-source
+ font-packages 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+Libertinus
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+Source-Code-Pro
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Version-Tracking
+\end_layout
+
+\begin_layout Standard
+The source-code of this project is distributed under the following repositories:
+\end_layout
+
+\begin_layout Itemize
+The main repository contains all code necessary for inspecting and reproducing
+ the training and testing results of this study and is published under:
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: upload to github
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset href
+LatexCommand href
+name "GitLab [ETH-Domain]"
+target "https://gitlab.ethz.ch/shenchen/sem_code/"
+literal "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset href
+LatexCommand href
+name "GitHub"
+target "https://github.com/shengdichen/msc_code"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+This thesis-document is accessible under: 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: make repo; make it public; change the hyperlink
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset href
+LatexCommand href
+name "GitHub"
+target "https://github.com/shengdichen/sem_tss/blob/main/src/main.pdf"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \end_body

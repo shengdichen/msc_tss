@@ -115,11 +115,1706 @@ todonotes
 \begin_body
 
 \begin_layout Section
-Sample Section
+The PDE Prototypes
+\end_layout
+
+\begin_layout Subsection
+Poisson Equation
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Poisson-Equation"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Here is some sample text.
+For the Poisson equation:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\begin{alignedat}{4} & \quad & \frac{\partial^{2}}{\partial x_{1}^{2}}u+\frac{\partial^{2}}{\partial x_{2}^{2}}u & = & \;- & f & \qquad\\
+\Longrightarrow &  & -\nabla^{2}u & = &  & f
+\end{alignedat}
+\]
+
+\end_inset
+
+the prototypical datasets are constructed as follows.
+\end_layout
+
+\begin_layout Subsubsection
+Sum of Trigs
+\end_layout
+
+\begin_layout Definition
+The 
+\begin_inset Quotes xld
+\end_inset
+
+Sum-of-Sines
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset 
+\begin_inset CommandInset label
+LatexCommand label
+name "def:poisson-sum-of-sines"
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Each instance of the solution 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+ is constructed as follows:
+\begin_inset Formula 
+\[
+u_{i}\coloneqq\frac{c_{c}}{\pi}\cdot\mathop{\underbrace{\:\sum_{k_{1}\in\left[1;c_{k}\right]}\,\sum_{k_{2}\in\left[1;c_{k}\right]}\;}_{\eqqcolon\;\sum\sum}\biggl\{\Bigl(\texttt{R}_{k_{1},k_{2}}\left(k_{1}^{2}+k_{2}^{2}\right)^{-c_{r}}\Bigr)\cdot\underbrace{\sin\left(k_{1}\pi x_{1}\right)\sin\left(k_{2}\pi x_{2}\right)}_{\eqqcolon\:\underline{\sin}}\biggr\}}
+\]
+
+\end_inset
+
+where:
+\end_layout
+
+\begin_layout Itemize
+the constant 
+\begin_inset Formula $c_{k}\in\mathbb{N}^{+}$
+\end_inset
+
+ determines the number of samples used to generate one such instance;
+\end_layout
+
+\begin_layout Itemize
+the sample-weights 
+\begin_inset Formula $\texttt{R}_{k_{1},k_{2}}$
+\end_inset
+
+ are drawn from a uniform distribution;
+\end_layout
+
+\begin_layout Itemize
+a configurable scaling constant 
+\begin_inset Formula $c_{c}\in\mathbb{R}^{+}$
+\end_inset
+
+ is provided to aid visualization and inspection of model data.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Due to:
+\begin_inset Formula 
+\[
+\qquad\qquad\text{trig}\left(k_{1}\pi x_{1}\right)\text{trig}\left(k_{1}\pi x_{2}\right)\stackrel{\nabla^{2}}{\longmapsto}-\left(k_{1}^{2}+k_{2}^{2}\right)\pi^{2}\cdot\Bigl(\text{trig}\left(k_{1}\pi x_{1}\right)\text{trig}\left(k_{1}\pi x_{2}\right)\Bigr)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\text{trig}\left(\cdot\right)$
+\end_inset
+
+ denotes the sine or the cosine function, the corresponding source term
+ 
+\begin_inset Formula $f_{i}$
+\end_inset
+
+ is easily obtained by super-positioning the Laplacian 
+\begin_inset Formula $\nabla^{2}$
+\end_inset
+
+ of 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left\{ \begin{alignedat}{3} & \, & u_{i} & \coloneqq &  & \frac{c_{c}}{\pi}\cdot\mathop{\sum\sum\biggl\{\Bigl(\texttt{R}_{k_{1},k_{2}}\left(k_{1}^{2}+k_{2}^{2}\right)^{c_{r}-1}\Bigr)\cdot\underline{\sin}\biggr\}}\\
+ &  & f_{i} & \coloneqq & \; & c_{c}\pi\cdot\mathop{\sum\sum\biggl\{\Bigl(\texttt{R}_{k_{1},k_{2}}\left(k_{1}^{2}+k_{2}^{2}\right)^{c_{r}}\Bigr)\cdot\underline{\sin}\biggr\}}\\
+ &  & \underline{\sin} & \coloneqq &  & \sin\left(k_{1}\pi x_{1}\right)\sin\left(k_{2}\pi x_{2}\right)
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Visualization of several instances of this dataset is provided in Figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:dataset-poisson-sine"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ This dataset is also deployed to study the Poisson Equation in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cno"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/poisson/sine.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:dataset-poisson-sine"
+
+\end_inset
+
+Visualization of several instances of the 
+\begin_inset Quotes xld
+\end_inset
+
+Sum-of-Sines
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset, each constructed from 
+\begin_inset Formula $c_{k}\coloneqq4$
+\end_inset
+
+ samples as specified in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:poisson-sum-of-sines"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ First row: 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+2D
+\end_layout
+
+\end_inset
+
+ contour-plots of 
+\begin_inset Formula $4$
+\end_inset
+
+ different instances of the solution 
+\begin_inset Formula $u$
+\end_inset
+
+.
+ Second row: contour-plots and 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+3D
+\end_layout
+
+\end_inset
+
+ surface-plots of both the solution 
+\begin_inset Formula $u$
+\end_inset
+
+ and the source-term 
+\begin_inset Formula $f$
+\end_inset
+
+ of one (common) instance.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+Configuration
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+For this thesis, the following configuration of these constants is used
+ for the sum-of-sines dataset:
+\end_layout
+
+\begin_layout Itemize
+each instance 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+ is generated from 
+\begin_inset Formula $4$
+\end_inset
+
+ samples 
+\begin_inset Formula $u_{i}^{k\in\left\{ 1,2,3,4\right\} }$
+\end_inset
+
+, i.e., 
+\begin_inset Formula $c_{k}\coloneqq4$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Itemize
+the weights 
+\begin_inset Formula $\texttt{R}_{k_{1},k_{2}}$
+\end_inset
+
+ are spawned uniformly from 
+\begin_inset Formula $\mathcal{U}\left[-1.0;+1.0\right]$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $c_{r}$
+\end_inset
+
+ is chosen as 
+\begin_inset Formula $0.85$
+\end_inset
+
+, which is the negative of the 
+\begin_inset Formula $r$
+\end_inset
+
+ constant in its original form as conceived in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cno"
+literal "false"
+
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Itemize
+manual scaling is kept neutral, i.e., 
+\begin_inset Formula $c_{c}\coloneqq1.0$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+Properties
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+One notes that the solution 
+\begin_inset Formula $u$
+\end_inset
+
+ will uniformly evaluate to 
+\begin_inset Formula $0$
+\end_inset
+
+ when either coordinate 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ or 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ is 
+\begin_inset Formula $0$
+\end_inset
+
+; in the sense of the grid as chosen in this project, this means that 
+\begin_inset Formula $u$
+\end_inset
+
+ will vanish on the lower boundary of either dimension:
+\begin_inset Formula 
+\[
+u\left(x_{1}=0,\forall x_{2}\right)\equiv u\left(\forall x_{1},x_{2}=0\right)\equiv0
+\]
+
+\end_inset
+
+This dataset will thus incorporate both fixed (vanishing) and varying boundary-c
+ondition (BC) on different segments of the spatial boundary.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Sum of Distributions
+\end_layout
+
+\begin_layout Note
+Sign modification
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+In preparation of introducing this dataset, the target Poisson Equation
+ as introduced previously in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Poisson-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is slightly modified such that the negative of the right-hand side is taken:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\nabla^{2}u=f
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The reason for this adjustment is purely cosmetic and follows from the very
+ definition of this dataset:
+\end_layout
+
+\begin_layout Definition
+Sum of Gaussians
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The following dataset is generated:
+\begin_inset Formula 
+\[
+u_{i}\coloneqq\mathop{\sum_{k\in\left[1;c_{k}\right]}\biggl\{\texttt{R}^{k}\cdot u_{i}^{k}\biggr\}}\coloneqq\mathop{\sum_{k\in\left[1;c_{k}\right]}\biggl\{\texttt{R}^{k}\cdot\mathcal{N}^{k}\biggr\}}\:,\quad\texttt{R}\in\mathbb{R}^{c_{k}}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathcal{N}^{k}$
+\end_inset
+
+ denotes the probability density function (PDF) of the two-dimensional normal
+ distribution, whose expected-value 
+\begin_inset Formula $\mu^{k}$
+\end_inset
+
+ and covariance-matrix 
+\begin_inset Formula $\text{Cov}^{k}$
+\end_inset
+
+ are sampled from their respective random distributions 
+\begin_inset Formula $\mathcal{U}^{\mu}\coloneqq\text{Unif}\left[c_{\text{low}}^{\mu};c_{\text{high}}^{\mu}\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{U}^{\sigma}\coloneqq\text{Unif}\left[c_{\text{low}}^{\sigma};c_{\text{high}}^{\sigma}\right]$
+\end_inset
+
+ as follows:
+\begin_inset Formula 
+\[
+\mathcal{N}^{k}\simeq\left\{ \begin{alignedat}{4} & \: & \mathbb{R}^{2}\ni & \; & \mu^{k} & \coloneqq & \; & \left[\begin{array}{c}
+\mu^{k,1}\simeq\mathcal{U}^{\mu}\\
+\mu^{k,2}\simeq\mathcal{U}^{\mu}
+\end{array}\right]\\
+ &  & \mathbb{R}^{2\times2}\ni &  & \text{Cov}^{k} & \coloneqq &  & \left[\begin{array}{cc}
+\left(\sigma^{k,1}\simeq\mathcal{U}^{\sigma}\right)^{2} & 0\\
+0 & \left(\sigma^{k,2}\simeq\mathcal{U}^{\sigma}\right)^{2}
+\end{array}\right]
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+With the conscious choice of the diagonal covariance-matrix, one could easily
+ calculate the analytic expression for the corresponding source term 
+\begin_inset Formula $f_{i}^{k}$
+\end_inset
+
+.
+ Collecting the results, one concludes:
+\begin_inset Formula 
+\[
+\left\{ \begin{alignedat}{2}u^{k} & \coloneqq & \; & \frac{1}{2\pi\sigma_{1}\sigma_{2}}\cdot\underline{\exp}\\
+f^{k} & \coloneqq &  & \frac{1}{2\pi\sigma_{1}\sigma_{2}}\cdot\left(\frac{1}{\sigma_{1}^{4}}\left(x_{1}-\mu_{1}\right)^{2}-\frac{1}{\sigma_{1}^{2}}+\frac{1}{\sigma_{2}^{4}}\left(x_{2}-\mu_{2}\right)^{2}-\frac{1}{\sigma_{2}^{2}}\right)\cdot\underline{\exp}\\
+\underline{\exp} & \coloneqq &  & \exp\left(-\frac{1}{2}\left(\frac{1}{\sigma_{1}^{2}}\left(x_{1}-\mu_{1}\right)^{2}+\frac{1}{\sigma_{2}^{2}}\left(x_{2}-\mu_{2}\right)^{2}\right)\right)
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+Note that the sub-index 
+\begin_inset Formula $i$
+\end_inset
+
+ is omitted above for notational convenience.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+Choice of constants
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+similar to the 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-sines
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset as introduced in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:poisson-sum-of-sines"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, 
+\begin_inset Formula $4$
+\end_inset
+
+ samples of 
+\begin_inset Formula $u_{i}^{k}$
+\end_inset
+
+ are used to generate one instance of the solution 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Itemize
+the sample-weights 
+\begin_inset Formula $\texttt{R}^{k}$
+\end_inset
+
+ are drawn from a uniform distribution: 
+\begin_inset Formula $\texttt{R}_{i}^{k}\simeq\mathcal{U}\left[0.3;0.7\right]$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Itemize
+to construct the Gaussian PDFs 
+\begin_inset Formula $\mathcal{N}^{k}$
+\end_inset
+
+, expected-values 
+\begin_inset Formula $\mu^{k}$
+\end_inset
+
+ are sampled (uniformly) from the entire grid, and values of 
+\begin_inset Formula $\sigma^{k,\{1,2\}}$
+\end_inset
+
+ of the diagonal covariance matrix are spawned from 
+\begin_inset Formula $\mathcal{U}^{\sigma}\left[0.04;0.13\right]$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In similar fashion to the 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-sines
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset, multiple instances of the 
+\begin_inset Quotes xld
+\end_inset
+
+Sum-of-Gaussians
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset are plotted in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:dataset-poisson-gauss"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/poisson/gauss.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:dataset-poisson-gauss"
+
+\end_inset
+
+Visualization of the 
+\begin_inset Quotes xld
+\end_inset
+
+Sum-of-Gaussians
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset, each constructed from 
+\begin_inset Formula $c_{k}\coloneqq4$
+\end_inset
+
+ samples as specified in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:poisson-sum-of-sines"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Ordering of the plots mimics that of Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:dataset-poisson-sine"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for the 
+\begin_inset Quotes xld
+\end_inset
+
+Sum-of-Sines
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset.
+ First row: contour-plots of 
+\begin_inset Formula $4$
+\end_inset
+
+ different instances of the solution 
+\begin_inset Formula $u$
+\end_inset
+
+.
+ Second row: contour-plots and 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+3D
+\end_layout
+
+\end_inset
+
+ surface-plots of both the solution 
+\begin_inset Formula $u$
+\end_inset
+
+ and the source-term 
+\begin_inset Formula $f$
+\end_inset
+
+ of one (common) instance.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Heuristic comparisons
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Heuristic-comparisons-poisson-dataset"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+By inspecting the plots for the 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-sines
+\begin_inset Quotes xrd
+\end_inset
+
+ and the 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-gaussians
+\begin_inset Quotes xrd
+\end_inset
+
+ datasets in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:dataset-poisson-sine"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:dataset-poisson-gauss"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ respectively, one draws several immediate conclusions:
+\end_layout
+
+\begin_layout Standard
+While the 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-sines
+\begin_inset Quotes xrd
+\end_inset
+
+ datasets appears smoother in general, instances of the 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-gaussians
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset are more jagged and display more distinct extrema.
+ On the other hand, the 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-gaussians
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset often contains large areas of 
+\begin_inset Formula $0$
+\end_inset
+
+, whereas the 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-sines
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset are generally non-vanishing.
+ These heuristics will be further expanded upon in later analysis, see Section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Eval-Poisson-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Darcy Flow
+\end_layout
+
+\begin_layout Standard
+The Darcy PDE is a non-linear elliptic PDE of second order
+\begin_inset Formula 
+\[
+-\nabla\circ\left(k\left(\mathbf{x}\right)\nabla u\right)=f
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $k\left(\mathbf{x}\right)$
+\end_inset
+
+ denotes the permeability field, as well as solution 
+\begin_inset Formula $u$
+\end_inset
+
+ and the force source 
+\begin_inset Formula $f$
+\end_inset
+
+ as previously introduced with the Poisson Equation in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Poisson-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The Darcy Flow problem is discussed in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "darcy-nvidia,fno,fno-neural-operator"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+TODO:
+\end_layout
+
+\begin_layout Enumerate
+Background: what does Poisson model
+\end_layout
+
+\begin_layout Enumerate
+Poisson to Laplace
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Greyedout
+status open
+
+\begin_layout Subsection
+Heat Equation
+\end_layout
+
+\begin_layout Plain Layout
+For the heat equation:
+\begin_inset Formula 
+\[
+\begin{alignedat}{3} & \; & \frac{\partial}{\partial t}u & = & \; & \frac{\partial^{2}}{\partial x_{1}^{2}}u+\frac{\partial^{2}}{\partial x_{2}^{2}}u\\
+\Longrightarrow &  & \dot{u} & = &  & \nabla^{2}u
+\end{alignedat}
+\]
+
+\end_inset
+
+the dataset is constructed as follows:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+\left\{ \begin{alignedat}{2}u_{i} & \coloneqq & \; & -\frac{1}{d}\mathop{\sum_{m\in\left[1;d\right]}\biggl\{\frac{\mu_{m}}{\sqrt{m}}\cdot\exp\left(-2m^{2}\pi^{2}t\right)\sin\left(m\pi x_{1}\right)\sin\left(m\pi x_{2}\right)\biggr\}}\\
+u_{i}\left(0,x_{1},x_{2}\right) & \coloneqq &  & -\frac{1}{d}\mathop{\sum_{m\in\left[1;d\right]}\biggl\{\frac{\mu_{m}}{\sqrt{m}}\cdot\sin\left(m\pi x_{1}\right)\sin\left(m\pi x_{2}\right)\biggr\}}\\
+u_{i}\left(t,\partial_{1},\partial_{2}\right) & \equiv &  & 0
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Wave Equation
+\end_layout
+
+\begin_layout Plain Layout
+For the wave equation:
+\begin_inset Formula 
+\[
+\begin{alignedat}{3} & \; & \frac{\partial}{\partial t^{2}}u & = & \; & c^{2}\biggl(\frac{\partial^{2}}{\partial x_{1}^{2}}u+\frac{\partial^{2}}{\partial x_{2}^{2}}u\biggr)\\
+\Longrightarrow &  & \ddot{u} & = &  & c^{2}\;\nabla^{2}u
+\end{alignedat}
+\]
+
+\end_inset
+
+the following dataset is constructed:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+\left\{ \begin{alignedat}{2}u_{i} & \coloneqq & \; & \sum_{m,n\in\left[1;c_{k}\right]}\biggl\{\left(m^{2}+n^{2}\right)^{-c_{r}}\,\texttt{A}_{m,n}\cdot\sin\left(m\pi x_{1}\right)\sin\left(n\pi x_{2}\right)\cos\left(c_{c}\sqrt{m^{2}+n^{2}}\pi t\right)\biggr\}\\
+u_{i}\left(0,x_{1},x_{2}\right) & \coloneqq &  & \sum_{m,n\in\left[1;c_{k}\right]}\biggl\{\left(m^{2}+n^{2}\right)^{-c_{r}}\,\texttt{A}_{m,n}\cdot\sin\left(m\pi x_{1}\right)\sin\left(n\pi x_{2}\right)\biggr\}\\
+u_{i}\left(t,\partial_{1},\partial_{2}\right) & \equiv &  & 0
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Masking
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Masking"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This section enumerates various masking styles deployed in this thesis.
+\end_layout
+
+\begin_layout Definition
+General procedure of masking
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The output of applying masking to a matrix-like object is another matrix-like
+ object of the same dimension, but with some of its entries modified:
+\begin_inset Formula 
+\[
+\mathbb{R}^{d_{1}\times d_{2}\times\cdots}\in m\longrightarrow m^{\text{mask}}\in\mathbb{R}^{d_{1}\times d_{2}\times\cdots}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A common modification strategy, as also deployed in researches such as
+\begin_inset CommandInset citation
+LatexCommand cite
+key "videomae-published,videomae,multimae"
+literal "false"
+
+\end_inset
+
+, is to set the values of these entries to 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Masking, as used in this project, is thus understood as a two-step process:
+\end_layout
+
+\begin_layout Enumerate
+determine the masked candidates;
+\end_layout
+
+\begin_layout Enumerate
+apply the masking strategy to the masked candidates.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Two algorithms for determining the 
+\begin_inset Quotes xld
+\end_inset
+
+to-be-masked
+\begin_inset Quotes xrd
+\end_inset
+
+ candidates are discussed below.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/mask/random.png
+	width 15cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:masking-random"
+
+\end_inset
+
+Visualization the random-style masking using solutions 
+\begin_inset Formula $u$
+\end_inset
+
+ of the Poisson Equation as specified in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:poisson-sum-of-sines"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ First row: contour-plots of three instances of the solution 
+\begin_inset Formula $u$
+\end_inset
+
+.
+ Second row: contour-plots of the respective 
+\begin_inset Formula $u$
+\end_inset
+
+ instances with random-style masking covering 
+\begin_inset Formula $30\%$
+\end_inset
+
+ of all spatial grid-points.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Island style
+\end_layout
+
+\begin_layout Standard
+The island-style masking keeps a centered portion of the input matrix in-tact,
+ while applying the masking strategy to the surrounding entries.
+ The masked candidates form a rectangular 
+\begin_inset Quotes xld
+\end_inset
+
+annulus
+\begin_inset Quotes xrd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The island style, as implemented in this project, accepts as argument the
+ proportion of the unmodified center island of each dimension.
+\end_layout
+
+\begin_layout Standard
+Using the 
+\begin_inset Quotes xld
+\end_inset
+
+Sum-of-Sines
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset, illustrations of this masking style are found in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:masking-island"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Random style
+\end_layout
+
+\begin_layout Standard
+The masked candidates are selected by random.
+ This style of masking is widely used, in particular, in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "videomae-published,videomae,multimae"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The implementation in this project accepts as argument the proportion of
+ masked candidates.
+ Note that unlike the island-style mentioned above, the random mask patch
+ is generated anew during each call to its 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+.mask()
+\end_layout
+
+\end_inset
+
+ method, guaranteeing random entropy of the resulting dataset.
+\end_layout
+
+\begin_layout Standard
+Visualization of this random-style masking 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/mask/island.png
+	width 15cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:masking-island"
+
+\end_inset
+
+Visualization of the island-style dataset with the Poisson Equation.
+ Ordering of the plots mimics that of Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:masking-random"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for the random masking style.
+ First row: contour-plots of three 
+\begin_inset Formula $u$
+\end_inset
+
+ instances.
+ Second row: respective contour-plots proceeded with island-style keeping
+ 
+\begin_inset Formula $70\%$
+\end_inset
+
+ of the spatial grid-points in each dimension.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Collection of masks 
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Collection-of-masks"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This thesis considers masks of:
+\end_layout
+
+\begin_layout Itemize
+random style: with (increasing) intensity from 
+\begin_inset Formula $10\%$
+\end_inset
+
+ to 
+\begin_inset Formula $90\%$
+\end_inset
+
+, with 
+\begin_inset Formula $10\%$
+\end_inset
+
+ increment (
+\begin_inset Formula $9$
+\end_inset
+
+ masks in total);
+\end_layout
+
+\begin_layout Itemize
+island style: the in-tact center island shrinks from 
+\begin_inset Formula $90\%$
+\end_inset
+
+ to 
+\begin_inset Formula $10\%$
+\end_inset
+
+ per dimension, with 
+\begin_inset Formula $10\%$
+\end_inset
+
+ decrement (
+\begin_inset Formula $9$
+\end_inset
+
+ masks in total).
+\end_layout
+
+\begin_layout Standard
+For every model on each dataset, a total of 
+\begin_inset Formula $18$
+\end_inset
+
+ models are therefore trained and evaluated.
+ It should be noted that a 
+\begin_inset Formula $90\%$
+\end_inset
+
+ island-style mask is of the 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+lowest
+\end_layout
+
+\end_inset
+
+ intensity, whereas one of 
+\begin_inset Formula $10\%$
+\end_inset
+
+ is of the highest.
+\end_layout
+
+\begin_layout Section
+Learning Pipeline
+\end_layout
+
+\begin_layout Subsection
+Single (Solution-) masking
+\end_layout
+
+\begin_layout Standard
+As the primary artifact of PDE learning is the solution 
+\begin_inset Formula $u$
+\end_inset
+
+, the immediate idea is to apply masks to 
+\begin_inset Formula $u$
+\end_inset
+
+ itself to form one extra channel of the left-hand side for training.
+ This is captured in the following definition:
+\end_layout
+
+\begin_layout Definition
+Dataset
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Conforming to 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+pytorch
+\end_layout
+
+\end_inset
+
+'s 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+Dataset
+\end_layout
+
+\end_inset
+
+ API, each instance of a dataset is provided as:
+\begin_inset Formula 
+\[
+\left\{ \begin{alignedat}{2}\texttt{LHS}_{i} & \coloneqq & \; & \Bigl[u_{i}^{\text{mask}},f_{i},x_{1},x_{2}\Bigr]\\
+\texttt{RHS}_{i} & \coloneqq &  & \Bigl[\,u_{i}\,\Bigr]
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+Dataset for the Poisson Equation
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+For the Poisson equation, the solver provides each instance of source 
+\begin_inset Formula $f_{i}$
+\end_inset
+
+ and exact solution 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+ as a tuple:
+\begin_inset Formula 
+\[
+\text{solver}\longrightarrow\left(u_{i},f_{i}\right)
+\]
+
+\end_inset
+
+which is then masked with a masking algorithm conforming to specifications
+ in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Masking"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+u_{i}\longrightarrow u_{i}^{\text{mask}}
+\]
+
+\end_inset
+
+For the Poisson equation discretized spatially as described above, the dimension
+s of these components are easily observed as:
+\begin_inset Formula 
+\[
+\left\{ \begin{alignedat}{2}\texttt{LHS}_{i} & \simeq & \; & \Bigl(i,64,64,4\Bigr)\\
+\texttt{RHS}_{i} & \simeq &  & \Bigl(i,64,64,1\Bigr)
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Prediction
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The model evaluates the prediction 
+\begin_inset Formula $\hat{u}_{i}$
+\end_inset
+
+ as follows:
+\begin_inset Formula 
+\[
+\begin{alignedat}{2}\Bigl(u_{i}^{\text{mask}},f_{i},x_{1},x_{2}\Bigr) & \stackrel{\text{model}}{\longrightarrow} & \; & \hat{u}_{i}\end{alignedat}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Loss
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Using the prototypical 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+-residual, the loss is thus understood as:
+\begin_inset Formula 
+\[
+\begin{alignedat}{2}\text{Loss} & = &  & \mathop{\sum_{i}\left\{ \text{Res}_{i}\right\} }\\
+ & \stackrel{L^{2}}{\equiv} &  & \mathop{\sum_{i}\Bigl\{\bigl|\,\hat{u}_{i}-u_{i}\bigr|_{2}\Bigr\}}
+\end{alignedat}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Dataset splits
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Following common etiquette of machine-learning, the datasets for training
+ and testing are mutually exclusive.
+ In the case of the Poisson equation, a 5-to-1 split is used:
+\begin_inset Formula 
+\[
+\left\{ \begin{alignedat}{2}i_{\text{train}} & \coloneqq & \; & 1500\\
+i_{\text{test}} & \coloneqq &  & 300
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+A batch-size of 
+\begin_inset Formula $20$
+\end_inset
+
+ samples is also used during training.
+\end_layout
+
+\begin_layout Standard
+As usual, the testing dataset is unseen by the model during training phase
+ and serves exclusively the purpose of evaluation to examine the adaptability
+ of the trained models to generalize on data unseen during training.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Multi-masking
+\end_layout
+
+\begin_layout Standard
+Apart from the main learning target solution 
+\begin_inset Formula $u$
+\end_inset
+
+, other components of the dataset can be subject to masking as well.
+ This notion of 
+\begin_inset Quotes xld
+\end_inset
+
+multi-masking
+\begin_inset Quotes xrd
+\end_inset
+
+ is introduced in this section with the Poisson Equation as case study:
+\end_layout
+
+\begin_layout Definition
+Prediction
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The model evaluates the prediction 
+\begin_inset Formula $\hat{u}_{i}$
+\end_inset
+
+ as follows:
+\begin_inset Formula 
+\[
+\begin{alignedat}{2}\Bigl(u_{i}^{\text{mask}},f_{i}^{\text{mask}},x_{1},x_{2}\Bigr) & \stackrel{\text{model}}{\longrightarrow} & \; & \Bigl(\hat{u}_{i},\hat{f}_{i}\Bigr)\end{alignedat}
+\]
+
+\end_inset
+
+The loss as introduced previously is now modified
+\begin_inset Formula 
+\[
+\begin{alignedat}{2}\text{Loss} & = &  & \mathop{\sum_{i}\left\{ \text{Res}_{i}\right\} }\\
+ & \stackrel{L^{2}}{\equiv} &  & \mathop{\sum_{i}\Bigl\{\bigl|\,\hat{u}_{i}-u_{i}\bigr|_{2}+\lambda\bigl|\,\hat{f}_{i}-f_{i}\bigr|_{2}\Bigr\}}
+\end{alignedat}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
 \end_layout
 
 \end_body

@@ -52,8 +52,8 @@ todonotes
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize 12
-\spacing other 1.5
+\paperfontsize 11
+\spacing other 1.17
 \use_hyperref true
 \pdf_title "Sample Thesis"
 \pdf_author "Shengdi »shc« Chen"
@@ -123,11 +123,7 @@ todonotes
 \begin_body
 
 \begin_layout Title
-Sample
-\begin_inset Newline newline
-\end_inset
-
-Essay
+Masked PDE-Learning
 \end_layout
 
 \begin_layout Author
@@ -217,7 +213,103 @@ ch | 17-943-358
 \end_layout
 
 \begin_layout Abstract
-This is the sample summary.
+PDEs have historically been solved by numerical methods distilled from tradition
+al applied mathematics.
+ With the advent of machine-learning as a whole, toolchains for PDE research
+ now include the operator learning methodology structured around deep neural
+ networks.
+ Pertaining to machine-learning as a whole, on the other hand, much effort
+ is made to study the algorithmic resistance to intrinsic noise of data.
+ Masking, as one representative of intentional data contamination, sets
+ certain patches of data channels to zero, concealing proportions of the
+ raw dataset.
+\end_layout
+
+\begin_layout Abstract
+This project applies established models of PDE learning on datasets tainted
+ with different masking strategies with varying intensities.
+ Performance is gauged under application of different operator-learning
+ algorithms on various quintessential PDE problems.
+\begin_inset Note Greyedout
+status open
+
+\begin_layout Plain Layout
+Conclusions drawn pertain to PDE analysis, continuous structure preservation,
+ as well as robustness and accuracy benchmarking of solution operators for
+ PDE-learning.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Notable success stories include the DeepONet 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "deeponet"
+literal "false"
+
+\end_inset
+
+, DeepM&Mnet 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "deepmmnet"
+literal "false"
+
+\end_inset
+
+, KNO 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "kno,kno-publish"
+literal "false"
+
+\end_inset
+
+, FNO 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fno,fno-neural-operator"
+literal "false"
+
+\end_inset
+
+ and CNO 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cno"
+literal "false"
+
+\end_inset
+
+.
+ Despite success stories in traditional machine-learning (ML) settings such
+ as image classification and object detection, convolutional neural-networks
+ (CNN) have seen limited application for retrieving solution operators of
+ partial differential equations (PDEs).
+ One notable adaptation of CNN in this context 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cno"
+literal "false"
+
+\end_inset
+
+ proposes the novel convolutional neural operators (CNOs) architecture,
+ achieving admirable results on various well-studied sample PDEs under several
+ comparisons conditions.
+\end_layout
+
+\end_inset
+
+
 \begin_inset VSpace 150baselineskip%
 \end_inset
 
@@ -225,7 +317,60 @@ This is the sample summary.
 \end_layout
 
 \begin_layout Abstract
-Here is more text.
+This project, conducted under the supervision of 
+\begin_inset CommandInset href
+LatexCommand href
+name "Prof. Dr. S. Mishra"
+target "siddhartha.mishra@sam.math.ethz.ch"
+type "mailto:"
+literal "false"
+
+\end_inset
+
+, is executed within the framework of a Master-Thesis under the catalogue
+ identifier 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+401-4990-01L
+\end_layout
+
+\end_inset
+
+ at ETH Zürich.
+ 
+\begin_inset CommandInset href
+LatexCommand href
+name "Bogdan Raonić"
+target "bogdan.raonic@ai.ethz.ch"
+type "mailto:"
+literal "false"
+
+\end_inset
+
+ is the project advisor and primary correspondent.
+ The project commenced on 
+\begin_inset Flex Strong
+status open
+
+\begin_layout Plain Layout
+04.12.2023
+\end_layout
+
+\end_inset
+
+, with a nonnegotiable duration of six (
+\begin_inset Flex Strong
+status open
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+
+) months.
 \end_layout
 
 \begin_layout Standard
@@ -267,12 +412,12 @@ status open
 \end_layout
 
 \begin_layout Center Header
-Sample Essay
+Masked PDE-Learning
 \begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
-Sample Essay
+Masked PDE-Learning
 \end_layout
 
 \end_inset
@@ -402,7 +547,7 @@ filename "p1/p1.lyx"
 \end_layout
 
 \begin_layout Part
-Warm-Up
+Background and Setup
 \end_layout
 
 \begin_layout Standard
@@ -423,7 +568,7 @@ filename "p2/p2.lyx"
 \end_layout
 
 \begin_layout Part
-More Stuff
+Models and Environment
 \end_layout
 
 \begin_layout Standard
@@ -444,7 +589,7 @@ filename "p3/p3.lyx"
 \end_layout
 
 \begin_layout Part
-The Closing
+Evaluation and Comparison
 \end_layout
 
 \begin_layout Standard

@@ -115,11 +115,558 @@ todonotes
 \begin_body
 
 \begin_layout Section
-Sample Section
+Results Comparison
+\end_layout
+
+\begin_layout Subsection
+Evaluation methodology
 \end_layout
 
 \begin_layout Standard
-Here is some sample text.
+A powerful measure to gauge the generalization capability of machine-learning
+ models relies on 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+out-of-distribution
+\end_layout
+
+\end_inset
+
+ evaluation.
+ While projects such as 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cno"
+literal "false"
+
+\end_inset
+
+ adjust the raw (unmasked) datasets directly by changing the value(s) of
+ the model constant(s), this thesis exploits the tunable nature of both
+ the random and the island style masking as introduced in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Masking"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+: out-of-distribution evaluation is realized by using a combination of varying
+ masking strategies and their respective percentage.
+ As an example, a model trained on 
+\begin_inset Formula $0.5$
+\end_inset
+
+ (
+\begin_inset Formula $50\%$
+\end_inset
+
+) random-style masking could be evaluated against the same dataset post-processe
+d via an island-style zeroing out 
+\begin_inset Formula $90\%$
+\end_inset
+
+ of the grid.
+\end_layout
+
+\begin_layout Proposition
+Plotting convention
+\begin_inset CommandInset label
+LatexCommand label
+name "prop:Plotting-convention"
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+To realize out-of-distribution evaluation, the results of each network architect
+ure are presented in one row in a three-way-split, see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:result-gauss-m-one"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ as an example, where:
+\end_layout
+
+\begin_layout Itemize
+each sub-figure shows the 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error of all 
+\begin_inset Formula $18$
+\end_inset
+
+ models per network (
+\begin_inset Formula $9$
+\end_inset
+
+ with random masking, 
+\begin_inset Formula $9$
+\end_inset
+
+ with island masking, see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Collection-of-masks"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) on the evaluation dataset;
+\end_layout
+
+\begin_layout Itemize
+the left column indicates evaluation on low masking intensity, with 
+\begin_inset Formula $10\%$
+\end_inset
+
+ random style and 
+\begin_inset Formula $90\%$
+\end_inset
+
+ island style applied to the evaluation dataset; the center column represents
+ moderate masking using 
+\begin_inset Formula $50\%$
+\end_inset
+
+ random and 
+\begin_inset Formula $50\%$
+\end_inset
+
+ island; the right column demonstrate extreme masking of 
+\begin_inset Formula $90\%$
+\end_inset
+
+ random and 
+\begin_inset Formula $10\%$
+\end_inset
+
+ island;
+\end_layout
+
+\begin_layout Itemize
+a dashed line is drawn at the 
+\begin_inset Formula $20\%$
+\end_inset
+
+ mark to indicate a handwavy baseline.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Poisson Equation
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Eval-Poisson-Equation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Sum of Gaussians
+\end_layout
+
+\begin_layout Standard
+Results of the FNO and CNO models of the 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-gaussians
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset are shown in figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:result-gauss-m-one"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Figures and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:result-sine-m-one"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ depict the performance on the 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-sines
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/poisson/gauss/mask_one--fno.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/poisson/gauss/mask_one--cno.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:result-gauss-m-one"
+
+\end_inset
+
+
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error VS masking intensities of the 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-gaussians
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset.
+ Individual sub-plots are explained in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "prop:Plotting-convention"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/poisson/sine/mask_one--cno.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/poisson/sine/mask_one--fno.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:result-sine-m-one"
+
+\end_inset
+
+
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error VS masking intensities of the 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-sines
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset.
+ Individual sub-plots are explained in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "prop:Plotting-convention"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+While the plots appear jagged and sporadic at first glance, several conclusions
+ are available nonetheless:
+\end_layout
+
+\begin_layout Standard
+Firstly, the FNO algorithm yields stable (almost constant) performing models,
+ whereas the CNO models vary significantly based on both training and evaluation
+ dataset.
+ While all FNO models solve the Gaussian dataset beautifully, they uniformly
+ fail for the sine dataset.
+ On the other hand, multiple instances of CNO manage to beat the 
+\begin_inset Formula $20\%$
+\end_inset
+
+ error mark.
+ A closer look at the distribution of those well-performing models leads
+ to the subsequent observation:
+\end_layout
+
+\begin_layout Standard
+CNO Models perform better when evaluated on masking intensities resembling
+ that during training.
+ This is particularly evident from the left (low masking intensity) and
+ right (high masking intensity) plots of CNO.
+ As an example, the model trained on 
+\begin_inset Formula $10\%$
+\end_inset
+
+ random mask for the sine dataset performs very well when evaluated with
+ the same masking configuration.
+ On the flip side, when CNO models are evaluated on masking intensities
+ drastically different than training intensity, the errors blow up very
+ quickly, see, in particular, the left plot of CNO models on the sine dataset.
+\end_layout
+
+\begin_layout Standard
+This 
+\begin_inset Quotes xld
+\end_inset
+
+locality
+\begin_inset Quotes xrd
+\end_inset
+
+ of model validity is further shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:masks-cno-sol-random-0.1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, where one instance of the CNO model trained on (low intensity) 
+\begin_inset Formula $10\%$
+\end_inset
+
+ random-style mask is evaluated against all 
+\begin_inset Formula $18$
+\end_inset
+
+ (
+\begin_inset Formula $9$
+\end_inset
+
+ random and 
+\begin_inset Formula $9$
+\end_inset
+
+ island) masks: starting at about 
+\begin_inset Formula $15\%$
+\end_inset
+
+, the error increases steadily as the masking intensity distances itself
+ from that during training, reaching approximately 
+\begin_inset Formula $80\%$
+\end_inset
+
+ for both masking styles at high intensity regime.
+ Also, evaluation on the same masking type as training (both random style
+ in this case) consistently outperforms the case where a different type
+ is used (in this case island style).
+ It follows thus that evaluation results are generally better of the same
+ masking style with similar intensity.
+\end_layout
+
+\begin_layout Standard
+Comparing the performance of the FNO and CNO models 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+across
+\end_layout
+
+\end_inset
+
+ the datasets, one concludes that the Gaussian dataset is easier to learn
+ than the Sine dataset.
+ Bearing the heuristics in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Heuristic-comparisons-poisson-dataset"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, one could attribute this to the fact that the Gaussian dataset contains
+ more patches of 
+\begin_inset Formula $0$
+\end_inset
+
+ value even without masking, effectively negating the effect of masking
+ (with zeroes).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/poisson/sine/all_masks--cno--sol_random_0.1.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:masks-cno-sol-random-0.1"
+
+\end_inset
+
+
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error VS masking intensities one particular instance of the CNO model:
+ trained with the 
+\begin_inset Formula $10\%$
+\end_inset
+
+ random mask, evaluated with 
+\begin_inset Formula $9$
+\end_inset
+
+ random and 
+\begin_inset Formula $9$
+\end_inset
+
+ island masks with increasing intensity.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body

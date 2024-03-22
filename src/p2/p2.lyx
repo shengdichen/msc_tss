@@ -115,11 +115,564 @@ todonotes
 \begin_body
 
 \begin_layout Section
-Sample Section
+Discretization
+\end_layout
+
+\begin_layout Subsection
+Spatial discretization
 \end_layout
 
 \begin_layout Standard
-Here is some sample text.
+As argued in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cno"
+literal "false"
+
+\end_inset
+
+ in sections establishing its benchmarking setup
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+referred to as 
+\begin_inset Quotes xld
+\end_inset
+
+Representative PDE Benchmarks (RPB)
+\begin_inset Quotes xrd
+\end_inset
+
+, Page 8
+\end_layout
+
+\end_inset
+
+, the two-dimensional space boasts of distinct merits for the purpose of
+ gauging the performance of operator-learning: in essence, the learning
+ landscape is sufficiently complex to challenge algorithms without inducing
+ fearsome costs during training and evaluation, which is ideal for rapid
+ iteration and prototyping.
+\end_layout
+
+\begin_layout Standard
+In this spirit, this project focuses on the two-dimensional space as well,
+ with specifics of the discretization defined below:
+\end_layout
+
+\begin_layout Definition
+Space grid
+\begin_inset CommandInset label
+LatexCommand label
+name "def:Space-grid"
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+, each dimension of the spatial grid is discretized into 
+\begin_inset Formula $64$
+\end_inset
+
+ grid-points.
+ This resolution is also used in
+\end_layout
+
+\end_inset
+
+This thesis deploys a standardized discretization scheme of the two-dimensional
+ space with a resolution of 
+\begin_inset Formula $64$
+\end_inset
+
+ grid-points per dimension.
+ The step-size is chosen as 
+\begin_inset Formula $0.01$
+\end_inset
+
+, and the starting value is the origin for both dimensions:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\begin{alignedat}{2}\mathbb{R}^{64}\ni x_{1,2} & \coloneqq & \; & \overbrace{\quad\:\texttt{grid}\;\quad}^{\texttt{<np|torch>.arange}}\texttt{(}\left[\begin{alignedat}{4}\, &  & \text{start} & = & \; & 0.00 &  & \,\\
+ &  & \text{step} & = &  & 0.01\\
+ &  & \text{count} & = &  & 64
+\end{alignedat}
+\right]\texttt{)}\end{alignedat}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+Comparison with existing research
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+The space grid as deployed in existing research, such as 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cno"
+literal "false"
+
+\end_inset
+
+, is of the same resolution of 
+\begin_inset Formula $64$
+\end_inset
+
+ grid-points.
+ This value is chosen consciously: the exact 
+\begin_inset Formula $2$
+\end_inset
+
+-exponential facilitates efficient computation of the discrete Fourier transform
+ation.
+\end_layout
+
+\begin_layout Itemize
+While 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cno"
+literal "false"
+
+\end_inset
+
+ also chooses the starting point of 
+\begin_inset Formula $0.0$
+\end_inset
+
+ for each dimension, its end-point is set as 
+\begin_inset Formula $1.0$
+\end_inset
+
+.
+ This thesis's space-grid specified above in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:Space-grid"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ uses a narrower grid, terminating at 
+\begin_inset Formula $0.63$
+\end_inset
+
+.
+ Be careful to avoid the off-by-one error!
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Temporal discretization
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Greyedout
+status open
+
+\begin_layout Note
+Application of temporal discretization
+\end_layout
+
+\begin_deeper
+\begin_layout Plain Layout
+It should be noted that the temporal discretization is not used to time-independ
+ent PDEs, including, in particular, the Poisson Equation studied later in
+ Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Poisson-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Plain Layout
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Dataset
+\end_layout
+
+\begin_layout Standard
+This section enumerates the PDE models investigated in this project alongside
+ the construction of their respective datasets for the learning pipeline.
+ The common procedure for such dataset construction is described as follows:
+\end_layout
+
+\begin_layout Proposition
+Dataset construction
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+A dataset of size 
+\begin_inset Formula $i$
+\end_inset
+
+ contains of 
+\begin_inset Formula $i$
+\end_inset
+
+ instances, where each instance 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ is the concatenation of multiple matrix-like components, including at least
+ the solution 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+, as well as the grid coordinates 
+\begin_inset Formula $\mathbf{x}_{i}$
+\end_inset
+
+.
+ In the case of a two-dimensional space, 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ consists thus at least of the following three matrices: 
+\begin_inset Formula 
+\[
+z_{i}\coloneqq\Bigl(u_{i},x_{1},x_{2}\Bigr)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+One shall note that the coordinates matrices 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ in the proposition above bear no subscript to indicate index 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ This is intentional, as the coordinates are constant across all instances
+ of the dataset and require no re-computation during generation.
+\end_layout
+
+\begin_layout Standard
+Assuming linearity of the underlying PDE, multiple 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+samples
+\end_layout
+
+\end_inset
+
+ can be super-positioned to construct one 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+instance
+\end_layout
+
+\end_inset
+
+, in order to simulate entropy while guaranteeing a unifying underlying
+ distribution.
+ The following example illustrates this technique for the solution matrix
+ 
+\begin_inset Formula $u$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Example
+Sample super-positioning of solution 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Each instance 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+ is constructed via linear combination of 
+\begin_inset Formula $k$
+\end_inset
+
+ samples 
+\begin_inset Formula $u_{i}^{k}$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+u_{i}\coloneqq\Biggl[\text{weights}\Biggr]\circ\Biggl[\text{samples}\Biggr]=\Biggl[\texttt{R}_{i}^{k}\Biggr]\circ\Biggl[u_{i}^{k}\Biggr]
+\]
+
+\end_inset
+
+where the weights 
+\begin_inset Formula $\texttt{R}_{i}^{k}$
+\end_inset
+
+ are drawn from some distribution 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+ chosen a priori, which typically corresponds to a uniform distribution:
+\begin_inset Formula 
+\[
+\texttt{R}_{i}^{k}\simeq\mathcal{P}\coloneqq\text{Unif}\left[c_{\text{low}};c_{\text{high}}\right]
+\]
+
+\end_inset
+
+in which case the configurations 
+\begin_inset Formula $c_{\text{low}}$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{\text{high}}$
+\end_inset
+
+are considered constants.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Apparently, such super-positioning construction shall be applied to other
+ components included in the dataset.
+ As an example, for the case of the Poisson Equation as introduced in Section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Poisson-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, both the solution 
+\begin_inset Formula $u$
+\end_inset
+
+ and the source term 
+\begin_inset Formula $f$
+\end_inset
+
+ must be linearly combined if this construction technique is used.
+\end_layout
+
+\begin_layout Note
+Shape of dataset
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Since each component of 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ is a two-dimensional matrix as representation of the space-grid, 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ itself thus contains one more dimension to indicate the number of these
+ two-dimensional matrices.
+ In the minimal example of 
+\begin_inset Formula $z_{i}\coloneqq\left(u_{i},x_{1,i},x_{2,i}\right)$
+\end_inset
+
+ as proposed above, this extra dimension will have the value 
+\begin_inset Formula $3$
+\end_inset
+
+.
+ Consequently, a dataset of 
+\begin_inset Formula $i$
+\end_inset
+
+ of these 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ instances is four-dimensional.
+\end_layout
+
+\begin_layout Standard
+Following standard dataset format, the first dimension denotes the number
+ of instances.
+ There exists, however, no standfast rule concerning the ordering of the
+ remaining three dimensions.
+ Out of the six
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Number of possible permutations of 
+\begin_inset Formula $3$
+\end_inset
+
+ elements
+\end_layout
+
+\end_inset
+
+ total ordering possibilities, two of them are generally acceptable.
+ Continuing with the minimal example above with the space-grid as defined
+ in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:Space-grid"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, these two orderings yield respectively:
+\begin_inset Formula 
+\[
+\text{dataset}\doteq\left\langle \begin{alignedat}{2} & \: & \Bigl[i,64,64,3\Bigr]\\
+ &  & \Bigl[i,3,64,64\Bigr]
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+As an example, the FNO 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fno,fno-neural-operator"
+literal "false"
+
+\end_inset
+
+ implementation included in this project's repository accepts the first
+ ordering, while the CNO 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cno"
+literal "false"
+
+\end_inset
+
+ implementation expects the second.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+The programmer's perspective
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+From the perspective of API design, the super-positioning pipeline described
+ above stipulates that the construction of such datasets requires only the
+ implementation of generating one such sample of the instances.
+ The remaining logic, such as the randomly weighted linear combination and
+ the final dataset assembly with the coordinates matrices, can be reused
+ to a substantial extent.
+\end_layout
+
+\begin_layout Standard
+This stipulates a clean overload structure: the base-class offers those
+ reusable utility functions, and individual concrete dataset providers shall
+ overload this base-class to provide its specific implementation to generate
+ its instance-samples.
+ This design pattern is used throughout the code-base of this project, and
+ the interested reader is invited to inspect the details in the source repositor
+y.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
 \end_layout
 
 \end_body
