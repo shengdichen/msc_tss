@@ -60,6 +60,64 @@ online{my_github_repo,
 }
 # }}}
 
+# ml {{{
+@book{ml-murphy,
+  title={Probabilistic Machine Learning: An Introduction},
+  author={Murphy, K.P.},
+  isbn={9780262046824},
+  lccn={2021027430},
+  series={Adaptive Computation and Machine Learning series},
+  url={https://books.google.fr/books?id=wrZNEAAAQBAJ},
+  year={2022},
+  publisher={MIT Press}
+}
+@book{ml-elem-stats-learning,
+  title={The Elements of Statistical Learning: Data Mining, Inference, and Prediction, Second Edition},
+  author={Hastie, T. and Tibshirani, R. and Friedman, J.},
+  isbn={9780387848587},
+  lccn={2008941148},
+  series={Springer Series in Statistics},
+  url={https://books.google.fr/books?id=tVIjmNS3Ob8C},
+  year={2009},
+  publisher={Springer New York}
+}
+@book{ml-goodfellow,
+  title={Deep Learning},
+  author={Goodfellow, I. and Bengio, Y. and Courville, A.},
+  isbn={9780262337373},
+  series={Adaptive Computation and Machine Learning series},
+  url={https://books.google.fr/books?id=omivDQAAQBAJ},
+  year={2016},
+  publisher={MIT Press}
+}
+@misc{ml-batchsize,
+      title={Revisiting Small Batch Training for Deep Neural Networks},
+      author={Dominic Masters and Carlo Luschi},
+      year={2018},
+      eprint={1804.07612},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
+
+@book{stats-wasserman,
+  title={All of Statistics: A Concise Course in Statistical Inference},
+  author={Wasserman, L.},
+  isbn={9780387217369},
+  lccn={2003062209},
+  series={Springer Texts in Statistics},
+  url={https://books.google.fr/books?id=qrcuBAAAQBAJ},
+  year={2013},
+  publisher={Springer New York}
+}
+@misc{ml-normalization-google,
+  author = {Google Developers},
+  title = {Machine Learning - Foundational courses},
+  howpublished = {\url{https://developers.google.com/machine-learning/data-prep/transform/normalization}},
+  year = {2024},
+  note = {Accessed: 2024-04-20}
+}
+# }}}
+
 # networks {{{
 @misc{operator-learning-intro,
   title         = {A Mathematical Guide to Operator Learning},
@@ -115,6 +173,14 @@ online{my_github_repo,
   eprint        = {2302.01178},
   archiveprefix = {arXiv},
   primaryclass  = {cs.LG}
+}
+@misc{unet,
+  title         = {U-Net: Convolutional Networks for Biomedical Image Segmentation},
+  author        = {Olaf Ronneberger and Philipp Fischer and Thomas Brox},
+  year          = {2015},
+  eprint        = {1505.04597},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.CV}
 }
 @misc{attention,
   title         = {Attention Is All You Need},
@@ -184,6 +250,44 @@ online{my_github_repo,
   year          = {2009},
   publisher     = {Springer Berlin Heidelberg}
 }
+
+@book{analysis-isaacson,
+  title={Analysis of Numerical Methods},
+  author={Isaacson, E. and Keller, H.B.},
+  isbn={9780486680293},
+  lccn={94007740},
+  series={Dover Books on Mathematics},
+  url={https://books.google.fr/books?id=y77n2ySMJHUC},
+  year={1994},
+  publisher={Dover Publications}
+}
+@book{analysis-atkinson,
+  title={Theoretical Numerical Analysis: A Functional Analysis Framework},
+  author={Atkinson, K. and Han, W.},
+  isbn={9780387287690},
+  lccn={00061920},
+  series={Texts in Applied Mathematics},
+  url={https://books.google.fr/books?id=6TpGAAAAQBAJ},
+  year={2007},
+  publisher={Springer New York}
+}
+@book{analysis-burden,
+  title={Numerical Analysis},
+  author={Burden, R.L. and Faires, J.D.},
+  isbn={9780538733519},
+  lccn={2010922639},
+  url={https://books.google.fr/books?id=zXnSxY9G2JgC},
+  year={2010},
+  publisher={Cengage Learning}
+}
+@book{analysis-cheney,
+  title={Numerical Mathematics and Computing},
+  author={Cheney, E.W. and Kincaid, D.R.},
+  isbn={9781133712350},
+  url={https://books.google.fr/books?id=PewJAAAAQBAJ},
+  year={2012},
+  publisher={Cengage Learning}
+}
 # }}}
 
 # misc {{{
@@ -192,6 +296,18 @@ online{my_github_repo,
   title         = {The uncompromising Python code formatter},
   year          = {2019},
   howpublished  = {\url{https://github.com/psf/black}}
+}
+@software{python-poetry,
+author = {Eustace, Sébastien and {The Poetry contributors}},
+license = {MIT},
+title = {{Poetry: Python packaging and dependency management made easy}},
+url = {https://github.com/python-poetry/poetry}
+}
+@misc{python-pytest,
+  title =        {pytest x.y},
+  author = {Krekel, Holger and Oliveira, Bruno and Pfannschmidt, Ronny and Bruynooghe, Floris and Laugher, Brianna and Bruhin, Florian},
+  year =         {2004},
+  url = {https://github.com/pytest-dev/pytest},
 }
 @inproceedings{pytorch,
   author        = {Paszke, Adam and Gross, Sam and Massa, Francisco and Lerer, Adam and Bradbury, James and Chanan, Gregory and Killeen, Trevor and Lin, Zeming and Gimelshein, Natalia and Antiga, Luca and Desmaison, Alban and Kopf, Andreas and Yang, Edward and DeVito, Zachary and Raison, Martin and Tejani, Alykhan and Chilamkurthy, Sasank and Steiner, Benoit and Fang, Lu and Bai, Junjie and Chintala, Soumith},
