@@ -1,5 +1,5 @@
-#LyX 2.3 created this file. For more info see http://www.lyx.org/
-\lyxformat 544
+#LyX 2.4 created this file. For more info see https://www.lyx.org/
+\lyxformat 620
 \begin_document
 \begin_header
 \save_transient_properties true
@@ -22,11 +22,11 @@ enumitem
 logicalmkup
 todonotes
 \end_modules
-\maintain_unincluded_children false
+\maintain_unincluded_children no
 \language english
 \language_package default
-\inputencoding auto
-\fontencoding global
+\inputencoding auto-legacy
+\fontencoding auto
 \font_roman "default" "Libertinus Serif"
 \font_sans "default" "Avenir LT Std"
 \font_typewriter "default" "Source Code Pro"
@@ -34,16 +34,20 @@ todonotes
 \font_default_family default
 \use_non_tex_fonts true
 \font_sc false
-\font_osf false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
 \font_sf_scale 100 100
 \font_tt_scale 100 93
 \use_microtype true
 \use_dash_ligatures true
 \graphics default
-\default_output_format pdf5
+\default_output_format pdf4
 \output_sync 0
 \bibtex_command default
 \index_command default
+\float_placement class
+\float_alignment class
 \paperfontsize 11
 \spacing other 1.09
 \use_hyperref true
@@ -60,7 +64,7 @@ todonotes
 \pdf_backref false
 \pdf_pdfusetitle true
 \pdf_quoted_options "linkcolor=black,  frenchlinks=true, citecolor=black, urlcolor=blue, filecolor=blue, pdfpagelayout=OneColumn, pdfnewwindow=true, pdfstartview=XYZ, plainpages=false"
-\papersize a4paper
+\papersize a4
 \use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
@@ -82,7 +86,9 @@ todonotes
 \suppress_date false
 \justification true
 \use_refstyle 1
+\use_formatted_ref 0
 \use_minted 0
+\use_lineno 0
 \index Index
 \shortcut idx
 \color #008000
@@ -104,12 +110,17 @@ todonotes
 \papercolumns 1
 \papersides 2
 \paperpagestyle fancy
+\tablestyle default
 \listings_params "basicstyle={\ttfamily\normalsize},commentstyle={\sffamily},columns=fullflexible,numbers=left,numberstyle={\ttfamily\scriptsize},stepnumber=1,numberblanklines=false,firstline=1,numbersep=9pt,frame=tlb,framexleftmargin=3pt,framextopmargin=2pt,framexbottommargin=1pt,aboveskip={\medskipamount},belowskip={\medskipamount},captionpos=b,floatplacement=tbp,tabsize=4,resetmargins=false,breaklines=true,breakatwhitespace=false,breakautoindent=true,breakindent=0pt,prebreak={...},postbreak={...},extendedchars=true"
 \tracking_changes false
 \output_changes false
+\change_bars false
+\postpone_fragile_content false
 \html_math_output 0
 \html_css_as_file 0
 \html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
 \end_header
 
 \begin_body
@@ -118,8 +129,166 @@ todonotes
 Discretization
 \end_layout
 
+\begin_layout Standard
+Numerical solutions of PDEs defined on continuous structures rely on the discretization of these domains.
+ This section explains the discretization strategy of both the spatial and the temporal domains deployed in this thesis.
+\end_layout
+
 \begin_layout Subsection
 Spatial discretization
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Section
+Backup
+\end_layout
+
+\begin_layout Itemize
+includes builtin construction method for both.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula 
+\[
+\begin{alignedat}{2}\mathbb{R}^{64}\ni x_{1,2} & \coloneqq & \; & \texttt{(}\left[\begin{alignedat}{4}\, &  & \text{start} & = & \; & 0.00 &  & \,\\
+ &  & \text{step} & = &  & 0.01\\
+ &  & \text{count} & = &  & 64
+\end{alignedat}
+\right]\texttt{)}\end{alignedat}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+,
+ each dimension of the spatial grid is discretized into 
+\begin_inset Formula $64$
+\end_inset
+
+ grid-points.
+ This resolution is also used in
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+This thesis deploys a standardized discretization scheme of the two-dimensional space with a resolution of 
+\begin_inset Formula $64$
+\end_inset
+
+ grid-points per dimension.
+ The exact The step-size is chosen as 
+\begin_inset Formula $0.01$
+\end_inset
+
+,
+ and the starting value is the origin for both dimensions:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+\begin{alignedat}{2}\mathbb{R}^{64}\ni x_{1,2} & \coloneqq & \; & \overbrace{\quad\:\texttt{grid}\;\quad}^{\texttt{<np|torch>.arange}}\texttt{(}\left[\begin{alignedat}{4}\, &  & \text{start} & = & \; & 0.00 &  & \,\\
+ &  & \text{step} & = &  & 0.01\\
+ &  & \text{count} & = &  & 64
+\end{alignedat}
+\right]\texttt{)}\end{alignedat}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+source code:
+\begin_inset listings
+lstparams "language=Python"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+# src/numerics/grid.py
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Grid:
+\end_layout
+
+\begin_layout Plain Layout
+
+    def __init__(self,
+ **kwargs):
+\end_layout
+
+\begin_layout Plain Layout
+
+        super().__init__(**kwargs)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def get_reward(self,
+ **kwargs) -> float:
+\end_layout
+
+\begin_layout Plain Layout
+
+        pass
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def get_reward_gameover(self,
+ **kwargs) -> float:
+\end_layout
+
+\begin_layout Plain Layout
+
+        pass
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Abstraction for General Reward-Functions
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -133,7 +302,7 @@ literal "false"
 
  in sections establishing its benchmarking setup
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 referred to as 
@@ -144,28 +313,30 @@ Representative PDE Benchmarks (RPB)
 \begin_inset Quotes xrd
 \end_inset
 
-, Page 8
+,
+ Page 8
 \end_layout
 
 \end_inset
 
-, the two-dimensional space boasts of distinct merits for the purpose of
- gauging the performance of operator-learning: in essence, the learning
- landscape is sufficiently complex to challenge algorithms without inducing
- fearsome costs during training and evaluation, which is ideal for rapid
- iteration and prototyping.
+,
+ the two-dimensional space boasts of distinct merits for the purpose of gauging the performance of operator-learning:
+ in essence,
+ the learning landscape is sufficiently complex to challenge algorithms without inducing fearsome costs during training and evaluation,
+ which is critical for rapid iteration and prototyping.
 \end_layout
 
 \begin_layout Standard
-In this spirit, this project focuses on the two-dimensional space as well,
- with specifics of the discretization defined below:
+In this spirit,
+ this project focuses on the two-dimensional space as well,
+ with specifics of its discretization defined below:
 \end_layout
 
 \begin_layout Definition
-Space grid
+Space mesh
 \begin_inset CommandInset label
 LatexCommand label
-name "def:Space-grid"
+name "def:Space-mesh"
 
 \end_inset
 
@@ -174,46 +345,227 @@ name "def:Space-grid"
 
 \begin_deeper
 \begin_layout Standard
-\begin_inset Note Note
-status collapsed
+Methods from the traditional discipline of numerical analysis stipulates the discretization as the transformation of any continuous space into a discrete mesh structure,
+ as demonstrated in textbooks such as:
+\begin_inset CommandInset citation
+LatexCommand cite
+key "analysis-atkinson,analysis-burden,analysis-cheney,analysis-isaacson"
+literal "false"
 
-\begin_layout Plain Layout
-, each dimension of the spatial grid is discretized into 
-\begin_inset Formula $64$
 \end_inset
 
- grid-points.
- This resolution is also used in
+.
+ While the quest for domain-specific,
+ high-quality mesh generation is intensely contested in applied mathematics,
+ this thesis,
+ similar to other researches for PDE Learning such as 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fno,cno,unet"
+literal "false"
+
+\end_inset
+
+,
+ uses the generic grid-like mesh.
+ For the purpose of the two-dimensional space that this thesis dwells on,
+ this translates to 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+rectangular
 \end_layout
 
 \end_inset
 
-This thesis deploys a standardized discretization scheme of the two-dimensional
- space with a resolution of 
-\begin_inset Formula $64$
-\end_inset
-
- grid-points per dimension.
- The step-size is chosen as 
-\begin_inset Formula $0.01$
-\end_inset
-
-, and the starting value is the origin for both dimensions:
+ elements.
 \end_layout
 
 \begin_layout Standard
+Implementation of such a rectangular mesh requires as basis the discretization of both dimensions 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+,
+ specified fully with the following four values:
 \begin_inset Formula 
 \[
-\begin{alignedat}{2}\mathbb{R}^{64}\ni x_{1,2} & \coloneqq & \; & \overbrace{\quad\:\texttt{grid}\;\quad}^{\texttt{<np|torch>.arange}}\texttt{(}\left[\begin{alignedat}{4}\, &  & \text{start} & = & \; & 0.00 &  & \,\\
+x_{1,2}^{\text{discrete}}\coloneqq\texttt{(}\left[\begin{alignedat}{4}\; &  & \text{start} & \triangleq & \; & \texttt{float} &  & \;\\
+ &  & \text{step-size} & \triangleq &  & \texttt{float}\\
+ &  & \text{end} & \triangleq &  & \texttt{float}\\
+ &  & \text{\#steps} & \triangleq &  & \texttt{int}
+\end{alignedat}
+\right]\texttt{)}
+\]
+
+\end_inset
+
+where 
+\begin_inset Quotes xld
+\end_inset
+
+#steps
+\begin_inset Quotes xrd
+\end_inset
+
+ denotes the number of grid-points for the dimension,
+ also referred to as 
+\begin_inset Quotes xld
+\end_inset
+
+resolution
+\begin_inset Quotes xrd
+\end_inset
+
+ in researches such as 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fno,fno-neural-operator,cno"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+Construction of Rectangular mesh
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+It should be noted that the knowledge of three of any of these four variables suffices to reconstruct the remaining one and thus enable the spatial discretization.
+ This thesis uses the following two typical construction methods to describe spatial discretization:
+\end_layout
+
+\begin_layout Itemize
+the starting value,
+ the step-size,
+ and the number of steps;
+\end_layout
+
+\begin_layout Itemize
+the starting and the end value,
+ and the number of steps,
+\end_layout
+
+\begin_layout Standard
+each with its own merit:
+ the knowledge of the step-size allows direct control over constraints such as the CFL condition 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "analysis-atkinson,analysis-burden,analysis-cheney,analysis-isaacson"
+literal "false"
+
+\end_inset
+
+,
+ whereas explicit end value aides tuning of spatial boundary conditions.
+ In this project,
+ specification of the spatial grid is provided by the more appropriate of these two construction variants specific to the PDE prototype at-hand.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+Quality of rectangular mesh
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+This square mesh,
+ though primitive compared to specialized mesh generation as deployed in the context of traditional numerical methods,
+ is nevertheless common-place for the status-quo of PDE Learning,
+ as seen in similar researches such as 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fno,cno,kno,kno-publish,unet"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+Space-grids in action
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+While this project deploys a constant number of discrete steps for both dimensions 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+,
+ the other three parameters of the grid varies among the PDE prototypes.
+ As an example,
+ the mesh used for solving the Poisson Equation,
+ seen later in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Poisson-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ is defined as follows:
+\begin_inset Formula 
+\[
+\begin{alignedat}{2}\mathbb{R}^{64}\ni x_{1,2} & \coloneqq & \; & \quad\:\texttt{grid}\;\quad\texttt{(}\left[\begin{alignedat}{4}\, &  & \text{start} & = & \; & 0.00 &  & \,\\
  &  & \text{step} & = &  & 0.01\\
- &  & \text{count} & = &  & 64
+ &  & \text{\#steps} & = &  & 64
 \end{alignedat}
 \right]\texttt{)}\end{alignedat}
 \]
 
 \end_inset
 
+which translates to an end value of 
+\begin_inset Formula $0.63$
+\end_inset
 
+:
+ be careful to avoid the off-by-one error!
+\end_layout
+
+\begin_layout Standard
+The reader is referred to chapters dedicated to the individual PDE models for other space grid specifications in this thesis.
 \end_layout
 
 \end_deeper
@@ -230,7 +582,8 @@ Comparison with existing research
 
 \begin_deeper
 \begin_layout Itemize
-The space grid as deployed in existing research, such as 
+The space grid as deployed in existing research,
+ such as 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "cno"
@@ -238,21 +591,32 @@ literal "false"
 
 \end_inset
 
-, is of the same resolution of 
+,
+ is of the same resolution of 
 \begin_inset Formula $64$
 \end_inset
 
  grid-points.
- This value is chosen consciously: the exact 
+ This value is chosen consciously:
+ the exact 
 \begin_inset Formula $2$
 \end_inset
 
--exponential facilitates efficient computation of the discrete Fourier transform
-ation.
+-exponential facilitates efficient computation of the discrete Fourier transformation,
+ as explained in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fno,fno-neural-operator,cno"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Itemize
-While 
+In the particular example of the Poisson Equation as seen above,
+ while 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "cno"
@@ -264,7 +628,8 @@ literal "false"
 \begin_inset Formula $0.0$
 \end_inset
 
- for each dimension, its end-point is set as 
+ for each dimension,
+ its end-point is set as 
 \begin_inset Formula $1.0$
 \end_inset
 
@@ -272,19 +637,32 @@ literal "false"
  This thesis's space-grid specified above in Definition 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "def:Space-grid"
+reference "def:Space-mesh"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
- uses a narrower grid, terminating at 
+ uses a narrower grid,
+ terminating at 
 \begin_inset Formula $0.63$
 \end_inset
 
 .
- Be careful to avoid the off-by-one error!
+ This particular difference is justified in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Poisson-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
 \end_layout
 
 \end_deeper
@@ -300,24 +678,548 @@ Temporal discretization
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Greyedout
+A similar procedure is applied to discretize the time axis,
+ with the apparent additional constraint that the starting value is non-negative.
+ In this thesis,
+ as also seen in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fno,cno,kno,kno-publish,unet"
+literal "false"
+
+\end_inset
+
+,
+ the initial time is set to 
+\begin_inset Formula $0.0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The implementation is similar to that of the single-axis discretization and can be found under 
+\begin_inset Note Note
 status open
+
+\begin_layout Plain Layout
+TODO:
+ code
+\end_layout
+
+\end_inset
+
+
+\end_layout
 
 \begin_layout Note
 Application of temporal discretization
 \end_layout
 
 \begin_deeper
-\begin_layout Plain Layout
-It should be noted that the temporal discretization is not used to time-independ
-ent PDEs, including, in particular, the Poisson Equation studied later in
- Section 
+\begin_layout Standard
+It should be noted that the temporal discretization is not used to steady-state,
+ time-independent PDEs,
+ including,
+ in particular,
+ the Poisson Equation studied later in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Poisson-Equation"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ On the other hand,
+ PDEs such as the Heat Equation and the Wave Equation,
+ introduced in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Heat-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ and Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Wave-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ respectively,
+ both require temporal discretization as discussed in this section.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+API
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO:
+ write this chapter!
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Key API
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Listing 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lis:grid"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ provides an overview of the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+Grid
+\end_layout
+
+\end_inset
+
+ class.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+# src/numerics/grid.py
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Grid:
+\end_layout
+
+\begin_layout Plain Layout
+
+    def __init__(
+\end_layout
+
+\begin_layout Plain Layout
+
+        self,
+\end_layout
+
+\begin_layout Plain Layout
+
+        intensity:
+ float = 0.5,
+\end_layout
+
+\begin_layout Plain Layout
+
+        intensity_spread:
+ float = 0.1,
+\end_layout
+
+\begin_layout Plain Layout
+
+        value_mask:
+ float = 0.5,
+\end_layout
+
+\begin_layout Plain Layout
+
+    ):
+\end_layout
+
+\begin_layout Plain Layout
+
+        pass  # detail omitted
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    @classmethod
+\end_layout
+
+\begin_layout Plain Layout
+
+    def from_start_end(cls,
+ n_pts:
+ int,
+ start:
+ float,
+ end:
+ float) -> "Grid":
+\end_layout
+
+\begin_layout Plain Layout
+
+        return cls(n_pts,
+ (end - start) / (n_pts - 1),
+ start)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def step(self,
+ with_start:
+ True,
+ with_end:
+ True) -> list[float]:
+\end_layout
+
+\begin_layout Plain Layout
+
+        pass  # detail omitted
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def is_on_boundary(self,
+ val:
+ float) -> bool:
+\end_layout
+
+\begin_layout Plain Layout
+
+        pass  # detail omitted
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "lis:grid"
+
+\end_inset
+
+Essential API for grid
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Masking
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Masking"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+With the formality of recalling discretization out of the way,
+ 
+\begin_inset Quotes xld
+\end_inset
+
+masking
+\begin_inset Quotes xrd
+\end_inset
+
+,
+ the primary concept and the very namesake of this thesis,
+ can now be introduced.
+ This section formalizes the concept of masking with concrete definition and enumerates two distinct masking variants deployed in this thesis.
+\end_layout
+
+\begin_layout Definition
+General masking procedure (TODOOOO:
+ find some symbols for mask,
+ intensity)
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The output of applying masking to a matrix-like object 
+\begin_inset Formula $\mathbf{M}$
+\end_inset
+
+ is another matrix-like object 
+\begin_inset Formula $\mathbf{M}^{\text{mask}}$
+\end_inset
+
+ of the same shape,
+ but with some of its entries modified:
+\begin_inset Formula 
+\[
+\mathbb{R}^{d_{1}\times d_{2}\times\cdots}\in\mathbf{M}\longrightarrow\mathbf{M}^{\text{mask}}\in\mathbb{R}^{d_{1}\times d_{2}\times\cdots}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As such,
+ masking is understood as a two-step process:
+\end_layout
+
+\begin_layout Enumerate
+determine the mask-candidates,
+ or the masking 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+indexes
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $\texttt{[idxs]}$
+\end_inset
+
+,
+ possibly via some sampling routine;
+\end_layout
+
+\begin_layout Enumerate
+apply the masking 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+strategy
+\end_layout
+
+\end_inset
+
+ to the mask candidates,
+ which translates to setting the mask candidates to some masking value 
+\begin_inset Formula $m$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\mathbf{M}\texttt{[idxs]}\leftarrow m
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The remainder of this section explains and justifies the configuration of these two steps of the masking procedure as seen in this project.
+ First,
+ the two generation subroutines of the masking indexes are presented:
+\end_layout
+
+\begin_layout Subsection
+Candidates sampling
+\end_layout
+
+\begin_layout Subsubsection
+Intensity
+\end_layout
+
+\begin_layout Definition
+Masking Intensity
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The masking intensity denotes the 
+\begin_inset Quotes xld
+\end_inset
+
+strength
+\begin_inset Quotes xrd
+\end_inset
+
+ of the mask:
+ the higher the intensity,
+ the more entries are tainted by the masking value:
+\begin_inset Formula 
+\[
+\text{\#}\texttt{idxs}\propto\text{mask-intensity}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Intensity sampling
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+To fine-tune the masking operation with extra entropy,
+ the masking intensities are sampled from a uniform distribution:
+\begin_inset Formula 
+\[
+\text{mask-intensity}\simeq\text{Unif}\left[c_{\text{low}};c_{\text{high}}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Similar to the convention of 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+scipy
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "scipy"
+literal "false"
+
+\end_inset
+
+,
+ the masking intensity is specified with a (center) location and a spread value
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+name "scipy: uniform distribution library"
+target "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.uniform.html"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+:
+ 
+\begin_inset Formula 
+\[
+\begin{alignedat}{2}\text{mask-intensity} & \simeq & \; & \text{Unif}\left[c_{\text{low}};c_{\text{high}}\right]\\
+\texttt{RHS}_{i} & \equiv &  & \left[\text{intensity};\text{spread}\right]
+\end{alignedat}
+\]
+
+\end_inset
+
+The reference implementation included in the source code provides a resampling function that extracts the resampling logic from this underlying uniform distribution,
+ see Listing 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lis:mask"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
 
 \end_inset
 
@@ -325,13 +1227,814 @@ noprefix "false"
 \end_layout
 
 \end_deeper
-\begin_layout Plain Layout
+\begin_layout Standard
 \begin_inset Separator plain
 \end_inset
 
 
 \end_layout
 
+\begin_layout Subsubsection
+Island style
+\end_layout
+
+\begin_layout Standard
+The island-style masking keeps a centered portion of the input matrix in-tact,
+ while applying the masking strategy to the surrounding entries.
+ The masked candidates form a rectangular 
+\begin_inset Quotes xld
+\end_inset
+
+annulus
+\begin_inset Quotes xrd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The island style,
+ as implemented in this project,
+ accepts as argument the proportion of the unmodified center island of each dimension.
+\end_layout
+
+\begin_layout Standard
+Using the 
+\begin_inset Quotes xld
+\end_inset
+
+Sum-of-Sines
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset,
+ illustrations of this masking style are found in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:masking-island"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/mask/island.png
+	width 15cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:masking-island"
+
+\end_inset
+
+Visualization of the island-style dataset with the Poisson Equation.
+ Ordering of the plots mimics that of Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:masking-random"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ for the random masking style.
+ First row:
+ contour-plots of three 
+\begin_inset Formula $u$
+\end_inset
+
+ instances.
+ Second row:
+ respective contour-plots proceeded with island-style keeping 
+\begin_inset Formula $70\%$
+\end_inset
+
+ of the spatial grid-points in each dimension.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Random style
+\end_layout
+
+\begin_layout Standard
+As suggested by its namesake,
+ the mask indexes are selected randomly.
+ This style of masking is widely used,
+ in particular,
+ as seen in publications such as 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "videomae-published,videomae,multimae"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The implementation in this project accepts as argument the proportion of masked candidates.
+ Note that unlike the island-style mentioned above,
+ the random mask patch is generated anew during each call to its 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+.mask()
+\end_layout
+
+\end_inset
+
+ method,
+ guaranteeing random entropy of the resulting dataset.
+\end_layout
+
+\begin_layout Standard
+Visualization of this random-style masking is seen Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:masking-random"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/mask/random.png
+	width 15cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:masking-random"
+
+\end_inset
+
+Visualization the random-style masking using solutions 
+\begin_inset Formula $u$
+\end_inset
+
+ of the Poisson Equation as specified in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:poisson-sum-of-sines"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ First row:
+ contour-plots of three instances of the solution 
+\begin_inset Formula $u$
+\end_inset
+
+.
+ Second row:
+ contour-plots of the respective 
+\begin_inset Formula $u$
+\end_inset
+
+ instances with random-style masking covering 
+\begin_inset Formula $30\%$
+\end_inset
+
+ of all spatial grid-points.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Masking strategy
+\end_layout
+
+\begin_layout Standard
+A common modification strategy,
+ as also deployed in researches such as
+\begin_inset CommandInset citation
+LatexCommand cite
+key "videomae-published,videomae,multimae"
+literal "false"
+
+\end_inset
+
+,
+ is to uniformly set the values of these entries to 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ This thesis continues upon this strategy of constant masking value,
+ but consciously adjusts the value to 
+\begin_inset Formula $0.5$
+\end_inset
+
+.
+ The justification of this decision stipulates a sneak-peak to the dataset normalization technique deployed inthis project,
+ which will be discussed in detail later in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Dataset-Setup"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proposition
+Dataset normalization
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+This thesis performs 
+\begin_inset Formula $\left[0,1\right]$
+\end_inset
+
+ normalization of the dataset per 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ml-normalization-google"
+literal "false"
+
+\end_inset
+
+,
+ such that each channel is linearly scaled within the range of 
+\begin_inset Formula $\left[0,1\right]$
+\end_inset
+
+ respectively.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The adjustment of masking value from 
+\begin_inset Formula $0$
+\end_inset
+
+ to 
+\begin_inset Formula $0.5$
+\end_inset
+
+,
+ though insignificant at face-value,
+ brings forth a profound implication:
+ the masked value now corresponds to the 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+mean
+\end_layout
+
+\end_inset
+
+ of the value-range of the data channels.
+ Masking performed as such thus does not implicitly skew the resulting dataset towards the minimum possible value,
+ as would be in the case of a 
+\begin_inset Formula $0$
+\end_inset
+
+ masking value.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+The worrisome implication of the 
+\begin_inset Formula $0$
+\end_inset
+
+ masking values as seen in other publications is now apparent,
+ by adjusting the There are,
+ however,
+ apparent worrisome implications of this strategy:
+ for the 
+\begin_inset Formula $0$
+\end_inset
+
+ masking-value to correspond to white noise in the sense of expected value,
+ the dataset
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+Non-constant masking values
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+It should be noted that masking value 
+\begin_inset Formula $m$
+\end_inset
+
+ need not be constant:
+ in fact,
+ the author considers the non-constant masks a future research direction,
+ see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Future-work"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Masking overview 
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Collection-of-masks"
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+REWRITE FOR NEW MASKS
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To summarize the various definitions above,
+ the masking procedure is understood as follows:
+\end_layout
+
+\begin_layout Conclusion
+Masking procedure
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\xymatrix{ & \text{intensity}\ar@(ul,ur)^{\text{resample}}\ar[r]^{\;\:\star} & \text{index}\ar[d]^{\text{select}}\\
+\mathbf{M}\ar@{-->}[rrrr] &  &  &  & \mathbf{M}^{\text{mask}}\\
+ &  &  & \text{value}\ar[u]_{\text{set}}
+}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Concerning the implementation,
+ the key elements of the reference implementation are listed as follows:
+\end_layout
+
+\begin_layout Definition
+API and Implementation
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The base 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+Masker
+\end_layout
+
+\end_inset
+
+ class provides the abstract method 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+mask()
+\end_layout
+
+\end_inset
+
+,
+ which which accepts as argument a raw tensor,
+ and outputs the masked matrix.
+ A common utility 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+_sample_intensity()
+\end_layout
+
+\end_inset
+
+ is provided to sample the intensity per uniform distribution as explained above.
+ Subclasses of 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+Masker
+\end_layout
+
+\end_inset
+
+ is expected to provide individual implementation of the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+mask()
+\end_layout
+
+\end_inset
+
+ method.
+\end_layout
+
+\begin_layout Standard
+The motivated reader is invited to implement its own class of masker class for alternative styles of masking other than the random and the island styles as mentioned above.
+ Note that the default value when constructing a masker with the code above yields a mask of intensity:
+ 
+\begin_inset Formula 
+\[
+\text{mask-intensity}\simeq\mathcal{P}\coloneqq\text{Unif}\left[c_{\text{low}}=0.4;c_{\text{high}}=0.6\right]
+\]
+
+\end_inset
+
+and the masking value 
+\begin_inset Formula $0.5$
+\end_inset
+
+ as specified above.
+\end_layout
+
+\begin_layout Standard
+The two masking variants are implemented in the same 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+python
+\end_layout
+
+\end_inset
+
+ module via direct inheritance.
+ Again,
+ the interested reader is encourage to visit the source code for detail inspection.
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+# src/util/dataset.py
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Masker:
+\end_layout
+
+\begin_layout Plain Layout
+
+    def __init__(
+\end_layout
+
+\begin_layout Plain Layout
+
+        self,
+\end_layout
+
+\begin_layout Plain Layout
+
+        intensity:
+ float = 0.5,
+\end_layout
+
+\begin_layout Plain Layout
+
+        intensity_spread:
+ float = 0.1,
+\end_layout
+
+\begin_layout Plain Layout
+
+        value_mask:
+ float = 0.5,
+\end_layout
+
+\begin_layout Plain Layout
+
+    ):
+\end_layout
+
+\begin_layout Plain Layout
+
+        pass  # detail omitted
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    @abc.abstractmethod
+\end_layout
+
+\begin_layout Plain Layout
+
+    def mask(self,
+ full:
+ torch.Tensor) -> torch.Tensor:
+\end_layout
+
+\begin_layout Plain Layout
+
+        raise NotImplementedError
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def _sample_intensity(self) -> float:
+\end_layout
+
+\begin_layout Plain Layout
+
+		pass
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class MaskerRandom(Masker):
+\end_layout
+
+\begin_layout Plain Layout
+
+	pass  # detail omitted
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class MaskerIsland(Masker):
+\end_layout
+
+\begin_layout Plain Layout
+
+	pass  # detail omitted
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "lis:mask"
+
+\end_inset
+
+Essential API for masking
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As a sneak-peak into the upcoming section where the concrete dataset is formed with masking,
+ This thesis utilizes four distinct bands of masking 
+\end_layout
+
+\begin_layout Standard
+This thesis considers masks of:
+\end_layout
+
+\begin_layout Itemize
+random style:
+ with (increasing) intensity from 
+\begin_inset Formula $10\%$
+\end_inset
+
+ to 
+\begin_inset Formula $90\%$
+\end_inset
+
+,
+ with 
+\begin_inset Formula $10\%$
+\end_inset
+
+ increment (
+\begin_inset Formula $9$
+\end_inset
+
+ masks in total);
+\end_layout
+
+\begin_layout Itemize
+island style:
+ the in-tact center island shrinks from 
+\begin_inset Formula $90\%$
+\end_inset
+
+ to 
+\begin_inset Formula $10\%$
+\end_inset
+
+ per dimension,
+ with 
+\begin_inset Formula $10\%$
+\end_inset
+
+ decrement (
+\begin_inset Formula $9$
+\end_inset
+
+ masks in total).
+\end_layout
+
+\begin_layout Standard
+For every model on each dataset,
+ a total of 
+\begin_inset Formula $18$
+\end_inset
+
+ models are therefore trained and evaluated.
+ It should be noted that a 
+\begin_inset Formula $90\%$
+\end_inset
+
+ island-style mask is of the 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+lowest
+\end_layout
+
+\end_inset
+
+ intensity,
+ whereas one of 
+\begin_inset Formula $10\%$
+\end_inset
+
+ is of the highest.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
 \end_inset
 
 
@@ -339,16 +2042,36 @@ noprefix "false"
 
 \begin_layout Section
 Dataset
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Dataset"
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Section
+TODO
+\end_layout
+
+\begin_layout Itemize
+find some quote on importance of data in ML
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-This section enumerates the PDE models investigated in this project alongside
- the construction of their respective datasets for the learning pipeline.
+This section enumerates the PDE models investigated in this project alongside the construction of their respective datasets for the learning pipeline.
  The common procedure for such dataset construction is described as follows:
 \end_layout
 
-\begin_layout Proposition
-Dataset construction
+\begin_layout Definition
+Dataset layout
 \end_layout
 
 \begin_deeper
@@ -357,32 +2080,85 @@ A dataset of size
 \begin_inset Formula $i$
 \end_inset
 
- contains of 
+ contains 
 \begin_inset Formula $i$
 \end_inset
 
- instances, where each instance 
+ instances,
+ where each instance 
 \begin_inset Formula $z_{i}$
 \end_inset
 
- is the concatenation of multiple matrix-like components, including at least
- the solution 
-\begin_inset Formula $u_{i}$
-\end_inset
+ is the concatenation of multiple matrix-like components,
+ otherwise referred to as 
+\begin_inset Flex Emph
+status open
 
-, as well as the grid coordinates 
-\begin_inset Formula $\mathbf{x}_{i}$
+\begin_layout Plain Layout
+channels
+\end_layout
+
 \end_inset
 
 .
- In the case of a two-dimensional space, 
+ These channels typically fall into two categories:
+\end_layout
+
+\begin_layout Itemize
+those specific to the particular PDE model at hand,
+ aka the 
+\begin_inset Quotes xld
+\end_inset
+
+PDE-channels
+\begin_inset Quotes xrd
+\end_inset
+
+ 
+\begin_inset Formula $\mathbf{C}^{\text{P}}$
+\end_inset
+
+,
+ including the solution 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+ of the PDE itself,
+\end_layout
+
+\begin_layout Itemize
+those common to the underlying space grid,
+ the 
+\begin_inset Quotes xld
+\end_inset
+
+grid-channels
+\begin_inset Quotes xrd
+\end_inset
+
+ 
+\begin_inset Formula $\mathbf{C}^{\text{x}}$
+\end_inset
+
+ such as the grid coordinates 
+\begin_inset Formula $x_{1,2\cdots}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In the case of the two-dimensional space of this thesis,
+ 
 \begin_inset Formula $z_{i}$
 \end_inset
 
- consists thus at least of the following three matrices: 
+ consists thus at least of the following three channels,
+ each corresponding to a two-dimensional matrix:
+ 
 \begin_inset Formula 
 \[
-z_{i}\coloneqq\Bigl(u_{i},x_{1},x_{2}\Bigr)
+z_{i}\coloneqq\Bigl(\overbrace{\;\;\;u_{i},\,\cdots\;\;\;}^{\mathbf{C}^{\text{P}}},\;\underbrace{\;x_{1},x_{2},\,\cdots\;}_{\mathbf{C}^{\text{x}}}\Bigr)
 \]
 
 \end_inset
@@ -412,12 +2188,75 @@ One shall note that the coordinates matrices
 \end_inset
 
 .
- This is intentional, as the coordinates are constant across all instances
- of the dataset and require no re-computation during generation.
+ This is intentional,
+ as the coordinates are constant across all instances of the dataset and require thus no re-computation during the generation procedure.
+ This observation is further developed in the following:
+\end_layout
+
+\begin_layout Definition
+Grid-channels 
+\begin_inset Formula $\mathbf{C}^{\text{x}}$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Channels related to the grid-coordinates 
+\begin_inset Formula $\mathbf{C}^{\text{x}}$
+\end_inset
+
+ as used in this project are composed of the following six components:
+\begin_inset Formula 
+\[
+\mathbf{C}^{\text{x}}\coloneqq\underbrace{\;\;\;x_{1},x_{2}\;\;\;}_{\text{coord}}\;,\;\,\underbrace{\;\sin\left(x_{1}\right),\sin\left(x_{2}\right),\cos\left(x_{1}\right),\cos\left(x_{2}\right)\;}_{4\times\;\;\text{trig}\left(\text{coord}\right)}
+\]
+
+\end_inset
+
+where the first two channels correspond to the raw coordinates of the (two-dimensional) spatial grid,
+ and the ensuing four represent these coordinates after applying value-wise trigonometry operations 
+\begin_inset Formula $\sin\left(\star\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\cos\left(\star\right)$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-Assuming linearity of the underlying PDE, multiple 
+As observed above,
+ these grid-channels are constant for any specific spatial grid and can be saved as such via pre-computation.
+ This property is further taken advantage of in 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Sample Super-positioning
+\end_layout
+
+\begin_layout Standard
+One frequently seen paradigm for generating the PDE is discussed below:
+\end_layout
+
+\begin_layout Definition
+Super-positioning construction
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Assuming linearity of the underlying PDE model,
+ multiple 
 \begin_inset Flex Emph
 status open
 
@@ -427,7 +2266,7 @@ samples
 
 \end_inset
 
- can be super-positioned to construct one 
+ can be linearly combined to construct one 
 \begin_inset Flex Emph
 status open
 
@@ -437,31 +2276,62 @@ instance
 
 \end_inset
 
-, in order to simulate entropy while guaranteeing a unifying underlying
- distribution.
- The following example illustrates this technique for the solution matrix
- 
-\begin_inset Formula $u$
+,
+ as seen in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cno,analysis-atkinson"
+literal "false"
+
 \end_inset
 
-:
+.
+\end_layout
+
+\begin_layout Standard
+Such super-positioning technique provides entropy critical to dataset generation while guaranteeing a common underlying distribution.
+ The critical relevance of these dataset properties is studied at length in textbooks of general machine-learning such as 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ml-elem-stats-learning,ml-murphy"
+literal "false"
+
+\end_inset
+
+ as well as those of traditional statistics including 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "stats-wasserman"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The following example illustrates this technique:
 \end_layout
 
 \begin_layout Example
-Sample super-positioning of solution 
-\begin_inset Formula $u_{i}$
-\end_inset
-
-
+Sample super-positioning
 \end_layout
 
 \begin_deeper
 \begin_layout Standard
-Each instance 
+Each instance of the PDE solution 
 \begin_inset Formula $u_{i}$
 \end_inset
 
- is constructed via linear combination of 
+ is constructed via a linear combination of 
 \begin_inset Formula $k$
 \end_inset
 
@@ -485,7 +2355,8 @@ where the weights
 \begin_inset Formula $\mathcal{P}$
 \end_inset
 
- chosen a priori, which typically corresponds to a uniform distribution:
+ chosen a priori,
+ which typically corresponds to a uniform distribution:
 \begin_inset Formula 
 \[
 \texttt{R}_{i}^{k}\simeq\mathcal{P}\coloneqq\text{Unif}\left[c_{\text{low}};c_{\text{high}}\right]
@@ -501,7 +2372,43 @@ in which case the configurations
 \begin_inset Formula $c_{\text{high}}$
 \end_inset
 
-are considered constants.
+are considered tunable hyper-parameters.
+\end_layout
+
+\begin_layout Standard
+On the other hand,
+ since the coordinates matrices 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ are constant among all 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+instances
+\end_layout
+
+\end_inset
+
+,
+ they remain thus by extension invariant among all 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+samples
+\end_layout
+
+\end_inset
+
+ as well.
+ Hence,
+ these grid-channels require no recomputation during the super-positioning process and can be reuse from some form of pre-computation.
 \end_layout
 
 \end_deeper
@@ -513,20 +2420,22 @@ are considered constants.
 \end_layout
 
 \begin_layout Standard
-Apparently, such super-positioning construction shall be applied to other
- components included in the dataset.
- As an example, for the case of the Poisson Equation as introduced in Section
- 
+Apparently,
+ such super-positioning construction shall be applied to other components included in the dataset.
+ As an example,
+ for the case of the Poisson Equation as introduced in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Poisson-Equation"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
-, both the solution 
+,
+ both the solution 
 \begin_inset Formula $u$
 \end_inset
 
@@ -538,101 +2447,12 @@ noprefix "false"
 \end_layout
 
 \begin_layout Note
-Shape of dataset
+Prerequisite for super-positioning
 \end_layout
 
 \begin_deeper
 \begin_layout Standard
-Since each component of 
-\begin_inset Formula $z_{i}$
-\end_inset
-
- is a two-dimensional matrix as representation of the space-grid, 
-\begin_inset Formula $z_{i}$
-\end_inset
-
- itself thus contains one more dimension to indicate the number of these
- two-dimensional matrices.
- In the minimal example of 
-\begin_inset Formula $z_{i}\coloneqq\left(u_{i},x_{1,i},x_{2,i}\right)$
-\end_inset
-
- as proposed above, this extra dimension will have the value 
-\begin_inset Formula $3$
-\end_inset
-
-.
- Consequently, a dataset of 
-\begin_inset Formula $i$
-\end_inset
-
- of these 
-\begin_inset Formula $z_{i}$
-\end_inset
-
- instances is four-dimensional.
-\end_layout
-
-\begin_layout Standard
-Following standard dataset format, the first dimension denotes the number
- of instances.
- There exists, however, no standfast rule concerning the ordering of the
- remaining three dimensions.
- Out of the six
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Number of possible permutations of 
-\begin_inset Formula $3$
-\end_inset
-
- elements
-\end_layout
-
-\end_inset
-
- total ordering possibilities, two of them are generally acceptable.
- Continuing with the minimal example above with the space-grid as defined
- in 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "def:Space-grid"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, these two orderings yield respectively:
-\begin_inset Formula 
-\[
-\text{dataset}\doteq\left\langle \begin{alignedat}{2} & \: & \Bigl[i,64,64,3\Bigr]\\
- &  & \Bigl[i,3,64,64\Bigr]
-\end{alignedat}
-\right.
-\]
-
-\end_inset
-
-As an example, the FNO 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "fno,fno-neural-operator"
-literal "false"
-
-\end_inset
-
- implementation included in this project's repository accepts the first
- ordering, while the CNO 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "cno"
-literal "false"
-
-\end_inset
-
- implementation expects the second.
+The underlying PDE must be linear for the super-positioning technique above to be applicable.
 \end_layout
 
 \end_deeper
@@ -641,6 +2461,10 @@ literal "false"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+Design and Implementation
 \end_layout
 
 \begin_layout Note
@@ -649,22 +2473,295 @@ The programmer's perspective
 
 \begin_deeper
 \begin_layout Standard
-From the perspective of API design, the super-positioning pipeline described
- above stipulates that the construction of such datasets requires only the
- implementation of generating one such sample of the instances.
- The remaining logic, such as the randomly weighted linear combination and
- the final dataset assembly with the coordinates matrices, can be reused
- to a substantial extent.
+The remaining logic,
+ such as the randomly weighted linear combination and the final dataset assembly with the coordinates matrices,
+ can be reused to a substantial extent.
 \end_layout
 
 \begin_layout Standard
-This stipulates a clean overload structure: the base-class offers those
- reusable utility functions, and individual concrete dataset providers shall
- overload this base-class to provide its specific implementation to generate
- its instance-samples.
- This design pattern is used throughout the code-base of this project, and
- the interested reader is invited to inspect the details in the source repositor
-y.
+This stipulates a clean overload structure:
+ the base-class offers those reusable utility functions,
+ and individual concrete dataset providers shall overload this base-class to provide its specific implementation to generate its instance-samples.
+ Listing 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lis:dataset-raw"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ showcases the one This design pattern is used throughout the code-base of this project,
+ and the interested reader is invited to inspect the details in the source repository.
+ 
+\end_layout
+
+\begin_layout Standard
+Central to the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+DatasetPDE
+\end_layout
+
+\end_inset
+
+ API is the abstract method 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+solve_instance()
+\end_layout
+
+\end_inset
+
+,
+ which returns a sequence of matrices
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+here,
+ 
+\begin_inset Quotes xld
+\end_inset
+
+matrices
+\begin_inset Quotes xrd
+\end_inset
+
+ refer to 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+python
+\end_layout
+
+\end_inset
+
+ objects of type 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+torch.Tensor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ of some PDE.
+ The length of this sequence denotes the number of channels relevant to fully capture the PDE problem and saved in member 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+N_CHANNELS
+\end_layout
+
+\end_inset
+
+.
+ Specific PDEs are to inherit this API and provide implementation of this method specific to the underlying PDE model.
+ An an example,
+ implementation for the Poisson equation would set 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+N_CHANNELS
+\end_layout
+
+\end_inset
+
+ to 
+\begin_inset Formula $2$
+\end_inset
+
+,
+ and have 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+solve_instance()
+\end_layout
+
+\end_inset
+
+ return the solution 
+\begin_inset Formula $u$
+\end_inset
+
+ and the source 
+\begin_inset Formula $f$
+\end_inset
+
+ as the two channels.
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+DatasetPDE.as_dataset()
+\end_layout
+
+\end_inset
+
+ method handles the low-level logic to assemble 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+n_instances
+\end_layout
+
+\end_inset
+
+ instances into one dataset for 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+pytorch
+\end_layout
+
+\end_inset
+
+.
+\begin_inset listings
+lstparams "language=Python"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+# src/pde/dataset.py
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class DatasetPDE:
+\end_layout
+
+\begin_layout Plain Layout
+
+    N_CHANNELS:
+ int  # to be overwritten by individual PDEs
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def as_dataset(self,
+ n_instances:
+ int) -> T_DATASET:
+\end_layout
+
+\begin_layout Plain Layout
+
+		# assemble instances into dataset (common to all PDEs)
+\end_layout
+
+\begin_layout Plain Layout
+
+        ...
+  # implementation detail not shown
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    @abc.abstractmethod
+\end_layout
+
+\begin_layout Plain Layout
+
+    def solve_instance(self) -> Sequence[torch.Tensor]:
+\end_layout
+
+\begin_layout Plain Layout
+
+        raise NotImplementedError  # to be implemented by individual PDEs
+\end_layout
+
+\begin_layout Plain Layout
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "lis:dataset-raw"
+
+\end_inset
+
+Key methods of PDE-Dataset API
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+From the perspective of API design,
+ the super-positioning pipeline described above stipulates that the construction of such datasets requires only the implementation of generating one such sample of the instances.
+ However,
+ to allow extendability to other non-linear PDE models,
+ the abstraction stops at the instance-level:
+ the boilerplate of implementing super-positioning is fairly minimal with the natural matrix-operation capabilities of 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+pytorch
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+numpy
+\end_layout
+
+\end_inset
+
+.
+ Alternatively,
+ non super-positioned datasets,
+ as justified in the discussion above,
+ are relieved from such unnecessary inheritance.
 \end_layout
 
 \end_deeper
@@ -673,6 +2770,16 @@ y.
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Thus concludes this introductory chapter on essential concepts used in this thesis:
+ key concepts including spatial and temporal discretization is are revisited and formalized,
+ masking as a concept is defined,
+ and the dataset generation routine is laid out.
+ In the upcoming chapter,
+ three concretes PDE models are introduced in the context of masked dataset generation,
+ before moving along towards the actual learning procedure and result evaluation.
 \end_layout
 
 \end_body

@@ -1,5 +1,5 @@
-#LyX 2.3 created this file. For more info see http://www.lyx.org/
-\lyxformat 544
+#LyX 2.4 created this file. For more info see https://www.lyx.org/
+\lyxformat 620
 \begin_document
 \begin_header
 \save_transient_properties true
@@ -22,11 +22,11 @@ enumitem
 logicalmkup
 todonotes
 \end_modules
-\maintain_unincluded_children false
+\maintain_unincluded_children no
 \language english
 \language_package default
-\inputencoding auto
-\fontencoding global
+\inputencoding auto-legacy
+\fontencoding auto
 \font_roman "default" "Libertinus Serif"
 \font_sans "default" "Avenir LT Std"
 \font_typewriter "default" "Source Code Pro"
@@ -34,7 +34,9 @@ todonotes
 \font_default_family default
 \use_non_tex_fonts true
 \font_sc false
-\font_osf false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
 \font_sf_scale 100 100
 \font_tt_scale 100 93
 \use_microtype true
@@ -60,7 +62,7 @@ todonotes
 \pdf_backref false
 \pdf_pdfusetitle true
 \pdf_quoted_options "linkcolor=black,  frenchlinks=true, citecolor=black, urlcolor=blue, filecolor=blue, pdfpagelayout=OneColumn, pdfnewwindow=true, pdfstartview=XYZ, plainpages=false"
-\papersize a4paper
+\papersize a4
 \use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
@@ -82,7 +84,9 @@ todonotes
 \suppress_date false
 \justification true
 \use_refstyle 1
+\use_formatted_ref 0
 \use_minted 0
+\use_lineno 0
 \index Index
 \shortcut idx
 \color #008000
@@ -104,12 +108,17 @@ todonotes
 \papercolumns 1
 \papersides 2
 \paperpagestyle fancy
+\tablestyle default
 \listings_params "basicstyle={\ttfamily\normalsize},commentstyle={\sffamily},columns=fullflexible,numbers=left,numberstyle={\ttfamily\scriptsize},stepnumber=1,numberblanklines=false,firstline=1,numbersep=9pt,frame=tlb,framexleftmargin=3pt,framextopmargin=2pt,framexbottommargin=1pt,aboveskip={\medskipamount},belowskip={\medskipamount},captionpos=b,floatplacement=tbp,tabsize=4,resetmargins=false,breaklines=true,breakatwhitespace=false,breakautoindent=true,breakindent=0pt,prebreak={...},postbreak={...},extendedchars=true"
 \tracking_changes false
 \output_changes false
+\change_bars false
+\postpone_fragile_content false
 \html_math_output 0
 \html_css_as_file 0
 \html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
 \end_header
 
 \begin_body
@@ -123,8 +132,7 @@ Evaluation methodology
 \end_layout
 
 \begin_layout Standard
-A powerful measure to gauge the generalization capability of machine-learning
- models relies on 
+A powerful measure to gauge the generalization capability of machine-learning models relies on 
 \begin_inset Flex Emph
 status open
 
@@ -143,34 +151,92 @@ literal "false"
 
 \end_inset
 
- adjust the raw (unmasked) datasets directly by changing the value(s) of
- the model constant(s), this thesis exploits the tunable nature of both
- the random and the island style masking as introduced in Section 
+ adjust the raw (unmasked) datasets directly by changing the value(s) of the model constant(s),
+ this thesis exploits the tunable nature of both the random and the island style masking as introduced in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Masking"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
-: out-of-distribution evaluation is realized by using a combination of varying
- masking strategies and their respective percentage.
- As an example, a model trained on 
-\begin_inset Formula $0.5$
-\end_inset
+:
+ out-of-distribution evaluation is realized by a combination of the following two key components of a mask:
+\end_layout
 
- (
+\begin_layout Itemize
+the masking strategy,
+\end_layout
+
+\begin_layout Itemize
+the masking intensities.
+\end_layout
+
+\begin_layout Standard
+As an example,
+ a model trained on random-style mask of 
 \begin_inset Formula $50\%$
 \end_inset
 
-) random-style masking could be evaluated against the same dataset post-processe
-d via an island-style zeroing out 
+ could be evaluated against the same dataset post-processed via an island-style zeroing out 
 \begin_inset Formula $90\%$
 \end_inset
 
  of the grid.
+\end_layout
+
+\begin_layout Standard
+The following proposition describes the evaluation procedure of the models to in both the in-distribution and the out-of-distribution manner.
+\end_layout
+
+\begin_layout Proposition
+Construction of evaluation datasets
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+The style:
+ Despite training on the random-style masks only,
+ the models are evaluated on both the random-style and the island style.
+\end_layout
+
+\begin_layout Itemize
+The intensities:
+ for both the random and the island style,
+ the intensities are sample randomly from ranges of 
+\begin_inset Formula $10\%$
+\end_inset
+
+:
+ 
+\begin_inset Formula $[0\%-10\%]$
+\end_inset
+
+,
+ 
+\begin_inset Formula $\left[10\%-20\%\right]$
+\end_inset
+
+ till 
+\begin_inset Formula $90\%-100\%$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Construction of the individual datasets follow the same routine as described previously for the training datasets.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
 \end_layout
 
 \begin_layout Proposition
@@ -185,20 +251,52 @@ name "prop:Plotting-convention"
 \end_layout
 
 \begin_deeper
-\begin_layout Standard
-To realize out-of-distribution evaluation, the results of each network architect
-ure are presented in one row in a three-way-split, see Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:result-gauss-m-one"
-plural "false"
-caps "false"
-noprefix "false"
+\begin_layout Itemize
+The errors plots are presented in two horizontal splits,
+ where the left split indicate errors on the random-style,
+ and the right split those of the island-style.
+\end_layout
 
+\begin_layout Itemize
+For the double mask,
+ masks of the same type and intensity are used on both channels.
+ The masking targets are computed separately for each channel.
+ This is the same procedure as used for generating the training dataset.
+\end_layout
+
+\begin_layout Standard
+Several visual cues are provided as well:
+\end_layout
+
+\begin_layout Itemize
+for specialized training ranges,
+ i.e.,
+ those not from the entire 
+\begin_inset Formula $0\%-100\%$
 \end_inset
 
- as an example, where:
+ range,
+ the vertical shaded bar indicate evaluation datasets where the masking intensities agree with those during training
 \end_layout
+
+\begin_layout Itemize
+as low baseline,
+ a dashed line is drawn at 
+\begin_inset Formula $5\%$
+\end_inset
+
+ to indicate excellent performance;
+ a handwavy baseline is chosen at the 
+\begin_inset Formula $15\%$
+\end_inset
+
+ and 
+\begin_inset Formula $25\%$
+\end_inset
+
+ as a handwavy baseline performance for the single and double masked masks respectively.
+\begin_inset Note Note
+status open
 
 \begin_layout Itemize
 each sub-figure shows the 
@@ -213,17 +311,20 @@ each sub-figure shows the
 \begin_inset Formula $9$
 \end_inset
 
- with random masking, 
+ with random masking,
+ 
 \begin_inset Formula $9$
 \end_inset
 
- with island masking, see Section 
+ with island masking,
+ see Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Collection-of-masks"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
@@ -231,7 +332,8 @@ noprefix "false"
 \end_layout
 
 \begin_layout Itemize
-the left column indicates evaluation on low masking intensity, with 
+the left column indicates evaluation on low masking intensity,
+ with 
 \begin_inset Formula $10\%$
 \end_inset
 
@@ -239,8 +341,8 @@ the left column indicates evaluation on low masking intensity, with
 \begin_inset Formula $90\%$
 \end_inset
 
- island style applied to the evaluation dataset; the center column represents
- moderate masking using 
+ island style applied to the evaluation dataset;
+ the center column represents moderate masking using 
 \begin_inset Formula $50\%$
 \end_inset
 
@@ -248,7 +350,8 @@ the left column indicates evaluation on low masking intensity, with
 \begin_inset Formula $50\%$
 \end_inset
 
- island; the right column demonstrate extreme masking of 
+ island;
+ the right column demonstrate extreme masking of 
 \begin_inset Formula $90\%$
 \end_inset
 
@@ -259,12 +362,9 @@ the left column indicates evaluation on low masking intensity, with
  island;
 \end_layout
 
-\begin_layout Itemize
-a dashed line is drawn at the 
-\begin_inset Formula $20\%$
 \end_inset
 
- mark to indicate a handwavy baseline.
+
 \end_layout
 
 \end_deeper
@@ -275,22 +375,1327 @@ a dashed line is drawn at the
 
 \end_layout
 
+\begin_layout Standard
+See Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:result-gauss-m-one"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ as an example.
+ To begin the analysis,
+ the result plots of the single mask sampled from 
+\begin_inset Formula $0\%-100\%$
+\end_inset
+
+ are shown:
+\end_layout
+
 \begin_layout Subsection
-Poisson Equation
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:Eval-Poisson-Equation"
+Full range
+\end_layout
+
+\begin_layout Subsubsection
+Single masks
+\end_layout
+
+\begin_layout Standard
+The errors plots are found below:
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/poisson/sum_of_sine-train_1800--random_0.0_1.0.png
+	width 16cm
 
 \end_inset
 
 
 \end_layout
 
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:result-poisson-single-0.0-1.0"
+
+\end_inset
+
+
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error-plot:
+ poisson-equation;
+ single mask,
+ full range
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Heat Equation:
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/heat/sum_of_sine-train_1800--random_0.0_1.0.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:result-heat-single-0.0-1.0"
+
+\end_inset
+
+
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error-plot:
+ heat-equation;
+ single mask,
+ full range
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wave Equation:
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/wave/sum_of_sine-train_1800--random_0.0_1.0.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:result-wave-single-0.0-1.0"
+
+\end_inset
+
+
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error-plot:
+ wave-equation;
+ single mask,
+ full range
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Conclusion
+Full range masks
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+It is readily apparent that the evaluation-errors increase steadily if:
+\end_layout
+
+\begin_layout Itemize
+evaluated on higher mask intensities for the same type of random masks
+\end_layout
+
+\begin_layout Itemize
+while the progression of errors evaluated on island style is generally unpredictable,
+ the performance is generally worse than that on 
+\end_layout
+
+\begin_layout Standard
+It should be noted though that even for the island style masks,
+ the evaluation errors are almost always under the baseline of 
+\begin_inset Formula $15\%$
+\end_inset
+
+.
+ This shall serve as the first proof of concept of the masked learning paradigm.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Double masks
+\end_layout
+
+\begin_layout Standard
+Now,
+ the results of the masks as shown:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO:
+ extra plot:
+ poisson:
+ single VS double mask,
+ both of the style
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/poisson/sum_of_sine-train_1800--random_0.0_1.0-random_0.0_1.0.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:result-poisson-double-0.0-1.0"
+
+\end_inset
+
+
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error-plot:
+ poisson-equation;
+ double mask,
+ full range
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+For the heat:
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/heat/sum_of_sine-train_1800--random_0.0_1.0-random_0.0_1.0.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:result-heat-double-0.0-1.0"
+
+\end_inset
+
+
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error-plot:
+ heat-equation;
+ double mask,
+ full range
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+For the wave:
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/wave/sum_of_sine-train_1800--random_0.0_1.0-random_0.0_1.0.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:result-wave-double-0.0-1.0"
+
+\end_inset
+
+
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error-plot:
+ wave-equation;
+ double mask,
+ full range
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Conclusion
+Double masks,
+ full range
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+When evaluated on random-masks:
+ for each channel,
+ the errors obey the same progression as seen in single masks:
+ steady increase of error with higher intensities.
+\end_layout
+
+\begin_layout Itemize
+When evaluated on island-masks:
+ again,
+ the errors are unpredictable.
+ The high-baseline has been raise slighted to 
+\begin_inset Formula $20\%$
+\end_inset
+
+,
+ but the errors only rarely rise beyond this threshold.
+ (list examples good,
+ examples bad).
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Specialized Ranges
+\end_layout
+
+\begin_layout Subsection
+The Poisson Equation
+\end_layout
+
+\begin_layout Standard
+To continue the analysis of the models,
+ the specialized single models are evaluated as follows.
+ One recalls that three specialized ranges are studied in this project:
+ 
+\begin_inset Formula $20\%-40\%$
+\end_inset
+
+...
+\end_layout
+
+\begin_layout Standard
+To begin the analysis,
+ the plots of the Poisson Equation in all three specialized ranges are shown:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/poisson/sum_of_sine-train_1800--random_0.2_0.4.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/poisson/sum_of_sine-train_1800--random_0.4_0.6.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/poisson/sum_of_sine-train_1800--random_0.6_0.8.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:result-poisson-single-specialized"
+
+\end_inset
+
+
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error-plot:
+ poisson-equation;
+ specialized ranges
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Conjecture
+Poisson Equation,
+ specialized ranges:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+errors are small in the ranges that the models are trained on
+\end_layout
+
+\begin_layout Itemize
+errors increase with larger discrepancy of masking intensity
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Conclusion
+Locality of masks
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+By studying only the plots on the left,
+ where the masking-type of evaluation agrees with that during training,
+ the immediate conclusion follows:
+\end_layout
+
+\begin_layout Itemize
+For FNO,
+ CNO and UNet,
+ for evaluation intensities the models perform best on masks trained on intensities close to that during training
+\end_layout
+
+\begin_layout Itemize
+in-distribution performance:
+ visible,
+ but only small increase of error for models trained on higher masking intensities:
+ 
+\end_layout
+
+\begin_layout Itemize
+The immediate 
+\end_layout
+
+\begin_layout Itemize
+Surprisingly,
+ for models trained on the high intensities evaluate worse on lower intensities evalutaion sets.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/poisson/sum_of_sine-train_1800--random_0.2_0.4-random_0.2_0.4.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:result-poisson-single-specialized-1"
+
+\end_inset
+
+
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error-plot:
+ poisson-equation;
+ double mask,
+ 0.2-0.4
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Conclusion
+Double masks
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Within each channel:
+ same story as single mask
+\end_layout
+
+\begin_layout Itemize
+Across channel:
+ Two channels have very similar performance
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The following shows the performance of 
+\begin_inset Formula $0.4-0.6$
+\end_inset
+
+ errors:
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/poisson/sum_of_sine-train_1800--random_0.4_0.6-random_0.4_0.6.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:result-poisson-single-specialized-1-1"
+
+\end_inset
+
+
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error-plot:
+ poisson-equation;
+ double mask,
+ 0.4-0.6
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The following of 
+\begin_inset Formula $0.6-0.8$
+\end_inset
+
+:
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/poisson/sum_of_sine-train_1800--random_0.6_0.8-random_0.6_0.8.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:result-poisson-single-specialized-1-1-1"
+
+\end_inset
+
+
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error-plot:
+ poisson-equation;
+ double mask,
+ 0.6-0.8
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is thus the result.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Heat Equation
+\end_layout
+
+\begin_layout Standard
+In the following,
+ the results of the other models are shown:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/heat/sum_of_sine-train_1800--random_0.2_0.4.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Formula $\qquad\qquad$
+\end_inset
+
+
+\begin_inset space \dotfill{}
+\end_inset
+
+
+\begin_inset Formula $\qquad\qquad$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/heat/sum_of_sine-train_1800--random_0.2_0.4-random_0.2_0.4.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:result-poisson-single-specialized-1-1-1-1"
+
+\end_inset
+
+
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error-plot:
+ heat-equation;
+ double mask,
+ 0.2-0.4
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/heat/sum_of_sine-train_1800--random_0.4_0.6.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Formula $\qquad\qquad$
+\end_inset
+
+
+\begin_inset space \dotfill{}
+\end_inset
+
+
+\begin_inset Formula $\qquad\qquad$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/heat/sum_of_sine-train_1800--random_0.4_0.6-random_0.4_0.6.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:result-poisson-single-specialized-1-1-1-1-1"
+
+\end_inset
+
+
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error-plot:
+ heat-equation;
+ double mask,
+ 0.4-0.6
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/heat/sum_of_sine-train_1800--random_0.6_0.8.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Formula $\qquad\qquad$
+\end_inset
+
+
+\begin_inset space \dotfill{}
+\end_inset
+
+
+\begin_inset Formula $\qquad\qquad$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/heat/sum_of_sine-train_1800--random_0.6_0.8-random_0.6_0.8.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:result-poisson-single-specialized-1-1-1-1-1-1-1"
+
+\end_inset
+
+
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error-plot:
+ heat-equation;
+ double mask,
+ 0.6-0.8
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Wave Equation
+\end_layout
+
+\begin_layout Standard
+These are thus the results of the wave equation:
+\end_layout
+
+\begin_layout Standard
+Some anomalies are to be observed here:
+\end_layout
+
+\begin_layout Enumerate
+f
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/wave/sum_of_sine-train_1800--random_0.2_0.4.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Formula $\qquad\qquad$
+\end_inset
+
+
+\begin_inset space \dotfill{}
+\end_inset
+
+
+\begin_inset Formula $\qquad\qquad$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/wave/sum_of_sine-train_1800--random_0.2_0.4-random_0.2_0.4.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:result-wave-special-0.2-0.4"
+
+\end_inset
+
+
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error-plot:
+ wave-equation;
+ double mask,
+ 0.2-0.4
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/wave/sum_of_sine-train_1800--random_0.4_0.6.png
+	width 14cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Formula $\qquad\qquad$
+\end_inset
+
+
+\begin_inset space \dotfill{}
+\end_inset
+
+
+\begin_inset Formula $\qquad\qquad$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/wave/sum_of_sine-train_1800--random_0.4_0.6-random_0.4_0.6.png
+	width 14cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:result-wave-special-0.4-0.6"
+
+\end_inset
+
+
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error-plot:
+ heat-equation;
+ double mask,
+ 0.4-0.6
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/wave/sum_of_sine-train_1800--random_0.6_0.8.png
+	width 15cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Formula $\qquad\qquad$
+\end_inset
+
+
+\begin_inset space \dotfill{}
+\end_inset
+
+
+\begin_inset Formula $\qquad\qquad$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/wave/sum_of_sine-train_1800--random_0.6_0.8-random_0.6_0.8.png
+	width 15cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:result-wave-special-0.6-0.8"
+
+\end_inset
+
+
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error-plot:
+ wave-equation;
+ double mask,
+ 0.6-0.8
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
 \begin_layout Subsubsection
 Sum of Gaussians
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Results of the FNO and CNO models of the 
 \begin_inset Quotes xld
 \end_inset
@@ -306,6 +1711,7 @@ reference "fig:result-gauss-m-one"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
@@ -317,6 +1723,7 @@ reference "fig:result-sine-m-one"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
@@ -331,6 +1738,8 @@ sum-of-sines
  dataset.
  
 \begin_inset Float figure
+placement document
+alignment document
 wide false
 sideways false
 status open
@@ -390,6 +1799,7 @@ reference "prop:Plotting-convention"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
@@ -406,8 +1816,10 @@ noprefix "false"
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Float figure
+placement document
+alignment document
 wide false
 sideways false
 status open
@@ -467,6 +1879,7 @@ reference "prop:Plotting-convention"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
@@ -483,43 +1896,44 @@ noprefix "false"
 
 \end_layout
 
-\begin_layout Standard
-While the plots appear jagged and sporadic at first glance, several conclusions
- are available nonetheless:
+\begin_layout Plain Layout
+While the plots appear jagged and sporadic at first glance,
+ several conclusions are available nonetheless:
 \end_layout
 
-\begin_layout Standard
-Firstly, the FNO algorithm yields stable (almost constant) performing models,
- whereas the CNO models vary significantly based on both training and evaluation
- dataset.
- While all FNO models solve the Gaussian dataset beautifully, they uniformly
- fail for the sine dataset.
- On the other hand, multiple instances of CNO manage to beat the 
+\begin_layout Plain Layout
+Firstly,
+ the FNO algorithm yields stable (almost constant) performing models,
+ whereas the CNO models vary significantly based on both training and evaluation dataset.
+ While all FNO models solve the Gaussian dataset beautifully,
+ they uniformly fail for the sine dataset.
+ On the other hand,
+ multiple instances of CNO manage to beat the 
 \begin_inset Formula $20\%$
 \end_inset
 
  error mark.
- A closer look at the distribution of those well-performing models leads
- to the subsequent observation:
+ A closer look at the distribution of those well-performing models leads to the subsequent observation:
 \end_layout
 
-\begin_layout Standard
-CNO Models perform better when evaluated on masking intensities resembling
- that during training.
- This is particularly evident from the left (low masking intensity) and
- right (high masking intensity) plots of CNO.
- As an example, the model trained on 
+\begin_layout Plain Layout
+CNO Models perform better when evaluated on masking intensities resembling that during training.
+ This is particularly evident from the left (low masking intensity) and right (high masking intensity) plots of CNO.
+ As an example,
+ the model trained on 
 \begin_inset Formula $10\%$
 \end_inset
 
- random mask for the sine dataset performs very well when evaluated with
- the same masking configuration.
- On the flip side, when CNO models are evaluated on masking intensities
- drastically different than training intensity, the errors blow up very
- quickly, see, in particular, the left plot of CNO models on the sine dataset.
+ random mask for the sine dataset performs very well when evaluated with the same masking configuration.
+ On the flip side,
+ when CNO models are evaluated on masking intensities drastically different than training intensity,
+ the errors blow up very quickly,
+ see,
+ in particular,
+ the left plot of CNO models on the sine dataset.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 This 
 \begin_inset Quotes xld
 \end_inset
@@ -535,10 +1949,12 @@ reference "fig:masks-cno-sol-random-0.1"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
-, where one instance of the CNO model trained on (low intensity) 
+,
+ where one instance of the CNO model trained on (low intensity) 
 \begin_inset Formula $10\%$
 \end_inset
 
@@ -554,24 +1970,24 @@ noprefix "false"
 \begin_inset Formula $9$
 \end_inset
 
- island) masks: starting at about 
+ island) masks:
+ starting at about 
 \begin_inset Formula $15\%$
 \end_inset
 
-, the error increases steadily as the masking intensity distances itself
- from that during training, reaching approximately 
+,
+ the error increases steadily as the masking intensity distances itself from that during training,
+ reaching approximately 
 \begin_inset Formula $80\%$
 \end_inset
 
  for both masking styles at high intensity regime.
- Also, evaluation on the same masking type as training (both random style
- in this case) consistently outperforms the case where a different type
- is used (in this case island style).
- It follows thus that evaluation results are generally better of the same
- masking style with similar intensity.
+ Also,
+ evaluation on the same masking type as training (both random style in this case) consistently outperforms the case where a different type is used (in this case island style).
+ It follows thus that evaluation results are generally better of the same masking style with similar intensity.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Comparing the performance of the FNO and CNO models 
 \begin_inset Flex Emph
 status open
@@ -582,8 +1998,8 @@ across
 
 \end_inset
 
- the datasets, one concludes that the Gaussian dataset is easier to learn
- than the Sine dataset.
+ the datasets,
+ one concludes that the Gaussian dataset is easier to learn than the Sine dataset.
  Bearing the heuristics in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -591,27 +2007,30 @@ reference "subsec:Heuristic-comparisons-poisson-dataset"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
-, one could attribute this to the fact that the Gaussian dataset contains
- more patches of 
+,
+ one could attribute this to the fact that the Gaussian dataset contains more patches of 
 \begin_inset Formula $0$
 \end_inset
 
- value even without masking, effectively negating the effect of masking
- (with zeroes).
+ value even without masking,
+ effectively negating the effect of masking (with zeroes).
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Separator plain
 \end_inset
 
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Float figure
+placement document
+alignment document
 wide false
 sideways false
 status open
@@ -648,7 +2067,8 @@ name "fig:masks-cno-sol-random-0.1"
 \begin_inset Formula $10\%$
 \end_inset
 
- random mask, evaluated with 
+ random mask,
+ evaluated with 
 \begin_inset Formula $9$
 \end_inset
 
@@ -669,5 +2089,263 @@ name "fig:masks-cno-sol-random-0.1"
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Subsection
+Poisson Equation
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Eval-Poisson-Equation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/poisson/sum_of_sine-train_1800--random_0.2_0.4-random_0.2_0.4.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Heat Equation
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Eval-Heat-Equation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Wave Equation
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Eval-Heat-Equation-1"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Specialized
+\end_layout
+
+\begin_layout Plain Layout
+For the 
+\end_layout
+
+\begin_layout Subsubsection
+Double mask
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/heat/sum_of_sine-train_1800--random_0.2_0.4.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/heat/sum_of_sine-train_1800--random_0.4_0.6.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/heat/sum_of_sine-train_1800--random_0.6_0.8.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:result-heat-single-specialized"
+
+\end_inset
+
+
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error VS masking intensities of the 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-gaussians
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset.
+ Individual sub-plots are explained in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "prop:Plotting-convention"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Other Evaluations
+\end_layout
+
+\begin_layout Subsection
+Dynamic remasking
+\end_layout
+
+\begin_layout Standard
+The dynamic-remasking strategy used during training as introduced in the previous Chapter 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO:
+ REF
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Conclusion about dynamic remasking
+\end_layout
+
+\begin_layout Standard
+Poisson:
+ Single
+\end_layout
+
+\begin_layout Standard
+Wave:
+ Double
+\end_layout
+
+\begin_layout Enumerate
+It almost always saves you (massive) number of epochs
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+compare #steps at termination
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+It almost always never costs you performance
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+two examples:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Poisson,
+ single:
+ performance at end
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+KNO
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+It could likely gives a fresh perspective (found )
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+compare:
+ number of new improvements after remask VS no remask
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Bad:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+KNO:
+ continuous improvement
+\end_layout
+
+\end_deeper
 \end_body
 \end_document

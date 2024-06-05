@@ -40,7 +40,7 @@ todonotes
 \use_microtype true
 \use_dash_ligatures true
 \graphics default
-\default_output_format pdf5
+\default_output_format pdf4
 \output_sync 0
 \bibtex_command default
 \index_command default
@@ -119,6 +119,1261 @@ Review and Projection
 \end_layout
 
 \begin_layout Subsection
+Environment Setup
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+The experiment
+\end_layout
+
+\begin_layout Itemize
+CPU
+\end_layout
+
+\begin_layout Itemize
+GPU
+\end_layout
+
+\begin_layout Itemize
+Ram
+\end_layout
+
+\begin_layout Itemize
+Linux Distro, version
+\end_layout
+
+\begin_layout Itemize
+Python version
+\end_layout
+
+\begin_layout Itemize
+Environment (poetry)
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Although
+\end_layout
+
+\begin_layout Plain Layout
+The
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A typical machine-learning project must be run on a carefully orchestrated
+ environment setup spanning from hardware to software components.
+ This section documents the particular setup utilized by the author of this
+ thesis to execute the full project pipeline.
+ To start off, Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:hardware"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ enumerates the hardware specifications:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="7">
+<features booktabs="true" islongtable="true" longtabularalignment="center">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="center" valignment="top">
+<column alignment="right" valignment="top" width="0pt">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Component
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\qquad$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Model
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\qquad$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Notes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GPU
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NVIDIA 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+RTX
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+2080Ti
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CPU
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Intel 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+Core
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+i7-12700K
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+with default overclocking
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RAM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+192 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+GB
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\begin_inset Formula $\times$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+48 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+GB
+\end_layout
+
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+DDR5
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:hardware"
+
+\end_inset
+
+Hardware setup
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+On the other hand, Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:software"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ enlists the software used in this project.
+ Due to the non-trivial, six-month time-span of the project, several key
+ pieces of software of this project have seen multiple versioned releases.
+ As such, the respective version 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+ranges
+\end_layout
+
+\end_inset
+
+ of these software components are given, which are tested for successful
+ deployment to execute the project.
+ It shall serve as a general orientation for readers attempting to reproduce
+ the results of the project.
+ Note that although non-listed versions of these pieces of software will
+ not necessarily break code, no explicit guarantee is given by the author
+ for functionality if they are used.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="5">
+<features booktabs="true" islongtable="true" longtabularalignment="center">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="center" valignment="top">
+<column alignment="right" valignment="top" width="0pt">
+<column alignment="right" valignment="top" width="0pt">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Component
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\qquad$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Version
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+OS Kernel
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Linux Zen, 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+6.6.9-6.7.9
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+python
+\end_layout
+
+\end_inset
+
+ Interpreter
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+reference implementation, 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+3.11-3.12
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Deep Learning Toolkit
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+pytorch
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+2.2-2.3
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+cuda
+\end_layout
+
+\end_inset
+
+ suite
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+12.3.1-12.5.0
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\texttt{C++}$
+\end_inset
+
+ toolchain
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+clang
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+16.0-17.0
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:software"
+
+\end_inset
+
+Supported software versions
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+python
+\end_layout
+
+\end_inset
+
+ related setup
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: 
+\end_layout
+
+\begin_layout Itemize
+repo URL (github, gitlab)
+\end_layout
+
+\begin_layout Itemize
+reproducability (seeding)
+\end_layout
+
+\begin_layout Itemize
+file-structure
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+poetry
+\end_layout
+
+\end_inset
+
+ virtual-environment tool is used to manage the virtual environment, which
+ handles the dependency management of the project.
+ The interested reader is invited to duplicate the environment to verify
+ the results: first, a virtual environment shall be created, then populated
+ with the necessary 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+python
+\end_layout
+
+\end_inset
+
+ packages.
+ This is achieved with the following command:
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+$ poetry install  # install package dependencies in virt.
+ env.
+\end_layout
+
+\begin_layout Plain Layout
+
+$ poetry shell  # activate shell of virt.
+ env.
+\end_layout
+
+\end_inset
+
+At this point, two possibilities exist for running commands in the now available
+ 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+$ poetry run python <module>  # execute some (python-) module
+\end_layout
+
+\begin_layout Plain Layout
+
+$ poetry shell  # activate interactive shell
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Both methods have merits, and the choice should depend on the specific coding
+ use-case at hand.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+Testing
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Core utilities of the project are tested with a separate test suite.
+ The test suite is structured as follows:
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+tests
+\end_layout
+
+\begin_layout Plain Layout
+
+|-- test_dataset.py
+\end_layout
+
+\begin_layout Plain Layout
+
+|-- test_deepl.py
+\end_layout
+
+\begin_layout Plain Layout
+
+|-- test_integral.py
+\end_layout
+
+\begin_layout Plain Layout
+
+|-- test_multidiff.py
+\end_layout
+
+\begin_layout Plain Layout
+
+|-- test_sample.py
+\end_layout
+
+\begin_layout Plain Layout
+
+|-- test_util_math.py
+\end_layout
+
+\begin_layout Plain Layout
+
+|-- test_util.py
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The established 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+pytest
+\end_layout
+
+\end_inset
+
+ utility 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+REF
+\end_layout
+
+\end_inset
+
+is used to format and manage the tests.
+ and included in the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+poetry
+\end_layout
+
+\end_inset
+
+ virtual environment setup as mentioned above.
+ All tests are automatically run by issuing:
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+$ cd <project_root>  # e.g., location after repo-cloning
+\end_layout
+
+\begin_layout Plain Layout
+
+$ pytest ./tests
+\end_layout
+
+\end_inset
+
+in the command-line once the environment is installed.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+Reproducibility
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+While significant segments of machine-learning banks on randomness, special
+ care has to be taken to guarantee some semblance of reproducibility.
+ The key is to set consciously set the seed for random-number-generators
+ whenever reproducibility is desired.
+ Conforming to common practice, this project uses 
+\begin_inset Formula $42$
+\end_inset
+
+ as the manual seed value.
+\end_layout
+
+\begin_layout Standard
+A list of commonly used seeding functions are listed below:
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+# import...
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+torch.manual_seed(42)
+\end_layout
+
+\begin_layout Plain Layout
+
+np.
+ (TDOOOO)
+\end_layout
+
+\begin_layout Plain Layout
+
+random.seed(42) (TODO: check)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
 Timeline
 \end_layout
 
@@ -135,7 +1390,7 @@ status open
 \end_inset
 
 .
- Commencingon 
+ Commencing on 
 \begin_inset Flex Strong
 status open
 
@@ -621,15 +1876,24 @@ Time-stamps of key activities
 
 \begin_layout Subsection
 Future work
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Future-work"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Some immediate prospects for further researches include, but are not limited
+Due to the object limitation of the framework of a Master Thesis, various
+ aspects related to masked PDE Learning remain to be explored.
+ Some immediate prospects for further researches include, but are not limited
  to:
 \end_layout
 
 \begin_layout Itemize
-application of more specialized PDE models;
+application of more advanced PDE models;
 \end_layout
 
 \begin_layout Itemize
@@ -641,9 +1905,50 @@ dimensions higher than
 \end_layout
 
 \begin_layout Itemize
-more advanced masking strategies
+application of the learning paradigm as discussed in this thesis under discretiz
+ation scheme beyond the generic square mesh structure as discussed in Section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:Space-mesh"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+the generation of quality mesh, as 
 \end_layout
 
+\begin_layout Itemize
+more advanced masking strategies, such as varying masking value as proposed
+ in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Masking"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and larger kernel for the single mask.
+\end_layout
+
+\begin_layout Itemize
+ML related
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+bagging strategy, graph, tree
+\end_layout
+
+\begin_layout Itemize
+other loss functions
+\end_layout
+
+\end_deeper
 \begin_layout Standard
 \begin_inset Separator plain
 \end_inset
