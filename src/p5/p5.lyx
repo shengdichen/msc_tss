@@ -1,5 +1,5 @@
-#LyX 2.3 created this file. For more info see http://www.lyx.org/
-\lyxformat 544
+#LyX 2.4 created this file. For more info see https://www.lyx.org/
+\lyxformat 620
 \begin_document
 \begin_header
 \save_transient_properties true
@@ -22,11 +22,11 @@ enumitem
 logicalmkup
 todonotes
 \end_modules
-\maintain_unincluded_children false
+\maintain_unincluded_children no
 \language english
 \language_package default
-\inputencoding auto
-\fontencoding global
+\inputencoding auto-legacy
+\fontencoding auto
 \font_roman "default" "Libertinus Serif"
 \font_sans "default" "Avenir LT Std"
 \font_typewriter "default" "Source Code Pro"
@@ -34,7 +34,9 @@ todonotes
 \font_default_family default
 \use_non_tex_fonts true
 \font_sc false
-\font_osf false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
 \font_sf_scale 100 100
 \font_tt_scale 100 93
 \use_microtype true
@@ -60,7 +62,7 @@ todonotes
 \pdf_backref false
 \pdf_pdfusetitle true
 \pdf_quoted_options "linkcolor=black,  frenchlinks=true, citecolor=black, urlcolor=blue, filecolor=blue, pdfpagelayout=OneColumn, pdfnewwindow=true, pdfstartview=XYZ, plainpages=false"
-\papersize a4paper
+\papersize a4
 \use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
@@ -82,7 +84,9 @@ todonotes
 \suppress_date false
 \justification true
 \use_refstyle 1
+\use_formatted_ref 0
 \use_minted 0
+\use_lineno 0
 \index Index
 \shortcut idx
 \color #008000
@@ -104,12 +108,17 @@ todonotes
 \papercolumns 1
 \papersides 2
 \paperpagestyle fancy
+\tablestyle default
 \listings_params "basicstyle={\ttfamily\normalsize},commentstyle={\sffamily},columns=fullflexible,numbers=left,numberstyle={\ttfamily\scriptsize},stepnumber=1,numberblanklines=false,firstline=1,numbersep=9pt,frame=tlb,framexleftmargin=3pt,framextopmargin=2pt,framexbottommargin=1pt,aboveskip={\medskipamount},belowskip={\medskipamount},captionpos=b,floatplacement=tbp,tabsize=4,resetmargins=false,breaklines=true,breakatwhitespace=false,breakautoindent=true,breakindent=0pt,prebreak={...},postbreak={...},extendedchars=true"
 \tracking_changes false
 \output_changes false
+\change_bars false
+\postpone_fragile_content false
 \html_math_output 0
 \html_css_as_file 0
 \html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
 \end_header
 
 \begin_body
@@ -140,7 +149,8 @@ Ram
 \end_layout
 
 \begin_layout Itemize
-Linux Distro, version
+Linux Distro,
+ version
 \end_layout
 
 \begin_layout Itemize
@@ -172,17 +182,17 @@ The
 \end_layout
 
 \begin_layout Standard
-A typical machine-learning project must be run on a carefully orchestrated
- environment setup spanning from hardware to software components.
- This section documents the particular setup utilized by the author of this
- thesis to execute the full project pipeline.
- To start off, Table 
+A typical machine-learning project must be run on a carefully orchestrated environment setup spanning from hardware to software components.
+ This section documents the particular setup utilized by the author of this thesis to execute the full project pipeline.
+ To start off,
+ Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:hardware"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
@@ -191,6 +201,8 @@ noprefix "false"
 
 \begin_layout Standard
 \begin_inset Float table
+placement document
+alignment document
 wide false
 sideways false
 status open
@@ -616,20 +628,24 @@ Hardware setup
 \end_layout
 
 \begin_layout Standard
-On the other hand, Table 
+On the other hand,
+ Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:software"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
  enlists the software used in this project.
- Due to the non-trivial, six-month time-span of the project, several key
- pieces of software of this project have seen multiple versioned releases.
- As such, the respective version 
+ Due to the non-trivial,
+ six-month time-span of the project,
+ several key pieces of software of this project have seen multiple versioned releases.
+ As such,
+ the respective version 
 \begin_inset Flex Emph
 status open
 
@@ -639,17 +655,17 @@ ranges
 
 \end_inset
 
- of these software components are given, which are tested for successful
- deployment to execute the project.
- It shall serve as a general orientation for readers attempting to reproduce
- the results of the project.
- Note that although non-listed versions of these pieces of software will
- not necessarily break code, no explicit guarantee is given by the author
- for functionality if they are used.
+ of these software components are given,
+ which are tested for successful deployment to execute the project.
+ It shall serve as a general orientation for readers attempting to reproduce the results of the project.
+ Note that although non-listed versions of these pieces of software will not necessarily break code,
+ no explicit guarantee is given by the author for functionality if they are used.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float table
+placement document
+alignment document
 wide false
 sideways false
 status open
@@ -745,7 +761,8 @@ OS Kernel
 \begin_inset Text
 
 \begin_layout Plain Layout
-Linux Zen, 
+Linux Zen,
+ 
 \begin_inset Flex Code
 status open
 
@@ -811,7 +828,8 @@ python
 \begin_inset Text
 
 \begin_layout Plain Layout
-reference implementation, 
+reference implementation,
+ 
 \begin_inset Flex Code
 status open
 
@@ -877,7 +895,8 @@ pytorch
 
 \end_inset
 
-, 
+,
+ 
 \begin_inset Flex Code
 status open
 
@@ -1024,7 +1043,8 @@ clang
 
 \end_inset
 
-, 
+,
+ 
 \begin_inset Flex Code
 status open
 
@@ -1094,11 +1114,13 @@ python
 status open
 
 \begin_layout Plain Layout
-TODO: 
+TODO:
+ 
 \end_layout
 
 \begin_layout Itemize
-repo URL (github, gitlab)
+repo URL (github,
+ gitlab)
 \end_layout
 
 \begin_layout Itemize
@@ -1126,11 +1148,12 @@ poetry
 
 \end_inset
 
- virtual-environment tool is used to manage the virtual environment, which
- handles the dependency management of the project.
- The interested reader is invited to duplicate the environment to verify
- the results: first, a virtual environment shall be created, then populated
- with the necessary 
+ virtual-environment tool is used to manage the virtual environment,
+ which handles the dependency management of the project.
+ The interested reader is invited to duplicate the environment to verify the results:
+ first,
+ a virtual environment shall be created,
+ then populated with the necessary 
 \begin_inset Flex Code
 status open
 
@@ -1160,8 +1183,8 @@ $ poetry shell  # activate shell of virt.
 
 \end_inset
 
-At this point, two possibilities exist for running commands in the now available
- 
+At this point,
+ two possibilities exist for running commands in the now available 
 \begin_inset listings
 inline false
 status open
@@ -1182,8 +1205,8 @@ $ poetry shell  # activate interactive shell
 \end_layout
 
 \begin_layout Standard
-Both methods have merits, and the choice should depend on the specific coding
- use-case at hand.
+Both methods have merits,
+ and the choice should depend on the specific coding use-case at hand.
 \end_layout
 
 \end_deeper
@@ -1291,7 +1314,8 @@ status open
 
 \begin_layout Plain Layout
 
-$ cd <project_root>  # e.g., location after repo-cloning
+$ cd <project_root>  # e.g.,
+ location after repo-cloning
 \end_layout
 
 \begin_layout Plain Layout
@@ -1318,11 +1342,11 @@ Reproducibility
 
 \begin_deeper
 \begin_layout Standard
-While significant segments of machine-learning banks on randomness, special
- care has to be taken to guarantee some semblance of reproducibility.
- The key is to set consciously set the seed for random-number-generators
- whenever reproducibility is desired.
- Conforming to common practice, this project uses 
+While significant segments of machine-learning banks on randomness,
+ special care has to be taken to guarantee some semblance of reproducibility.
+ The key is to set consciously set the seed for random-number-generators whenever reproducibility is desired.
+ Conforming to common practice,
+ this project uses 
 \begin_inset Formula $42$
 \end_inset
 
@@ -1357,7 +1381,8 @@ np.
 
 \begin_layout Plain Layout
 
-random.seed(42) (TODO: check)
+random.seed(42) (TODO:
+ check)
 \end_layout
 
 \end_inset
@@ -1378,8 +1403,7 @@ Timeline
 \end_layout
 
 \begin_layout Standard
-The administrative details of this thesis can be retrieved under the course-cata
-logue of ETH Zürich under the registration number 
+The administrative details of this thesis can be retrieved under the course-catalogue of ETH Zürich under the registration number 
 \begin_inset Flex Code
 status open
 
@@ -1400,7 +1424,8 @@ status open
 
 \end_inset
 
-, the project consists of six (
+,
+ the project consists of six (
 \begin_inset Flex Strong
 status open
 
@@ -1410,8 +1435,8 @@ status open
 
 \end_inset
 
-) months of full-time work, including the drafting of the thesis and the
- composing of the source-code.
+) months of full-time work,
+ including the drafting of the thesis and the composing of the source-code.
  Specifics are found in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1419,6 +1444,7 @@ reference "tab:Time-stamps-of-key-activities"
 plural "false"
 caps "false"
 noprefix "false"
+nolink "false"
 
 \end_inset
 
@@ -1427,6 +1453,8 @@ noprefix "false"
 
 \begin_layout Standard
 \begin_inset Float table
+placement document
+alignment document
 wide false
 sideways false
 status open
@@ -1508,7 +1536,8 @@ weeks)
 \begin_inset Text
 
 \begin_layout Plain Layout
-Initial planning; project structuring
+Initial planning;
+ project structuring
 \end_layout
 
 \end_inset
@@ -1558,7 +1587,8 @@ Initial planning; project structuring
 \begin_inset Text
 
 \begin_layout Plain Layout
-Literature survey; ML hardware lab setup
+Literature survey;
+ ML hardware lab setup
 \end_layout
 
 \end_inset
@@ -1708,7 +1738,8 @@ Initial coding and testing
 \begin_inset Text
 
 \begin_layout Plain Layout
-Theoretical formulation; bulk implementation work
+Theoretical formulation;
+ bulk implementation work
 \end_layout
 
 \end_inset
@@ -1758,7 +1789,8 @@ Theoretical formulation; bulk implementation work
 \begin_inset Text
 
 \begin_layout Plain Layout
-Benchmarking; results collection
+Benchmarking;
+ results collection
 \end_layout
 
 \end_inset
@@ -1808,7 +1840,8 @@ Benchmarking; results collection
 \begin_inset Text
 
 \begin_layout Plain Layout
-Final code review; thesis drafting
+Final code review;
+ thesis drafting
 \end_layout
 
 \end_inset
@@ -1883,92 +1916,11 @@ name "subsec:Future-work"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-Due to the object limitation of the framework of a Master Thesis, various
- aspects related to masked PDE Learning remain to be explored.
- Some immediate prospects for further researches include, but are not limited
- to:
-\end_layout
-
-\begin_layout Itemize
-application of more advanced PDE models;
-\end_layout
-
-\begin_layout Itemize
-dimensions higher than 
-\begin_inset Formula $2$
-\end_inset
-
-;
-\end_layout
-
-\begin_layout Itemize
-application of the learning paradigm as discussed in this thesis under discretiz
-ation scheme beyond the generic square mesh structure as discussed in Section
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "def:Space-mesh"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-the generation of quality mesh, as 
-\end_layout
-
-\begin_layout Itemize
-more advanced masking strategies, such as varying masking value as proposed
- in 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Masking"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- and larger kernel for the single mask.
-\end_layout
-
-\begin_layout Itemize
-ML related
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-bagging strategy, graph, tree
-\end_layout
-
-\begin_layout Itemize
-other loss functions
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The list is definitely non-exhaustive: the reader is encouraged to continue
- upon the findings of this thesis to explore follow-up possibilities building
- upon the framework of masked PDE learning as general research direction.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Itemize
-Expansion of the evaluation framework to include other testing-environments
- such as the classic control-problems of the Cartpole and the Pendulum 
+Expansion of the evaluation framework to include other testing-environments such as the classic control-problems of the Cartpole and the Pendulum 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "gym"
@@ -1980,14 +1932,13 @@ literal "false"
 \end_layout
 
 \begin_layout Itemize
-Extension of the PW-IL algorithm with adaptive regularization and parameter
- tuning;
+Extension of the PW-IL algorithm with adaptive regularization and parameter tuning;
 \end_layout
 
 \begin_layout Itemize
 Comparison of the PW-IL algorithm with other state-of-the-art algorithms,
- in particular, IRL methods such as Adversarial Inverse Reinforcement Learning
- (AIRL) 
+ in particular,
+ IRL methods such as Adversarial Inverse Reinforcement Learning (AIRL) 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "AIRL"
@@ -2003,12 +1954,95 @@ literal "false"
 
 \end_layout
 
+\begin_layout Standard
+Due to the object limitation of the framework of a Master Thesis,
+ various aspects related to masked PDE Learning remain to be explored.
+ Some immediate prospects for further researches include,
+ but are not limited to:
+\end_layout
+
+\begin_layout Itemize
+application of more advanced PDE models;
+\end_layout
+
+\begin_layout Itemize
+dimensions higher than 
+\begin_inset Formula $2$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Itemize
+application of the learning paradigm as discussed in this thesis under discretization scheme beyond the generic square mesh structure as discussed in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:Space-mesh"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+the generation of quality mesh,
+ as 
+\end_layout
+
+\begin_layout Itemize
+more advanced masking strategies,
+ such as varying masking value as proposed in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Masking"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ and larger kernel for the single mask;
+ other masking shapes,
+ such as random masks with hider kernel,
+ as well as ring-like masks to complement the existing island-style mask.
+\end_layout
+
+\begin_layout Itemize
+ML related
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+bagging strategy,
+ graph,
+ tree
+\end_layout
+
+\begin_layout Itemize
+other loss functions
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The list is definitely non-exhaustive:
+ the reader is encouraged to continue upon the findings of this thesis to explore follow-up possibilities building upon the framework of masked PDE learning as general research direction.
+\end_layout
+
 \begin_layout Section
 Acknowledgements
 \end_layout
 
 \begin_layout Standard
-To the supervisor of this thesis, Prof.
+To the supervisor of this thesis,
+ Prof.
  Dr.
  S.
  Mishra:
@@ -2016,8 +2050,7 @@ To the supervisor of this thesis, Prof.
 
 \begin_layout Standard
 my deepest appreciation for the encouragement of pursuing this project,
- for the rigorous yet illuminating approach to the realm of scientific learning
- as a whole;
+ for the rigorous yet illuminating approach to the realm of scientific learning as a whole;
 \begin_inset VSpace 50baselineskip%
 \end_inset
 
@@ -2025,13 +2058,13 @@ my deepest appreciation for the encouragement of pursuing this project,
 \end_layout
 
 \begin_layout Standard
-To my advisor, Bogdan:
+To my advisor,
+ Bogdan:
 \end_layout
 
 \begin_layout Standard
-my heart-felt thanks for the rapid and intuitive implementations of abstract
- concepts and for providing me with constructive suggestions during the
- fledging stages of the project; 
+my heart-felt thanks for the rapid and intuitive implementations of abstract concepts and for providing me with constructive suggestions during the fledging stages of the project;
+ 
 \begin_inset VSpace 50baselineskip%
 \end_inset
 
@@ -2039,8 +2072,9 @@ my heart-felt thanks for the rapid and intuitive implementations of abstract
 \end_layout
 
 \begin_layout Standard
-Finally, to my family and my friends: my sincere gratitude for the unyielding
- support and care during the course of my studies.
+Finally,
+ to my family and my friends:
+ my sincere gratitude for the unyielding support and care during the course of my studies.
 \end_layout
 
 \end_body

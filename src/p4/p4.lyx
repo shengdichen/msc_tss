@@ -151,7 +151,7 @@ literal "false"
 
 \end_inset
 
- adjust the raw (unmasked) datasets directly by changing the value(s) of the model constant(s),
+ adjust the raw (unmasked) datasets directly by changing the value(s) of the model parameters(s),
  this thesis exploits the tunable nature of both the random and the island style masking as introduced in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -190,6 +190,817 @@ As an example,
 
 \begin_layout Standard
 The following proposition describes the evaluation procedure of the models to in both the in-distribution and the out-of-distribution manner.
+ First,
+ the datasets for training are introduced:
+\end_layout
+
+\begin_layout Definition
+Construction of training datasets
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Every underlying raw dataset is masked in four modes:
+\end_layout
+
+\begin_layout Itemize
+the full range,
+ i.e.,
+ where the intensity is sampled from the entire intensity range:
+ 
+\begin_inset Formula $0\%\text{ -- }100\%$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+three 
+\begin_inset Quotes xld
+\end_inset
+
+specialized
+\begin_inset Quotes xrd
+\end_inset
+
+ modes,
+ where the intensity spread is uniformly 
+\begin_inset Formula $10\%$
+\end_inset
+
+,
+ and the center,
+ expected-value of intensities at 
+\begin_inset Formula $30\%$
+\end_inset
+
+,
+ 
+\begin_inset Formula $50\%$
+\end_inset
+
+ and 
+\begin_inset Formula $70\%$
+\end_inset
+
+ respectively,
+ each targeting the low,
+ middle and high masking regime.
+\end_layout
+
+\begin_layout Standard
+A summary of the training masks are found in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:mask-train"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ and Listing 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lis:mask-train"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ shows the implementation for creating those masks in a generic 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+python
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+list
+\end_layout
+
+\end_inset
+
+ object.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="9">
+<features booktabs="true" islongtable="true" longtabularalignment="center">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Regime
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\qquad$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mathbb{E}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\pm$
+\end_inset
+
+spread
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+min
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+max
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Full
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+50%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+50%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+100%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Low
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+30%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+20%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+40%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Middle
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+50%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+40%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+60%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+High
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+70%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+60%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+80%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:mask-train"
+
+\end_inset
+
+Masking Intensities for training
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+# src/problem.py
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Problem:
+\end_layout
+
+\begin_layout Plain Layout
+
+    def __init__(...):
+\end_layout
+
+\begin_layout Plain Layout
+
+        self._masks_train = [
+\end_layout
+
+\begin_layout Plain Layout
+
+            util_dataset.MaskerRandom.from_min_max(
+\end_layout
+
+\begin_layout Plain Layout
+
+                intensity_min=0.0,
+ intensity_max=1.0
+\end_layout
+
+\begin_layout Plain Layout
+
+            ),
+\end_layout
+
+\begin_layout Plain Layout
+
+            util_dataset.MaskerRandom.from_min_max(
+\end_layout
+
+\begin_layout Plain Layout
+
+                intensity_min=0.4,
+ intensity_max=0.6
+\end_layout
+
+\begin_layout Plain Layout
+
+            ),
+\end_layout
+
+\begin_layout Plain Layout
+
+            util_dataset.MaskerRandom.from_min_max(
+\end_layout
+
+\begin_layout Plain Layout
+
+                intensity_min=0.2,
+ intensity_max=0.4
+\end_layout
+
+\begin_layout Plain Layout
+
+            ),
+\end_layout
+
+\begin_layout Plain Layout
+
+            util_dataset.MaskerRandom.from_min_max(
+\end_layout
+
+\begin_layout Plain Layout
+
+                intensity_min=0.6,
+ intensity_max=0.8
+\end_layout
+
+\begin_layout Plain Layout
+
+            ),
+\end_layout
+
+\begin_layout Plain Layout
+
+        ]
+\end_layout
+
+\begin_layout Plain Layout
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "lis:mask-train"
+
+\end_inset
+
+Creation of training masks
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Next,
+ the datasets for evaluation are presented:
 \end_layout
 
 \begin_layout Proposition
@@ -229,6 +1040,34 @@ The intensities:
 
 \begin_layout Standard
 Construction of the individual datasets follow the same routine as described previously for the training datasets.
+ In conclusion,
+ of the two masking styles 
+\begin_inset Quotes xld
+\end_inset
+
+random
+\begin_inset Quotes xrd
+\end_inset
+
+ and 
+\begin_inset Quotes xld
+\end_inset
+
+island
+\begin_inset Quotes xrd
+\end_inset
+
+,
+ a total of 
+\begin_inset Formula $20$
+\end_inset
+
+ evaluation masks are created,
+ à 
+\begin_inset Formula $10$
+\end_inset
+
+ masks.
 \end_layout
 
 \end_deeper
@@ -239,7 +1078,153 @@ Construction of the individual datasets follow the same routine as described pre
 
 \end_layout
 
-\begin_layout Proposition
+\begin_layout Note
+Out of distribution testing
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+As hinted at before,
+ 
+\begin_inset Quotes xld
+\end_inset
+
+out-of-distribution
+\begin_inset Quotes xrd
+\end_inset
+
+ evaluation provides a powerful mechanism of model testing.
+ In the case of masked PDE learning,
+ there exist two opportunities for performing this type of performance gauging:
+\end_layout
+
+\begin_layout Standard
+On the one hand,
+ the style of the mask can be varied.
+ In the case of this thesis,
+ since training is performed uniformly with the random mask,
+ this translates to using the island masks.
+\end_layout
+
+\begin_layout Standard
+On the other hand,
+ the intensity of the mask,
+ i.e.,
+ its expected value and/or its spread,
+ can be modified during evaluation.
+ Recalling the training and evaluation datasets,
+ one readily realizes that 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+all
+\end_layout
+
+\end_inset
+
+evaluation masking intensities differ from those used during training:
+ as the spread of masks never agree.
+ However,
+ in the case of the three 
+\begin_inset Quotes xld
+\end_inset
+
+specialized
+\begin_inset Quotes xrd
+\end_inset
+
+ masks of 
+\begin_inset Formula $10\%$
+\end_inset
+
+ spreads,
+ two evaluation masks overlap fully with the training masks:
+\begin_inset Formula 
+\[
+\left\{ \begin{alignedat}{2}\overbrace{\qquad\qquad\quad\;\;}^{\text{train}} &  &  & \quad\overbrace{\qquad\qquad\qquad}^{\text{eval}}\\
+\left[20\%\text{ -- }40\%\right]\;\; & \supseteq &  & \left\langle \begin{alignedat}{1}\;\; & \left[20\%;30\%\right]\\
+ & \left[30\%;40\%\right]
+\end{alignedat}
+\right.\\
+\left[40\%-60\%\right]\;\; & \supseteq &  & \left\langle \begin{alignedat}{1}\;\; & \left[40\%;50\%\right]\\
+ & \left[50\%;60\%\right]
+\end{alignedat}
+\right.\\
+\left[60\%-80\%\right]\;\; & \supseteq &  & \left\langle \begin{alignedat}{1}\;\; & \left[60\%;70\%\right]\\
+ & \left[70\%;90\%\right]
+\end{alignedat}
+\right.
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To conclude,
+ the evaluation procedure uses some form of out-of-distribution testing for all datasets,
+ with certain training and evaluation datasets more 
+\begin_inset Quotes xld
+\end_inset
+
+similar
+\begin_inset Quotes xrd
+\end_inset
+
+ to each other.
+ For the purpose of the upcoming sections,
+ the evaluation datasets enumerated above are considered in-distribution,
+ whereas the others out-of-distribution.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO:
+ consider making a table:
+\end_layout
+
+\begin_layout Enumerate
+full dataset:
+ under 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus concludes the setup of model evaluation.
+ In the following,
+ analysis results from all possible training-evaluation pairings are presented ordered by masking types and channels.
+ To commence,
+ the result plots of the single mask sampled from 
+\begin_inset Formula $0\%-100\%$
+\end_inset
+
+ are shown:
+\end_layout
+
+\begin_layout Subsection
+Full range
+\end_layout
+
+\begin_layout Definition
 Plotting convention
 \begin_inset CommandInset label
 LatexCommand label
@@ -375,11 +1360,24 @@ the left column indicates evaluation on low masking intensity,
 
 \end_layout
 
+\begin_layout Subsubsection
+Single masks
+\end_layout
+
 \begin_layout Standard
-See Figure 
+The errors plots are found below:
+\end_layout
+
+\begin_layout Definition
+Poisson equation
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:result-gauss-m-one"
+reference "fig:result-poisson-single-full"
 plural "false"
 caps "false"
 noprefix "false"
@@ -387,25 +1385,10 @@ nolink "false"
 
 \end_inset
 
- as an example.
- To begin the analysis,
- the result plots of the single mask sampled from 
-\begin_inset Formula $0\%-100\%$
-\end_inset
-
- are shown:
-\end_layout
-
-\begin_layout Subsection
-Full range
-\end_layout
-
-\begin_layout Subsubsection
-Single masks
+ showcases the Poisson equation.
 \end_layout
 
 \begin_layout Standard
-The errors plots are found below:
 \begin_inset Float figure
 placement document
 alignment document
@@ -432,7 +1415,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:result-poisson-single-0.0-1.0"
+name "fig:result-poisson-single-full"
 
 \end_inset
 
@@ -456,8 +1439,35 @@ name "fig:result-poisson-single-0.0-1.0"
 
 \end_layout
 
+\end_deeper
 \begin_layout Standard
-Heat Equation:
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Heat equation
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:result-heat-single-full"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ showcases the heat equation.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 placement document
 alignment document
@@ -484,7 +1494,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:result-heat-single-0.0-1.0"
+name "fig:result-heat-single-full"
 
 \end_inset
 
@@ -508,8 +1518,35 @@ name "fig:result-heat-single-0.0-1.0"
 
 \end_layout
 
+\end_deeper
 \begin_layout Standard
-Wave Equation:
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Wave equation
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:result-wave-single-full"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ showcases the Wave equation.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 placement document
 alignment document
@@ -536,7 +1573,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:result-wave-single-0.0-1.0"
+name "fig:result-wave-single-full"
 
 \end_inset
 
@@ -555,6 +1592,14 @@ name "fig:result-wave-single-0.0-1.0"
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
 \end_inset
 
 
@@ -598,16 +1643,8 @@ It should be noted though that even for the island style masks,
 
 \begin_layout Subsubsection
 Double masks
-\end_layout
-
-\begin_layout Standard
-Now,
- the results of the masks as shown:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 TODO:
@@ -620,6 +1657,34 @@ TODO:
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Now,
+ the results of the double masks are shown:
+\end_layout
+
+\begin_layout Definition
+Poisson Equation
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:result-poisson-double-full"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ shows Poisson equation.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 placement document
 alignment document
@@ -646,7 +1711,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:result-poisson-double-0.0-1.0"
+name "fig:result-poisson-double-full"
 
 \end_inset
 
@@ -667,7 +1732,38 @@ name "fig:result-poisson-double-0.0-1.0"
 
 \end_inset
 
-For the heat:
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Heat equation
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:result-heat-double-full"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ shows heat equation.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 placement document
 alignment document
@@ -694,7 +1790,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:result-heat-double-0.0-1.0"
+name "fig:result-heat-double-full"
 
 \end_inset
 
@@ -715,7 +1811,38 @@ name "fig:result-heat-double-0.0-1.0"
 
 \end_inset
 
-For the wave:
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Wave Equation
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:result-wave-double-full"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ shows wave equation.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 placement document
 alignment document
@@ -742,7 +1869,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:result-wave-double-0.0-1.0"
+name "fig:result-wave-double-full"
 
 \end_inset
 
@@ -761,6 +1888,14 @@ name "fig:result-wave-double-0.0-1.0"
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
 \end_inset
 
 
@@ -1417,12 +2552,20 @@ name "fig:result-poisson-single-specialized-1-1-1-1-1-1-1"
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Wave Equation
 \end_layout
 
 \begin_layout Standard
-These are thus the results of the wave equation:
+The wave equation results follow the patterns observed previously.
+ These are thus the results of the wave equation:
 \end_layout
 
 \begin_layout Standard
@@ -2092,9 +3235,6 @@ name "fig:masks-cno-sol-random-0.1"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Note Note
 status collapsed
 
@@ -2256,12 +3396,232 @@ nolink "false"
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Other Evaluations
 \end_layout
 
 \begin_layout Subsection
 Dynamic remasking
+\end_layout
+
+\begin_layout Standard
+A specific tactic is used to regulate the training process,
+ which,
+ for reasons soon to become apparent,
+ is referred to as 
+\begin_inset Quotes xld
+\end_inset
+
+dynamic remasking
+\begin_inset Quotes xrd
+\end_inset
+
+.
+ Here is a quick run-down:
+\end_layout
+
+\begin_layout Standard
+Critical to dynamic remasking is the state of staleness when training the models:
+\end_layout
+
+\begin_layout Definition
+Staleness during training
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+A 
+\begin_inset Quotes xld
+\end_inset
+
+stale
+\begin_inset Quotes xrd
+\end_inset
+
+ epoch is defined as a training epoch,
+ after which the model's performance on the validation dataset did not improve.
+ Conversely,
+ a non-stale epoch 
+\end_layout
+
+\begin_layout Itemize
+A 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+mask
+\end_layout
+
+\end_inset
+
+ is said to be 
+\begin_inset Quotes xld
+\end_inset
+
+stale
+\begin_inset Quotes xrd
+\end_inset
+
+,
+ if a certain number of consecutive stale epochs have been accumulated.
+ This number is a hyper-parameter of the training process and is set to 
+\begin_inset Formula $30$
+\end_inset
+
+ by default in this project.
+ If any epoch yields improvement of model,
+ the current number of consecutive stale epochs shall,
+ per definition,
+ be reset.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Dynamic remasking
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The dataset is remasked after every stale mask,
+ i.e.,
+ 
+\begin_inset Formula $30$
+\end_inset
+
+ stale epochs by default.
+ If no improvement is made after three consecutive remasking,
+ the training process is terminated in advance.
+ Otherwise,
+ training is terminated at the expiration of the maximal number of training epochs.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The remainder of this chapter is dedicated to showcasing the effect of the dynamic-remasking during training on the final model performance.
+ The following plot show-cases the 
+\end_layout
+
+\begin_layout Definition
+Poisson,
+ full-range masking
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:resample-unet"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ demonstrates the error-plot during the training process of the UNet network using the full-range mask on the Poisson equation.
+ Similar to the error-plots for single-masks as seen before,
+ the high and low baselines are indicated with grey dashed lines respectively.
+ The 
+\begin_inset Formula $x$
+\end_inset
+
+ axis of the plot now indicate the training epoch number for the entire duration of the training process.
+\end_layout
+
+\begin_layout Standard
+Vertical dotted lines indicate the epoch where a remask is triggered.
+\end_layout
+
+\begin_layout Standard
+An immediate rise of the training error is visible following every remask,
+ indicating that:
+ 1.
+ remasking imports new knowledge,
+ however,
+ since the increase of the training error is not astronomical,
+ the new 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/remask/sum_of_sine-train_1800--random_0.0_1.0--unet--remask_30.png
+	width 12cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:resample-unet"
+
+\end_inset
+
+
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error-plot:
+ wave-equation;
+ double mask,
+ 0.2-0.4
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2290,7 +3650,22 @@ Poisson:
 
 \begin_layout Standard
 Wave:
- Double
+ Double 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO!
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Table <TODO> shows the number of training epochs at termination.
+ The immediate conclusion is the dramatic reduction of time
 \end_layout
 
 \begin_layout Enumerate
@@ -2336,16 +3711,530 @@ compare:
 \end_layout
 
 \end_deeper
-\begin_layout Enumerate
-Bad:
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Restriction
 \end_layout
 
 \begin_deeper
-\begin_layout Enumerate
-KNO:
- continuous improvement
+\begin_layout Standard
+There are,
+ however,
+ situations where the remasking strategy provides inconsequential training improvement.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:resample-kno"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ depicts the training progress of KNO on Wave Equation using masks of the full range,
+ i.e.,
+ 
+\begin_inset Formula $\left[0\%-100\%\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/remask/sum_of_sine-train_1800--random_0.0_1.0--kno--remask_30.png
+	width 12cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:resample-kno"
+
+\end_inset
+
+
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error-plot:
+ wave-equation;
+ double mask,
+ 0.2-0.4
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As discussed previously,
+ KNO behaves in highly recognizable ways:
+ it does not seem to demonstrate any locality attachment to masking and performs generally worse in similar conditions in comparison to its competitors such as FNO.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:resample-kno"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ provides yet another curious insight to KNO:
+ unlike other networks,
+ KNO offers extended periods of continuous improvement:
+ the example shows KNO terminating only at epoch 
+\begin_inset Formula $888$
+\end_inset
+
+,
+ almost exhausting the maximal training limit of 
+\begin_inset Formula $1000$
+\end_inset
+
+ epochs.
+ Recall the previous examples of UNet and CNO both finishing at approximately 
+\begin_inset Formula $200$
+\end_inset
+
+ steps,
+ one concludes that the training progress of KNO offers a steady trail of improvement of model performance,
+ although,
+ ultimately,
+ the final performance is comparatively weaker against its competitors.
+ 
 \end_layout
 
 \end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Direct visual inspecton
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Definition
+Prediction,
+ default
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+defaults of every hyper-param,
+ their range
+\end_layout
+
+\begin_layout Itemize
+50%,
+ as-long-as-poibble
+\end_layout
+
+\end_deeper
+\begin_layout Plain Layout
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Another powerful method of evaluating model performance is via direct inspection.
+ This chapter uses the Poisson Equation,
+ model is trained on the full mask range.
+ In the following,
+ the FNO model is used unless otherwise mentioned.
+ To start off,
+ result with the single mask is shown.
+\end_layout
+
+\begin_layout Definition
+Single,
+ random
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:reconstruct-single-random"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ depicts the direct inspection options available to user:
+ as seen previously (TODO:
+ REF:
+ dataset raw pics),
+ the second row provides a 3D surface-plot to complement the 2D contour-plot of the same underlying matrix.
+ Here,
+ the model is trained.
+ The first three columns all depict the learning target,
+ i.e.,
+ the solution 
+\begin_inset Formula $u$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+the first column shows the raw,
+ exact 
+\begin_inset Formula $u$
+\end_inset
+
+,
+ as obtained from calling the raw dataset generator (REF)
+\end_layout
+
+\begin_layout Itemize
+the second column shows the masked version of the solution object;
+ here,
+ the underlying 
+\begin_inset Formula $u$
+\end_inset
+
+ is remasked with a random mask of intensity in range 
+\begin_inset Formula $\left[50\%;60\%\right]$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Itemize
+the third columns shows the model's prediction.
+\end_layout
+
+\begin_layout Standard
+The forth column shows the (raw) difference between 
+\begin_inset Quotes xld
+\end_inset
+
+truth
+\begin_inset Quotes xrd
+\end_inset
+
+ and the model's prediction:
+\begin_inset Formula 
+\[
+\text{Error}\coloneqq\text{Prediction}-\text{Truth}
+\]
+
+\end_inset
+
+The particular plot is generated with the first instance of the dataset,
+ and the underlying FNO model performed at a relative MSE of 
+\begin_inset Formula $6.64\%$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/reconstruct/sum_of_sine-train_1800--random_0.0_1.0--reconstruction-single-random.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:reconstruct-single-random"
+
+\end_inset
+
+Reconstruction of Poisson equation with single mask of random-style.
+ As shown:
+ first instance of dataset;
+ absolute MSE:
+ 
+\begin_inset Formula $0.0013$
+\end_inset
+
+,
+ relative MSE:
+ 
+\begin_inset Formula $6.64\%$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now,
+ the island mask:
+\end_layout
+
+\begin_layout Definition
+Single,
+ island
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Following the same plotting convention above,
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:reconstruct-single-island"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ provides visualization of the Poisson equation masked with the island-style.
+ It should be noted that the 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+same
+\end_layout
+
+\end_inset
+
+ FNO model is used to predict the 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+same
+\end_layout
+
+\end_inset
+
+ instance in dataset as seen in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:reconstruct-single-random"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ to allow direct comparison.
+\end_layout
+
+\begin_layout Standard
+As shown,
+ the model performance corresponds to a relative MSE of 
+\begin_inset Formula $10.30\%$
+\end_inset
+
+.
+ This confirms the typical observation:
+ the 
+\begin_inset Quotes xld
+\end_inset
+
+out-of-distribution
+\begin_inset Quotes xrd
+\end_inset
+
+ performance with the island-style mask lags slightly behind the 
+\begin_inset Quotes xld
+\end_inset
+
+in-distribution
+\begin_inset Quotes xrd
+\end_inset
+
+ counterpart of random-style.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/reconstruct/sum_of_sine-train_1800--random_0.0_1.0--reconstruction-single-island.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:reconstruct-single-island"
+
+\end_inset
+
+Reconstruction:
+ Poisson with single mask of island-style.
+ As shown:
+ first instance of dataset;
+ absolute MSE:
+ 
+\begin_inset Formula $0.0032$
+\end_inset
+
+,
+ relative MSE:
+ 
+\begin_inset Formula $10.30\%$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Apparently,
+ the direct inspection technique above is performed on a 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+single
+\end_layout
+
+\end_inset
+
+ instance of a masking dataset of one particular model.
+ As such,
+ this type of visualization is done on a 
+\begin_inset Quotes xld
+\end_inset
+
+point-wise
+\begin_inset Quotes xrd
+\end_inset
+
+ basis and the interested reader is invited to review any trained model's performance with the plotting procedure above.
+\end_layout
+
+\begin_layout Section
+Summary
+\end_layout
+
+\begin_layout Standard
+This 
+\end_layout
+
 \end_body
 \end_document

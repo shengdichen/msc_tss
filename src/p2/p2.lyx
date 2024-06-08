@@ -1675,9 +1675,13 @@ Masking procedure
 
 \begin_deeper
 \begin_layout Standard
+The following chart depicts a curt summary of the masking procedure as defined above:
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \[
-\xymatrix{ & \text{intensity}\ar@(ul,ur)^{\text{resample}}\ar[r]^{\;\:\star} & \text{index}\ar[d]^{\text{select}}\\
+\xymatrix{ & \text{intensity}\ar@(ul,ur)^{\text{resample}}\ar[r]^{\;\:\star} & \texttt{idxs}\ar[d]^{\text{select}}\\
 \mathbf{M}\ar@{-->}[rrrr] &  &  &  & \mathbf{M}^{\text{mask}}\\
  &  &  & \text{value}\ar[u]_{\text{set}}
 }
@@ -1870,7 +1874,7 @@ class Masker:
 
 \begin_layout Plain Layout
 
-        raise NotImplementedError
+        raise NotImplementedError  # to be overloaded by subclasses
 \end_layout
 
 \begin_layout Plain Layout
@@ -1884,7 +1888,7 @@ class Masker:
 
 \begin_layout Plain Layout
 
-		pass
+        pass  # detail omitted
 \end_layout
 
 \begin_layout Plain Layout
@@ -1898,6 +1902,7 @@ class Masker:
 \begin_layout Plain Layout
 
 class MaskerRandom(Masker):
+  # direct inheritance
 \end_layout
 
 \begin_layout Plain Layout
@@ -1916,6 +1921,7 @@ class MaskerRandom(Masker):
 \begin_layout Plain Layout
 
 class MaskerIsland(Masker):
+  # direct inheritance
 \end_layout
 
 \begin_layout Plain Layout
@@ -1951,17 +1957,35 @@ Essential API for masking
 
 \end_layout
 
-\begin_layout Standard
-As a sneak-peak into the upcoming section where the concrete dataset is formed with masking,
- This thesis utilizes four distinct bands of masking 
+\begin_layout Definition
+Masking ranges
 \end_layout
 
+\begin_deeper
 \begin_layout Standard
-This thesis considers masks of:
+As a sneak-peak into the upcoming section where the concrete dataset is formed with masking,
+ this thesis utilizes the following masks:
 \end_layout
 
 \begin_layout Itemize
-random style:
+for 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+training
+\end_layout
+
+\end_inset
+
+:
+ four masking intensity-ranges,
+ all of random-style:
+ 
+\begin_inset Formula $0\%-100\%$
+\end_inset
+
+,
  with (increasing) intensity from 
 \begin_inset Formula $10\%$
 \end_inset
@@ -2031,6 +2055,14 @@ lowest
 \end_inset
 
  is of the highest.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2747,6 +2779,14 @@ pytorch
 
 \end_inset
 
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "pytorch"
+literal "false"
+
+\end_inset
+
  and 
 \begin_inset Flex Code
 status open
@@ -2757,11 +2797,84 @@ numpy
 
 \end_inset
 
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "numpy"
+literal "false"
+
+\end_inset
+
 .
  Alternatively,
  non super-positioned datasets,
  as justified in the discussion above,
  are relieved from such unnecessary inheritance.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+Other functionalities
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Despite the core instance-solving and dataset-exporting methods mentioned above,
+ several peripheral functions are also instrumental to its workings.
+ These include,
+ among others,
+ a save-load utility.
+ In particular,
+ the save-load path is calculated as follows:
+\begin_inset Formula 
+\[
+\texttt{<BIN\_DIR>}\;\texttt{/}\;\texttt{<name> f< > .<suffix>}
+\]
+
+\end_inset
+
+where:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+BIN_DIR
+\end_layout
+
+\end_inset
+
+ is a project-wide constant for the path all binary outputs
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+self._base_dir / <name_dataset>-<type>_<n_instances>.<suffix>
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Other essential utilities of a PDE dataset include that of visualization:
+ these will be further detailed with concrete plot examples in later chapters when the individual PDE prototypes are introduced.
 \end_layout
 
 \end_deeper
