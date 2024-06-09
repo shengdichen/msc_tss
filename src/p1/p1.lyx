@@ -129,6 +129,36 @@ Quick Start
 
 \begin_layout Subsection
 Overview
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+WHY num-methods bad:
+\end_layout
+
+\begin_layout Itemize
+The error scales steeply with the resolution.
+ We need a high resolution to get good approximations.
+\end_layout
+
+\begin_layout Itemize
+The computation and storage steeply scale with the resolution (i.e.
+ the size of the grid).
+\end_layout
+
+\begin_layout Itemize
+When the equation is solved on one discretization,
+ we cannot change the discretization anymore.
+ (solution only holds for one particular discretization)
+\end_layout
+
+\begin_layout Itemize
+https://zongyi-li.github.io/blog/2020/fourier-pde/
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

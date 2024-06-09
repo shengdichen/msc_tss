@@ -143,11 +143,21 @@ out-of-distribution
 \end_inset
 
  evaluation.
- While projects such as 
+ While projects such as (TODO:
+ uncomment this ref when done!!!!!!!) 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 \begin_inset CommandInset citation
 LatexCommand cite
 key "cno"
 literal "false"
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -894,6 +904,16 @@ class Problem:
 
 \begin_layout Plain Layout
 
+        ...
+  # other init work
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
         self._masks_train = [
 \end_layout
 
@@ -1187,14 +1207,43 @@ status open
 
 \begin_layout Plain Layout
 TODO:
- consider making a table:
+ consider making a table to show out-of-distribution
 \end_layout
 
 \begin_layout Enumerate
 full dataset:
- under 
 \end_layout
 
+\begin_deeper
+\begin_layout Enumerate
+in:
+ all random
+\end_layout
+
+\begin_layout Enumerate
+out:
+ all island
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+low,
+ mid,
+ high
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+in:
+ random in range
+\end_layout
+
+\begin_layout Enumerate
+out:
+ all island + random but not in range
+\end_layout
+
+\end_deeper
 \end_inset
 
 
@@ -1213,15 +1262,15 @@ Thus concludes the setup of model evaluation.
  In the following,
  analysis results from all possible training-evaluation pairings are presented ordered by masking types and channels.
  To commence,
- the result plots of the single mask sampled from 
+ the results of the single mask from the full 
 \begin_inset Formula $0\%-100\%$
 \end_inset
 
- are shown:
+ intensity-range are studied:
 \end_layout
 
 \begin_layout Subsection
-Full range
+Full intensity-range
 \end_layout
 
 \begin_layout Definition
@@ -1236,116 +1285,28 @@ name "prop:Plotting-convention"
 \end_layout
 
 \begin_deeper
-\begin_layout Itemize
-The errors plots are presented in two horizontal splits,
- where the left split indicate errors on the random-style,
- and the right split those of the island-style.
-\end_layout
-
-\begin_layout Itemize
-For the double mask,
- masks of the same type and intensity are used on both channels.
- The masking targets are computed separately for each channel.
- This is the same procedure as used for generating the training dataset.
-\end_layout
-
 \begin_layout Standard
-Several visual cues are provided as well:
-\end_layout
-
-\begin_layout Itemize
-for specialized training ranges,
- i.e.,
- those not from the entire 
-\begin_inset Formula $0\%-100\%$
-\end_inset
-
- range,
- the vertical shaded bar indicate evaluation datasets where the masking intensities agree with those during training
-\end_layout
-
-\begin_layout Itemize
-as low baseline,
- a dashed line is drawn at 
-\begin_inset Formula $5\%$
-\end_inset
-
- to indicate excellent performance;
- a handwavy baseline is chosen at the 
-\begin_inset Formula $15\%$
-\end_inset
-
- and 
-\begin_inset Formula $25\%$
-\end_inset
-
- as a handwavy baseline performance for the single and double masked masks respectively.
-\begin_inset Note Note
-status open
-
-\begin_layout Itemize
-each sub-figure shows the 
+The errors graphs are presented in two horizontal splits,
+ both plotting the 
 \begin_inset Formula $L^{2}$
 \end_inset
 
- error of all 
-\begin_inset Formula $18$
-\end_inset
-
- models per network (
-\begin_inset Formula $9$
-\end_inset
-
- with random masking,
- 
-\begin_inset Formula $9$
-\end_inset
-
- with island masking,
- see Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Collection-of-masks"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-) on the evaluation dataset;
+ relative error against the masking intensity.
+ The left split depicts errors of the random-style,
+ and the right split those of the island-style.
 \end_layout
 
-\begin_layout Itemize
-the left column indicates evaluation on low masking intensity,
- with 
-\begin_inset Formula $10\%$
-\end_inset
-
- random style and 
-\begin_inset Formula $90\%$
-\end_inset
-
- island style applied to the evaluation dataset;
- the center column represents moderate masking using 
-\begin_inset Formula $50\%$
-\end_inset
-
- random and 
-\begin_inset Formula $50\%$
-\end_inset
-
- island;
- the right column demonstrate extreme masking of 
-\begin_inset Formula $90\%$
-\end_inset
-
- random and 
-\begin_inset Formula $10\%$
-\end_inset
-
- island;
-\end_layout
+\begin_layout Standard
+Recalling that for the full intensity rage studied in this section,
+ island-style masks correspond to out-of-distribution evaluation.
+ Thus:
+\begin_inset Formula 
+\[
+\left\{ \begin{alignedat}{2}\text{plot}^{\text{ left}} & \;\hat{=} & \; & \text{in-distribution}\\
+\text{plot}^{\text{ right}} & \;\hat{=} &  & \text{\text{out-of-distribution}}
+\end{alignedat}
+\right.
+\]
 
 \end_inset
 
@@ -1366,6 +1327,29 @@ Single masks
 
 \begin_layout Standard
 The errors plots are found below:
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Definition
+Analysis at extremes
+\end_layout
+
+\begin_deeper
+\begin_layout Plain Layout
+Two specific evaluation
+\end_layout
+
+\end_deeper
+\begin_layout Plain Layout
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Definition
@@ -1386,6 +1370,64 @@ nolink "false"
 \end_inset
 
  showcases the Poisson equation.
+ One immediately observes the general trend that for every network,
+ the errors steadily increase with higher masking intensity.
+ This applies to both in-distributiuon when evaluated on both the random and island style masks.
+ 
+\end_layout
+
+\begin_layout Standard
+Observing the in-distribution evaluation results on the left,
+ one concludes that FNO,
+ CNO and UNet all perform comparably:
+ with errors starting at slightly above 
+\begin_inset Formula $5\%$
+\end_inset
+
+ at lower masking intensities,
+ steadily increasing to approximately 
+\begin_inset Formula $10\%$
+\end_inset
+
+ at higher intensities.
+ KNO's performance lags behind visibility across all intensities,
+ starting at 
+\begin_inset Formula $10\%$
+\end_inset
+
+ errors at lower intensities and closing at approximately 
+\begin_inset Formula $15\%$
+\end_inset
+
+ at intensities around 
+\begin_inset Formula $90\%$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For the out-of-distribution on the right,
+ one observes slight zigzagging of CNO at 
+\begin_inset Formula $\left[20\%;30\%\right]$
+\end_inset
+
+.
+ Otherwise,
+ the upwards trajectories seen on the left are carried over,
+ with UNet not meeting the 
+\begin_inset Formula $15\%$
+\end_inset
+
+ baseline at the highest intensity range.
+\end_layout
+
+\begin_layout Standard
+Crucially,
+ it is also apparent that at similar intensities,
+ the in-distribution and out-of-distribution errors are similar:
+ no particular performance degrade is seen when evaluating the models on island-style masks,
+ although training was executed with the random masks.
 \end_layout
 
 \begin_layout Standard
@@ -1467,6 +1509,26 @@ nolink "false"
  showcases the heat equation.
 \end_layout
 
+\begin_layout Itemize
+Excellent performance:
+ 
+\begin_inset Formula $2.5\%$
+\end_inset
+
+ all models (similar performance);
+ KNO:
+ 7.5-10
+\end_layout
+
+\begin_layout Itemize
+virtually indistinguishable in VS out of distribution
+\end_layout
+
+\begin_layout Itemize
+The performance is striking:
+ in both the in-distribution and the out-of-distribution
+\end_layout
+
 \begin_layout Standard
 \begin_inset Float figure
 placement document
@@ -1544,6 +1606,28 @@ nolink "false"
 \end_inset
 
  showcases the Wave equation.
+\end_layout
+
+\begin_layout Itemize
+Left:
+ similar performance;
+ KNO 6%-15+
+\end_layout
+
+\begin_layout Itemize
+right:
+ stable performance FNO;
+ CNO,
+ Unet:
+ bump in middle,
+ 6%,
+ other ends 2.5%;
+ KNO 5-16
+\end_layout
+
+\begin_layout Itemize
+combined:
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1654,6 +1738,31 @@ TODO:
  both of the style
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Plotting convention for double masks
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Building upon the plotting setting for single-masking,
+ plots for double mask show
+\end_layout
+
+\begin_layout Standard
+,
+ masks of the same type and intensity are used on both channels.
+ The masking targets are computed separately for each channel.
+ This is the same procedure as used for generating the training dataset.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
 \end_inset
 
 
@@ -1945,6 +2054,122 @@ When evaluated on island-masks:
 
 \begin_layout Section
 Specialized Ranges
+\end_layout
+
+\begin_layout Definition
+Visual aids
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Several visual cues are provided as well:
+\end_layout
+
+\begin_layout Itemize
+for specialized training ranges,
+ i.e.,
+ those not from the entire 
+\begin_inset Formula $0\%-100\%$
+\end_inset
+
+ range,
+ the vertical shaded bar indicate evaluation datasets where the masking intensities agree with those during training
+\end_layout
+
+\begin_layout Itemize
+as low baseline,
+ a dashed line is drawn at 
+\begin_inset Formula $5\%$
+\end_inset
+
+ to indicate excellent performance;
+ a handwavy baseline is chosen at the 
+\begin_inset Formula $15\%$
+\end_inset
+
+ and 
+\begin_inset Formula $25\%$
+\end_inset
+
+ as a handwavy baseline performance for the single and double masked masks respectively.
+\begin_inset Note Note
+status open
+
+\begin_layout Itemize
+each sub-figure shows the 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error of all 
+\begin_inset Formula $18$
+\end_inset
+
+ models per network (
+\begin_inset Formula $9$
+\end_inset
+
+ with random masking,
+ 
+\begin_inset Formula $9$
+\end_inset
+
+ with island masking,
+ see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Collection-of-masks"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+) on the evaluation dataset;
+\end_layout
+
+\begin_layout Itemize
+the left column indicates evaluation on low masking intensity,
+ with 
+\begin_inset Formula $10\%$
+\end_inset
+
+ random style and 
+\begin_inset Formula $90\%$
+\end_inset
+
+ island style applied to the evaluation dataset;
+ the center column represents moderate masking using 
+\begin_inset Formula $50\%$
+\end_inset
+
+ random and 
+\begin_inset Formula $50\%$
+\end_inset
+
+ island;
+ the right column demonstrate extreme masking of 
+\begin_inset Formula $90\%$
+\end_inset
+
+ random and 
+\begin_inset Formula $10\%$
+\end_inset
+
+ island;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
