@@ -3523,7 +3523,7 @@ The remainder of this chapter is dedicated to showcasing the effect of the dynam
  The following plot show-cases the 
 \end_layout
 
-\begin_layout Definition
+\begin_layout Example
 Poisson,
  full-range masking
 \end_layout
@@ -3562,7 +3562,16 @@ An immediate rise of the training error is visible following every remask,
  remasking imports new knowledge,
  however,
  since the increase of the training error is not astronomical,
- the new 
+ existing model's capability is carried over.
+\end_layout
+
+\begin_layout Standard
+More importantly,
+ the model is improved on three separate occasions after the remask,
+ in particular,
+ immediately after the first remask,
+ a better model is discovered.
+ One concludes that remasking will likely provide model improvement during training.
 \end_layout
 
 \begin_layout Standard
@@ -3643,12 +3652,12 @@ TODO:
 Conclusion about dynamic remasking
 \end_layout
 
-\begin_layout Standard
+\begin_layout Itemize
 Poisson:
  Single
 \end_layout
 
-\begin_layout Standard
+\begin_layout Itemize
 Wave:
  Double 
 \begin_inset Note Note
@@ -3701,7 +3710,7 @@ KNO
 
 \end_deeper
 \begin_layout Enumerate
-It could likely gives a fresh perspective (found )
+It could likely gives a fresh perspective (found)
 \end_layout
 
 \begin_deeper
@@ -3718,8 +3727,8 @@ compare:
 
 \end_layout
 
-\begin_layout Definition
-Restriction
+\begin_layout Note
+Restrictions of dynamic remasking
 \end_layout
 
 \begin_deeper
@@ -4233,7 +4242,9 @@ Summary
 \end_layout
 
 \begin_layout Standard
-This 
+This concludes the analysis section of this thesis.
+ In the following,
+ a 
 \end_layout
 
 \end_body

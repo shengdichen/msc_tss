@@ -249,13 +249,13 @@ Thesis structure
 
 \begin_layout Standard
 This thesis opens with generic preludial material in Part 1,
- outlining the project as a whole and giving some technical specifications.
+ outlining the project as a whole and providing some technical specifications.
 \end_layout
 
 \begin_layout Standard
-Part 2 begins with a run-down of the fundamental concepts,
+Part 2 begins with a run-down of the fundamental concepts of this project,
  including discretization techniques and masking procedures,
- and continues to build upon these concepts by introducing the dataset structure of PDE models under the the masked settings.
+ and continues to build upon them by introducing the dataset structure of PDE models under the masked settings.
 \end_layout
 
 \begin_layout Standard

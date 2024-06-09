@@ -1177,9 +1177,190 @@ Options for configuring the dataset are similar to those for the Poisson dataset
 .
 \end_layout
 
+\begin_layout Definition
+Configuration
+\end_layout
+
+\begin_deeper
 \begin_layout Standard
-TODO:
- add pic
+The heat equation dataset is defined on the following grid:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\left[-1.0,+1.0\right]$
+\end_inset
+
+,
+ with the 
+\begin_inset Formula $64$
+\end_inset
+
+ steps
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $t_{T}=0.005$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Visualization of the dataset as specified as above is given in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:dataset-heat-raw"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ each column showcasing the solution 
+\begin_inset Formula $u$
+\end_inset
+
+ at the initial time 
+\begin_inset Formula $u_{0}$
+\end_inset
+
+,
+ the middle and the final time.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/heat/plot_snapshots.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:dataset-heat-raw"
+
+\end_inset
+
+Visualization of the Heat equation dataset,
+ each constructed from 
+\begin_inset Formula $c_{k}\coloneqq4$
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+REWRITE!
+\end_layout
+
+\begin_layout Plain Layout
+samples as specified in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:poisson-sum-of-sines"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ Ordering of the plots mimics that of Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:dataset-poisson-sine"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ for the 
+\begin_inset Quotes xld
+\end_inset
+
+Sum-of-Sines
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset.
+ First row:
+ contour-plots of 
+\begin_inset Formula $4$
+\end_inset
+
+ different instances of the solution 
+\begin_inset Formula $u$
+\end_inset
+
+.
+ Second row:
+ contour-plots and 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+3D
+\end_layout
+
+\end_inset
+
+ surface-plots of both the solution 
+\begin_inset Formula $u$
+\end_inset
+
+ and the source-term 
+\begin_inset Formula $f$
+\end_inset
+
+ of one (common) instance.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1328,6 +1509,200 @@ Finally,
 \begin_layout Itemize
 TODO:
  add pic
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Configuration
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The heat equation dataset is defined on the following grid:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\left[0.0,+1.0\right]$
+\end_inset
+
+,
+ with the 
+\begin_inset Formula $64$
+\end_inset
+
+ steps
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $t_{T}=5.0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Visualization of the dataset as specified as above is given in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:dataset-wave-raw"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ Following the plotting convention for the heat equation,
+ the three columns depict the solution 
+\begin_inset Formula $u$
+\end_inset
+
+ at the initial time 
+\begin_inset Formula $u_{0}$
+\end_inset
+
+,
+ the middle and the final time respectively.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/wave/plot_snapshots.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:dataset-wave-raw"
+
+\end_inset
+
+Visualization of the Heat equation dataset,
+ each constructed from 
+\begin_inset Formula $c_{k}\coloneqq4$
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+REWRITE!
+\end_layout
+
+\begin_layout Plain Layout
+samples as specified in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:poisson-sum-of-sines"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ Ordering of the plots mimics that of Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:dataset-poisson-sine"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ for the 
+\begin_inset Quotes xld
+\end_inset
+
+Sum-of-Sines
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset.
+ First row:
+ contour-plots of 
+\begin_inset Formula $4$
+\end_inset
+
+ different instances of the solution 
+\begin_inset Formula $u$
+\end_inset
+
+.
+ Second row:
+ contour-plots and 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+3D
+\end_layout
+
+\end_inset
+
+ surface-plots of both the solution 
+\begin_inset Formula $u$
+\end_inset
+
+ and the source-term 
+\begin_inset Formula $f$
+\end_inset
+
+ of one (common) instance.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1786,6 +2161,175 @@ Time-stamps of key activities
 \end_layout
 
 \begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+# src/problem.py
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class ProblemHeat(Problem):
+\end_layout
+
+\begin_layout Plain Layout
+
+    def __init__(self):
+\end_layout
+
+\begin_layout Plain Layout
+
+        super().__init__(n_channels_raw=dataset_heat.DatasetHeat.N_CHANNELS)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def _dataset_raw(self) -> dataset_heat.DatasetHeat:
+\end_layout
+
+\begin_layout Plain Layout
+
+        grids = grid.Grids(
+\end_layout
+
+\begin_layout Plain Layout
+
+            [
+\end_layout
+
+\begin_layout Plain Layout
+
+                grid.Grid.from_start_end(64,
+ start=-1.0,
+ end=1.0),
+\end_layout
+
+\begin_layout Plain Layout
+
+                grid.Grid.from_start_end(64,
+ start=-1.0,
+ end=1.0),
+\end_layout
+
+\begin_layout Plain Layout
+
+            ],
+\end_layout
+
+\begin_layout Plain Layout
+
+        )
+\end_layout
+
+\begin_layout Plain Layout
+
+        grid_time = grid.GridTime.from_start_end_only(end=0.005)
+\end_layout
+
+\begin_layout Plain Layout
+
+        return dataset_heat.DatasetHeat(grids,
+ grid_time)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class ProblemWave(Problem):
+\end_layout
+
+\begin_layout Plain Layout
+
+    def __init__(self):
+\end_layout
+
+\begin_layout Plain Layout
+
+        super().__init__(n_channels_raw=dataset_wave.DatasetWave.N_CHANNELS)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def _dataset_raw(self) -> dataset_wave.DatasetWave:
+\end_layout
+
+\begin_layout Plain Layout
+
+        grids = grid.Grids(
+\end_layout
+
+\begin_layout Plain Layout
+
+            [
+\end_layout
+
+\begin_layout Plain Layout
+
+                grid.Grid.from_start_end(64,
+ start=0.0,
+ end=1.0),
+\end_layout
+
+\begin_layout Plain Layout
+
+                grid.Grid.from_start_end(64,
+ start=0.0,
+ end=1.0),
+\end_layout
+
+\begin_layout Plain Layout
+
+            ],
+\end_layout
+
+\begin_layout Plain Layout
+
+        )
+\end_layout
+
+\begin_layout Plain Layout
+
+        grid_time = grid.GridTime.from_start_end_only(end=5.0)
+\end_layout
+
+\begin_layout Plain Layout
+
+        return dataset_wave.DatasetWave(grids,
+ grid_time)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Newpage newpage
 \end_inset
 
@@ -1802,404 +2346,6 @@ This section builds upon the previous chapters on PDE models,
  as well as masking,
  to build the full learning pipeline of this project,
  covering the process from dataset generation to model evaluation.
-\end_layout
-
-\begin_layout Subsection
-Dataset Setup
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:Dataset-Setup"
-
-\end_inset
-
-
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Itemize
-preparation:
- pre knowledge:
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-grid (space,
- time if needed)
-\end_layout
-
-\begin_layout Itemize
-split count
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-assembly
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-generate dataset-specific channels:
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-generate raw dataset,
- which requires at least the space grid,
- and,
- depending on the particular PDE model,
- the time grid as well
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-append grid-specific channels:
- constant
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-raw coordinates
-\end_layout
-
-\begin_layout Itemize
-trigonometric coordinates
-\end_layout
-
-\end_deeper
-\end_deeper
-\begin_layout Itemize
-normalize
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Definition
-Generation
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-The following diagram captures the dataset generation procedure:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\xymatrix{ & \text{ch}^{\text{PDE}}\ar[rd]^{\text{C}}\\
-\text{grid}\ar[ru]^{\text{A}}\ar[rd]_{\text{B}} &  & \mathds{D}^{\dagger}\ar[r]^{\text{D}} & \mathds{D}^{\ddagger}\ar[r]^{\text{E}} & *+[F]{\mathds{D}}\\
- & \text{ch}^{\text{grid}}\ar[ru]_{\text{C}}
-}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-In step A,
- the (raw) dataset generation routine is called upon to generate 
-\begin_inset Formula $i$
-\end_inset
-
- instances of PDE-channels on the chosen spatial and optionally temporal grid,
- and the grid-related channels are fetched trivially in step B.
- These channels are then assembled by the procedure previously seen in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Dataset"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
- in step C to form the first fully-shaped dataset 
-\begin_inset Formula $\mathds{D}^{\dagger}$
-\end_inset
-
- in the sense of 
-\begin_inset Flex Code
-status open
-
-\begin_layout Plain Layout
-pytorch
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-After normalizing the dataset in step D to obtain 
-\begin_inset Formula $\mathds{D}^{\ddagger}$
-\end_inset
-
-,
- the masking procedure is applied to produce the final 
-\begin_inset Formula $\mathds{D}$
-\end_inset
-
- primed for the learning pipeline.
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
-\begin_layout Note
-Shape of dataset
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Some algorithms requires a flattened layout of all channel matrices,
- i.e.,
- each channel now has shape 
-\begin_inset Formula $4096$
-\end_inset
-
- instead of 
-\begin_inset Formula $64\times64$
-\end_inset
-
-,
- the official FNO repo refers to this dataset shape as 
-\begin_inset Quotes xld
-\end_inset
-
-pixel
-\begin_inset Quotes xrd
-\end_inset
-
-.
- This is,
- however,
- not required by any of the aforementioned algorithms of this project and is thus not implemented.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-Since each component of 
-\begin_inset Formula $z_{i}$
-\end_inset
-
- is a two-dimensional matrix as representation of the space-grid,
- 
-\begin_inset Formula $z_{i}$
-\end_inset
-
- itself thus contains one more dimension to indicate the number of these two-dimensional matrices.
- In the minimal example of 
-\begin_inset Formula $z_{i}\coloneqq\left(u_{i},x_{1,i},x_{2,i}\right)$
-\end_inset
-
- as proposed above,
- this extra dimension will have the value 
-\begin_inset Formula $3$
-\end_inset
-
-.
- Consequently,
- a dataset of 
-\begin_inset Formula $i$
-\end_inset
-
- of these 
-\begin_inset Formula $z_{i}$
-\end_inset
-
- instances is four-dimensional.
-\end_layout
-
-\begin_layout Standard
-Following standard dataset format,
- the first dimension denotes the number of instances.
- There exists,
- however,
- no standfast rule concerning the ordering of the remaining three dimensions.
- Out of the six
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-Number of possible permutations of 
-\begin_inset Formula $3$
-\end_inset
-
- elements
-\end_layout
-
-\end_inset
-
- total ordering possibilities,
- two of them are generally acceptable.
- Continuing with the minimal example above with the space-grid as defined in 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "def:Space-mesh"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-,
- these two orderings yield respectively:
-\begin_inset Formula 
-\[
-\text{dataset-shape}\doteq\left\langle \begin{alignedat}{2} & \: & \Bigl[i,64,64,3\Bigr]\\
- &  & \Bigl[i,3,64,64\Bigr]
-\end{alignedat}
-\right.
-\]
-
-\end_inset
-
-As an example,
- the FNO 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "fno,fno-neural-operator"
-literal "false"
-
-\end_inset
-
- implementation included in this project's repository accepts the first ordering,
- while the CNO 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "cno"
-literal "false"
-
-\end_inset
-
- implementation expects the second.
-\end_layout
-
-\begin_layout Standard
-also require The official FNO repository 
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
-\begin_layout Definition
-Dataset splits
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-Following common etiquette of machine-learning 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ml-elem-stats-learning,ml-murphy,stats-wasserman"
-literal "false"
-
-\end_inset
-
-,
- the datasets for training and testing are mutually exclusive.
- More specifically,
- a 6-to-1-to-1 split is used to generate the splits:
-\begin_inset Formula 
-\[
-\left\{ \begin{alignedat}{2}i_{\text{train}} & \coloneqq & \; & 1800\\
-i_{\text{valid}} & \coloneqq &  & 300\\
-i_{\text{eval}} & \coloneqq &  & 300
-\end{alignedat}
-\right.
-\]
-
-\end_inset
-
-As usual,
- the testing dataset is unseen by the model during training phase and serves exclusively the purpose of evaluation to examine the adaptability of the trained models to generalize on data unseen during training.
- 
-\end_layout
-
-\begin_layout Standard
-A batch-size of 
-\begin_inset Formula $20$
-\end_inset
-
- samples is used throughout all three aforementioned phases.
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
-\begin_layout Note
-A word on batch-size
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-It should be noted that the choice of batch-size has been a topic of major contention in the milieu of machine learning in general,
- with researches including 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ml-batchsize"
-literal "false"
-
-\end_inset
-
- recommending smaller values up to 
-\begin_inset Formula $32$
-\end_inset
-
-,
- and traditional textbooks such as 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ml-goodfellow,ml-murphy"
-literal "false"
-
-\end_inset
-
- putting forward values up to hundreds.
-\end_layout
-
-\begin_layout Standard
-The particular batch-size of 
-\begin_inset Formula $20$
-\end_inset
-
- as chosen in this thesis is purely decided upon via empirical observation and intuition.
- The interested reader is encourage to rerun the project code with other values for experimentation.
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
@@ -2793,6 +2939,865 @@ In summary,
 
 \end_layout
 
+\begin_layout Section
+Prediction Model
+\end_layout
+
+\begin_layout Subsection
+Masked Dataset
+\end_layout
+
+\begin_layout Standard
+This section enumerates the PDE models investigated in this project alongside the construction of their respective datasets for the learning pipeline.
+ The common procedure for such dataset construction is described as follows:
+\end_layout
+
+\begin_layout Definition
+Dataset structure
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+In this context,
+ the channels matrix-like components,
+ otherwise referred to as 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+channels
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+A dataset of size 
+\begin_inset Formula $i$
+\end_inset
+
+ contains 
+\begin_inset Formula $i$
+\end_inset
+
+ 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+instances
+\end_layout
+
+\end_inset
+
+,
+ where each instance 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ is composed of two channel-groups:
+ the 
+\begin_inset Formula $\texttt{LHS}_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $\texttt{RHS}_{i}$
+\end_inset
+
+ group,
+ acronyms for 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+left
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+right
+\end_layout
+
+\end_inset
+
+ hand-side respectively:
+\begin_inset Formula 
+\[
+\text{Dataset}\coloneqq\left\{ \begin{alignedat}{2}\overbrace{\qquad\cdots\quad\;\;}^{\text{instance}} &  &  & \quad\overbrace{\qquad\cdots\qquad}^{\text{ch. group}}\\
+\\z_{i}\; & \coloneqq & \; & \left\langle \begin{alignedat}{1}\;\; & \texttt{LHS}_{i}\\
+ & \texttt{RHS}_{i}
+\end{alignedat}
+\right.\\
+\cdots
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+such that the prediction model of some network 
+\begin_inset Formula $\boldsymbol{N}$
+\end_inset
+
+ as introduced previously can be formulated as follows:
+\begin_inset Formula 
+\[
+\begin{alignedat}{3} & \; & \boldsymbol{N}\left(\texttt{LHS}\right) & = & \; & \widehat{\texttt{RHS}}\\
+\Longrightarrow &  & \text{error} & \simeq &  & \left\Vert \widehat{\texttt{RHS}}-\texttt{RHS}\right\Vert 
+\end{alignedat}
+\]
+
+\end_inset
+
+Note that the error-term is formulated vaguely deliberately:
+ this is studied more rigorously in the upcoming sections.
+\end_layout
+
+\begin_layout Standard
+Both channel-groups are,
+ as the name suggests,
+ a concatenation of multiple 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+channels
+\end_layout
+
+\end_inset
+
+.
+ These channels typically fall into two categories:
+\end_layout
+
+\begin_layout Itemize
+those specific to the particular PDE model at hand,
+ aka the 
+\begin_inset Quotes xld
+\end_inset
+
+PDE-channels
+\begin_inset Quotes xrd
+\end_inset
+
+ 
+\begin_inset Formula $\mathbf{C}^{\text{PDE}}$
+\end_inset
+
+,
+ including the solution 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+ of the PDE itself,
+\end_layout
+
+\begin_layout Itemize
+those common to the underlying space grid,
+ the 
+\begin_inset Quotes xld
+\end_inset
+
+grid-channels
+\begin_inset Quotes xrd
+\end_inset
+
+ 
+\begin_inset Formula $\mathbf{C}^{\text{x}}$
+\end_inset
+
+ such as the grid coordinates 
+\begin_inset Formula $x_{1,2\cdots}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+With the structure of the dataset provided as above,
+ the construction of the dataset is detailed as follows:
+\end_layout
+
+\begin_layout Definition
+Dataset construction
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+In the case of the two-dimensional space of this thesis,
+ 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ consists thus at least of the following three channels,
+ each corresponding to a two-dimensional matrix:
+\begin_inset Formula 
+\[
+z_{i}\coloneqq\Bigl(\overbrace{\;\;\;u_{i},\,\cdots\;\;\;}^{\mathbf{C}^{\text{PDE}}},\;\underbrace{\;x_{1},x_{2},\,\cdots\;}_{\mathbf{C}^{\text{x}}}\Bigr)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+All available PDE-channels generated by the PDE prototype are divided into two categories:
+ those targeted for masking,
+ and those kept 
+\begin_inset Quotes xld
+\end_inset
+
+as-is
+\begin_inset Quotes xrd
+\end_inset
+
+ without masking.
+ Notation-wise,
+ this leads to two mutually exclusive sub-groups 
+\begin_inset Formula $\mathbf{C}^{\text{PDE-m}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{C}^{\text{PDE-r}}$
+\end_inset
+
+ (
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+r
+\end_layout
+
+\end_inset
+
+ as shorthand for 
+\begin_inset Quotes xld
+\end_inset
+
+
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+r
+\end_layout
+
+\end_inset
+
+aw
+\begin_inset Quotes xrd
+\end_inset
+
+):
+\begin_inset Formula 
+\[
+\left\{ \begin{alignedat}{2}\mathbf{C}^{\text{PDE-m}}\cup\mathbf{C}^{\text{PDE-r}} & \equiv & \; & \mathbf{C}^{\text{PDE}}\\
+\mathbf{C}^{\text{PDE-m}}\cap\mathbf{C}^{\text{PDE-r}} & \eqqcolon &  & \diameter
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $\texttt{LHS}$
+\end_inset
+
+ channel-group is constructed as a three-fold concatenation:
+ the 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+masked
+\end_layout
+
+\end_inset
+
+ target-group,
+ the raw-group and the grid group.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\texttt{LHS}\coloneqq\biggl(\underbrace{\overbrace{\phantom{{\displaystyle \prod}}m_{1}^{\text{mask}},\,\cdots\;\;\;\;}^{\mathbf{C}^{\text{PDE-m, mask}}},\;\overbrace{\phantom{{\displaystyle \prod}}r_{1},\,\cdots\;\;\;\;}^{\mathbf{C}^{\text{PDE-r}}}}_{\mathbf{C}^{\text{PDE}}},\;\underbrace{\;x_{1},x_{2},\,\cdots\;}_{\mathbf{C}^{\text{x}}}\biggr)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+On the other hand,
+ the 
+\begin_inset Formula $\texttt{RHS}$
+\end_inset
+
+ channel-group contains the 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+unmasked
+\end_layout
+
+\end_inset
+
+ target-group as 
+\begin_inset Quotes xld
+\end_inset
+
+truth
+\begin_inset Quotes xrd
+\end_inset
+
+ for the network:
+\begin_inset Formula 
+\[
+\texttt{RHS}\coloneqq\Bigl(\overbrace{\;\;\;m_{1},\,\cdots\;\;\;}^{\mathbf{C}^{\text{PDE-m}}}\Bigr)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+One shall note that the coordinates matrices 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ in the proposition above bear no subscript to indicate index 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ This is intentional,
+ as the coordinates are constant across all instances of the dataset and require thus no re-computation during the generation procedure.
+ This observation is further developed in the following:
+\end_layout
+
+\begin_layout Definition
+PDE-channels 
+\begin_inset Formula $\mathbf{C}^{\text{PDE}}$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Unsurprisingly,
+ the PDE-channels are provided by the underlying PDE model.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Grid-channels 
+\begin_inset Formula $\mathbf{C}^{\text{x}}$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Channels related to the grid-coordinates 
+\begin_inset Formula $\mathbf{C}^{\text{x}}$
+\end_inset
+
+ as used in this project are composed of the following six components:
+\begin_inset Formula 
+\[
+\mathbf{C}^{\text{x}}\coloneqq\underbrace{\;\;\;x_{1},x_{2}\;\;\;}_{\text{coord}}\;,\;\,\underbrace{\;\sin\left(x_{1}\right),\sin\left(x_{2}\right),\cos\left(x_{1}\right),\cos\left(x_{2}\right)\;}_{4\times\;\;\text{trig}\left(\text{coord}\right)}
+\]
+
+\end_inset
+
+where the first two channels correspond to the raw coordinates of the (two-dimensional) spatial grid,
+ and the ensuing four represent these coordinates after applying value-wise trigonometry operations 
+\begin_inset Formula $\sin\left(\star\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\cos\left(\star\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+As observed above,
+ these grid-channels are constant for any specific spatial grid and can be saved as such via pre-computation.
+ This property is further taken advantage of in 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Dataset Setup
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Dataset-Setup"
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Itemize
+preparation:
+ pre knowledge:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+grid (space,
+ time if needed)
+\end_layout
+
+\begin_layout Itemize
+split count
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+assembly
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+generate dataset-specific channels:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+generate raw dataset,
+ which requires at least the space grid,
+ and,
+ depending on the particular PDE model,
+ the time grid as well
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+append grid-specific channels:
+ constant
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+raw coordinates
+\end_layout
+
+\begin_layout Itemize
+trigonometric coordinates
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Itemize
+normalize
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Generation
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The following diagram captures the dataset generation procedure:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\xymatrix{ & \text{ch}^{\text{PDE}}\ar[rd]^{\text{C}}\\
+\text{grid}\ar[ru]^{\text{A}}\ar[rd]_{\text{B}} &  & \mathds{D}^{\dagger}\ar[r]^{\text{D}} & \mathds{D}^{\ddagger}\ar[r]^{\text{E}} & *+[F]{\mathds{D}}\\
+ & \text{ch}^{\text{grid}}\ar[ru]_{\text{C}}
+}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In step A,
+ the (raw) dataset generation routine is called upon to generate 
+\begin_inset Formula $i$
+\end_inset
+
+ instances of PDE-channels on the chosen spatial and optionally temporal grid,
+ and the grid-related channels are fetched trivially in step B.
+ These channels are then assembled by the procedure previously seen in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Dataset"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ in step C to form the first fully-shaped dataset 
+\begin_inset Formula $\mathds{D}^{\dagger}$
+\end_inset
+
+ in the sense of 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+pytorch
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+After normalizing the dataset in step D to obtain 
+\begin_inset Formula $\mathds{D}^{\ddagger}$
+\end_inset
+
+,
+ the masking procedure is applied to produce the final 
+\begin_inset Formula $\mathds{D}$
+\end_inset
+
+ primed for the learning pipeline.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+Shape of dataset
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Some algorithms requires a flattened layout of all channel matrices,
+ i.e.,
+ each channel now has shape 
+\begin_inset Formula $4096$
+\end_inset
+
+ instead of 
+\begin_inset Formula $64\times64$
+\end_inset
+
+,
+ the official FNO repo refers to this dataset shape as 
+\begin_inset Quotes xld
+\end_inset
+
+pixel
+\begin_inset Quotes xrd
+\end_inset
+
+.
+ This is,
+ however,
+ not required by any of the aforementioned algorithms of this project and is thus not implemented.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since each component of 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ is a two-dimensional matrix as representation of the space-grid,
+ 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ itself thus contains one more dimension to indicate the number of these two-dimensional matrices.
+ In the minimal example of 
+\begin_inset Formula $z_{i}\coloneqq\left(u_{i},x_{1,i},x_{2,i}\right)$
+\end_inset
+
+ as proposed above,
+ this extra dimension will have the value 
+\begin_inset Formula $3$
+\end_inset
+
+.
+ Consequently,
+ a dataset of 
+\begin_inset Formula $i$
+\end_inset
+
+ of these 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ instances is four-dimensional.
+\end_layout
+
+\begin_layout Standard
+Following standard dataset format,
+ the first dimension denotes the number of instances.
+ There exists,
+ however,
+ no standfast rule concerning the ordering of the remaining three dimensions.
+ Out of the six
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Number of possible permutations of 
+\begin_inset Formula $3$
+\end_inset
+
+ elements
+\end_layout
+
+\end_inset
+
+ total ordering possibilities,
+ two of them are generally acceptable.
+ Continuing with the minimal example above with the space-grid as defined in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:Space-mesh"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ these two orderings yield respectively:
+\begin_inset Formula 
+\[
+\text{dataset-shape}\doteq\left\langle \begin{alignedat}{2} & \: & \Bigl[i,64,64,3\Bigr]\\
+ &  & \Bigl[i,3,64,64\Bigr]
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+As an example,
+ the FNO 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fno,fno-neural-operator"
+literal "false"
+
+\end_inset
+
+ implementation included in this project's repository accepts the first ordering,
+ while the CNO 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cno"
+literal "false"
+
+\end_inset
+
+ implementation expects the second.
+\end_layout
+
+\begin_layout Standard
+also require The official FNO repository 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Dataset splits
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Following common etiquette of machine-learning 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ml-elem-stats-learning,ml-murphy,stats-wasserman"
+literal "false"
+
+\end_inset
+
+,
+ the datasets for training and testing are mutually exclusive.
+ More specifically,
+ a 6-to-1-to-1 split is used to generate the splits:
+\begin_inset Formula 
+\[
+\left\{ \begin{alignedat}{2}i_{\text{train}} & \coloneqq & \; & 1800\\
+i_{\text{valid}} & \coloneqq &  & 300\\
+i_{\text{eval}} & \coloneqq &  & 300
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+As usual,
+ the testing dataset is unseen by the model during training phase and serves exclusively the purpose of evaluation to examine the adaptability of the trained models to generalize on data unseen during training.
+ 
+\end_layout
+
+\begin_layout Standard
+A batch-size of 
+\begin_inset Formula $20$
+\end_inset
+
+ samples is used throughout all three aforementioned phases.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+A word on batch-size
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+It should be noted that the choice of batch-size has been a topic of major contention in the milieu of machine learning in general,
+ with researches including 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ml-batchsize"
+literal "false"
+
+\end_inset
+
+ recommending smaller values up to 
+\begin_inset Formula $32$
+\end_inset
+
+,
+ and traditional textbooks such as 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ml-goodfellow,ml-murphy"
+literal "false"
+
+\end_inset
+
+ putting forward values up to hundreds.
+\end_layout
+
+\begin_layout Standard
+The particular batch-size of 
+\begin_inset Formula $20$
+\end_inset
+
+ as chosen in this thesis is purely decided upon via empirical observation and intuition.
+ The interested reader is encourage to rerun the project code with other values for experimentation.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \begin_layout Subsection
 Prediction Model
 \begin_inset Note Note
@@ -2845,7 +3850,7 @@ nolink "false"
 \end_inset
 
 ,
- the prediction model of masked learning can finally be presented.
+ the prediction model of masked learning can now be presented.
  In this thesis,
  two principle variants are studied:
  the single and the double-mask model.

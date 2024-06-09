@@ -1189,7 +1189,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset CommandInset href
 LatexCommand href
-name "scipy: uniform distribution library"
+name "scipy: uniform distribution API"
 target "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.uniform.html"
 literal "false"
 
@@ -1201,7 +1201,6 @@ literal "false"
 \end_inset
 
 :
- 
 \begin_inset Formula 
 \[
 \begin{alignedat}{2}\text{mask-intensity} & \simeq & \; & \text{Unif}\left[c_{\text{low}};c_{\text{high}}\right]\\
@@ -1484,7 +1483,7 @@ Masking strategy
 
 \begin_layout Standard
 A common modification strategy,
- as also deployed in researches such as
+ as also deployed in researches such as 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "videomae-published,videomae,multimae"
@@ -1981,7 +1980,7 @@ training
 :
  four masking intensity-ranges,
  all of random-style:
- 
+ full 
 \begin_inset Formula $0\%-100\%$
 \end_inset
 
@@ -2007,25 +2006,37 @@ training
 \end_layout
 
 \begin_layout Itemize
-island style:
- the in-tact center island shrinks from 
-\begin_inset Formula $90\%$
+for 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+evaluation
+\end_layout
+
 \end_inset
 
- to 
-\begin_inset Formula $10\%$
+:
+ both random and island style,
+ each with 
+\begin_inset Formula $10$
 \end_inset
 
- per dimension,
- with 
-\begin_inset Formula $10\%$
+ intensities ranges:
+ 
+\begin_inset Formula $[0\%-10\%]$
 \end_inset
 
- decrement (
-\begin_inset Formula $9$
+,
+ 
+\begin_inset Formula $\left[10\%-20\%\right]$
 \end_inset
 
- masks in total).
+ till 
+\begin_inset Formula $90\%-100\%$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -2073,7 +2084,7 @@ lowest
 \end_layout
 
 \begin_layout Section
-Dataset
+PDE Dataset
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Dataset"
@@ -2098,179 +2109,9 @@ find some quote on importance of data in ML
 \end_layout
 
 \begin_layout Standard
-This section enumerates the PDE models investigated in this project alongside the construction of their respective datasets for the learning pipeline.
- The common procedure for such dataset construction is described as follows:
-\end_layout
-
-\begin_layout Definition
-Dataset layout
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-A dataset of size 
-\begin_inset Formula $i$
-\end_inset
-
- contains 
-\begin_inset Formula $i$
-\end_inset
-
- instances,
- where each instance 
-\begin_inset Formula $z_{i}$
-\end_inset
-
- is the concatenation of multiple matrix-like components,
- otherwise referred to as 
-\begin_inset Flex Emph
-status open
-
-\begin_layout Plain Layout
-channels
-\end_layout
-
-\end_inset
-
-.
- These channels typically fall into two categories:
-\end_layout
-
-\begin_layout Itemize
-those specific to the particular PDE model at hand,
- aka the 
-\begin_inset Quotes xld
-\end_inset
-
-PDE-channels
-\begin_inset Quotes xrd
-\end_inset
-
- 
-\begin_inset Formula $\mathbf{C}^{\text{P}}$
-\end_inset
-
-,
- including the solution 
-\begin_inset Formula $u_{i}$
-\end_inset
-
- of the PDE itself,
-\end_layout
-
-\begin_layout Itemize
-those common to the underlying space grid,
- the 
-\begin_inset Quotes xld
-\end_inset
-
-grid-channels
-\begin_inset Quotes xrd
-\end_inset
-
- 
-\begin_inset Formula $\mathbf{C}^{\text{x}}$
-\end_inset
-
- such as the grid coordinates 
-\begin_inset Formula $x_{1,2\cdots}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-In the case of the two-dimensional space of this thesis,
- 
-\begin_inset Formula $z_{i}$
-\end_inset
-
- consists thus at least of the following three channels,
- each corresponding to a two-dimensional matrix:
- 
-\begin_inset Formula 
-\[
-z_{i}\coloneqq\Bigl(\overbrace{\;\;\;u_{i},\,\cdots\;\;\;}^{\mathbf{C}^{\text{P}}},\;\underbrace{\;x_{1},x_{2},\,\cdots\;}_{\mathbf{C}^{\text{x}}}\Bigr)
-\]
-
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-One shall note that the coordinates matrices 
-\begin_inset Formula $x_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $x_{2}$
-\end_inset
-
- in the proposition above bear no subscript to indicate index 
-\begin_inset Formula $i$
-\end_inset
-
-.
- This is intentional,
- as the coordinates are constant across all instances of the dataset and require thus no re-computation during the generation procedure.
- This observation is further developed in the following:
-\end_layout
-
-\begin_layout Definition
-Grid-channels 
-\begin_inset Formula $\mathbf{C}^{\text{x}}$
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-Channels related to the grid-coordinates 
-\begin_inset Formula $\mathbf{C}^{\text{x}}$
-\end_inset
-
- as used in this project are composed of the following six components:
-\begin_inset Formula 
-\[
-\mathbf{C}^{\text{x}}\coloneqq\underbrace{\;\;\;x_{1},x_{2}\;\;\;}_{\text{coord}}\;,\;\,\underbrace{\;\sin\left(x_{1}\right),\sin\left(x_{2}\right),\cos\left(x_{1}\right),\cos\left(x_{2}\right)\;}_{4\times\;\;\text{trig}\left(\text{coord}\right)}
-\]
-
-\end_inset
-
-where the first two channels correspond to the raw coordinates of the (two-dimensional) spatial grid,
- and the ensuing four represent these coordinates after applying value-wise trigonometry operations 
-\begin_inset Formula $\sin\left(\star\right)$
-\end_inset
-
- and 
-\begin_inset Formula $\cos\left(\star\right)$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-As observed above,
- these grid-channels are constant for any specific spatial grid and can be saved as such via pre-computation.
- This property is further taken advantage of in 
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
+Another central component of the setup work is the dataset generated by the PDEs,
+ typically revolving around solving the PDEs themselves.
+ This section introduces the three core PDE prototypes of the project and the respective datasets induced by them.
 \end_layout
 
 \begin_layout Subsection
