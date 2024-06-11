@@ -2901,7 +2901,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/wave/sum_of_sine-train_1800--random_0.4_0.6.png
-	width 14cm
+	width 16cm
 
 \end_inset
 
@@ -2930,7 +2930,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/wave/sum_of_sine-train_1800--random_0.4_0.6-random_0.4_0.6.png
-	width 14cm
+	width 16cm
 
 \end_inset
 
@@ -2981,7 +2981,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/wave/sum_of_sine-train_1800--random_0.6_0.8.png
-	width 15cm
+	width 16cm
 
 \end_inset
 
@@ -3010,7 +3010,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/wave/sum_of_sine-train_1800--random_0.6_0.8-random_0.6_0.8.png
-	width 15cm
+	width 16cm
 
 \end_inset
 
@@ -4088,7 +4088,7 @@ nolink "false"
 \end_layout
 
 \begin_layout Subsection
-Direct visual inspecton
+Direct visual inspection
 \begin_inset Note Note
 status collapsed
 
@@ -4122,18 +4122,28 @@ defaults of every hyper-param,
 \end_layout
 
 \begin_layout Standard
-Another powerful method of evaluating model performance is via direct inspection.
- This chapter uses the Poisson Equation,
- model is trained on the full mask range.
- In the following,
- the FNO model is used unless otherwise mentioned.
- To start off,
- result with the single mask is shown.
+Directly comparing plots of the truth and the inferred prediction of the object(s) of interest plots is arguably one of the visual and direct methods for evaluating model performance in machine learning 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ml-goodfellow,ml-murphy"
+literal "false"
+
+\end_inset
+
+.
+ In the settings of two-dimensional operator learning,
+ such visualization is readily available,
+ notably via the 2D contour and the 3D surface plots as used throughout this thesis.
 \end_layout
 
-\begin_layout Definition
-Single,
- random
+\begin_layout Standard
+This chapter provides inspections of the FNO network trained on the full-range singly masked Poisson equation.
+ To start off,
+ the in-distribution evaluation variant is given:
+\end_layout
+
+\begin_layout Example
+In-distribution direct inspection
 \end_layout
 
 \begin_deeper
@@ -4205,7 +4215,7 @@ truth
  and the model's prediction:
 \begin_inset Formula 
 \[
-\text{Error}\coloneqq\text{Prediction}-\text{Truth}
+\text{Diff}\coloneqq\text{Prediction}-\text{Truth}
 \]
 
 \end_inset
@@ -4230,7 +4240,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/reconstruct/sum_of_sine-train_1800--random_0.0_1.0--reconstruction-single-random.png
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/reconstruction-random.png
 	width 16cm
 
 \end_inset
@@ -4382,7 +4392,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/reconstruct/sum_of_sine-train_1800--random_0.0_1.0--reconstruction-single-island.png
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/reconstruction-island.png
 	width 16cm
 
 \end_inset
@@ -4407,13 +4417,13 @@ Reconstruction:
  first instance of dataset;
  absolute MSE:
  
-\begin_inset Formula $0.0032$
+\begin_inset Formula $0.0021$
 \end_inset
 
 ,
  relative MSE:
  
-\begin_inset Formula $10.30\%$
+\begin_inset Formula $8.34\%$
 \end_inset
 
 
@@ -4432,6 +4442,65 @@ Reconstruction:
 \end_deeper
 \begin_layout Standard
 \begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/reconstruction-ring.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:reconstruct-ring"
+
+\end_inset
+
+Reconstruction:
+ Poisson with single mask of ring-style.
+ As shown:
+ first instance of dataset;
+ absolute MSE:
+ 
+\begin_inset Formula $0.0033$
+\end_inset
+
+,
+ relative MSE:
+ 
+\begin_inset Formula $10.42\%$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
 
@@ -4460,6 +4529,38 @@ point-wise
 \end_inset
 
  basis and the interested reader is invited to review any trained model's performance with the plotting procedure above.
+\end_layout
+
+\begin_layout Section
+Non-Official Studies
+\end_layout
+
+\begin_layout Subsection
+The ring mask
+\end_layout
+
+\begin_layout Standard
+The reader should consider the implication of these results above:
+\end_layout
+
+\begin_layout Standard
+For any pair of complementary intensity-pair of Island and Ring masks:
+\begin_inset Formula 
+\[
+M^{\text{type}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Non-standard masking
+\end_layout
+
+\begin_layout Standard
+As previously discussed in Chapter 
 \end_layout
 
 \begin_layout Section

@@ -1027,7 +1027,7 @@ The output of applying masking to a matrix-like object
  but with some of its entries modified:
 \begin_inset Formula 
 \[
-\mathbb{R}^{d_{1}\times d_{2}\times\cdots}\in\mathbf{M}\longrightarrow\mathbf{M}^{\text{mask}}\in\mathbb{R}^{d_{1}\times d_{2}\times\cdots}
+\mathbb{R}^{d_{1}\times d_{2}\times\cdots}\in\mathbf{M}\overset{\mathbf{m}}{\longrightarrow}\mathbf{M}^{\text{mask}}\in\mathbb{R}^{d_{1}\times d_{2}\times\cdots}
 \]
 
 \end_inset
@@ -1234,6 +1234,185 @@ nolink "false"
 \end_layout
 
 \begin_layout Subsubsection
+Random style
+\end_layout
+
+\begin_layout Standard
+As suggested by its namesake,
+ the mask indexes are selected randomly.
+ This style of masking is widely used,
+ in particular,
+ as seen in publications such as 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "videomae-published,videomae,multimae"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The implementation in this project accepts as argument the proportion of masked candidates.
+ Note that unlike the island-style mentioned above,
+ the random mask patch is generated anew during each call to its 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+.mask()
+\end_layout
+
+\end_inset
+
+ method,
+ guaranteeing random entropy of the resulting dataset.
+\end_layout
+
+\begin_layout Example
+Visualization of random-masking
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:masking-random"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ provides visualization of random-style masking at 
+\begin_inset Formula $50\%$
+\end_inset
+
+ intensity.
+ The intensity-spread is set to 
+\begin_inset Formula $0.0$
+\end_inset
+
+ to guarantee the exact intensity for this particular instance.
+ The particular raw,
+ unmasked matrix is defined as:
+\begin_inset Formula 
+\[
+\mathbf{R}_{x_{1},x_{2}}\coloneqq\cos\left(x_{1}\right)\times\cos\left(x_{2}\right)\quad,\qquad x_{1,2}\in\left[-1.0,+1.0\right]^{2}
+\]
+
+\end_inset
+
+One observes that matrix 
+\begin_inset Formula $\mathbf{R}$
+\end_inset
+
+ is strictly within the range of 
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:masking-random"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/mask_random_0.5_0.5.png
+	width 15cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:masking-random"
+
+\end_inset
+
+Visualization the random-style masking using solutions 
+\begin_inset Formula $u$
+\end_inset
+
+ of the Poisson Equation as specified in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:poisson-sum-of-sines"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ First row:
+ contour-plots of three instances of the solution 
+\begin_inset Formula $u$
+\end_inset
+
+.
+ Second row:
+ contour-plots of the respective 
+\begin_inset Formula $u$
+\end_inset
+
+ instances with random-style masking covering 
+\begin_inset Formula $30\%$
+\end_inset
+
+ of all spatial grid-points.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
 Island style
 \end_layout
 
@@ -1293,7 +1472,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/mask/island.png
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/mask_island_0.75_0.75.png
 	width 15cm
 
 \end_inset
@@ -1312,7 +1491,91 @@ name "fig:masking-island"
 
 \end_inset
 
-Visualization of the island-style dataset with the Poisson Equation.
+Visualization of the island-style mask at 
+\begin_inset Formula $75\%$
+\end_inset
+
+ intensity.
+ The underlying,
+ unmasked matrix,
+ as well as all plotting conventions follows those of Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:masking-random"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Ring style
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/mask_ring_0.25_0.25.png
+	width 15cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:masking-ring"
+
+\end_inset
+
+Visualization of the ring-style masks.
+ The underlying,
+ unmasked matrix,
+ as well as all plotting conventions follows those of Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:masking-random"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+island-style dataset with the Poisson Equation.
  Ordering of the plots mimics that of Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1342,129 +1605,6 @@ nolink "false"
 \end_inset
 
 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Random style
-\end_layout
-
-\begin_layout Standard
-As suggested by its namesake,
- the mask indexes are selected randomly.
- This style of masking is widely used,
- in particular,
- as seen in publications such as 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "videomae-published,videomae,multimae"
-literal "false"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-The implementation in this project accepts as argument the proportion of masked candidates.
- Note that unlike the island-style mentioned above,
- the random mask patch is generated anew during each call to its 
-\begin_inset Flex Code
-status open
-
-\begin_layout Plain Layout
-.mask()
-\end_layout
-
-\end_inset
-
- method,
- guaranteeing random entropy of the resulting dataset.
-\end_layout
-
-\begin_layout Standard
-Visualization of this random-style masking is seen Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:masking-random"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement document
-alignment document
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/mask/random.png
-	width 15cm
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:masking-random"
-
-\end_inset
-
-Visualization the random-style masking using solutions 
-\begin_inset Formula $u$
-\end_inset
-
- of the Poisson Equation as specified in Definition 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "def:poisson-sum-of-sines"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-.
- First row:
- contour-plots of three instances of the solution 
-\begin_inset Formula $u$
-\end_inset
-
-.
- Second row:
- contour-plots of the respective 
-\begin_inset Formula $u$
-\end_inset
-
- instances with random-style masking covering 
-\begin_inset Formula $30\%$
-\end_inset
-
- of all spatial grid-points.
 \end_layout
 
 \end_inset
@@ -2955,7 +3095,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/poisson/sine.png
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/raw_poisson_sine.png
 	width 16cm
 
 \end_inset
@@ -3459,7 +3599,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/poisson/gauss.png
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/raw_poisson_gauss.png
 	width 16cm
 
 \end_inset
@@ -3878,7 +4018,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/heat/plot_snapshots.png
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/raw_heat.png
 	width 16cm
 
 \end_inset
@@ -4220,7 +4360,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/wave/plot_snapshots.png
+	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/raw_wave.png
 	width 16cm
 
 \end_inset
@@ -4247,7 +4387,7 @@ Visualization of the Heat equation dataset,
 
 
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 REWRITE!
@@ -4517,7 +4657,7 @@ channels
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+super-pos.
 \end_layout
 
 \end_inset
@@ -4582,7 +4722,13 @@ No
 \begin_inset Text
 
 \begin_layout Plain Layout
+solution 
 \begin_inset Formula $u$
+\end_inset
+
+,
+ source 
+\begin_inset Formula $f$
 \end_inset
 
 
@@ -4590,10 +4736,13 @@ No
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell multirow="3" alignment="right" valignment="middle" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $\boxed{\text{Yes}}$
+\end_inset
+
 
 \end_layout
 
@@ -4655,7 +4804,7 @@ Yes
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell multirow="3" alignment="right" valignment="middle" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4664,7 +4813,7 @@ Yes
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell multirow="4" alignment="center" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4729,7 +4878,7 @@ Yes
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+<cell multirow="4" alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4738,7 +4887,7 @@ Yes
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+<cell multirow="4" alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout

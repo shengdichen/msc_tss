@@ -182,7 +182,7 @@ The
 \end_layout
 
 \begin_layout Standard
-A typical machine-learning project must be run on a carefully orchestrated environment setup spanning from hardware to software components.
+A typical machine-learning project must be run on a carefully orchestrated environment setup spanning both hardware and software components.
  This section documents the particular setup utilized by the author of this thesis to execute the full project pipeline.
  To start off,
  Table 
