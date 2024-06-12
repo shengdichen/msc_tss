@@ -124,11 +124,11 @@ todonotes
 \begin_body
 
 \begin_layout Section
-Results Comparison
+Evaluation methodology
 \end_layout
 
 \begin_layout Subsection
-Evaluation methodology
+Dataset Construction
 \end_layout
 
 \begin_layout Standard
@@ -218,10 +218,10 @@ the full range,
  i.e.,
  where the intensity is sampled from the entire intensity range:
  
-\begin_inset Formula $0\%\text{ -- }100\%$
+\begin_inset Formula $\left[0\%;100\%\right]$
 \end_inset
 
-.
+;
 \end_layout
 
 \begin_layout Itemize
@@ -282,7 +282,7 @@ nolink "false"
 
 \end_inset
 
- shows the implementation for creating those masks in a generic 
+ shows the creation of those masks in a generic 
 \begin_inset Flex Code
 status open
 
@@ -303,6 +303,103 @@ list
 \end_inset
 
  object.
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+# src/problem.py
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Problem:
+\end_layout
+
+\begin_layout Plain Layout
+
+    def __init__(...):
+\end_layout
+
+\begin_layout Plain Layout
+
+        ...
+  # other init work
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+        self._masks_train = [
+\end_layout
+
+\begin_layout Plain Layout
+
+            MaskerRandom.from_min_max(0.0,
+ 1.0),
+\end_layout
+
+\begin_layout Plain Layout
+
+            MaskerRandom.from_min_max(0.4,
+ 0.6),
+\end_layout
+
+\begin_layout Plain Layout
+
+            MaskerRandom.from_min_max(0.2,
+ 0.4),
+\end_layout
+
+\begin_layout Plain Layout
+
+            MaskerRandom.from_min_max(0.6,
+ 0.8),
+\end_layout
+
+\begin_layout Plain Layout
+
+        ]
+\end_layout
+
+\begin_layout Plain Layout
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "lis:mask-train"
+
+\end_inset
+
+Creation of training masks
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -315,8 +412,9 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="5" columns="9">
+<lyxtabular version="3" rows="5" columns="10">
 <features booktabs="true" islongtable="true" longtabularalignment="center">
+<column alignment="left" valignment="top" width="0pt">
 <column alignment="left" valignment="top" width="0pt">
 <column alignment="left" valignment="top" width="0pt">
 <column alignment="center" valignment="top">
@@ -345,11 +443,20 @@ Regime
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Intensity type
+\end_layout
+
+\end_inset
+</cell>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $\qquad$
+\begin_inset Formula $\qquad\qquad$
 \end_inset
 
 
@@ -373,9 +480,6 @@ Regime
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $\pm$
-\end_inset
-
 spread
 \end_layout
 
@@ -437,6 +541,15 @@ Full
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+generic
+\end_layout
+
+\end_inset
+</cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
@@ -468,6 +581,9 @@ Full
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $\quad\;\hat{=}\quad\;\;$
+\end_inset
+
 
 \end_layout
 
@@ -552,6 +668,15 @@ Low
 \begin_inset Text
 
 \begin_layout Plain Layout
+specialized
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -579,6 +704,9 @@ Low
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $\quad\;\hat{=}\quad\;\;$
+\end_inset
+
 
 \end_layout
 
@@ -663,6 +791,15 @@ Middle
 \begin_inset Text
 
 \begin_layout Plain Layout
+specialized
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -690,6 +827,9 @@ Middle
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $\quad\;\hat{=}\quad\;\;$
+\end_inset
+
 
 \end_layout
 
@@ -774,6 +914,15 @@ High
 \begin_inset Text
 
 \begin_layout Plain Layout
+specialized
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -801,6 +950,9 @@ High
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $\quad\;\hat{=}\quad\;\;$
+\end_inset
+
 
 \end_layout
 
@@ -865,7 +1017,7 @@ name "tab:mask-train"
 
 \end_inset
 
-Masking Intensities for training
+Four configuration modes of masking for training
 \end_layout
 
 \end_inset
@@ -873,146 +1025,6 @@ Masking Intensities for training
 
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-# src/problem.py
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-class Problem:
-\end_layout
-
-\begin_layout Plain Layout
-
-    def __init__(...):
-\end_layout
-
-\begin_layout Plain Layout
-
-        ...
-  # other init work
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-        self._masks_train = [
-\end_layout
-
-\begin_layout Plain Layout
-
-            util_dataset.MaskerRandom.from_min_max(
-\end_layout
-
-\begin_layout Plain Layout
-
-                intensity_min=0.0,
- intensity_max=1.0
-\end_layout
-
-\begin_layout Plain Layout
-
-            ),
-\end_layout
-
-\begin_layout Plain Layout
-
-            util_dataset.MaskerRandom.from_min_max(
-\end_layout
-
-\begin_layout Plain Layout
-
-                intensity_min=0.4,
- intensity_max=0.6
-\end_layout
-
-\begin_layout Plain Layout
-
-            ),
-\end_layout
-
-\begin_layout Plain Layout
-
-            util_dataset.MaskerRandom.from_min_max(
-\end_layout
-
-\begin_layout Plain Layout
-
-                intensity_min=0.2,
- intensity_max=0.4
-\end_layout
-
-\begin_layout Plain Layout
-
-            ),
-\end_layout
-
-\begin_layout Plain Layout
-
-            util_dataset.MaskerRandom.from_min_max(
-\end_layout
-
-\begin_layout Plain Layout
-
-                intensity_min=0.6,
- intensity_max=0.8
-\end_layout
-
-\begin_layout Plain Layout
-
-            ),
-\end_layout
-
-\begin_layout Plain Layout
-
-        ]
-\end_layout
-
-\begin_layout Plain Layout
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "lis:mask-train"
-
-\end_inset
-
-Creation of training masks
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
 \end_inset
 
 
@@ -1020,48 +1032,71 @@ Creation of training masks
 
 \begin_layout Standard
 Next,
- the datasets for evaluation are presented:
+ the datasets for evaluation are formed to allow both in-distribution and out-of-distribution testing:
 \end_layout
 
-\begin_layout Proposition
+\begin_layout Definition
 Construction of evaluation datasets
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
-The style:
+Masking strategies:
  Despite training on the random-style masks only,
- the models are evaluated on both the random-style and the island style.
-\end_layout
+ the models are evaluated on all three masking styles of this project introduced in Chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Masking-strategies"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
 
-\begin_layout Itemize
-The intensities:
- for both the random and the island style,
- the intensities are sample randomly from ranges of 
-\begin_inset Formula $10\%$
 \end_inset
 
 :
+ the random-style,
+ the island-style and the ring-style.
+\end_layout
+
+\begin_layout Itemize
+Masking intensities:
+ for each masking strategy,
+ the intensities are sampled from ranges spanning 
+\begin_inset Formula $10\%$
+\end_inset
+
+ increasing at a 
+\begin_inset Formula $10\%$
+\end_inset
+
+ step-size:
  
-\begin_inset Formula $[0\%-10\%]$
+\begin_inset Formula $[0\%;10\%]$
 \end_inset
 
 ,
  
-\begin_inset Formula $\left[10\%-20\%\right]$
+\begin_inset Formula $\left[10\%;20\%\right]$
 \end_inset
 
- till 
-\begin_inset Formula $90\%-100\%$
+ until 
+\begin_inset Formula $[90\%;100\%]$
 \end_inset
 
-.
+,
+ translating to 
+\begin_inset Formula $10$
+\end_inset
+
+ masking ranges for each of the three masking strategies.
 \end_layout
 
 \begin_layout Standard
-Construction of the individual datasets follow the same routine as described previously for the training datasets.
+Construction of the individual datasets follows the same routine as described previously for the training datasets.
  In conclusion,
- of the two masking styles 
+ of the three masking styles,
+ 
 \begin_inset Quotes xld
 \end_inset
 
@@ -1069,7 +1104,8 @@ random
 \begin_inset Quotes xrd
 \end_inset
 
- and 
+,
+ 
 \begin_inset Quotes xld
 \end_inset
 
@@ -1077,22 +1113,36 @@ island
 \begin_inset Quotes xrd
 \end_inset
 
+ and 
+\begin_inset Quotes xld
+\end_inset
+
+ring
+\begin_inset Quotes xrd
+\end_inset
+
 ,
  a total of 
-\begin_inset Formula $20$
+\begin_inset Formula $30$
 \end_inset
 
- evaluation masks are created,
- à 
-\begin_inset Formula $10$
-\end_inset
-
- masks.
+ evaluation masks are created.
 \end_layout
 
 \end_deeper
 \begin_layout Standard
 \begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+In-distribution VS Out-of-distribution
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:in-vs-out-distribution"
+
 \end_inset
 
 
@@ -1104,7 +1154,7 @@ Out of distribution testing
 
 \begin_deeper
 \begin_layout Standard
-As hinted at before,
+As hinted at previously,
  
 \begin_inset Quotes xld
 \end_inset
@@ -1114,16 +1164,16 @@ out-of-distribution
 \end_inset
 
  evaluation provides a powerful mechanism of model testing.
- In the case of masked PDE learning,
+ In the case of masked PDE learning studied in this thesis,
  there exist two opportunities for performing this type of performance gauging:
 \end_layout
 
 \begin_layout Standard
 On the one hand,
- the style of the mask can be varied.
- In the case of this thesis,
- since training is performed uniformly with the random mask,
- this translates to using the island masks.
+ the masking strategy can be varied.
+ For this thesis,
+ since training is performed uniformly with random masks,
+ evaluation performed on island and ring-style masks is thus out-of-distribution.
 \end_layout
 
 \begin_layout Standard
@@ -1131,7 +1181,7 @@ On the other hand,
  the intensity of the mask,
  i.e.,
  its expected value and/or its spread,
- can be modified during evaluation.
+ can be modified for the purpose of out-of-distribution evaluation.
  Recalling the training and evaluation datasets,
  one readily realizes that 
 \begin_inset Flex Emph
@@ -1144,7 +1194,7 @@ all
 \end_inset
 
 evaluation masking intensities differ from those used during training:
- as the spread of masks never agree.
+ as the spread of masks never fully agree.
  However,
  in the case of the three 
 \begin_inset Quotes xld
@@ -1159,20 +1209,30 @@ specialized
 \end_inset
 
  spreads,
- two evaluation masks overlap fully with the training masks:
+ two evaluation masks 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+overlap
+\end_layout
+
+\end_inset
+
+ completely with the training masks:
 \begin_inset Formula 
 \[
 \left\{ \begin{alignedat}{2}\overbrace{\qquad\qquad\quad\;\;}^{\text{train}} &  &  & \quad\overbrace{\qquad\qquad\qquad}^{\text{eval}}\\
-\left[20\%\text{ -- }40\%\right]\;\; & \supseteq &  & \left\langle \begin{alignedat}{1}\;\; & \left[20\%;30\%\right]\\
+\left[20\%;40\%\right]\;\; & \supseteq &  & \left\langle \begin{alignedat}{1}\;\; & \left[20\%;30\%\right]\\
  & \left[30\%;40\%\right]
 \end{alignedat}
 \right.\\
-\left[40\%-60\%\right]\;\; & \supseteq &  & \left\langle \begin{alignedat}{1}\;\; & \left[40\%;50\%\right]\\
+\left[40\%;60\%\right]\;\; & \supseteq &  & \left\langle \begin{alignedat}{1}\;\; & \left[40\%;50\%\right]\\
  & \left[50\%;60\%\right]
 \end{alignedat}
 \right.\\
-\left[60\%-80\%\right]\;\; & \supseteq &  & \left\langle \begin{alignedat}{1}\;\; & \left[60\%;70\%\right]\\
- & \left[70\%;90\%\right]
+\left[60\%;80\%\right]\;\; & \supseteq &  & \left\langle \begin{alignedat}{1}\;\; & \left[60\%;70\%\right]\\
+ & \left[70\%;80\%\right]
 \end{alignedat}
 \right.
 \end{alignedat}
@@ -1196,14 +1256,60 @@ similar
 \end_inset
 
  to each other.
- For the purpose of the upcoming sections,
- the evaluation datasets enumerated above are considered in-distribution,
- whereas the others out-of-distribution.
+\end_layout
+
+\begin_layout Standard
+A natural follow-up definition of out-of-distribution evaluation requires either a different masking strategy or a non-overlapping masking intensity range during training and evaluation.
+ Specifically,
+ the differentiation between in-distribution and out-of-distribution evaluation is understood as follows:
+\end_layout
+
+\begin_layout Itemize
+For the full-range intensity mask 
+\begin_inset Formula $\left[0\%;100\%\right]$
+\end_inset
+
+,
+ evaluation is out-of-distribution if and only if the masking strategy is different,
+ i.e.,
+ on island and ring style masks;
+\end_layout
+
+\begin_layout Itemize
+For any of specialized intensity masks,
+ evaluation is out-of-distribution if the masking strategy is different 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+or
+\end_layout
+
+\end_inset
+
+ if the masking intensity range during evaluation is not contained within that during training.
+ As an example,
+ for models trained on 
+\begin_inset Formula $\left[40\%;60\%\right]$
+\end_inset
+
+ range,
+ evaluation using the 
+\begin_inset Formula $\left[40\%;50\%\right]$
+\end_inset
+
+ random mask is in-distribution,
+ whereas an intensity range of 
+\begin_inset Formula $\left[70\%;80\%\right]$
+\end_inset
+
+ (of random mask) is deemed out-of-distribution.
+ 
 \end_layout
 
 \begin_layout Standard
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 TODO:
@@ -1263,13 +1369,13 @@ Thus concludes the setup of model evaluation.
  analysis results from all possible training-evaluation pairings are presented ordered by masking types and channels.
  To commence,
  the results of the single mask from the full 
-\begin_inset Formula $0\%-100\%$
+\begin_inset Formula $\left[0\%;100\%\right]$
 \end_inset
 
  intensity-range are studied:
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Full intensity-range
 \end_layout
 
@@ -1277,7 +1383,7 @@ Full intensity-range
 Plotting convention
 \begin_inset CommandInset label
 LatexCommand label
-name "prop:Plotting-convention"
+name "prop:Plotting-convention-mask-single"
 
 \end_inset
 
@@ -1286,24 +1392,24 @@ name "prop:Plotting-convention"
 
 \begin_deeper
 \begin_layout Standard
-The errors graphs are presented in two horizontal splits,
- both plotting the 
+The errors graphs are presented in three horizontal splits,
+ all plotting the 
 \begin_inset Formula $L^{2}$
 \end_inset
 
  relative error against the masking intensity.
- The left split depicts errors of the random-style,
- and the right split those of the island-style.
+ The three splits from left to right depict errors of the random-style,
+ the island-style and the ring-style respectively.
 \end_layout
 
 \begin_layout Standard
-Recalling that for the full intensity rage studied in this section,
- island-style masks correspond to out-of-distribution evaluation.
+Recalling that for the full intensity range studied in this section,
+ the island and the ring style masks correspond to out-of-distribution evaluation.
  Thus:
 \begin_inset Formula 
 \[
 \left\{ \begin{alignedat}{2}\text{plot}^{\text{ left}} & \;\hat{=} & \; & \text{in-distribution}\\
-\text{plot}^{\text{ right}} & \;\hat{=} &  & \text{\text{out-of-distribution}}
+\;\text{plot}^{\text{ middle}\:\cup\:\text{right}} & \;\hat{=} &  & \text{\text{out-of-distribution}}
 \end{alignedat}
 \right.
 \]
@@ -1311,6 +1417,15 @@ Recalling that for the full intensity rage studied in this section,
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+The error plots depict error values up to 
+\begin_inset Formula $17.5\%$
+\end_inset
+
+,
+ and those beyond this threshold are truncated.
 \end_layout
 
 \end_deeper
@@ -1321,12 +1436,8 @@ Recalling that for the full intensity rage studied in this section,
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Single masks
-\end_layout
-
-\begin_layout Standard
-The errors plots are found below:
 \begin_inset Note Note
 status collapsed
 
@@ -1352,7 +1463,7 @@ Two specific evaluation
 
 \end_layout
 
-\begin_layout Definition
+\begin_layout Example
 Poisson equation
 \end_layout
 
@@ -1390,7 +1501,7 @@ Observing the in-distribution evaluation results on the left,
 \end_inset
 
  at higher intensities.
- KNO's performance lags behind visibility across all intensities,
+ KNO's performance lags behind across all intensities,
  starting at 
 \begin_inset Formula $10\%$
 \end_inset
@@ -1399,7 +1510,7 @@ Observing the in-distribution evaluation results on the left,
 \begin_inset Formula $15\%$
 \end_inset
 
- at intensities around 
+ for intensities close to 
 \begin_inset Formula $90\%$
 \end_inset
 
@@ -1407,27 +1518,42 @@ Observing the in-distribution evaluation results on the left,
 \end_layout
 
 \begin_layout Standard
-For the out-of-distribution on the right,
- one observes slight zigzagging of CNO at 
-\begin_inset Formula $\left[20\%;30\%\right]$
+For the out-of-distribution plots in the middle and on the right,
+ one observes a visible bump of the error-curve of CNO at 
+\begin_inset Formula $40\%$
 \end_inset
 
-.
- Otherwise,
- the upwards trajectories seen on the left are carried over,
- with UNet not meeting the 
-\begin_inset Formula $15\%$
-\end_inset
-
- baseline at the highest intensity range.
+ island-masks (plot in the middle),
+ as well as of UNet and FNO at high intensities for ring-style masks (plot on the right).
 \end_layout
 
 \begin_layout Standard
 Crucially,
- it is also apparent that at similar intensities,
- the in-distribution and out-of-distribution errors are similar:
- no particular performance degrade is seen when evaluating the models on island-style masks,
+ by comparing the performance 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+vertically
+\end_layout
+
+\end_inset
+
+ across all three masking strategies,
+ one recognizes that at similar intensities,
+ the out-of-distribution errors are only moderately higher than the in-distribution error values:
+ no drastic performance degrade is seen when evaluating the models on island-style or ring-style masks,
  although training was executed with the random masks.
+ The more prominent ones include FNO and UNet on the ring-style masks,
+ which performed visibly worse in ring-style masks.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1442,7 +1568,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/poisson/sum_of_sine-train_1800--random_0.0_1.0.png
+	filename ../../bin/poisson/sum_of_sine-train_1800--random_0.0_1.0.png
 	width 16cm
 
 \end_inset
@@ -1466,7 +1592,7 @@ name "fig:result-poisson-single-full"
 \end_inset
 
  error-plot:
- poisson-equation;
+ Poisson equation;
  single mask,
  full range
 \end_layout
@@ -1481,33 +1607,10 @@ name "fig:result-poisson-single-full"
 
 \end_layout
 
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
-\begin_layout Definition
+\begin_layout Example
 Heat equation
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:result-heat-single-full"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
- showcases the heat equation.
-\end_layout
+\begin_inset Note Note
+status collapsed
 
 \begin_layout Itemize
 Excellent performance:
@@ -1529,6 +1632,70 @@ The performance is striking:
  in both the in-distribution and the out-of-distribution
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:result-heat-single-full"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ showcases the 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ errors of the heat equation with single masks.
+ Here,
+ the performance is excellent for all models except KNO in 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+both
+\end_layout
+
+\end_inset
+
+ in-distribution and out-of-distribution evaluation,
+ achieving approximately 
+\begin_inset Formula $2.5\%$
+\end_inset
+
+ error in all evaluation settings.
+ 
+\end_layout
+
+\begin_layout Standard
+In fact,
+ the error curves of the FNO,
+ CNO and Unet models practically overlap and hold steady despite varying masking intensities or strategies.
+ Although KNO performs visibly worse than the other networks,
+ the errors still hardly ever surpassed 
+\begin_inset Formula $10\%$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 \begin_inset Float figure
 placement document
@@ -1541,7 +1708,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/heat/sum_of_sine-train_1800--random_0.0_1.0.png
+	filename ../../bin/heat/sum_of_sine-train_1800--random_0.0_1.0.png
 	width 16cm
 
 \end_inset
@@ -1580,33 +1747,10 @@ name "fig:result-heat-single-full"
 
 \end_layout
 
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
-\begin_layout Definition
+\begin_layout Example
 Wave equation
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:result-wave-single-full"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
- showcases the Wave equation.
-\end_layout
+\begin_inset Note Note
+status collapsed
 
 \begin_layout Itemize
 Left:
@@ -1627,7 +1771,74 @@ right:
 
 \begin_layout Itemize
 combined:
- 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The errors plots of the Wave equation prototype are found in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:result-wave-single-full"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ For the in-distribution plot on the left,
+ models except KNO perform very well,
+ with errors lower than 
+\begin_inset Formula $2.5\%$
+\end_inset
+
+.
+ KNOs error values also surpass the 
+\begin_inset Formula $15\%$
+\end_inset
+
+ threshold at higher masking intensity levels.
+\end_layout
+
+\begin_layout Standard
+Studying the out-of-distribution plots in the middle and on the right,
+ one first observes the fantastic performance of FNO,
+ holding at lower than 
+\begin_inset Formula $2.5\%$
+\end_inset
+
+ errors under all settings.
+ For CNO and UNet,
+ visible humps are displayed at high-intensity island-masks and low-intensity ring-masks.
+ However,
+ the performance overall was still fairly decent at 
+\begin_inset Formula $7.5\%$
+\end_inset
+
+ for worst-case performance.
+\end_layout
+
+\begin_layout Standard
+KNOs errors appear to always increase steadily with increasing masking intensity,
+ exceeding the 
+\begin_inset Formula $15\%$
+\end_inset
+
+ mark with high-intensity masks in island and ring-style masks as well.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1642,7 +1853,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/wave/sum_of_sine-train_1800--random_0.0_1.0.png
+	filename ../../bin/wave/sum_of_sine-train_1800--random_0.0_1.0.png
 	width 16cm
 
 \end_inset
@@ -1681,16 +1892,8 @@ name "fig:result-wave-single-full"
 
 \end_layout
 
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
 \begin_layout Conclusion
-Full range masks
+Full range masks TODOOOOOOO
 \end_layout
 
 \begin_deeper
@@ -1725,7 +1928,7 @@ It should be noted though that even for the island style masks,
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Double masks
 \begin_inset Note Note
 status collapsed
@@ -1743,21 +1946,35 @@ TODO:
 
 \end_layout
 
+\begin_layout Standard
+With the preliminary result plots of the single-masks seen in the previous section,
+ performance with double-masks is now studied.
+ With an extra channel to analyze,
+ the plotting convention requires some adaptations:
+\end_layout
+
 \begin_layout Definition
 Plotting convention for double masks
+\begin_inset CommandInset label
+LatexCommand label
+name "def:Plotting-convention-mask-double"
+
+\end_inset
+
+
 \end_layout
 
 \begin_deeper
 \begin_layout Standard
 Building upon the plotting setting for single-masking,
- plots for double mask show
+ plots for double mask contain two rows,
+ with the top and the bottom row depicting the first and the second masking channel respectively.
 \end_layout
 
 \begin_layout Standard
-,
- masks of the same type and intensity are used on both channels.
- The masking targets are computed separately for each channel.
- This is the same procedure as used for generating the training dataset.
+It should be pointed out that masks of the same intensity and variant are used for both channels,
+ whereas the actual masking indexes are sampled separately for each channel.
+ One shall also recall this exact procedure in use when generating the training dataset.
 \end_layout
 
 \end_deeper
@@ -1770,7 +1987,9 @@ Building upon the plotting setting for single-masking,
 
 \begin_layout Standard
 Now,
- the results of the double masks are shown:
+ the individual plots of the double masks models are shown.
+ As usual,
+ the analysis commences with the Poisson equation:
 \end_layout
 
 \begin_layout Definition
@@ -1793,6 +2012,14 @@ nolink "false"
  shows Poisson equation.
 \end_layout
 
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 \begin_inset Float figure
 placement document
@@ -1805,7 +2032,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/poisson/sum_of_sine-train_1800--random_0.0_1.0-random_0.0_1.0.png
+	filename ../../bin/poisson/sum_of_sine-train_1800--random_0.0_1.0-random_0.0_1.0.png
 	width 16cm
 
 \end_inset
@@ -1844,14 +2071,6 @@ name "fig:result-poisson-double-full"
 
 \end_layout
 
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
 \begin_layout Definition
 Heat equation
 \end_layout
@@ -1872,6 +2091,14 @@ nolink "false"
  shows heat equation.
 \end_layout
 
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 \begin_inset Float figure
 placement document
@@ -1884,7 +2111,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/heat/sum_of_sine-train_1800--random_0.0_1.0-random_0.0_1.0.png
+	filename ../../bin/heat/sum_of_sine-train_1800--random_0.0_1.0-random_0.0_1.0.png
 	width 16cm
 
 \end_inset
@@ -1923,14 +2150,6 @@ name "fig:result-heat-double-full"
 
 \end_layout
 
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
 \begin_layout Definition
 Wave Equation
 \end_layout
@@ -1951,6 +2170,14 @@ nolink "false"
  shows wave equation.
 \end_layout
 
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 \begin_inset Float figure
 placement document
@@ -1963,7 +2190,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/wave/sum_of_sine-train_1800--random_0.0_1.0-random_0.0_1.0.png
+	filename ../../bin/wave/sum_of_sine-train_1800--random_0.0_1.0-random_0.0_1.0.png
 	width 16cm
 
 \end_inset
@@ -1997,14 +2224,6 @@ name "fig:result-wave-double-full"
 
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
 \end_inset
 
 
@@ -2046,7 +2265,7 @@ When evaluated on island-masks:
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage newpage
+\begin_inset Newpage clearpage
 \end_inset
 
 
@@ -2054,6 +2273,62 @@ When evaluated on island-masks:
 
 \begin_layout Section
 Specialized Ranges
+\end_layout
+
+\begin_layout Standard
+After concluding the review of the models trained on the full-range 
+\begin_inset Formula $\left[0\%;100\%\right]$
+\end_inset
+
+.
+ this section continues the performance analysis with the three specialized intensity-ranges enlisted in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:mask-train"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ One recalls them as:
+\end_layout
+
+\begin_layout Itemize
+low regime:
+ intensity range 
+\begin_inset Formula $i\in\left[20\%;40\%\right]$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Itemize
+middle regime:
+ intensity range 
+\begin_inset Formula $i\in\left[40\%;60\%\right]$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Itemize
+middle regime:
+ intensity range 
+\begin_inset Formula $i\in\left[60\%;80\%\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Unlike the full-range masks as studied in the previous section
+\end_layout
+
+\begin_layout Standard
+Continuing with the plotting conventions specified previously 
 \end_layout
 
 \begin_layout Definition
@@ -2172,6 +2447,11 @@ the left column indicates evaluation on low masking intensity,
 
 \end_layout
 
+\begin_layout Standard
+Unlike the previous section,
+ the results here are grouped by equation types.
+\end_layout
+
 \begin_layout Subsection
 The Poisson Equation
 \end_layout
@@ -2204,7 +2484,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/poisson/sum_of_sine-train_1800--random_0.2_0.4.png
+	filename ../../bin/poisson/sum_of_sine-train_1800--random_0.2_0.4.png
 	width 16cm
 
 \end_inset
@@ -2216,7 +2496,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/poisson/sum_of_sine-train_1800--random_0.4_0.6.png
+	filename ../../bin/poisson/sum_of_sine-train_1800--random_0.4_0.6.png
 	width 16cm
 
 \end_inset
@@ -2228,7 +2508,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/poisson/sum_of_sine-train_1800--random_0.6_0.8.png
+	filename ../../bin/poisson/sum_of_sine-train_1800--random_0.6_0.8.png
 	width 16cm
 
 \end_inset
@@ -2343,7 +2623,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/poisson/sum_of_sine-train_1800--random_0.2_0.4-random_0.2_0.4.png
+	filename ../../bin/poisson/sum_of_sine-train_1800--random_0.2_0.4-random_0.2_0.4.png
 	width 16cm
 
 \end_inset
@@ -2406,11 +2686,25 @@ Across channel:
 \end_layout
 
 \begin_layout Standard
-The following shows the performance of 
-\begin_inset Formula $0.4-0.6$
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:result-poisson-double-0.4-0.6"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
 \end_inset
 
- errors:
+ shows the result of the double mask at 
+\begin_inset Formula $\left[40\%;60\%\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 placement document
 alignment document
@@ -2422,7 +2716,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/poisson/sum_of_sine-train_1800--random_0.4_0.6-random_0.4_0.6.png
+	filename ../../bin/poisson/sum_of_sine-train_1800--random_0.4_0.6-random_0.4_0.6.png
 	width 16cm
 
 \end_inset
@@ -2437,7 +2731,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:result-poisson-single-specialized-1-1"
+name "fig:result-poisson-double-0.4-0.6"
 
 \end_inset
 
@@ -2445,10 +2739,18 @@ name "fig:result-poisson-single-specialized-1-1"
 \begin_inset Formula $L^{2}$
 \end_inset
 
- error-plot:
- poisson-equation;
+ error:
+ Poisson equation,
  double mask,
- 0.4-0.6
+ masking intensity 
+\begin_inset Formula $\left[40\%;60\%\right]$
+\end_inset
+
+.
+ Top row:
+ first channel of double mask;
+ bottom row:
+ second channel of double mask.
 \end_layout
 
 \end_inset
@@ -2462,11 +2764,22 @@ name "fig:result-poisson-single-specialized-1-1"
 \end_layout
 
 \begin_layout Standard
-The following of 
-\begin_inset Formula $0.6-0.8$
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:result-poisson-double-0.6-0.8"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
 \end_inset
 
-:
+ shows the result of the double mask at 
+\begin_inset Formula $\left[60\%;80\%\right]$
+\end_inset
+
+.
 \begin_inset Float figure
 placement document
 alignment document
@@ -2478,7 +2791,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/poisson/sum_of_sine-train_1800--random_0.6_0.8-random_0.6_0.8.png
+	filename ../../bin/poisson/sum_of_sine-train_1800--random_0.6_0.8-random_0.6_0.8.png
 	width 16cm
 
 \end_inset
@@ -2493,7 +2806,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:result-poisson-single-specialized-1-1-1"
+name "fig:result-poisson-double-0.6-0.8"
 
 \end_inset
 
@@ -2501,10 +2814,18 @@ name "fig:result-poisson-single-specialized-1-1-1"
 \begin_inset Formula $L^{2}$
 \end_inset
 
- error-plot:
- poisson-equation;
+ error:
+ heat equation,
  double mask,
- 0.6-0.8
+ masking intensity 
+\begin_inset Formula $\left[20\%;40\%\right]$
+\end_inset
+
+.
+ Top row:
+ first channel of double mask;
+ bottom row:
+ second channel of double mask.
 \end_layout
 
 \end_inset
@@ -2519,13 +2840,6 @@ name "fig:result-poisson-single-specialized-1-1-1"
 
 \begin_layout Standard
 This is thus the result.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
@@ -2549,7 +2863,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/heat/sum_of_sine-train_1800--random_0.2_0.4.png
+	filename ../../bin/heat/sum_of_sine-train_1800--random_0.2_0.4.png
 	width 16cm
 
 \end_inset
@@ -2578,7 +2892,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/heat/sum_of_sine-train_1800--random_0.2_0.4-random_0.2_0.4.png
+	filename ../../bin/heat/sum_of_sine-train_1800--random_0.2_0.4-random_0.2_0.4.png
 	width 16cm
 
 \end_inset
@@ -2593,7 +2907,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:result-poisson-single-specialized-1-1-1-1"
+name "fig:result-heat-0.2-0.4"
 
 \end_inset
 
@@ -2601,10 +2915,19 @@ name "fig:result-poisson-single-specialized-1-1-1-1"
 \begin_inset Formula $L^{2}$
 \end_inset
 
- error-plot:
- heat-equation;
- double mask,
- 0.2-0.4
+ error:
+ heat equation,
+ masking intensity 
+\begin_inset Formula $\left[20\%;40\%\right]$
+\end_inset
+
+.
+ Top row:
+ single mask;
+ second row:
+ first channel of double mask;
+ third row:
+ second channel of double mask.
 \end_layout
 
 \end_inset
@@ -2629,7 +2952,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/heat/sum_of_sine-train_1800--random_0.4_0.6.png
+	filename ../../bin/heat/sum_of_sine-train_1800--random_0.4_0.6.png
 	width 16cm
 
 \end_inset
@@ -2658,7 +2981,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/heat/sum_of_sine-train_1800--random_0.4_0.6-random_0.4_0.6.png
+	filename ../../bin/heat/sum_of_sine-train_1800--random_0.4_0.6-random_0.4_0.6.png
 	width 16cm
 
 \end_inset
@@ -2673,7 +2996,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:result-poisson-single-specialized-1-1-1-1-1"
+name "fig:result-heat-0.4-0.6"
 
 \end_inset
 
@@ -2709,7 +3032,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/heat/sum_of_sine-train_1800--random_0.6_0.8.png
+	filename ../../bin/heat/sum_of_sine-train_1800--random_0.6_0.8.png
 	width 16cm
 
 \end_inset
@@ -2738,7 +3061,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/heat/sum_of_sine-train_1800--random_0.6_0.8-random_0.6_0.8.png
+	filename ../../bin/heat/sum_of_sine-train_1800--random_0.6_0.8-random_0.6_0.8.png
 	width 16cm
 
 \end_inset
@@ -2753,7 +3076,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:result-poisson-single-specialized-1-1-1-1-1-1-1"
+name "fig:result-heat-0.6-0.8"
 
 \end_inset
 
@@ -2777,13 +3100,6 @@ name "fig:result-poisson-single-specialized-1-1-1-1-1-1-1"
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
-
-
-\end_layout
-
 \begin_layout Subsection
 Wave Equation
 \end_layout
@@ -2798,14 +3114,7 @@ Some anomalies are to be observed here:
 \end_layout
 
 \begin_layout Enumerate
-f
-\end_layout
-
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
+ffdfas
 \end_layout
 
 \begin_layout Standard
@@ -2820,7 +3129,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/wave/sum_of_sine-train_1800--random_0.2_0.4.png
+	filename ../../bin/wave/sum_of_sine-train_1800--random_0.2_0.4.png
 	width 16cm
 
 \end_inset
@@ -2849,7 +3158,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/wave/sum_of_sine-train_1800--random_0.2_0.4-random_0.2_0.4.png
+	filename ../../bin/wave/sum_of_sine-train_1800--random_0.2_0.4-random_0.2_0.4.png
 	width 16cm
 
 \end_inset
@@ -2868,14 +3177,10 @@ name "fig:result-wave-special-0.2-0.4"
 
 \end_inset
 
-
-\begin_inset Formula $L^{2}$
-\end_inset
-
- error-plot:
- wave-equation;
+MSE% plots:
+ Wave equation,
  double mask,
- 0.2-0.4
+ 0.2-0.4.
 \end_layout
 
 \end_inset
@@ -2900,7 +3205,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/wave/sum_of_sine-train_1800--random_0.4_0.6.png
+	filename ../../bin/wave/sum_of_sine-train_1800--random_0.4_0.6.png
 	width 16cm
 
 \end_inset
@@ -2929,7 +3234,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/wave/sum_of_sine-train_1800--random_0.4_0.6-random_0.4_0.6.png
+	filename ../../bin/wave/sum_of_sine-train_1800--random_0.4_0.6-random_0.4_0.6.png
 	width 16cm
 
 \end_inset
@@ -2980,7 +3285,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/wave/sum_of_sine-train_1800--random_0.6_0.8.png
+	filename ../../bin/wave/sum_of_sine-train_1800--random_0.6_0.8.png
 	width 16cm
 
 \end_inset
@@ -3009,7 +3314,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/wave/sum_of_sine-train_1800--random_0.6_0.8-random_0.6_0.8.png
+	filename ../../bin/wave/sum_of_sine-train_1800--random_0.6_0.8-random_0.6_0.8.png
 	width 16cm
 
 \end_inset
@@ -3163,7 +3468,7 @@ sum-of-gaussians
  Individual sub-plots are explained in Definition 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "prop:Plotting-convention"
+reference "prop:Plotting-convention-mask-single"
 plural "false"
 caps "false"
 noprefix "false"
@@ -3243,7 +3548,7 @@ sum-of-sines
  Individual sub-plots are explained in Definition 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "prop:Plotting-convention"
+reference "prop:Plotting-convention-mask-single"
 plural "false"
 caps "false"
 noprefix "false"
@@ -3588,7 +3893,7 @@ sum-of-gaussians
  Individual sub-plots are explained in Definition 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "prop:Plotting-convention"
+reference "prop:Plotting-convention-mask-single"
 plural "false"
 caps "false"
 noprefix "false"
@@ -3622,7 +3927,7 @@ nolink "false"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage newpage
+\begin_inset Newpage clearpage
 \end_inset
 
 
@@ -3799,6 +4104,14 @@ More importantly,
  One concludes that remasking will likely provide model improvement during training.
 \end_layout
 
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 \begin_inset Float figure
 placement document
@@ -3811,7 +4124,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/remask/sum_of_sine-train_1800--random_0.0_1.0--unet--remask_30.png
+	filename ../../bin/remask/sum_of_sine-train_1800--random_0.0_1.0--unet--remask_30.png
 	width 12cm
 
 \end_inset
@@ -3850,15 +4163,50 @@ name "fig:resample-unet"
 
 \end_layout
 
-\end_deeper
+\begin_layout Conclusion
+Characteristics of dynamic masking
+\end_layout
+
+\begin_deeper
 \begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
+The dynamic masking procedure as defined above offers some desirable profits for the overall learning pipeline.
+ Specifically,
+ it serves as a sensible early-stopping criteria,
+ allowing saving of time and resource during training.
 \end_layout
 
 \begin_layout Standard
+On the other hand,
+ it is found on multiple occasions to provide fresh information for the learning model during training by infusing a controlled amount of new information at every remasking run.
+ The
+\end_layout
+
+\begin_layout Standard
+However,
+ dynamic masking finds its greatest limitation in network models with slow,
+ yet constant ongoing improvement.
+ In such cases,
+ the remasking criteria is almost never triggered and the functionality of this technique vanishes almost fully,
+ equating approximately to running the training process without remasking at all.
+\end_layout
+
+\begin_layout Standard
+It should also be noted that the remasking routine might be considered configurable,
+ but to conclude its variable optimal values would require extensive testing,
+ in particular in the sense of time,
+ as the inner loop is the raw training loop itself.
+ Use-cases not warrantying such tuning might consider relying on the default configuration values.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+allows significant reduction of the 
+\end_layout
+
+\begin_layout Plain Layout
 The dynamic-remasking strategy used during training as introduced in the previous Chapter 
 \begin_inset Note Note
 status open
@@ -3873,7 +4221,7 @@ TODO:
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Conclusion about dynamic remasking
 \end_layout
 
@@ -3945,6 +4293,16 @@ compare:
 \end_layout
 
 \end_deeper
+\end_inset
+
+
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \begin_layout Standard
 \begin_inset Separator plain
 \end_inset
@@ -3979,64 +4337,6 @@ nolink "false"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement document
-alignment document
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/remask/sum_of_sine-train_1800--random_0.0_1.0--kno--remask_30.png
-	width 12cm
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:resample-kno"
-
-\end_inset
-
-
-\begin_inset Formula $L^{2}$
-\end_inset
-
- error-plot:
- wave-equation;
- double mask,
- 0.2-0.4
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -4082,6 +4382,64 @@ nolink "false"
 \end_deeper
 \begin_layout Standard
 \begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../../bin/remask/sum_of_sine-train_1800--random_0.0_1.0--kno--remask_30.png
+	width 12cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:resample-kno"
+
+\end_inset
+
+
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error-plot:
+ wave-equation;
+ double mask,
+ 0.2-0.4
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
 \end_inset
 
 
@@ -4228,6 +4586,14 @@ The particular plot is generated with the first instance of the dataset,
 .
 \end_layout
 
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 \begin_inset Float figure
 placement document
@@ -4240,7 +4606,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/reconstruction-random.png
+	filename ../../bin/reconstruction-random.png
 	width 16cm
 
 \end_inset
@@ -4286,22 +4652,14 @@ Reconstruction of Poisson equation with single mask of random-style.
 
 \end_layout
 
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
 \begin_layout Standard
 Now,
  the island mask:
 \end_layout
 
 \begin_layout Definition
-Single,
- island
+Reconstruction,
+ Island-style
 \end_layout
 
 \begin_deeper
@@ -4318,7 +4676,7 @@ nolink "false"
 
 \end_inset
 
- provides visualization of the Poisson equation masked with the island-style.
+ provides visualization of the reconstructed Poisson equation with island-style masking.
  It should be noted that the 
 \begin_inset Flex Emph
 status open
@@ -4380,6 +4738,14 @@ in-distribution
  counterpart of random-style.
 \end_layout
 
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 \begin_inset Float figure
 placement document
@@ -4392,7 +4758,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/reconstruction-island.png
+	filename ../../bin/reconstruction-island.png
 	width 16cm
 
 \end_inset
@@ -4439,6 +4805,36 @@ Reconstruction:
 
 \end_layout
 
+\begin_layout Definition
+Reconstruction,
+ Ring-style
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:reconstruct-ring"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ visualizes the FNO reconstruction of the same Poisson equation instance now masked with the ring-style.
+ The particular reconstruction corresponds to an absolute MSE of 
+\begin_inset Formula $0.0033$
+\end_inset
+
+ and 
+\begin_inset Formula $10.42\%$
+\end_inset
+
+ relative to input.
+\end_layout
+
 \end_deeper
 \begin_layout Standard
 \begin_inset Separator plain
@@ -4459,7 +4855,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/reconstruction-ring.png
+	filename ../../bin/reconstruction-ring.png
 	width 16cm
 
 \end_inset
@@ -4506,19 +4902,34 @@ Reconstruction:
 
 \end_layout
 
+\begin_layout Note
+Further reconstruction possibilities
+\end_layout
+
+\begin_deeper
 \begin_layout Standard
 Apparently,
- the direct inspection technique above is performed on a 
+ the direct inspection technique above is performed on 
 \begin_inset Flex Emph
 status open
 
 \begin_layout Plain Layout
-single
+one
 \end_layout
 
 \end_inset
 
- instance of a masking dataset of one particular model.
+ particular instance of a masking dataset of 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+one
+\end_layout
+
+\end_inset
+
+ particular model.
  As such,
  this type of visualization is done on a 
 \begin_inset Quotes xld
@@ -4531,12 +4942,69 @@ point-wise
  basis and the interested reader is invited to review any trained model's performance with the plotting procedure above.
 \end_layout
 
-\begin_layout Section
-Non-Official Studies
+\begin_layout Standard
+The plotting routine is implemented in the base 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+Problem
+\end_layout
+
+\end_inset
+
+ class:
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+# src/problem/
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Problem.plot_reconstruction() -> None
+\end_layout
+
+\end_inset
+
+and is thus available to all three PDE models of this thesis for rapid visualization capability.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
-The ring mask
+The island-ring juxtaposition
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:The-island-ring-juxtaposition"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As hinted when initially introducing the masks in Chapter 
 \end_layout
 
 \begin_layout Standard
@@ -4555,22 +5023,3860 @@ M^{\text{type}}
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Non-standard masking
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:non-standard-masking-value"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 As previously discussed in Chapter 
-\end_layout
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Masking-value"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
 
-\begin_layout Section
-Summary
+\end_inset
+
+,
+ the standard masking value used in this thesis seen so far is 
+\begin_inset Formula $0.5$
+\end_inset
+
+,
+ corresponding exactly to the expected value of the value range of the 
+\begin_inset Formula $\left[0;1\right]$
+\end_inset
+
+ normalization strategy of this project.
+ 
 \end_layout
 
 \begin_layout Standard
-This concludes the analysis section of this thesis.
- In the following,
- a 
+On the other hand,
+ frequently seen in other researches pertaining to masking is the the vanishing masking value 
+\begin_inset Formula $0.0$
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "videomae-published,videomae,multimae"
+literal "false"
+
+\end_inset
+
+.
+ This chapter investigates such non-standard masking values,
+ in order to contrast model performance under the influence of masking value changes.
+\end_layout
+
+\begin_layout Definition
+Experiment setup
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The standard masking value used so far is calculated as the expected value,
+ aka mean,
+ of the dataset post-normalization in the range of 
+\begin_inset Formula $\left[0;1\right]$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+v^{\text{mask}}\coloneqq\text{Dataset}_{\mu}\equiv0.5
+\]
+
+\end_inset
+
+Contrast to this standard 
+\begin_inset Quotes xld
+\end_inset
+
+mean-masking
+\begin_inset Quotes xrd
+\end_inset
+
+ are the practices of 
+\begin_inset Quotes xld
+\end_inset
+
+min
+\begin_inset Quotes xrd
+\end_inset
+
+ and 
+\begin_inset Quotes xld
+\end_inset
+
+max-masking
+\begin_inset Quotes xrd
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+v^{\text{mask}}\coloneqq\left\langle \begin{alignedat}{1}\; & \text{Dataset}_{\min}\equiv0.0\\
+ & \text{Dataset}_{\max}\equiv1.0
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+With the min-masking regime particularly popular in the masked-learning context.
+\end_layout
+
+\begin_layout Standard
+In-distribution and out-of-distribution errors are studied to compare the impact of these three masking values on model performance.
+ In particular,
+ the Poisson equation with the full intensity-range 
+\begin_inset Formula $\left[0\%;100\%\right]$
+\end_inset
+
+ is used for experimentation.
+ Single masking is used with FNO as the underlying network.
+\end_layout
+
+\begin_layout Standard
+Other configurations of the learning pipeline,
+ such as the training-epoch count and the dataset-split numbers are kept unchanged.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+In-distribution performance
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The in-distribution results are shown in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:nonstandard-in-distribution"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+One observes that the best overall average performance of 
+\begin_inset Formula $7.3962\%$
+\end_inset
+
+ is achieved using the standard 
+\begin_inset Formula $0.5$
+\end_inset
+
+ masking value,
+ corresponding to the expected value of the normalized dataset.
+ In comparison,
+ the average errors with masking value of 
+\begin_inset Formula $0.0$
+\end_inset
+
+ (minimum of dataset) and 
+\begin_inset Formula $1.0$
+\end_inset
+
+ (maximum of dataset) both approach 
+\begin_inset Formula $10\%$
+\end_inset
+
+ approximately.
+\end_layout
+
+\begin_layout Standard
+At lower intensity ranges,
+ in particular,
+ for the two ranges of 
+\begin_inset Formula $\left[0\%;10\%\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $\left[10\%;20\%\right]$
+\end_inset
+
+,
+ the 
+\begin_inset Formula $0.0$
+\end_inset
+
+ masks and 
+\begin_inset Formula $1.0$
+\end_inset
+
+ masks do visibly out-perform the standard 
+\begin_inset Formula $0.5$
+\end_inset
+
+ masks.
+\end_layout
+
+\begin_layout Standard
+However,
+ the errors increase steeply for the non-standard masks with higher masking intensities.
+ At higher intensity ranges such as 
+\begin_inset Formula $\left[80\%;90\%\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $\left[90\%;100\%\right]$
+\end_inset
+
+,
+ errors of the standard 
+\begin_inset Formula $0.5$
+\end_inset
+
+ mask at approximately 
+\begin_inset Formula $10\%$
+\end_inset
+
+ are significantly lower than those of the 
+\begin_inset Formula $0.0$
+\end_inset
+
+ and 
+\begin_inset Formula $0.5$
+\end_inset
+
+ masks,
+ both surpassing 
+\begin_inset Formula $15\%$
+\end_inset
+
+ by a fair margin.
+\end_layout
+
+\begin_layout Standard
+One concludes that in comparison to the non-standard,
+ minimum and maximum masking values of 
+\begin_inset Formula $0.0$
+\end_inset
+
+ and 
+\begin_inset Formula $1.0$
+\end_inset
+
+,
+ the standard 
+\begin_inset Formula $0.5$
+\end_inset
+
+ masking leads to lower average errors overall with stable performance across all intensity ranges.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="12" columns="7">
+<features booktabs="true" islongtable="true" longtabularalignment="center">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Intensity
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\;$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0.5$
+\end_inset
+
+ (standard)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0.0$
+\end_inset
+
+ (
+\begin_inset Formula $\text{Dataset}_{\min}$
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.0$
+\end_inset
+
+ (
+\begin_inset Formula $\text{Dataset}_{\max}$
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[0\%;10\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+6.8956%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+1.8869%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+3.9493%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[10\%;20\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+6.3342%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+2.8223%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+5.4531%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[20\%;30\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+5.9610%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+4.6118%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+7.0412%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[30\%;40\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+5.9683%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+6.3858%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+8.6560%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[40\%;50\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+6.2500%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+8.2742%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+10.2120%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[50\%;60\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+6.7590%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+10.0805%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+11.6263%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[60\%;70\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+7.5202%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+11.9137%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+12.9951%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[70\%;80\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+8.3690%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+13.6400%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+14.2366%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[80\%;90\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+9.3936%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+15.5404%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+15.5530%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[90\%;100\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+10.5111%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+17.4296%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+16.8266%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Average
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+7.3962%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+9.2585%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+10.6549%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:nonstandard-in-distribution"
+
+\end_inset
+
+In-distribution errors for masking values of 
+\begin_inset Formula $0.5$
+\end_inset
+
+ (standard,
+ mean-masking),
+ 
+\begin_inset Formula $0.0$
+\end_inset
+
+ (minimum-masking) and 
+\begin_inset Formula $1.0$
+\end_inset
+
+ (maximum-masking).
+ Dataset:
+ Poisson equation,
+ single mask,
+ linearly normalized to 
+\begin_inset Formula $\left[0;1\right]$
+\end_inset
+
+.
+ Network as shown:
+ FNO.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+Out-of-distribution performance
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:nonstandard-out-distribution"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ showcases the out-of-distribution errors.
+\end_layout
+
+\begin_layout Standard
+Again,
+ one observes better performance using the standard masking value 
+\begin_inset Formula $0.5$
+\end_inset
+
+ in both out-of distribution
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="12" columns="10">
+<features booktabs="true" islongtable="true" longtabularalignment="center">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Intensity
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0.5$
+\end_inset
+
+ island
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0.0$
+\end_inset
+
+ island
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.0$
+\end_inset
+
+ island
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\,$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0.5$
+\end_inset
+
+ ring
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0.0$
+\end_inset
+
+ ring
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.0$
+\end_inset
+
+ ring
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[0\%;10\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+7.3387%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+3.4390%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+4.2509%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+7.2926%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+3.4224%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+4.0788%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[10\%;20\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+7.8197%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+5.6579%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+6.2150%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+7.5648%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+6.4754%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+6.7281%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[20\%;30\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+8.4838%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+7.9534%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+8.2012%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+8.3061%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+9.2473%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+9.0674%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[30\%;40\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+8.8928%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+9.4391%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+9.5032%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+9.4824%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+11.5996%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+10.8434%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[40\%;50\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+8.9740%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+10.3829%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+10.4518%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+10.6205%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+13.5792%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+12.3557%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[50\%;60\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+8.9802%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+11.3247%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+11.4227%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+11.5566%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+14.9632%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+13.4732%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[60\%;70\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+9.2314%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+12.7234%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+12.6959%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+11.8797%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+15.6670%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+14.2111%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[70\%;80\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+9.7914%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+14.2507%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+13.9129%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+11.7918%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+16.0739%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+14.8999%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[80\%;90\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+10.5130%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+15.8436%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+15.2514%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+11.4092%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+16.6917%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+15.7196%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[90\%;100\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+11.1132%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+17.6946%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+16.8784%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+11.0738%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+17.6626%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+16.7686%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Average
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+9.1138%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+10.8709%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+10.8783%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+10.0978%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+12.5382%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+11.8146%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:nonstandard-out-distribution"
+
+\end_inset
+
+Out-of-distribution errors (island-style and ring-style) for masking values of 
+\begin_inset Formula $0.5$
+\end_inset
+
+ (standard,
+ mean-masking),
+ 
+\begin_inset Formula $0.0$
+\end_inset
+
+ (minimum-masking) and 
+\begin_inset Formula $1.0$
+\end_inset
+
+ (maximum-masking).
+ Dataset:
+ Poisson equation,
+ single mask,
+ linearly normalized to 
+\begin_inset Formula $\left[0;1\right]$
+\end_inset
+
+.
+ Network as shown:
+ FNO.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+With this,
+ the analysis section of this thesis is concluded.
+ An executive summary is given in the upcoming chapter to recapitulate the key findings during the review processes above.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Executive Summary
 \end_layout
 
 \end_body

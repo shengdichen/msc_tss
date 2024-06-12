@@ -361,13 +361,15 @@ literal "false"
  similar to other researches for PDE Learning such as 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "fno,cno,unet"
+key "fno,fno-neural-operator,cno"
+pretextlist "cno"
+posttextlist "cno"
 literal "false"
 
 \end_inset
 
 ,
- uses the generic grid-like mesh.
+ uses the generic grid-shaped mesh.
  For the purpose of the two-dimensional space that this thesis dwells on,
  this translates to 
 \begin_inset Flex Emph
@@ -380,6 +382,24 @@ rectangular
 \end_inset
 
  elements.
+ Henceforth in this thesis,
+ the terms 
+\begin_inset Quotes xld
+\end_inset
+
+grid
+\begin_inset Quotes xrd
+\end_inset
+
+ and 
+\begin_inset Quotes xld
+\end_inset
+
+rectangular mesh
+\begin_inset Quotes xrd
+\end_inset
+
+ are used interchangeably.
 \end_layout
 
 \begin_layout Standard
@@ -442,12 +462,13 @@ literal "false"
 \end_layout
 
 \begin_layout Note
-Construction of Rectangular mesh
+Construction of rectangular mesh
 \end_layout
 
 \begin_deeper
 \begin_layout Standard
-It should be noted that the knowledge of three of any of these four variables suffices to reconstruct the remaining one and thus enable the spatial discretization.
+It should be noted that the knowledge of three of any of the four variables in the definition above suffices to reconstruct the remaining one,
+ enabling thus the spatial discretization as a rectangular mesh.
  This thesis uses the following two typical construction methods to describe spatial discretization:
 \end_layout
 
@@ -464,7 +485,7 @@ the starting and the end value,
 
 \begin_layout Standard
 each with its own merit:
- the knowledge of the step-size allows direct control over constraints such as the CFL condition 
+ the knowledge of the step-size allows direct control over specific constraints such as the CFL condition 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "analysis-atkinson,analysis-burden,analysis-cheney,analysis-isaacson"
@@ -473,7 +494,7 @@ literal "false"
 \end_inset
 
 ,
- whereas explicit end value aides tuning of spatial boundary conditions.
+ whereas explicit end value aides the tuning of spatial boundary conditions.
  In this project,
  specification of the spatial grid is provided by the more appropriate of these two construction variants specific to the PDE prototype at-hand.
 \end_layout
@@ -487,19 +508,25 @@ literal "false"
 \end_layout
 
 \begin_layout Note
-Quality of rectangular mesh
+Quality of grid discretization
 \end_layout
 
 \begin_deeper
 \begin_layout Standard
 This square mesh,
  though primitive compared to specialized mesh generation as deployed in the context of traditional numerical methods,
- is nevertheless common-place for the status-quo of PDE Learning,
- as seen in similar researches such as 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "fno,cno,kno,kno-publish,unet"
-literal "false"
+ is,
+ as pointed out previously,
+ nevertheless common-place for the status-quo of PDE Learning.
+ A potential direction for future research involves investigation of more sophisticated discretization strategies,
+ as discussed in the closing section of this thesis in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Future-work"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
 
 \end_inset
 
@@ -520,16 +547,18 @@ Space-grids in action
 
 \begin_deeper
 \begin_layout Standard
-While this project deploys a constant number of discrete steps for both dimensions 
-\begin_inset Formula $x_{1}$
+This thesis uses a constant resolution of 
+\begin_inset Formula $64$
 \end_inset
 
- and 
-\begin_inset Formula $x_{2}$
-\end_inset
+ for both for the purpose of spatial discretization.
+ 
+\end_layout
 
-,
- the other three parameters of the grid varies among the PDE prototypes.
+\begin_layout Standard
+On the other hand,
+ the other three parameters of the grid are variable,
+ chosen specifically for each individual PDE model.
  As an example,
  the mesh used for solving the Poisson Equation,
  seen later in Section 
@@ -547,11 +576,10 @@ nolink "false"
  is defined as follows:
 \begin_inset Formula 
 \[
-\begin{alignedat}{2}\mathbb{R}^{64}\ni x_{1,2} & \coloneqq & \; & \:\texttt{grid}\;\texttt{(}\left[\begin{alignedat}{4}\, &  & \text{start} & = & \; & 0.00 &  & \,\\
- &  & \text{step-size} & = &  & 0.01\\
- &  & \text{\#steps} & = &  & 64
+\mathbb{R}^{64}\ni x_{1,2}^{\text{Poisson}}\coloneqq\;\left\{ \begin{alignedat}{2}\text{start} & \coloneqq0. & 0.00\\
+\text{step-size} & \coloneqq & 0.01
 \end{alignedat}
-\right]\texttt{)}\end{alignedat}
+\right.
 \]
 
 \end_inset
@@ -565,7 +593,7 @@ which translates to an end value of
 \end_layout
 
 \begin_layout Standard
-The reader is referred to chapters dedicated to the individual PDE models for other space grid specifications in this thesis.
+The reader is referred to chapters dedicated to the specific PDE prototypes for their space grid specifications.
 \end_layout
 
 \end_deeper
@@ -680,16 +708,7 @@ Temporal discretization
 \begin_layout Standard
 A similar procedure is applied to discretize the time axis,
  with the apparent additional constraint that the starting value is non-negative.
- In this thesis,
- as also seen in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "fno,cno,kno,kno-publish,unet"
-literal "false"
-
-\end_inset
-
-,
+ As is typical for temporal discretization,
  the initial time is set to 
 \begin_inset Formula $0.0$
 \end_inset
@@ -698,6 +717,10 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 The implementation is similar to that of the single-axis discretization and can be found under 
 \begin_inset Note Note
 status open
@@ -705,6 +728,11 @@ status open
 \begin_layout Plain Layout
 TODO:
  code
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -722,7 +750,8 @@ It should be noted that the temporal discretization is not used to steady-state,
  time-independent PDEs,
  including,
  in particular,
- the Poisson Equation studied later in Section 
+ the Poisson Equation,
+ introduced in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Poisson-Equation"
@@ -735,7 +764,7 @@ nolink "false"
 
 .
  On the other hand,
- PDEs such as the Heat Equation and the Wave Equation,
+ PDEs such as Heat Equation and the Wave Equation,
  introduced in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -759,7 +788,7 @@ nolink "false"
 \end_inset
 
  respectively,
- both require temporal discretization as discussed in this section.
+ require temporal discretization as discussed in this section.
 \end_layout
 
 \end_deeper
@@ -991,6 +1020,10 @@ name "sec:Masking"
 
 \end_layout
 
+\begin_layout Subsection
+Introduction
+\end_layout
+
 \begin_layout Standard
 With the formality of recalling discretization out of the way,
  
@@ -1002,66 +1035,81 @@ masking
 \end_inset
 
 ,
- the primary concept and the very namesake of this thesis,
+ the premier concept and the very namesake of this thesis,
  can now be introduced.
- This section formalizes the concept of masking with concrete definition and enumerates two distinct masking variants deployed in this thesis.
+ This section formalizes the concept of masking with concrete definition and enumerates three distinct flavors of masking deployed in this thesis.
 \end_layout
 
 \begin_layout Definition
-General masking procedure (TODOOOO:
- find some symbols for mask,
- intensity)
+General masking procedure
 \end_layout
 
 \begin_deeper
 \begin_layout Standard
 The output of applying masking to a matrix-like object 
-\begin_inset Formula $\mathbf{M}$
+\begin_inset Formula $\mathbf{R}$
 \end_inset
 
  is another matrix-like object 
-\begin_inset Formula $\mathbf{M}^{\text{mask}}$
+\begin_inset Formula $\mathbf{R}^{\text{mask}}$
 \end_inset
 
- of the same shape,
- but with some of its entries modified:
+ of the same shape:
 \begin_inset Formula 
 \[
-\mathbb{R}^{d_{1}\times d_{2}\times\cdots}\in\mathbf{M}\overset{\mathbf{m}}{\longrightarrow}\mathbf{M}^{\text{mask}}\in\mathbb{R}^{d_{1}\times d_{2}\times\cdots}
+\mathbb{R}^{d_{1}\times d_{2}\times\cdots}\in\mathbf{R}\overset{\mathbf{M}}{\longrightarrow}\mathbf{R}^{\mathbf{M}}\in\mathbb{R}^{d_{1}\times d_{2}\times\cdots}
 \]
 
 \end_inset
 
+The original 
+\begin_inset Formula $\mathbf{R}$
+\end_inset
 
-\end_layout
+ is referred to as 
+\begin_inset Quotes xld
+\end_inset
 
-\begin_layout Standard
-As such,
- masking is understood as a two-step process:
+unmasked
+\begin_inset Quotes xrd
+\end_inset
+
+,
+ and 
+\begin_inset Formula $\mathbf{R}^{\mathbf{M}}$
+\end_inset
+
+ on the right-hand side is its masked counterpart with mask 
+\begin_inset Formula $\mathbf{M}$
+\end_inset
+
+ .
+ Specifically,
+ certain entries of the unmasked 
+\begin_inset Formula $\mathbf{R}$
+\end_inset
+
+ are modified following a three-step process:
 \end_layout
 
 \begin_layout Enumerate
-determine the mask-candidates,
- or the masking 
+obtain the masking 
 \begin_inset Flex Emph
 status open
 
 \begin_layout Plain Layout
-indexes
+intensity
 \end_layout
 
-\end_inset
-
- 
-\begin_inset Formula $\texttt{[idxs]}$
 \end_inset
 
 ,
- possibly via some sampling routine;
+ either as a constant value or from some random distribution;
 \end_layout
 
 \begin_layout Enumerate
-apply the masking 
+determine,
+ according to some masking 
 \begin_inset Flex Emph
 status open
 
@@ -1071,15 +1119,34 @@ strategy
 
 \end_inset
 
- to the mask candidates,
- which translates to setting the mask candidates to some masking value 
-\begin_inset Formula $m$
+,
+ the indexes 
+\begin_inset Formula $\texttt{[idx]}$
+\end_inset
+
+ of the mask-candidates,
+ possibly with some sampling routine;
+\end_layout
+
+\begin_layout Enumerate
+set the selected masking indexes to some masking 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+value
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $v$
 \end_inset
 
 :
 \begin_inset Formula 
 \[
-\mathbf{M}\texttt{[idxs]}\leftarrow m
+\mathbf{R}\texttt{[idx]}\leftarrow v
 \]
 
 \end_inset
@@ -1096,17 +1163,13 @@ strategy
 \end_layout
 
 \begin_layout Standard
-The remainder of this section explains and justifies the configuration of these two steps of the masking procedure as seen in this project.
+The remainder of this section elaborates on the masking procedure nominated above.
  First,
  the two generation subroutines of the masking indexes are presented:
 \end_layout
 
 \begin_layout Subsection
-Candidates sampling
-\end_layout
-
-\begin_layout Subsubsection
-Intensity
+Masking intensity
 \end_layout
 
 \begin_layout Definition
@@ -1115,7 +1178,11 @@ Masking Intensity
 
 \begin_deeper
 \begin_layout Standard
-The masking intensity denotes the 
+The masking intensity 
+\begin_inset Formula $i$
+\end_inset
+
+ denotes the 
 \begin_inset Quotes xld
 \end_inset
 
@@ -1124,11 +1191,15 @@ strength
 \end_inset
 
  of the mask:
- the higher the intensity,
- the more entries are tainted by the masking value:
+ the higher the intensity 
+\begin_inset Formula $i$
+\end_inset
+
+,
+ the more masking indexes are selected:
 \begin_inset Formula 
 \[
-\text{\#}\texttt{idxs}\propto\text{mask-intensity}
+\text{\#}\texttt{idx}\propto i
 \]
 
 \end_inset
@@ -1150,11 +1221,25 @@ Intensity sampling
 
 \begin_deeper
 \begin_layout Standard
-To fine-tune the masking operation with extra entropy,
- the masking intensities are sampled from a uniform distribution:
+To infuse the masking operation with extra entropy,
+ the masking intensities 
+\begin_inset Formula $i$
+\end_inset
+
+ may be sampled from a uniform distribution to capture a 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+range
+\end_layout
+
+\end_inset
+
+ of acceptable intensity values:
 \begin_inset Formula 
 \[
-\text{mask-intensity}\simeq\text{Unif}\left[c_{\text{low}};c_{\text{high}}\right]
+i\simeq\text{Unif}\left[i_{\min};i_{\max}\right]
 \]
 
 \end_inset
@@ -1182,16 +1267,26 @@ literal "false"
 \end_inset
 
 ,
- the masking intensity is specified with a (center) location and a spread value
+ the masking intensity can also be specified with a (center) location and a spread value
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset CommandInset href
 LatexCommand href
-name "scipy: uniform distribution API"
+name "API"
 target "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.uniform.html"
 literal "false"
+
+\end_inset
+
+ for uniform distribution by 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+scipy
+\end_layout
 
 \end_inset
 
@@ -1200,17 +1295,47 @@ literal "false"
 
 \end_inset
 
-:
+,
+ captured by the following loose notation:
 \begin_inset Formula 
 \[
-\begin{alignedat}{2}\text{mask-intensity} & \simeq & \; & \text{Unif}\left[c_{\text{low}};c_{\text{high}}\right]\\
-\texttt{RHS}_{i} & \equiv &  & \left[\text{intensity};\text{spread}\right]
+i\simeq\left\langle \begin{alignedat}{1}\; & \text{Unif}\left[i_{\min};i_{\max}\right]\\
+ & \text{Unif}\left[i_{\mu};i_{\sigma}\right]
 \end{alignedat}
+\right.
 \]
 
 \end_inset
 
-The reference implementation included in the source code provides a resampling function that extracts the resampling logic from this underlying uniform distribution,
+
+\end_layout
+
+\begin_layout Standard
+Note that an exact,
+ deterministic intensity value is naturally obtainable by specifying a vanishing spread value 
+\begin_inset Formula $i_{\sigma}\equiv0.0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+Masking intensity availability
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+All three masking strategies of this thesis support introduced later support the intensity-sampling procedure above.
+ The reference implementation included in the source code provides a function that encapsulates the intensity resampling logic from the underlying uniform distribution,
  see Listing 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1233,8 +1358,112 @@ nolink "false"
 
 \end_layout
 
+\begin_layout Definition
+Masking intensity revisited
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Given some matrix defined on a space-grid,
+ once the masking intensity 
+\begin_inset Formula $i$
+\end_inset
+
+ is known,
+ the exact number of masking indexes 
+\begin_inset Formula $n$
+\end_inset
+
+ is calculated as follows:
+\begin_inset Formula 
+\[
+n\coloneqq\text{\#}\texttt{idx}\coloneqq\texttt{round}\left(i\times\text{\Bigl\Vert\;\text{grid}\;\Bigr\Vert}\right)
+\]
+
+\end_inset
+
+In other words,
+ a higher intensity value translates to proportionally larger number of entries tainted after masking,
+ with the proportionality factor understood as the number of grid-points of the spatial discretization.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It is now up to the masking 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+strategy
+\end_layout
+
+\end_inset
+
+ to obtain these 
+\begin_inset Formula $n$
+\end_inset
+
+ masking indexes 
+\begin_inset Formula $\texttt{idx}$
+\end_inset
+
+.
+ Three such 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+strategies
+\end_layout
+
+\end_inset
+
+ are implemented and utilized in this thesis:
+\end_layout
+
+\begin_layout Subsection
+Masking strategies
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Masking-strategies"
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Random style
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+The implementation in this project accepts as argument the proportion of masked candidates.
+ Note that unlike the island-style mentioned above,
+ the random mask patch is generated anew during each call to its 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+.mask()
+\end_layout
+
+\end_inset
+
+ method,
+ guaranteeing random entropy of the resulting dataset.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1254,28 +1483,6 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-The implementation in this project accepts as argument the proportion of masked candidates.
- Note that unlike the island-style mentioned above,
- the random mask patch is generated anew during each call to its 
-\begin_inset Flex Code
-status open
-
-\begin_layout Plain Layout
-.mask()
-\end_layout
-
-\end_inset
-
- method,
- guaranteeing random entropy of the resulting dataset.
-\end_layout
-
-\begin_layout Example
-Visualization of random-masking
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
 Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1291,26 +1498,50 @@ nolink "false"
 \begin_inset Formula $50\%$
 \end_inset
 
- intensity.
- The intensity-spread is set to 
+ intensity:
+\end_layout
+
+\begin_layout Example
+Visualization of random-masking
+\begin_inset CommandInset label
+LatexCommand label
+name "exa:Visualization-of-random-masking"
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The intensity-spread is set to 
 \begin_inset Formula $0.0$
 \end_inset
 
  to guarantee the exact intensity for this particular instance.
  The particular raw,
- unmasked matrix is defined as:
+ unmasked matrix 
+\begin_inset Formula $\mathbf{R}$
+\end_inset
+
+ is defined as:
 \begin_inset Formula 
 \[
-\mathbf{R}_{x_{1},x_{2}}\coloneqq\cos\left(x_{1}\right)\times\cos\left(x_{2}\right)\quad,\qquad x_{1,2}\in\left[-1.0,+1.0\right]^{2}
+\mathbf{R}_{x_{1},\,x_{2}}\coloneqq\cos\left(\frac{1}{2}\pi\cdot x_{1}\right)\times\cos\left(\frac{1}{2}\pi\cdot x_{2}\right)\;\;,\quad x_{1,2}\in\Bigl[-1.0;+1.0\Bigr]^{2}
 \]
 
 \end_inset
 
-One observes that matrix 
+One observes that entries of 
 \begin_inset Formula $\mathbf{R}$
 \end_inset
 
  is strictly within the range of 
+\begin_inset Formula $\left[0;1\right]$
+\end_inset
+
+ and form a perfect dome-like shape.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1325,7 +1556,18 @@ nolink "false"
 
 \end_inset
 
- 
+ is organized as follows:
+ every matrix is shown in a 2D contour-plot in the top row and a 3D surface-plot in the bottom.
+ The raw,
+ un
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1340,7 +1582,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/mask_random_0.5_0.5.png
+	filename ../../bin/mask_random_0.5_0.5.png
 	width 15cm
 
 \end_inset
@@ -1360,14 +1602,23 @@ name "fig:masking-random"
 
 \end_inset
 
-Visualization the random-style masking using solutions 
-\begin_inset Formula $u$
+Visualization of random masking of intensity 
+\begin_inset Formula $50\%$
 \end_inset
 
- of the Poisson Equation as specified in Definition 
+,
+ using 
+\begin_inset Formula $\mathbf{R}\coloneqq\cos\left(\cdot\right)\times\cos\left(\cdot\right)$
+\end_inset
+
+ on 
+\begin_inset Formula $\left[-1;1\right]^{2}$
+\end_inset
+
+ in Definition 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "def:poisson-sum-of-sines"
+reference "exa:Visualization-of-random-masking"
 plural "false"
 caps "false"
 noprefix "false"
@@ -1376,28 +1627,145 @@ nolink "false"
 \end_inset
 
 .
- First row:
- contour-plots of three instances of the solution 
-\begin_inset Formula $u$
+ Top row:
+ 2D contour-plot;
+ bottom row:
+ corresponding 3D surface plot.
+ From left to right:
+ the raw,
+ unmasked 
+\begin_inset Formula $\mathbf{R}$
 \end_inset
 
-.
- Second row:
- contour-plots of the respective 
-\begin_inset Formula $u$
+,
+ the masked results with masking value 
+\begin_inset Formula $0.0$
 \end_inset
 
- instances with random-style masking covering 
-\begin_inset Formula $30\%$
+,
+ 
+\begin_inset Formula $0.25$
 \end_inset
 
- of all spatial grid-points.
+ and 
+\begin_inset Formula $0.50$
+\end_inset
+
+ respectively.
 \end_layout
 
 \end_inset
 
 
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Island style
+\end_layout
+
+\begin_layout Standard
+The island-style masking strategy keeps a centered portion,
+ or an 
+\begin_inset Quotes xld
+\end_inset
+
+
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+island
+\end_layout
+
+\end_inset
+
+
+\begin_inset Quotes xrd
+\end_inset
+
+,
+ of the input matrix in-tact,
+ while targeting its surrounding entries.
+ The masked candidates form a rectangular 
+\begin_inset Quotes xld
+\end_inset
+
+annulus
+\begin_inset Quotes xrd
+\end_inset
+
+,
+ or 
+\begin_inset Quotes xld
+\end_inset
+
+ring
+\begin_inset Quotes xrd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+Alternative interpretation of masking intensity
+\begin_inset CommandInset label
+LatexCommand label
+name "note:intensity-island"
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+In the case of island-masks,
+ the masking intensity 
+\begin_inset Formula $i$
+\end_inset
+
+ can also be understood as:
+\begin_inset Formula 
+\[
+i\equiv\frac{\text{Area}\left(\text{annulus}\right)}{\text{Area}\left(\text{grid}\right)}\equiv1-\frac{\text{Area}\left(\text{island}\right)}{\text{Area}\left(\text{grid}\right)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+On a 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+square
+\end_layout
+
+\end_inset
+
+ grid,
+ given some desired masking intensity 
+\begin_inset Formula $i$
+\end_inset
+
+,
+ the proportion 
+\begin_inset Formula $p$
+\end_inset
+
+ of the side-length of the island over that of the entire grid is calculated as follows:
+\begin_inset Formula 
+\[
+p=\left(1-i\right)^{\nicefrac{1}{2}}
+\]
 
 \end_inset
 
@@ -1412,41 +1780,13 @@ nolink "false"
 
 \end_layout
 
-\begin_layout Subsubsection
-Island style
+\begin_layout Example
+Visualization of island-masking
 \end_layout
 
+\begin_deeper
 \begin_layout Standard
-The island-style masking keeps a centered portion of the input matrix in-tact,
- while applying the masking strategy to the surrounding entries.
- The masked candidates form a rectangular 
-\begin_inset Quotes xld
-\end_inset
-
-annulus
-\begin_inset Quotes xrd
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-The island style,
- as implemented in this project,
- accepts as argument the proportion of the unmodified center island of each dimension.
-\end_layout
-
-\begin_layout Standard
-Using the 
-\begin_inset Quotes xld
-\end_inset
-
-Sum-of-Sines
-\begin_inset Quotes xrd
-\end_inset
-
- dataset,
- illustrations of this masking style are found in Figure 
+Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:masking-island"
@@ -1455,6 +1795,47 @@ caps "false"
 noprefix "false"
 nolink "false"
 
+\end_inset
+
+ provides visualization of the island masks with the 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+same
+\end_layout
+
+\end_inset
+
+ underlying unmasked,
+ raw matrix 
+\begin_inset Formula $\mathbf{R}\coloneqq\cos\left(\cdot\right)\times\cos\left(\cdot\right)$
+\end_inset
+
+.
+ The masking intensity shown is 
+\begin_inset Formula $75\%$
+\end_inset
+
+.
+ Following the calculation in Note 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "note:intensity-island"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ the side-length of the center island is thus exactly half of that of the whole grid.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
 \end_inset
 
 
@@ -1472,7 +1853,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/mask_island_0.75_0.75.png
+	filename ../../bin/mask_island_0.75_0.75.png
 	width 15cm
 
 \end_inset
@@ -1496,9 +1877,13 @@ Visualization of the island-style mask at
 \end_inset
 
  intensity.
- The underlying,
- unmasked matrix,
- as well as all plotting conventions follows those of Figure 
+ The same underlying,
+ unmasked matrix 
+\begin_inset Formula $\mathbf{R}\coloneqq\cos\left(\cdot\right)\times\cos\left(\cdot\right)$
+\end_inset
+
+ is used,
+ and all plotting conventions follow those of Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:masking-random"
@@ -1509,8 +1894,17 @@ nolink "false"
 
 \end_inset
 
-.
- 
+ for random-masks.
+ Note that for the 
+\begin_inset Formula $75\%$
+\end_inset
+
+ overall intensity,
+ the proportion of the side-length of the island is 
+\begin_inset Formula $50\%$
+\end_inset
+
+ of the whole grid.
 \end_layout
 
 \end_inset
@@ -1525,6 +1919,125 @@ nolink "false"
 
 \begin_layout Subsubsection
 Ring style
+\end_layout
+
+\begin_layout Standard
+Conceived as the mirror-image of the island-masks,
+ ring-style masks apply the masking-value to the center proportion of the grid,
+ while leaving the surrounding ring untouched.
+\end_layout
+
+\begin_layout Note
+Interpretation of masking intensity
+\begin_inset CommandInset label
+LatexCommand label
+name "note:intensity-ring"
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The masking intensity of ring-style masks can also be seenas:
+\begin_inset Formula 
+\[
+i\equiv1-\frac{\text{Area}\left(\text{ring}\right)}{\text{Area}\left(\text{grid}\right)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Again,
+ on a square grid,
+ the proportion 
+\begin_inset Formula $p$
+\end_inset
+
+ of the side-length of the center island over that of the entire grid corresponds to:
+\begin_inset Formula 
+\[
+p=i^{\nicefrac{1}{2}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+Visualization of ring-masking
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:masking-ring"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ visualizes a 
+\begin_inset Formula $25\%$
+\end_inset
+
+ ring-style mask using the 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+same
+\end_layout
+
+\end_inset
+
+ underlying unmasked,
+ raw matrix 
+\begin_inset Formula $\mathbf{R}\coloneqq\cos\left(\cdot\right)\times\cos\left(\cdot\right)$
+\end_inset
+
+ seen previously.
+ Per Note 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "note:intensity-ring"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ the side-length of the center island is exactly half of that of the whole grid.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 placement document
 alignment document
@@ -1536,7 +2049,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/mask_ring_0.25_0.25.png
+	filename ../../bin/mask_ring_0.25_0.25.png
 	width 15cm
 
 \end_inset
@@ -1617,13 +2130,118 @@ nolink "false"
 
 \end_layout
 
-\begin_layout Subsection
-Masking strategy
+\begin_layout Note
+Complementary masks
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The intensities of 
+\begin_inset Formula $75\%$
+\end_inset
+
+ and 
+\begin_inset Formula $25\%$
+\end_inset
+
+ for visualizing the island-style and ring-style masks above are chosen consciously:
+ one observes that the resulting,
+ masked objects are perfect 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+complements
+\end_layout
+
+\end_inset
+
+ of each other,
+ i.e.,
+ the masked portion of one corresponds directly to the unmasked portion of another.
 \end_layout
 
 \begin_layout Standard
-A common modification strategy,
- as also deployed in researches such as 
+In fact,
+ any pairing of an island-mask with intensity 
+\begin_inset Formula $i$
+\end_inset
+
+ and a ring-mask with intensity 
+\begin_inset Formula $1-i$
+\end_inset
+
+ forms exact compliments of each other.
+ This specific complementary property of masking is further studied in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:The-island-ring-juxtaposition"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+After deciding upon a masking strategy,
+ the masking candidates are readily available:
+\end_layout
+
+\begin_layout Itemize
+for the random-style masks,
+ the candidates are calculated via random sampling from all indexes of the underlying matrix 
+\begin_inset Formula $\mathbf{R}$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Itemize
+for the island-style and ring-style masks,
+ the candidates are known deterministically with the calculation formula for the side-length proportion 
+\begin_inset Formula $p$
+\end_inset
+
+ of the embedded center square as specified above.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The final step of masking corresponds to setting the masking candidates to some masking value:
+\end_layout
+
+\begin_layout Subsection
+Masking value
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Masking-value"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A common masking value to apply to the masking candidates,
+ as deployed in researches such as 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "videomae-published,videomae,multimae"
@@ -1643,8 +2261,11 @@ literal "false"
 \end_inset
 
 .
- The justification of this decision stipulates a sneak-peak to the dataset normalization technique deployed inthis project,
- which will be discussed in detail later in Section 
+\end_layout
+
+\begin_layout Standard
+The justification of this decision stipulates a sneak-peak to the dataset normalization technique deployed in this project,
+ discussed furthered in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Dataset-Setup"
@@ -1655,7 +2276,7 @@ nolink "false"
 
 \end_inset
 
-.
+:
 \end_layout
 
 \begin_layout Proposition
@@ -1671,17 +2292,17 @@ This thesis performs
  normalization of the dataset per 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "ml-normalization-google"
+key "ml-normalization-google,ml-elem-stats-learning,ml-goodfellow"
 literal "false"
 
 \end_inset
 
 ,
- such that each channel is linearly scaled within the range of 
+ such that every channel is linearly scaled within the range of 
 \begin_inset Formula $\left[0,1\right]$
 \end_inset
 
- respectively.
+.
 \end_layout
 
 \end_deeper
@@ -1703,7 +2324,7 @@ The adjustment of masking value from
 
 ,
  though insignificant at face-value,
- brings forth a profound implication:
+ brings forth a deep implication:
  the masked value now corresponds to the 
 \begin_inset Flex Emph
 status open
@@ -1723,7 +2344,7 @@ mean
  masking value.
  
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 The worrisome implication of the 
@@ -1745,6 +2366,29 @@ The worrisome implication of the
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Later analyses in Chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:non-standard-masking-value"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ study the behavior when using masking values 
+\begin_inset Formula $0$
+\end_inset
+
+ and 
+\begin_inset Formula $1$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Note
@@ -2096,16 +2740,19 @@ Essential API for masking
 
 \end_layout
 
-\begin_layout Definition
-Masking ranges
+\begin_layout Standard
+Thus concludes this introductory chapter on masking,
+ which provides concrete definitions of the masking procedure,
+ showcasing three variants of masks with their respective configuration possibilities.
+ To conclude this section and as a sneak-peak into the upcoming section where the concrete dataset is formed with masking,
+ the following concrete masks are used in this thesis:
+\end_layout
+
+\begin_layout Example
+Masking ranges for learning pipeline
 \end_layout
 
 \begin_deeper
-\begin_layout Standard
-As a sneak-peak into the upcoming section where the concrete dataset is formed with masking,
- this thesis utilizes the following masks:
-\end_layout
-
 \begin_layout Itemize
 for 
 \begin_inset Flex Emph
@@ -2120,29 +2767,27 @@ training
 :
  four masking intensity-ranges,
  all of random-style:
- full 
+ full-range 
 \begin_inset Formula $0\%-100\%$
 \end_inset
 
 ,
- with (increasing) intensity from 
-\begin_inset Formula $10\%$
-\end_inset
-
- to 
-\begin_inset Formula $90\%$
+ as well as low,
+ mid and high ranges:
+ 
+\begin_inset Formula $\left[20\%;40\%\right]$
 \end_inset
 
 ,
- with 
-\begin_inset Formula $10\%$
+ 
+\begin_inset Formula $\left[40\%;60\%\right]$
 \end_inset
 
- increment (
-\begin_inset Formula $9$
+ and 
+\begin_inset Formula $\left[60\%;80\%\right]$
 \end_inset
 
- masks in total);
+ (4 masks in total);
 \end_layout
 
 \begin_layout Itemize
@@ -2157,7 +2802,7 @@ evaluation
 \end_inset
 
 :
- both random and island style,
+ all three masking styles,,
  each with 
 \begin_inset Formula $10$
 \end_inset
@@ -2176,36 +2821,22 @@ evaluation
 \begin_inset Formula $90\%-100\%$
 \end_inset
 
-.
+ (30 masks in total).
 \end_layout
 
 \begin_layout Standard
-For every model on each dataset,
+Thus,
+ for every model on each dataset,
  a total of 
-\begin_inset Formula $18$
+\begin_inset Formula $4$
 \end_inset
 
- models are therefore trained and evaluated.
- It should be noted that a 
-\begin_inset Formula $90\%$
+ masking iterations are performed for training,
+ and 
+\begin_inset Formula $30$
 \end_inset
 
- island-style mask is of the 
-\begin_inset Flex Emph
-status open
-
-\begin_layout Plain Layout
-lowest
-\end_layout
-
-\end_inset
-
- intensity,
- whereas one of 
-\begin_inset Formula $10\%$
-\end_inset
-
- is of the highest.
+ for evaluation.
 \end_layout
 
 \end_deeper
@@ -2252,7 +2883,7 @@ find some quote on importance of data in ML
 Another central component of the setup work is the dataset generated by the PDEs,
  typically revolving around solving the PDEs themselves.
  This section introduces the three core PDE prototypes of the project and the respective datasets induced by them.
- Some necessary setup requirements are introduced in the following section:
+ Some necessary setup steps are introduced in the following section:
 \end_layout
 
 \begin_layout Subsection
@@ -2261,6 +2892,13 @@ Setup
 
 \begin_layout Subsubsection
 Sample Super-positioning
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Sample-Super-positioning"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2977,7 +3615,18 @@ the constant
 \begin_inset Formula $c_{k}\in\mathbb{N}^{+}$
 \end_inset
 
- determines the number of samples used to generate one such instance;
+ determines the number of samples used to generate one such instance with the super-positioning technique introduced in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Sample-Super-positioning"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+;
 \end_layout
 
 \begin_layout Itemize
@@ -3004,19 +3653,18 @@ a configurable scaling constant
 \end_layout
 
 \begin_layout Standard
-Due to:
-\begin_inset Formula 
-\[
-\qquad\qquad\text{trig}\left(k_{1}\pi x_{1}\right)\text{trig}\left(k_{1}\pi x_{2}\right)\stackrel{\nabla^{2}}{\longmapsto}-\left(k_{1}^{2}+k_{2}^{2}\right)\pi^{2}\cdot\Bigl(\text{trig}\left(k_{1}\pi x_{1}\right)\text{trig}\left(k_{1}\pi x_{2}\right)\Bigr)
-\]
+Due to Fact 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fact:Laplacian-of-double-trig"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
 
 \end_inset
 
-where 
-\begin_inset Formula $\text{trig}\left(\cdot\right)$
-\end_inset
-
- denotes the sine or the cosine function,
+,
  the corresponding source term 
 \begin_inset Formula $f_{i}$
 \end_inset
@@ -3056,7 +3704,39 @@ where
 \end_layout
 
 \begin_layout Fact
-ff
+Laplacian of double trig-product
+\begin_inset CommandInset label
+LatexCommand label
+name "fact:Laplacian-of-double-trig"
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+It is readily verifiable that:
+\begin_inset Formula 
+\[
+\qquad\qquad\text{trig}\left(k_{1}\pi x_{1}\right)\text{trig}\left(k_{1}\pi x_{2}\right)\stackrel{\nabla^{2}}{\longmapsto}-\left(k_{1}^{2}+k_{2}^{2}\right)\pi^{2}\cdot\Bigl(\text{trig}\left(k_{1}\pi x_{1}\right)\text{trig}\left(k_{1}\pi x_{2}\right)\Bigr)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\text{trig}\left(\cdot\right)$
+\end_inset
+
+ denotes the sine or the cosine function.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3095,7 +3775,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/raw_poisson_sine.png
+	filename ../../bin/raw_poisson_sine.png
 	width 16cm
 
 \end_inset
@@ -3278,7 +3958,15 @@ manual scaling is kept neutral,
 \end_layout
 
 \begin_layout Note
-Properties
+Properties of the 
+\begin_inset Quotes xld
+\end_inset
+
+Sum-of-Sines
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset
 \end_layout
 
 \begin_deeper
@@ -3599,7 +4287,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/raw_poisson_gauss.png
+	filename ../../bin/raw_poisson_gauss.png
 	width 16cm
 
 \end_inset
@@ -4006,6 +4694,14 @@ nolink "false"
  the middle and the final time.
 \end_layout
 
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 \begin_inset Float figure
 placement document
@@ -4018,7 +4714,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/raw_heat.png
+	filename ../../bin/raw_heat.png
 	width 16cm
 
 \end_inset
@@ -4131,14 +4827,6 @@ status open
 
 \end_layout
 
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
 \begin_layout Standard
 \begin_inset Note Note
 status collapsed
@@ -4193,11 +4881,7 @@ name "subsec:Wave-Equation"
 status open
 
 \begin_layout Plain Layout
-The wave equation is a fundamental partial differential equation (PDE) that describes the propagation of waves through various mediums,
- such as sound waves in air,
- light waves in a vacuum,
- and water waves on a surface.
- Mathematically,
+Mathematically,
  it is expressed as ∂2u∂t2=c2∇2u∂t2∂2u=c2∇2u,
  where uu represents the wave function,
  tt is time,
@@ -4215,7 +4899,8 @@ The wave equation is a fundamental partial differential equation (PDE) that desc
 \end_layout
 
 \begin_layout Standard
-For the wave equation:
+A fundamental PDE model to describe wave propagation through mediums,
+ the wave equation is formulated as:
 \begin_inset Formula 
 \[
 \begin{alignedat}{3} & \; & \frac{\partial}{\partial t^{2}}u & = & \; & c_{c}^{2}\biggl(\frac{\partial^{2}}{\partial x_{1}^{2}}u+\frac{\partial^{2}}{\partial x_{2}^{2}}u\biggr)\\
@@ -4225,7 +4910,7 @@ For the wave equation:
 
 \end_inset
 
-where each instance-sample is defined as:
+The dataset for wave equation as deployed in this thesis defines one instance-sample as:
 \begin_inset Formula 
 \[
 u_{i}\coloneqq\mathop{\sum\sum\biggl\{\Bigl(\texttt{R}_{k_{1},k_{2}}\left(k_{1}^{2}+k_{2}^{2}\right)^{-c_{r}}\Bigr)\cdot\cos\left(c_{c}\sqrt{k_{1}^{2}+k_{2}^{2}}\pi t\right)\cdot\underbrace{\sin\left(k_{1}\pi x_{1}\right)\sin\left(k_{2}\pi x_{2}\right)}_{\eqqcolon\:\underline{\sin}}\biggr\}}
@@ -4348,6 +5033,14 @@ nolink "false"
  the middle and the final time respectively.
 \end_layout
 
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 \begin_inset Float figure
 placement document
@@ -4360,7 +5053,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/main/mnt/t480/mnt/x/Dox/amperstand/eth/tss/msc/tss/bin/raw_wave.png
+	filename ../../bin/raw_wave.png
 	width 16cm
 
 \end_inset
@@ -4468,14 +5161,6 @@ status open
 
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
 \end_inset
 
 
@@ -4596,11 +5281,11 @@ status open
 <column alignment="left" valignment="top" width="0pt">
 <column alignment="left" valignment="top" width="0pt">
 <column alignment="center" valignment="top">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
 <column alignment="right" valignment="top" width="0pt">
 <column alignment="right" valignment="top" width="0pt">
-<column alignment="right" valignment="top" width="0pt">
-<column alignment="right" valignment="top" width="0pt">
-<column alignment="center" valignment="top">
 <row>
 <cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -4611,7 +5296,7 @@ status open
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4624,7 +5309,7 @@ Equation
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $\qquad$
+\begin_inset Formula $\quad$
 \end_inset
 
 
@@ -4632,7 +5317,16 @@ Equation
 
 \end_inset
 </cell>
-<cell alignment="right" valignment="top" topline="true" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+super-pos.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4648,30 +5342,24 @@ Equation
 \begin_inset Text
 
 \begin_layout Plain Layout
-channels
+\begin_inset Formula $\quad$
+\end_inset
+
+
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-super-pos.
+key channels
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4691,7 +5379,7 @@ super-pos.
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4709,7 +5397,19 @@ Poisson
 
 \end_inset
 </cell>
-<cell alignment="right" valignment="top" topline="true" usebox="none">
+<cell multirow="3" alignment="center" valignment="middle" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\boxed{\text{Yes}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4722,11 +5422,20 @@ No
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 solution 
 \begin_inset Formula $u$
 \end_inset
 
-,
+;
  source 
 \begin_inset Formula $f$
 \end_inset
@@ -4736,28 +5445,7 @@ solution
 
 \end_inset
 </cell>
-<cell multirow="3" alignment="right" valignment="middle" topline="true" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\boxed{\text{Yes}}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4768,7 +5456,7 @@ solution
 </cell>
 </row>
 <row>
-<cell alignment="left" valignment="top" topline="true" usebox="none">
+<cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4777,7 +5465,7 @@ solution
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4786,25 +5474,7 @@ Heat
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="right" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Yes
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="3" alignment="right" valignment="middle" topline="true" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4822,7 +5492,16 @@ Yes
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell multirow="3" alignment="center" valignment="middle" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Yes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4831,7 +5510,25 @@ Yes
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell multirow="3" alignment="right" valignment="middle" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+init 
+\begin_inset Formula $u_{t=0}$
+\end_inset
+
+;
+ end 
+\begin_inset Formula $u_{t=T}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4842,7 +5539,7 @@ Yes
 </cell>
 </row>
 <row>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4851,7 +5548,7 @@ Yes
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4860,25 +5557,7 @@ Wave
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="right" valignment="top" topline="true" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Yes
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4896,7 +5575,7 @@ Yes
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+<cell multirow="4" alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4905,7 +5584,25 @@ Yes
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -4932,7 +5629,7 @@ name "tab:datasets-raws"
 
 \end_inset
 
-Time-stamps of key activities
+Quick summary PDE prototypes
 \end_layout
 
 \end_inset
@@ -4946,6 +5643,10 @@ Time-stamps of key activities
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset listings
 inline false
 status open
@@ -5109,6 +5810,18 @@ class ProblemWave(Problem):
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
 \end_inset
 
 

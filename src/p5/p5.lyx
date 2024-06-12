@@ -129,56 +129,10 @@ Review and Projection
 
 \begin_layout Subsection
 Environment Setup
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-The experiment
 \end_layout
 
-\begin_layout Itemize
-CPU
-\end_layout
-
-\begin_layout Itemize
-GPU
-\end_layout
-
-\begin_layout Itemize
-Ram
-\end_layout
-
-\begin_layout Itemize
-Linux Distro,
- version
-\end_layout
-
-\begin_layout Itemize
-Python version
-\end_layout
-
-\begin_layout Itemize
-Environment (poetry)
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Although
-\end_layout
-
-\begin_layout Plain Layout
-The
-\end_layout
-
-\end_inset
-
-
+\begin_layout Subsubsection
+OS-level setup
 \end_layout
 
 \begin_layout Standard
@@ -196,7 +150,7 @@ nolink "false"
 
 \end_inset
 
- enumerates the hardware specifications:
+ enumerates the hardware specifications.
 \end_layout
 
 \begin_layout Standard
@@ -359,6 +313,9 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $\diameter$
+\end_inset
+
 
 \end_layout
 
@@ -702,7 +659,7 @@ Component
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $\qquad$
+\begin_inset Formula $\qquad\qquad\quad\;$
 \end_inset
 
 
@@ -1099,7 +1056,7 @@ Supported software versions
 
 \end_layout
 
-\begin_layout Definition
+\begin_layout Subsubsection
 \begin_inset Flex Code
 status open
 
@@ -1109,13 +1066,16 @@ python
 
 \end_inset
 
- related setup
+-specific setup
+\end_layout
+
+\begin_layout Solution
+Virtual environment
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 TODO:
- 
 \end_layout
 
 \begin_layout Itemize
@@ -1148,11 +1108,22 @@ poetry
 
 \end_inset
 
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "python-poetry"
+literal "false"
+
+\end_inset
+
  virtual-environment tool is used to manage the virtual environment,
  which handles the dependency management of the project.
- The interested reader is invited to duplicate the environment to verify the results:
- first,
- a virtual environment shall be created,
+\end_layout
+
+\begin_layout Standard
+The interested reader is invited to duplicate the environment to verify the results or run individual modules.
+ To this end,
+ a virtual environment shall first be created,
  then populated with the necessary 
 \begin_inset Flex Code
 status open
@@ -1163,9 +1134,38 @@ python
 
 \end_inset
 
- packages.
- This is achieved with the following command:
+ packages for executing the source code of the repository.
+ This is achieved with the following command
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+name "official documentation"
+target "https://python-poetry.org/docs/basic-usage/#initialising-a-pre-existing-project"
+literal "false"
+
+\end_inset
+
+ by 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+poetry
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+:
 \begin_inset listings
+lstparams "language=bash"
 inline false
 status open
 
@@ -1175,17 +1175,16 @@ $ poetry install  # install package dependencies in virt.
  env.
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
 
-$ poetry shell  # activate shell of virt.
- env.
-\end_layout
 
+\begin_inset Newpage clearpage
 \end_inset
 
 At this point,
- two possibilities exist for running commands in the now available 
+ two possibilities exist for running commands in the now available virtual environment:
 \begin_inset listings
+lstparams "language=bash"
 inline false
 status open
 
@@ -1201,11 +1200,7 @@ $ poetry shell  # activate interactive shell
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Both methods have merits,
+Each method has its own merits,
  and the choice should depend on the specific coding use-case at hand.
 \end_layout
 
@@ -1217,14 +1212,13 @@ Both methods have merits,
 
 \end_layout
 
-\begin_layout Note
-Testing
+\begin_layout Solution
+Module testing
 \end_layout
 
 \begin_deeper
 \begin_layout Standard
-Core utilities of the project are tested with a separate test suite.
- The test suite is structured as follows:
+Core utilities of the project are tested with a separate test suite structured as follows:
 \begin_inset listings
 inline false
 status open
@@ -1286,17 +1280,15 @@ pytest
 \end_inset
 
  utility 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-REF
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "python-pytest"
+literal "false"
 
 \end_inset
 
-is used to format and manage the tests.
- and included in the 
+ is used to format and manage the tests.
+ and automatically installed with the 
 \begin_inset Flex Code
 status open
 
@@ -1306,9 +1298,10 @@ poetry
 
 \end_inset
 
- virtual environment setup as mentioned above.
- All tests are automatically run by issuing:
+ virtual environment setup procedure above.
+ All tests are automatically run by issuing the following commands:
 \begin_inset listings
+lstparams "language=bash"
 inline false
 status open
 
@@ -1325,7 +1318,7 @@ $ pytest ./tests
 
 \end_inset
 
-in the command-line once the environment is installed.
+
 \end_layout
 
 \end_deeper
@@ -1342,9 +1335,17 @@ Reproducibility
 
 \begin_deeper
 \begin_layout Standard
-While significant segments of machine-learning banks on randomness,
- special care has to be taken to guarantee some semblance of reproducibility.
- The key is to set consciously set the seed for random-number-generators whenever reproducibility is desired.
+While significant segments of machine-learning banks on randomness and seeding
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ml-elem-stats-learning,ml-goodfellow,ml-murphy"
+literal "false"
+
+\end_inset
+
+,
+ measures can still be taken to guarantee some semblance of reproducibility.
+ The key is to consciously set the seed-value for random-number-generators whenever reproducibility is desired.
  Conforming to common practice,
  this project uses 
 \begin_inset Formula $42$
@@ -1354,10 +1355,16 @@ While significant segments of machine-learning banks on randomness,
 \end_layout
 
 \begin_layout Standard
-A list of commonly used seeding functions are listed below:
+A list of commonly used seeding functions are collected in the following routine:
 \begin_inset listings
+lstparams "language=Python"
 inline false
 status open
+
+\begin_layout Plain Layout
+
+# src/definition.py
+\end_layout
 
 \begin_layout Plain Layout
 
@@ -1370,19 +1377,33 @@ status open
 
 \begin_layout Plain Layout
 
-torch.manual_seed(42)
+class Definition:
 \end_layout
 
 \begin_layout Plain Layout
 
-np.
- (TDOOOO)
+    @staticmethod
 \end_layout
 
 \begin_layout Plain Layout
 
-random.seed(42) (TODO:
- check)
+    def seed(seed:
+ int = 42) -> None:
+\end_layout
+
+\begin_layout Plain Layout
+
+        torch.manual_seed(seed)
+\end_layout
+
+\begin_layout Plain Layout
+
+        np.random.seed(seed)
+\end_layout
+
+\begin_layout Plain Layout
+
+        random.seed(seed)
 \end_layout
 
 \end_inset
@@ -2049,8 +2070,7 @@ To the supervisor of this thesis,
 \end_layout
 
 \begin_layout Standard
-my deepest appreciation for the encouragement of pursuing this project,
- for the rigorous yet illuminating approach to the realm of scientific learning as a whole;
+my deepest appreciation for the encouragement of pursuing this project and for the rigorous yet illuminating approach to the realm of scientific learning as a whole;
 \begin_inset VSpace 50baselineskip%
 \end_inset
 
@@ -2063,7 +2083,7 @@ To my advisor,
 \end_layout
 
 \begin_layout Standard
-my heart-felt thanks for the rapid and intuitive implementations of abstract concepts and for providing me with constructive suggestions during the fledging stages of the project;
+my heart-felt thanks for the rapid and intuitive implementations of abstract concepts and for providing me with constructive suggestions during hours of auditing and reviewing;
  
 \begin_inset VSpace 50baselineskip%
 \end_inset
@@ -2074,7 +2094,10 @@ my heart-felt thanks for the rapid and intuitive implementations of abstract con
 \begin_layout Standard
 Finally,
  to my family and my friends:
- my sincere gratitude for the unyielding support and care during the course of my studies.
+\end_layout
+
+\begin_layout Standard
+my sincere gratitude for the unyielding support and care throughout the course of my studies.
 \end_layout
 
 \end_body

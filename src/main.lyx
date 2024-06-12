@@ -230,15 +230,59 @@ PDEs have historically been solved by numerical methods distilled from tradition
  toolchains for PDE research now include the operator learning methodology structured around deep neural networks.
  Pertaining to machine-learning as a whole,
  on the other hand,
- much effort is made to study the algorithmic resistance to intrinsic noise of data.
+ much effort is expended to study algorithmic resistance to the intrinsic noisiness of data.
  Masking,
- as one representative of intentional data contamination,
- sets certain patches of data channels to zero,
- concealing proportions of the raw dataset.
+ as one established method to this end,
+ intentionally contaminates portions of a clean dataset by setting certain patches of its data channels to some noise value,
+ effectively concealing parts of the underlying dataset from the learning model.
 \end_layout
 
 \begin_layout Abstract
-This project applies established models of PDE learning on datasets tainted with different masking strategies with varying intensities.
+This project studies the effect of masking in the specific settings of PDE Learning.
+ The work??
+ commences with a formalization of the masking concept and identifying three distinct masking strategies.
+ By adjusting the 
+\begin_inset Note Note
+status open
+
+\begin_layout Itemize
+intensity type;
+ intensity range
+\end_layout
+
+\begin_layout Itemize
+in & out of distribution
+\end_layout
+
+\begin_layout Itemize
+locality
+\end_layout
+
+\begin_layout Itemize
+dynamic remask:
+ Effect of Masking on training
+\end_layout
+
+\begin_layout Plain Layout
+as one representative of intentional data contamination
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+To The concept of mask 
+\end_layout
+
+\begin_layout Abstract
+This project applies established models of PDE learning on datasets tainted with a diverse array of masking procedures.
+ Systematic studies are conducted by varying the 
+\end_layout
+
+\begin_layout Abstract
+different masking strategies with varying intensities.
  Performance is gauged under application of different operator-learning algorithms on various quintessential PDE problems.
 \begin_inset Note Greyedout
 status open
@@ -679,11 +723,12 @@ discretize
 
 \begin_deeper
 \begin_layout Enumerate
-grid space (DRAFTED)
+grid space (checked I)
 \end_layout
 
 \begin_layout Enumerate
-grid time (DRAFTED)
+grid time (TODO:
+ rewrite code related)
 \end_layout
 
 \end_deeper
