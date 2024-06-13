@@ -2564,7 +2564,45 @@ nolink "false"
 
 \end_inset
 
- shows Poisson equation.
+ shows performance of the double-masked Poisson equation.
+\end_layout
+
+\begin_layout Standard
+For the two in-distribution result plots on the left,
+ one observes similar performance for both individual mask channels.
+ FNO,
+ CNO and UNet offer similar performance:
+ the errors are kept under 
+\begin_inset Formula $10\%$
+\end_inset
+
+ for intensities values under 
+\begin_inset Formula $80\%$
+\end_inset
+
+,
+ and rise significantly for higher intensities.
+ KNOs errors increase almost linearly with higher masking intensities,
+ reaching almost 
+\begin_inset Formula $20\%$
+\end_inset
+
+ for masking intensities higher than 
+\begin_inset Formula $90\%$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For both cases of the out-of-distributions scenarios,
+ shown in the middle and on the right,
+ one observes that the performance of the two channels are again similar,
+ where the errors steadily increase for all models.
+ It should also be noted that the models perform generally worse on the ring-type masks than those of island-style.
+ Interestingly,
+ KNO performs fairly well here,
+ surpassing even all three other models with the ring-style masks.
 \end_layout
 
 \end_deeper
@@ -2632,7 +2670,7 @@ Heat equation
 
 \begin_deeper
 \begin_layout Standard
-Figure 
+Results for the Heat equation are found in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:result-heat-double-full"
@@ -2643,7 +2681,29 @@ nolink "false"
 
 \end_inset
 
- shows heat equation.
+.
+\end_layout
+
+\begin_layout Standard
+For the in-distribution case on the left,
+ the lower-regime errors are again very low for FNO,
+ CNO and UNet,
+ before rising sharpy for 
+\begin_inset Formula $90\%$
+\end_inset
+
+.
+ Again,
+ KNO performs visibly worse than the other three models.
+\end_layout
+
+\begin_layout Standard
+All four models display a steadily increasing,
+ quasi linear error cursive for out-of-distribution evaluation scenarios.
+ It is also noteworthy that the errors of the island-style masks are,
+ again,
+ slightly lower than the other out-of-distribution,
+ ring-type masks.
 \end_layout
 
 \end_deeper
@@ -2725,6 +2785,47 @@ nolink "false"
  shows wave equation.
 \end_layout
 
+\begin_layout Standard
+The striking observation is thew significant out-of-distribution errors for the wave equation.
+ In particular,
+ the errors overshoot the 
+\begin_inset Formula $25\%$
+\end_inset
+
+ mark on multiple occasions for FNO,
+ and generally exceed 
+\begin_inset Formula $20\%$
+\end_inset
+
+ for all models in higher masking intensities ranges.
+\end_layout
+
+\begin_layout Standard
+Other observations are similar to those with Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:result-poisson-double-full"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ (Poisson) and Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:result-heat-double-full"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ (Heat) previously.
+\end_layout
+
 \end_deeper
 \begin_layout Standard
 \begin_inset Separator plain
@@ -2791,24 +2892,33 @@ Double masks,
 
 \begin_deeper
 \begin_layout Itemize
-When evaluated on random-masks:
- for each channel,
- the errors obey the same progression as seen in single masks:
- steady increase of error with higher intensities.
+For any of the three masking types,
+ performances of the two channels are fairly similar.
 \end_layout
 
 \begin_layout Itemize
-When evaluated on island-masks:
- again,
- the errors are unpredictable.
- The high-baseline has been raise slighted to 
-\begin_inset Formula $20\%$
+When evaluating with random-masks for in-distribution analysis,
+ FNO,
+ CNO and UNet peform well for masking intensities up to approximately 
+\begin_inset Formula $80\%$
 \end_inset
 
 ,
- but the errors only rarely rise beyond this threshold.
- (list examples good,
- examples bad).
+ after which a significant increase of errors is observed.
+\end_layout
+
+\begin_layout Itemize
+While the errors with random masks are visibly smaller than those with island and ring style masks (out-of-distribution),
+ the difference is more subtle among these two out-of-distribution masks.
+ However,
+ upon closer inspection,
+ performance is generally better on the island-masks than the ring-style ones.
+\end_layout
+
+\begin_layout Itemize
+While KNO performs visibly worse than other models in-distribution,
+ its behavior is comparable to,
+ sometimes even surpassing that of the other three models when evaluated out-of-distribution.
 \end_layout
 
 \end_deeper
@@ -3028,6 +3138,10 @@ To begin the analysis,
 
 \end_layout
 
+\begin_layout Subsubsection
+Single Masking
+\end_layout
+
 \begin_layout Example
 Poisson equation,
  specialized masks
@@ -3139,7 +3253,20 @@ lowest
 \end_layout
 
 \begin_layout Standard
-Switching to the 
+Results for the out-of-distribution plots in the middle and on the right are a lot more sporadic,
+ however,
+ for the low-intensity regime on the first row,
+ the errors increase linearly for all models with higher masking intensities.
+ For the middle intensity regime,
+ the general trend of the errors is still increasing with larger intensity values,
+ albeit with a less inclined slope.
+ 
+\end_layout
+
+\begin_layout Standard
+Again,
+ while KNO performs significantly worse than other models when evaluated on the random masks,
+ its performance aligns fairly well with the other three for island and ring-style masks.
 \end_layout
 
 \begin_layout Standard
@@ -3167,10 +3294,6 @@ Across channel:
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsubsection
-Single Masking
 \end_layout
 
 \begin_layout Definition
@@ -3353,8 +3476,69 @@ name "fig:result-poisson-single-specialized"
 
 \end_layout
 
+\begin_layout Standard
+With the first results of the models trained on specialized ranges seen in the previous section with single-mask Poisson,
+ the performance of the double-masked counter-part is now studied as the natural extension.
+\end_layout
+
 \begin_layout Subsubsection
 Double Masking
+\end_layout
+
+\begin_layout Example
+Poisson equation,
+ double-masking,
+ low-intensity
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:result-poisson-double-0.4-0.6"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ shows the result of the double mask at 
+\begin_inset Formula $\left[20\%;40\%\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Similar to previous observations,
+ performance is fairly comparable among both dataset channels for each of the three masking styles,
+ irrespective of the in or out-of-distribution evaluation nature.
+\end_layout
+
+\begin_layout Standard
+The locality effect of the low-intensity masks used during training is clearly visible with the low errors in the shaded region and the clearly increasing errors for masking ranges higher than 
+\begin_inset Formula $40\%$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For the out-of-distribution evaluation,
+ the errors increase steadily with higher masking intensity.
+ Also,
+ the error appears slightly larger for the ring-style masks than the island-style,
+ which also confirms to previous observations.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3419,8 +3603,20 @@ name "fig:result-poisson-double-0.2-0.4"
 
 \end_layout
 
+\begin_layout Example
+Poisson equation,
+ double-masking,
+ middle-intensity
+\end_layout
+
+\begin_deeper
 \begin_layout Standard
-Figure 
+Results of the four models trained with the double-masked,
+ middle intensity range 
+\begin_inset Formula $\left[40\%;60\%\right]$
+\end_inset
+
+ are shown in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:result-poisson-double-0.4-0.6"
@@ -3431,11 +3627,55 @@ nolink "false"
 
 \end_inset
 
- shows the result of the double mask at 
+.
+ 
+\end_layout
+
+\begin_layout Standard
+For the same masking type,
+ i.e.,
+ same column,
+ evaluation performance is similar for both channels,
+ corresponding to previous observations.
+\end_layout
+
+\begin_layout Standard
+The signature U-shaped error curve in once again visible for FNO,
+ CNO and UNet in the two subplots on the left,
+ showing errors close to 
+\begin_inset Formula $5\%$
+\end_inset
+
+ in the shaded region,
+ corresponding to the in-distribution evaluation mode with the same masking type and masking intensity range as used during training.
+ Interestingly,
+ the unmistakable linear error curve of KNO leads to its outperforming the rest at lower intensity regimes.
+\end_layout
+
+\begin_layout Standard
+Out-of-distribution errors generally increase with higher masking intensities,
+ however,
+ CNO and UNet once again display signs of locality awareness for the island-style masks shown in the middle:
+ their errors only begin to increase when the evaluation masking intensities are higher than the 
 \begin_inset Formula $\left[40\%;60\%\right]$
 \end_inset
 
-.
+ range used during training,
+ indicated by the shaded area.
+\end_layout
+
+\begin_layout Standard
+It should also be noted that in the out-of-distribution settings,
+ KNO constantly out-performs all three other models,
+ the difference is particularly noticeable in the lower intensity regimes.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3506,6 +3746,13 @@ name "fig:result-poisson-double-0.4-0.6"
 
 \end_layout
 
+\begin_layout Example
+Poisson equation,
+ double-masking,
+ high-intensity
+\end_layout
+
+\begin_deeper
 \begin_layout Standard
 Figure 
 \begin_inset CommandInset ref
@@ -3523,6 +3770,65 @@ nolink "false"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+For in-distribution evaluation plotted on the left column,
+ the skewed U-shaped error curves of FNO,
+ CNO and UNet are again testament to the locality effect.
+ Inside the shaded region,
+ the three models perform comparably,
+ with errors hovering slightly over 
+\begin_inset Formula $5\%$
+\end_inset
+
+.
+ However,
+ outside portion,
+ FNO performs significantly better than CNO and UNet,
+ which is particularly apparent in lower intensity ranges.
+ However,
+ similar to the previous analysis,
+ the best performer there is KNO,
+ thanks to its linearly increasing error values.
+\end_layout
+
+\begin_layout Standard
+The out-of-distribution errors curves in the middle and on the right are now more sporadic than the in the single-mask case.
+ One notes that,
+ in particular,
+ UNet and CNO appears to display locality awareness,
+ as the errors decrease in the higher intensity ranges,
+ as indicated by the shaded areas.
+ Also,
+ in these out-of-distribution settings,
+ KNO manages to consistently out-perform all the other three models by a comfortable margin.
+\end_layout
+
+\begin_layout Standard
+One shall observe that the out-of-distribution performance is,
+ in general,
+ uninspired:
+ with the rare exception of KNO on lower intensity regimes,
+ the error values almost always surpass 
+\begin_inset Formula $15\%$
+\end_inset
+
+.
+ In fact,
+ CNO and UNet both hardly managed to make the baseline of 
+\begin_inset Formula $20\%$
+\end_inset
+
+ for most of the evaluation scenarios.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3579,13 +3885,6 @@ name "fig:result-poisson-double-0.6-0.8"
 
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage clearpage
 \end_inset
 
 
@@ -4048,14 +4347,18 @@ name "fig:result-heat-0.6-0.8"
 Wave Equation
 \end_layout
 
-\begin_layout Example
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
 Wave equation,
  single mask,
  low-regime
 \end_layout
 
-\begin_deeper
-\begin_layout Standard
+\end_inset
+
 Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4108,7 +4411,6 @@ It should be pointed out that FNO performs exceptionally well for the single mas
  for both in and out-of-distribution evaluation.
 \end_layout
 
-\end_deeper
 \begin_layout Standard
 \begin_inset Separator plain
 \end_inset
@@ -4191,14 +4493,25 @@ MSE% plots:
 
 \end_layout
 
-\begin_layout Example
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
 Wave equation,
  single mask,
  middle-regime
 \end_layout
 
-\begin_deeper
-\begin_layout Standard
+\end_inset
+
 Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4251,7 +4564,6 @@ For evaluation with the island and the ring-style masks,
  indicating some semblance of locality-awareness even the masking type is different!
 \end_layout
 
-\end_deeper
 \begin_layout Standard
 \begin_inset Separator plain
 \end_inset
@@ -4339,14 +4651,25 @@ name "fig:result-wave-special-0.4-0.6"
 
 \end_layout
 
-\begin_layout Example
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
 Wave equation,
  single mask,
  high-regime
 \end_layout
 
-\begin_deeper
-\begin_layout Standard
+\end_inset
+
 Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4404,7 +4727,6 @@ Otherwise,
  where the error dips around 70% to 80%.
 \end_layout
 
-\end_deeper
 \begin_layout Standard
 \begin_inset Separator plain
 \end_inset
@@ -7091,6 +7413,13 @@ However,
 
 \begin_layout Subsection
 Direct visual inspection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Direct-visual-inspection"
+
+\end_inset
+
+
 \begin_inset Note Note
 status collapsed
 
@@ -7644,19 +7973,1731 @@ name "subsec:The-island-ring-juxtaposition"
 \end_layout
 
 \begin_layout Standard
-As hinted when initially introducing the masks in Chapter 
+As hinted at initially when introducing the three fundamental masking types in Chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Masking-strategies"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ the island and the ring-style masks are defined as natural complements of each other.
+ One recalls that,
+ as pointed out in Note 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "note:Complementary-masks"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ the masked portion of an island-mask of intensity 
+\begin_inset Formula $i$
+\end_inset
+
+ corresponds exactly to the unmasked region of a ring-style mask of intensity 
+\begin_inset Formula $1-i$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-The reader should consider the implication of these results above:
+This section studies the effect of this island-ring juxtaposition with the following task:
 \end_layout
 
+\begin_layout Definition
+The Island-and-ring problem
+\end_layout
+
+\begin_deeper
 \begin_layout Standard
-For any pair of complementary intensity-pair of Island and Ring masks:
+The model is trained on the island style,
+ with masking range sampled from 
+\begin_inset Formula $50\%$
+\end_inset
+
+ as mean,
+ with a 
+\begin_inset Formula $10\%$
+\end_inset
+
+ spread:
 \begin_inset Formula 
 \[
-M^{\text{type}}
+\text{mask-intensity}\simeq\mathcal{P}\coloneqq\text{Unif}\left[c_{\text{low}}=0.4;c_{\text{high}}=0.6\right]
 \]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The evaluation datasets use all three masking styles with the usual masking intensity ranges of 
+\begin_inset Formula $[0\%;10\%]$
+\end_inset
+
+,
+ 
+\begin_inset Formula $\left[10\%;20\%\right]$
+\end_inset
+
+ until 
+\begin_inset Formula $\left[90\%;100\%\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Of course,
+ of particular interest are the evaluation cases with ring-style masks of intensity 
+\begin_inset Formula $\left[40\%;50\%\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $\left[50\%;60\%\right]$
+\end_inset
+
+,
+ where the island and the ring style masks form complements of each other.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Conclusion
+Island-and-ring problem with CNO
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:error-island-ring"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ documents the evaluation error of a CNO network with the island mask (in-distribution),
+ as well as the ring and random masks (out-of-distribution).
+ One observes an average in-distribution error of 
+\begin_inset Formula $9.1\%$
+\end_inset
+
+,
+ and 
+\begin_inset Formula $18\%$
+\end_inset
+
+ and 
+\begin_inset Formula $22\%$
+\end_inset
+
+ out-of-distribution error rates for the ring and the random style respectively.
+\end_layout
+
+\begin_layout Standard
+Although the result is slightly disappointing in terms of raw error values,
+ the reader should consider the implication of these results above:
+ the model trained with the island-style masks saw only the center portion of the data channel during training.
+ The out-of-distribution evaluation with the ring-style mask means feeding the model with data on everywhere 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+except
+\end_layout
+
+\end_inset
+
+ the center section of the channel the model is trained on,
+ i.e.,
+ the network has to make predictions on portions of the data,
+ where it never saw the truth values during training.
+ In this sense,
+ the error rate of 
+\begin_inset Formula $22\%$
+\end_inset
+
+ is more understandable.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="12" columns="8">
+<features booktabs="true" islongtable="true" longtabularalignment="center">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Intensity
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\qquad$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+island (in-distr'n)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\quad$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+ring
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+random
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[0\%;10\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+5.0452%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+7.0281%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+12.0592%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[10\%;20\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+4.8685%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+11.8477%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+17.9906%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[20\%;30\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+4.2850%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+14.7517%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+21.4952%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[30\%;40\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+3.3851%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+17.7182%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+23.3162%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[40\%;50\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+3.0814%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\color blue
+22.4464%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+24.6729%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[50\%;60\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+3.2372%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\color blue
+23.3570%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+25.2784%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[60\%;70\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+8.7907%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+22.8414%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+25.1982%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[70\%;80\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+17.9895%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+21.4422%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+24.8265%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[80\%;90\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+20.3517%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+20.5185%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+23.7969%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[90\%;100\%\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+19.9440%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+20.5284%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+22.0637%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Average
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+9.0978%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+18.2480%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+22.0698%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:error-island-ring"
+
+\end_inset
+
+Evaluation errors of CNO trained on 
+\begin_inset Formula $\left[40\%;60\%\right]$
+\end_inset
+
+ island-masks.
+ Evaluation using the complementary ring-style mask is marked blue.
+ Definition of the masks as provided in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Masking-strategies"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Solution
+Island-and-ring visualization with KNO
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:island-ring"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ showcases the complementary nature of the island and the ring-style masks.
+ Using the direct inspection technique introduced in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Direct-visual-inspection"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ the first column depicts one training instance masked with island 
+\begin_inset Formula $\left[40\%;60\%\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+With the evaluation mask chosen as the ring-style mask of 
+\begin_inset Formula $\left[40\%;50\%\right]$
+\end_inset
+
+,
+ the second to fourth columns represent the truth,
+ the masked result and the prediction by KNO respectively.
+ As shown,
+ the prediction corresponds to an absolute and relative MSE of 
+\begin_inset Formula $0.0102$
+\end_inset
+
+ and 
+\begin_inset Formula $18.29\%$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../../bin/reconstruction-island.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:island-ring"
+
+\end_inset
+
+First column:
+ instance during training (island mask with intensity 
+\begin_inset Formula $\in\left[40\%;60\%\right]$
+\end_inset
+
+).
+ Second to fourth column:
+ truth,
+ masked and KNO's prediction of one eval instance,
+ masked with ring-style,
+ intensity 
+\begin_inset Formula $\in\left[40\%;50\%\right]$
+\end_inset
+
+.
+ MSE as shown:
+ 0.0102 absolute,18.29% relative.
+ Observe the complementary training and evaluation portions!
+\end_layout
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -8108,19 +10149,7 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\color blue
 1.8869%
 \end_layout
 
@@ -8218,19 +10247,7 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\color blue
 2.8223%
 \end_layout
 
@@ -8328,19 +10345,7 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\color blue
 4.6118%
 \end_layout
 
@@ -8415,19 +10420,7 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\color blue
 5.9683%
 \end_layout
 
@@ -8525,19 +10518,7 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\color blue
 6.2500%
 \end_layout
 
@@ -8635,19 +10616,7 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\color blue
 6.7590%
 \end_layout
 
@@ -8745,19 +10714,7 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\color blue
 7.5202%
 \end_layout
 
@@ -8855,19 +10812,7 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\color blue
 8.3690%
 \end_layout
 
@@ -8965,19 +10910,7 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\color blue
 9.3936%
 \end_layout
 
@@ -9075,19 +11008,7 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\color blue
 10.5111%
 \end_layout
 
@@ -9195,7 +11116,10 @@ Average
 \uwave off
 \noun off
 \color none
-7.3962%
+\begin_inset Formula $\boxed{{\color{blue}\text{7.3962\%}}}$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -9288,7 +11212,8 @@ In-distribution errors for masking values of
 \end_inset
 
  (maximum-masking).
- Dataset:
+ Best performing mask-variant of each row marked blue.
+ row Dataset:
  Poisson equation,
  single mask,
  linearly normalized to 
@@ -9357,8 +11282,9 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="12" columns="10">
+<lyxtabular version="3" rows="12" columns="11">
 <features booktabs="true" islongtable="true" longtabularalignment="center">
+<column alignment="left" valignment="top" width="0pt">
 <column alignment="left" valignment="top" width="0pt">
 <column alignment="left" valignment="top" width="0pt">
 <column alignment="center" valignment="top" width="0pt">
@@ -9384,6 +11310,15 @@ status open
 
 \begin_layout Plain Layout
 Intensity
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -9428,7 +11363,7 @@ Intensity
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $\,$
+\begin_inset Formula $\quad$
 \end_inset
 
 
@@ -9509,6 +11444,15 @@ Intensity
 
 \begin_layout Plain Layout
 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \family roman
 \series medium
 \shape up
@@ -9532,19 +11476,7 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\color blue
 3.4390%
 \end_layout
 
@@ -9610,19 +11542,7 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\color green
 3.4224%
 \end_layout
 
@@ -9688,6 +11608,15 @@ Intensity
 
 \begin_layout Plain Layout
 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \family roman
 \series medium
 \shape up
@@ -9711,19 +11640,7 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\color blue
 5.6579%
 \end_layout
 
@@ -9789,19 +11706,7 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\color green
 6.4754%
 \end_layout
 
@@ -9867,6 +11772,15 @@ Intensity
 
 \begin_layout Plain Layout
 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \family roman
 \series medium
 \shape up
@@ -9890,19 +11804,7 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\color blue
 7.9534%
 \end_layout
 
@@ -9945,19 +11847,7 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\color green
 8.3061%
 \end_layout
 
@@ -10046,19 +11936,16 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\color blue
 8.8928%
 \end_layout
 
@@ -10124,19 +12011,7 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\color green
 9.4824%
 \end_layout
 
@@ -10225,19 +12100,16 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\color blue
 8.9740%
 \end_layout
 
@@ -10303,19 +12175,7 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\color green
 10.6205%
 \end_layout
 
@@ -10404,19 +12264,16 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\color blue
 8.9802%
 \end_layout
 
@@ -10482,19 +12339,7 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\color green
 11.5566%
 \end_layout
 
@@ -10583,19 +12428,16 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\color blue
 9.2314%
 \end_layout
 
@@ -10661,19 +12503,7 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\color green
 11.8797%
 \end_layout
 
@@ -10762,19 +12592,16 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\color blue
 9.7914%
 \end_layout
 
@@ -10840,19 +12667,7 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\color green
 11.7918%
 \end_layout
 
@@ -10941,19 +12756,16 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\color blue
 10.5130%
 \end_layout
 
@@ -11019,19 +12831,7 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\color green
 11.4092%
 \end_layout
 
@@ -11120,19 +12920,16 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\color blue
 11.1132%
 \end_layout
 
@@ -11198,19 +12995,7 @@ Intensity
 
 \begin_layout Plain Layout
 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\nospellcheck off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\color green
 11.0738%
 \end_layout
 
@@ -11296,6 +13081,15 @@ Average
 
 \begin_layout Plain Layout
 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \family roman
 \series medium
 \shape up
@@ -11309,7 +13103,10 @@ Average
 \uwave off
 \noun off
 \color none
-9.1138%
+\begin_inset Formula $\boxed{{\color{blue}\text{9.1138\%}}}$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -11387,7 +13184,14 @@ Average
 \uwave off
 \noun off
 \color none
-10.0978%
+\begin_inset Formula $ $
+\end_inset
+
+
+\begin_inset Formula $\boxed{{\color{green}\text{10.0978\%}}}$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -11505,7 +13309,7 @@ Out-of-distribution errors (island-style and ring-style) for masking values of
 \begin_layout Standard
 With this,
  the analysis section of this thesis is concluded.
- An executive summary is given in the upcoming chapter to recapitulate the key findings during the review processes above.
+ An executive summary is given in the upcoming chapter to recapitulate the key findings of this chapter.
 \end_layout
 
 \begin_layout Standard
@@ -11517,6 +13321,10 @@ With this,
 
 \begin_layout Section
 Executive Summary
+\end_layout
+
+\begin_layout Standard
+At th
 \end_layout
 
 \end_body

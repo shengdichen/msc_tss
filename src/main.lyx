@@ -249,8 +249,7 @@ PDEs have historically been solved by numerical methods distilled from tradition
 
 \begin_layout Abstract
 This project studies the effect of masking in the specific settings of PDE Learning.
- The work??
- commences with a formalization of the masking concept and identifying three distinct masking strategies.
+ The work commences with a formalization of the masking concept and identifying three distinct masking strategies.
  By adjusting the 
 \begin_inset Note Note
 status open

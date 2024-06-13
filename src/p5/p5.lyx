@@ -1335,7 +1335,7 @@ Reproducibility
 
 \begin_deeper
 \begin_layout Standard
-While significant segments of machine-learning banks on randomness and seeding
+While significant segments of machine-learning banks on randomness and seeding 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "ml-elem-stats-learning,ml-goodfellow,ml-murphy"
@@ -1355,7 +1355,18 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-A list of commonly used seeding functions are collected in the following routine:
+Listing 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lis:seeding"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ shows a utility function collecting common seeding functions:
 \begin_inset listings
 lstparams "language=Python"
 inline false
@@ -1404,6 +1415,25 @@ class Definition:
 \begin_layout Plain Layout
 
         random.seed(seed)
+\end_layout
+
+\begin_layout Plain Layout
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "lis:seeding"
+
+\end_inset
+
+Common seeding operations
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1558,7 +1588,7 @@ weeks)
 
 \begin_layout Plain Layout
 Initial planning;
- project structuring
+ ML lab environment setup
 \end_layout
 
 \end_inset
@@ -1609,7 +1639,7 @@ Initial planning;
 
 \begin_layout Plain Layout
 Literature survey;
- ML hardware lab setup
+ project structuring
 \end_layout
 
 \end_inset
@@ -1976,26 +2006,15 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-Due to the object limitation of the framework of a Master Thesis,
- various aspects related to masked PDE Learning remain to be explored.
+Due to the objective limitation of the framework of a Master Thesis,
+ various aspects related to masked PDE learning remain to be explored.
  Some immediate prospects for further researches include,
  but are not limited to:
 \end_layout
 
 \begin_layout Itemize
-application of more advanced PDE models;
-\end_layout
-
-\begin_layout Itemize
-dimensions higher than 
-\begin_inset Formula $2$
-\end_inset
-
-;
-\end_layout
-
-\begin_layout Itemize
-application of the learning paradigm as discussed in this thesis under discretization scheme beyond the generic square mesh structure as discussed in Section 
+application of more involved PDE models,
+ including generalization of the existing three prototypes beyond the two-dimensional settings and the usage of discretization schemes beyond the generic square mesh structure as discussed in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "def:Space-mesh"
@@ -2006,13 +2025,12 @@ nolink "false"
 
 \end_inset
 
-the generation of quality mesh,
- as 
+,
 \end_layout
 
 \begin_layout Itemize
-more advanced masking strategies,
- such as varying masking value as proposed in 
+implementation of more advanced masking strategies,
+ such as varying masking value as proposed in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Masking"
@@ -2023,28 +2041,25 @@ nolink "false"
 
 \end_inset
 
- and larger kernel for the single mask;
- other masking shapes,
- such as random masks with hider kernel,
- as well as ring-like masks to complement the existing island-style mask.
+ and larger 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+kernels
+\end_layout
+
+\end_inset
+
+ for the random mask,
+ and other mask shapes and strategies in general,
 \end_layout
 
 \begin_layout Itemize
-ML related
+augmentation with other general machine-learning techniques for training,
+ including the exploration of other loss functions and scheduling rules with the possible application of strategies such as bagging and graph-based learning.
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-bagging strategy,
- graph,
- tree
-\end_layout
-
-\begin_layout Itemize
-other loss functions
-\end_layout
-
-\end_deeper
 \begin_layout Standard
 \begin_inset Separator plain
 \end_inset

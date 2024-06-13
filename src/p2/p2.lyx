@@ -2140,6 +2140,13 @@ nolink "false"
 
 \begin_layout Note
 Complementary masks
+\begin_inset CommandInset label
+LatexCommand label
+name "note:Complementary-masks"
+
+\end_inset
+
+
 \end_layout
 
 \begin_deeper

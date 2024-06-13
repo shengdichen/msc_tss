@@ -477,519 +477,20 @@ nolink "false"
 \end_layout
 
 \begin_layout Subsubsection
-CNO
-\end_layout
-
-\begin_layout Example
-CNO
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Itemize
-GPT
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-The Continuous Neural Operator (CNO) is an advanced machine learning framework designed to efficiently learn the solutions of partial differential equations (PDEs) from continuous space-time data.
- The CNO extends the capabilities of neural operators by operating directly in the continuous domain,
- making it suitable for high-dimensional and complex PDE problems.
-\end_layout
-
-\begin_layout Itemize
-Neural Operators:
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Neural operators are a class of machine learning models that learn mappings between function spaces,
- allowing them to approximate the solutions to PDEs.
- The CNO builds upon this concept by focusing on continuous data.
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Continuous Framework:
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Unlike traditional neural networks that work on discretized data,
- the CNO operates in the continuous space-time domain.
- This is achieved through the use of integral kernels and continuous layers that can process data without relying on a fixed grid.
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Efficient Learning:
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-The CNO leverages efficient learning mechanisms that can handle large-scale and high-dimensional data.
- This includes the use of kernel integral operators and advanced neural network architectures that can generalize well across different PDEs.
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Applications:
- The CNO is applicable to a variety of PDE-driven problems across physics,
- engineering,
- and other scientific fields.
- Examples include fluid dynamics,
- electromagnetism,
- and materials science,
- where accurate and efficient solution approximations are critical.
-\end_layout
-
-\begin_layout Itemize
-Advantages:
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Continuity:
- By operating in the continuous domain,
- the CNO can provide more accurate approximations and is not limited by the resolution of discretized data.
-\end_layout
-
-\begin_layout Itemize
-Scalability:
- The framework is designed to handle high-dimensional problems efficiently,
- making it suitable for complex real-world applications.
-\end_layout
-
-\begin_layout Itemize
-Generalization:
- The CNO can generalize across different types of PDEs,
- offering a versatile tool for solving a wide range of problems.
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-In summary,
- the Continuous Neural Operator (CNO) is a powerful extension of neural operators that efficiently learns the solutions of PDEs from continuous space-time data,
- providing high accuracy and scalability for complex and high-dimensional problems.
-\end_layout
-
-\end_deeper
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-For the CNO network as introduced in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "cno"
-literal "false"
-
-\end_inset
-
- is configured with 
-\begin_inset Formula $4$
-\end_inset
-
- layers as specified in its reference implementation.
- The input and output channel counts are adapted for the specific dataset as explained for the FNO model.
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
-\begin_layout Note
-CNO configuration
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-This thesis deploys a custom implementation of the CNO algorithm adapted from the author's official repository
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-\begin_inset CommandInset href
-LatexCommand href
-name "GitHub repository"
-target "https://github.com/camlab-ethz/ConvolutionalNeuralOperator"
-literal "false"
-
-\end_inset
-
- by CNO's authors
-\end_layout
-
-\end_inset
-
-.
- Configurations of the CNO algorithm A personal implementation based on the lecture document (TODO:
- ref) is included in the repository.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float table
-placement document
-alignment document
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Tabular
-<lyxtabular version="3" rows="6" columns="5">
-<features booktabs="true" islongtable="true" longtabularalignment="center">
-<column alignment="left" valignment="top" width="0pt">
-<column alignment="left" valignment="top" width="0pt">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Option
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\qquad$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Value
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-#hidden-channels
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-16
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-#layers
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-kernel-size
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-depth
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-computation mode
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Flex Code
-status open
-
-\begin_layout Plain Layout
-JIT
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "tab:network-cno"
-
-\end_inset
-
-Configuration for UNet
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
 UNet
 \end_layout
 
 \begin_layout Definition
 UNet
+\begin_inset CommandInset label
+LatexCommand label
+name "def:network-unet"
+
+\end_inset
+
+
 \begin_inset Note Note
-status collapsed
+status open
 
 \begin_layout Itemize
 summary:
@@ -1100,10 +601,19 @@ In summary,
  making it highly effective for image segmentation tasks.
 \end_layout
 
-\begin_layout Section
+\end_deeper
+\begin_layout Plain Layout
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
 Excerpt
 \end_layout
 
+\begin_deeper
 \begin_layout Plain Layout
 The network architecture is illustrated in Figure 1.
  It consists of a contracting
@@ -1111,65 +621,23 @@ The network architecture is illustrated in Figure 1.
 
 \begin_layout Plain Layout
 path (left side) and an expansive path (right side).
- The contracting path follows
 \end_layout
 
-\begin_layout Plain Layout
-the typical architecture of a convolutional network.
- It consists of the repeated
+\begin_layout Itemize
+The contracting path follows the typical architecture of a convolutional network.
+ It consists of the repeated application of two 3x3 convolutions (unpadded convolutions),
+ each followed by a rectified linear unit (ReLU) and a 2x2 max pooling operation with stride 2 for downsampling.
+ At each downsampling step we double the number of feature channels.
 \end_layout
 
-\begin_layout Plain Layout
-application of two 3x3 convolutions (unpadded convolutions),
- each followed by
-\end_layout
-
-\begin_layout Plain Layout
-a rectified linear unit (ReLU) and a 2x2 max pooling operation with stride 2
-\end_layout
-
-\begin_layout Plain Layout
-for downsampling.
- At each downsampling step we double the number of feature
-\end_layout
-
-\begin_layout Plain Layout
-channels.
- Every step in the expansive path consists of an upsampling of the
-\end_layout
-
-\begin_layout Plain Layout
-feature map followed by a 2x2 convolution (“up-convolution”) that halves the
-\end_layout
-
-\begin_layout Plain Layout
-number of feature channels,
- a concatenation with the correspondingly cropped
-\end_layout
-
-\begin_layout Plain Layout
-feature map from the contracting path,
+\begin_layout Itemize
+Every step in the expansive path consists of an upsampling of the feature map followed by a 2x2 convolution (“up-convolution”) that halves the number of feature channels,
+ a concatenation with the correspondingly cropped feature map from the contracting path,
  and two 3x3 convolutions,
- each fol-
-\end_layout
-
-\begin_layout Plain Layout
-lowed by a ReLU.
- The cropping is necessary due to the loss of border pixels in
-\end_layout
-
-\begin_layout Plain Layout
-every convolution.
- At the final layer a 1x1 convolution is used to map each 64-
-\end_layout
-
-\begin_layout Plain Layout
-component feature vector to the desired number of classes.
- In total the network
-\end_layout
-
-\begin_layout Plain Layout
-has 23 convolutional layers.
+ each followed by a ReLU.
+ The cropping is necessary due to the loss of border pixels in every convolution.
+ At the final layer a 1x1 convolution is used to map each 64-component feature vector to the desired number of classes.
+ In total the network has 23 convolutional layers.
 \end_layout
 
 \begin_layout Plain Layout
@@ -1208,15 +676,11 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-(TODO:
- rewrite this paragraph) Consisting of a contracting encoder and a expanding decoder,
- where the encoder follows the typical CNN architecture,
- to perform a downsampling with stride 
-\begin_inset Formula $2$
-\end_inset
-
-.
- The encoder then expands step-wise the feature channels to the output cardinality.
+The UNet network consists of a contracting encoder and a expanding decoder,
+ where the encoder follows the typical CNN architecture to repeatedly apply convolution with activation and max-pooling to achieve the downsampling effect.
+ Afterwards,
+ the expansive path performs upsampling coupled with convolution and cropping,
+ before mapping to the desired output size with the final layer.
 \end_layout
 
 \end_deeper
@@ -1233,9 +697,19 @@ UNet configuration
 
 \begin_deeper
 \begin_layout Standard
-This thesis deploys a custom implementation of the UNet algorithm.
- A personal implementation based on the lecture document (TODO:
- ref) is included in the repository.
+This thesis deploys a custom implementation of the UNet algorithm based on the original implementation of its authors.
+ The default configuration of this implementation is provided in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:network-unet"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
 \end_layout
 
 \end_deeper
@@ -1574,7 +1048,19 @@ name "tab:network-unet"
 
 \end_inset
 
-Configuration for UNet
+Configuration for the UNet network,
+ introduced in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:network-unet"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1582,6 +1068,574 @@ Configuration for UNet
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+CNO
+\end_layout
+
+\begin_layout Definition
+CNO
+\begin_inset CommandInset label
+LatexCommand label
+name "def:network-cno"
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Itemize
+GPT
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+The Continuous Neural Operator (CNO) is an advanced machine learning framework designed to efficiently learn the solutions of partial differential equations (PDEs) from continuous space-time data.
+ The CNO extends the capabilities of neural operators by operating directly in the continuous domain,
+ making it suitable for high-dimensional and complex PDE problems.
+\end_layout
+
+\begin_layout Itemize
+Neural Operators:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Neural operators are a class of machine learning models that learn mappings between function spaces,
+ allowing them to approximate the solutions to PDEs.
+ The CNO builds upon this concept by focusing on continuous data.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Continuous Framework:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Unlike traditional neural networks that work on discretized data,
+ the CNO operates in the continuous space-time domain.
+ This is achieved through the use of integral kernels and continuous layers that can process data without relying on a fixed grid.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Efficient Learning:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+The CNO leverages efficient learning mechanisms that can handle large-scale and high-dimensional data.
+ This includes the use of kernel integral operators and advanced neural network architectures that can generalize well across different PDEs.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Applications:
+ The CNO is applicable to a variety of PDE-driven problems across physics,
+ engineering,
+ and other scientific fields.
+ Examples include fluid dynamics,
+ electromagnetism,
+ and materials science,
+ where accurate and efficient solution approximations are critical.
+\end_layout
+
+\begin_layout Itemize
+Advantages:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Continuity:
+ By operating in the continuous domain,
+ the CNO can provide more accurate approximations and is not limited by the resolution of discretized data.
+\end_layout
+
+\begin_layout Itemize
+Scalability:
+ The framework is designed to handle high-dimensional problems efficiently,
+ making it suitable for complex real-world applications.
+\end_layout
+
+\begin_layout Itemize
+Generalization:
+ The CNO can generalize across different types of PDEs,
+ offering a versatile tool for solving a wide range of problems.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+In summary,
+ the Continuous Neural Operator (CNO) is a powerful extension of neural operators that efficiently learns the solutions of PDEs from continuous space-time data,
+ providing high accuracy and scalability for complex and high-dimensional problems.
+\end_layout
+
+\end_deeper
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+A fairly involved network designed specifically for the purpose of PDE learning,
+ the CNO network as introduced in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cno"
+literal "false"
+
+\end_inset
+
+ adapts traditional CNNs to preserve properties of the underlying PDE solution operators in continuous space to achieve equivalence between the discrete and the continuous spaces of the resulting model.
+\end_layout
+
+\begin_layout Standard
+Based on the UNet structure as introduced previously in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:network-unet"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ the CNO network structure begins with a lifting layer to expand the channel-count,
+ followed by a series of consecutive upsampling and downsampling with activation.
+ The final output is obtained via an iterative procedure with a projection operator.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+CNO configuration
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+This thesis deploys a custom implementation of the CNO algorithm adapted from the author's official repository
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+name "GitHub repository"
+target "https://github.com/camlab-ethz/ConvolutionalNeuralOperator"
+literal "false"
+
+\end_inset
+
+ by CNO's authors
+\end_layout
+
+\end_inset
+
+.
+ Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:network-cno"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ enumerates the default configuration of this implementation as used in the project.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+continuous attempts to learn PDE solution operators
+\end_layout
+
+\begin_layout Plain Layout
+is configured with 
+\begin_inset Formula $4$
+\end_inset
+
+ layers as specified in its reference implementation.
+ The input and output channel counts are adapted for the specific dataset as explained for the FNO model.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="5">
+<features booktabs="true" islongtable="true" longtabularalignment="center">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Option
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\qquad$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Value
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+#hidden-channels
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+#layers
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+kernel-size
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+depth
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+computation mode
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+JIT
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:network-cno"
+
+\end_inset
+
+Configuration for the custom implementation of the CNO network,
+ introduced in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:network-cno"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
 \end_inset
 
 
@@ -3613,7 +3667,11 @@ Number of possible permutations of
 
  total ordering possibilities,
  two of them are generally acceptable.
- Continuing with the minimal example above with the space-grid as defined in 
+ With a space-grid of resolution 
+\begin_inset Formula $64$
+\end_inset
+
+ as defined in 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "def:Space-mesh"
@@ -3628,8 +3686,8 @@ nolink "false"
  these two orderings yield respectively:
 \begin_inset Formula 
 \[
-\text{dataset-shape}\doteq\left\langle \begin{alignedat}{2} & \: & \Bigl[i,64,64,3\Bigr]\\
- &  & \Bigl[i,3,64,64\Bigr]
+\text{dataset-shape}\doteq\left\langle \begin{alignedat}{2} &  & \Bigl[i,3,64,64\Bigr]\\
+ &  & \Bigl[i,64,64,3\Bigr]
 \end{alignedat}
 \right.
 \]
@@ -3804,13 +3862,6 @@ Dataset
 
 \end_deeper
 \begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
-\begin_layout Example
 \begin_inset Separator plain
 \end_inset
 
