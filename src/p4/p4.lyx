@@ -143,12 +143,7 @@ out-of-distribution
 \end_inset
 
  evaluation.
- While projects such as (TODO:
- uncomment this ref when done!!!!!!!) 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
+ While projects such as 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "cno"
@@ -156,13 +151,9 @@ literal "false"
 
 \end_inset
 
-
-\end_layout
-
-\end_inset
-
  adjust the raw (unmasked) datasets directly by changing the value(s) of the model parameters(s),
- this thesis exploits the tunable nature of both the random and the island style masking as introduced in Section 
+ this thesis exploits the tunable nature of masking.
+ Recalling the masking procedure as introduced in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Masking"
@@ -173,8 +164,8 @@ nolink "false"
 
 \end_inset
 
-:
- out-of-distribution evaluation is realized by a combination of the following two key components of a mask:
+,
+ one observes that out-of-distribution evaluation can be achieved by a combination of the following two key configurable components of masking:
 \end_layout
 
 \begin_layout Itemize
@@ -412,9 +403,8 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="5" columns="10">
+<lyxtabular version="3" rows="5" columns="9">
 <features booktabs="true" islongtable="true" longtabularalignment="center">
-<column alignment="left" valignment="top" width="0pt">
 <column alignment="left" valignment="top" width="0pt">
 <column alignment="left" valignment="top" width="0pt">
 <column alignment="center" valignment="top">
@@ -438,16 +428,7 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-Regime
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Intensity type
+Regime (intensity type)
 \end_layout
 
 \end_inset
@@ -456,7 +437,7 @@ Intensity type
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $\qquad\qquad$
+\begin_inset Formula $\qquad\;$
 \end_inset
 
 
@@ -536,16 +517,7 @@ max
 \begin_inset Text
 
 \begin_layout Plain Layout
-Full
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-generic
+Full (generic)
 \end_layout
 
 \end_inset
@@ -659,16 +631,7 @@ generic
 \begin_inset Text
 
 \begin_layout Plain Layout
-Low
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-specialized
+Low (specialized)
 \end_layout
 
 \end_inset
@@ -782,16 +745,7 @@ specialized
 \begin_inset Text
 
 \begin_layout Plain Layout
-Middle
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-specialized
+Middle (specialized)
 \end_layout
 
 \end_inset
@@ -905,16 +859,7 @@ specialized
 \begin_inset Text
 
 \begin_layout Plain Layout
-High
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-specialized
+High (specialized)
 \end_layout
 
 \end_inset
@@ -1305,9 +1250,6 @@ or
 
  (of random mask) is deemed out-of-distribution.
  
-\end_layout
-
-\begin_layout Standard
 \begin_inset Note Note
 status collapsed
 
@@ -1350,6 +1292,595 @@ out:
 \end_layout
 
 \end_deeper
+\begin_layout Plain Layout
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Float table
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="9">
+<features booktabs="true" islongtable="true" longtabularalignment="center">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Regime (intensity type)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\qquad\;$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mathbb{E}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+spread
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+min
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+max
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Full (generic)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+All of island + ring
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+50%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\quad\;\hat{=}\quad\;\;$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+100%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Low 20%-40%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+all of island + all of +ring
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\quad\;\hat{=}\quad\;\;$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+20%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+40%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Middle (specialized)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+50%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\quad\;\hat{=}\quad\;\;$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+40%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+60%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+High (specialized)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+70%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\quad\;\hat{=}\quad\;\;$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+60%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+80%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:in-vs-out-dist"
+
+\end_inset
+
+In-distribution VS out-of-distribution modes
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
 
@@ -1420,7 +1951,18 @@ Recalling that for the full intensity range studied in this section,
 \end_layout
 
 \begin_layout Standard
-The error plots depict error values up to 
+As the lower baseline,
+ a dashed line is drawn at 
+\begin_inset Formula $5\%$
+\end_inset
+
+ to indicate excellent performance;
+ a hand-wavy higher baseline is chosen at 
+\begin_inset Formula $15\%$
+\end_inset
+
+.
+ The error plots depict error values up to 
 \begin_inset Formula $17.5\%$
 \end_inset
 
@@ -1977,6 +2519,19 @@ It should be pointed out that masks of the same intensity and variant are used f
  One shall also recall this exact procedure in use when generating the training dataset.
 \end_layout
 
+\begin_layout Standard
+Additionally,
+ the higher baseline is raised from 
+\begin_inset Formula $15\%$
+\end_inset
+
+ to 
+\begin_inset Formula $25\%$
+\end_inset
+
+ to cater for potentially more volatile model performance.
+\end_layout
+
 \end_deeper
 \begin_layout Standard
 \begin_inset Separator plain
@@ -2324,51 +2879,14 @@ middle regime:
 \end_layout
 
 \begin_layout Standard
-Unlike the full-range masks as studied in the previous section
-\end_layout
-
-\begin_layout Standard
-Continuing with the plotting conventions specified previously 
+Continuing with the plotting conventions specified previously,
+ one observes the following additional rules to facilitate error analysis:
 \end_layout
 
 \begin_layout Definition
-Visual aids
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-Several visual cues are provided as well:
-\end_layout
-
-\begin_layout Itemize
-for specialized training ranges,
- i.e.,
- those not from the entire 
-\begin_inset Formula $0\%-100\%$
-\end_inset
-
- range,
- the vertical shaded bar indicate evaluation datasets where the masking intensities agree with those during training
-\end_layout
-
-\begin_layout Itemize
-as low baseline,
- a dashed line is drawn at 
-\begin_inset Formula $5\%$
-\end_inset
-
- to indicate excellent performance;
- a handwavy baseline is chosen at the 
-\begin_inset Formula $15\%$
-\end_inset
-
- and 
-\begin_inset Formula $25\%$
-\end_inset
-
- as a handwavy baseline performance for the single and double masked masks respectively.
+Visual aids specialized ranges
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Itemize
 each sub-figure shows the 
@@ -2437,6 +2955,43 @@ the left column indicates evaluation on low masking intensity,
 \end_inset
 
 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+evaluation datasets where the masking intensities agree with those during training,
+ corresponding
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+For the three specialized training ranges nominated above,
+ a vertical shaded bar indicate the masking intensity range used during training.
+\end_layout
+
+\begin_layout Standard
+One recalls that,
+ unlike the full-range masks studied in the previous section,
+ it is now possible to achieve out-of-distribution even when evaluating with the random-style mask:
+ as pointed out in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:in-vs-out-distribution"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ if the intensity range is outside the shaded range,
+ the evaluation is out-of-distribution.
 \end_layout
 
 \end_deeper
@@ -2447,16 +3002,12 @@ the left column indicates evaluation on low masking intensity,
 
 \end_layout
 
-\begin_layout Standard
-Unlike the previous section,
- the results here are grouped by equation types.
-\end_layout
-
 \begin_layout Subsection
 The Poisson Equation
-\end_layout
+\begin_inset Note Note
+status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 To continue the analysis of the models,
  the specialized single models are evaluated as follows.
  One recalls that three specialized ranges are studied in this project:
@@ -2467,9 +3018,245 @@ To continue the analysis of the models,
 ...
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 To begin the analysis,
  the plots of the Poisson Equation in all three specialized ranges are shown:
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+Poisson equation,
+ specialized masks
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+To begin the analysis,
+ results of the single-mask Poisson equation are shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:result-poisson-single-specialized"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+One begins by observing the 3 plots on the 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+left-most
+\end_layout
+
+\end_inset
+
+ column,
+ which depict the model performance using the same (random) style for evaluation as for training.
+ With the usual exception of KNO,
+ the striking phenomenon is the 
+\begin_inset Quotes xld
+\end_inset
+
+shifting U shape
+\begin_inset Quotes xrd
+\end_inset
+
+,
+ with the low point perfectly matching the horizontal position of the shaded bars.
+ This leads to the key property of 
+\begin_inset Quotes xld
+\end_inset
+
+locality
+\begin_inset Quotes xrd
+\end_inset
+
+ of specialized masking ranges:
+ if training and evaluation are both performed using the random masks,
+ the closer the evaluation intensity range is to that of training,
+ the lower the errors.
+\end_layout
+
+\begin_layout Standard
+This 
+\begin_inset Quotes xld
+\end_inset
+
+locality
+\begin_inset Quotes xrd
+\end_inset
+
+ property contrasts sharply with the previous observation for the full intensity mask where the evaluation errors generally increase with higher intensity,
+ errors now increase with intensities higher and 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+lower
+\end_layout
+
+\end_inset
+
+ than the training intensity.
+ This effect is magnified for the plot on the lower-left corner,
+ where the model is trained on the high intensity regime of 
+\begin_inset Formula $i\in\left[60\%;80\%\right]$
+\end_inset
+
+:
+ here,
+ the errors are almost at the 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+lowest
+\end_layout
+
+\end_inset
+
+ for higher masking intensities,
+ flipping the error curve almost completely to the steadily increasing error curve seen so far in full-range masks.
+ Also,
+ for the middle intensity regime 
+\begin_inset Formula $i\in\left[40\%;60\%\right]$
+\end_inset
+
+,
+ an almost perfect U-shaped error curve is shown for FNO,
+ CNO and UNet.
+\end_layout
+
+\begin_layout Standard
+Switching to the 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Itemize
+Within each channel:
+ same story as single mask
+\end_layout
+
+\begin_layout Itemize
+Across channel:
+ Two channels have very similar performance
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Single Masking
+\end_layout
+
+\begin_layout Definition
+Locality of masking
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Conjecture
+Locality of masks
+\end_layout
+
+\begin_layout Plain Layout
+By studying only the plots on the left,
+ where the masking-type of evaluation agrees with that during training,
+ the immediate conclusion follows:
+\end_layout
+
+\begin_layout Itemize
+For FNO,
+ CNO and UNet,
+ for evaluation intensities the models perform best on masks trained on intensities close to that during training
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+in-distribution performance:
+ visible,
+ but only small increase of error for models trained on higher masking intensities:
+\end_layout
+
+\begin_layout Itemize
+The immediate
+\end_layout
+
+\begin_layout Itemize
+Surprisingly,
+ for models trained on the high intensities evaluate worse on lower intensities evalutaion sets.
+\end_layout
+
+\end_deeper
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+When training and evaluation are both performed using the random-style masks as defined in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:masking-random"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ evaluation errors are generally lower if the masking intensity (or the intensity range) is closer to that used for training,
+ increasing steadily with larger discrepancies between evaluation and training intensity.
+\end_layout
+
+\begin_layout Standard
+This observation conforms well to the proposed differentiation between in and out-of-distribution discussed previously in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:in-vs-out-distribution"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+:
+ with both training and evaluation using random-masks,
+ the in-distribution error is thus consistently lower than the out-of-distribution counterpart.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2487,6 +3274,10 @@ status open
 	filename ../../bin/poisson/sum_of_sine-train_1800--random_0.2_0.4.png
 	width 16cm
 
+\end_inset
+
+
+\begin_inset VSpace 5mm
 \end_inset
 
 
@@ -2546,21 +3337,6 @@ name "fig:result-poisson-single-specialized"
 
 \end_layout
 
-\begin_layout Conjecture
-Poisson Equation,
- specialized ranges:
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-errors are small in the ranges that the models are trained on
-\end_layout
-
-\begin_layout Itemize
-errors increase with larger discrepancy of masking intensity
-\end_layout
-
-\end_deeper
 \begin_layout Standard
 \begin_inset Separator plain
 \end_inset
@@ -2568,45 +3344,17 @@ errors increase with larger discrepancy of masking intensity
 
 \end_layout
 
-\begin_layout Conclusion
-Locality of masks
-\end_layout
-
-\begin_deeper
 \begin_layout Standard
-By studying only the plots on the left,
- where the masking-type of evaluation agrees with that during training,
- the immediate conclusion follows:
-\end_layout
-
-\begin_layout Itemize
-For FNO,
- CNO and UNet,
- for evaluation intensities the models perform best on masks trained on intensities close to that during training
-\end_layout
-
-\begin_layout Itemize
-in-distribution performance:
- visible,
- but only small increase of error for models trained on higher masking intensities:
- 
-\end_layout
-
-\begin_layout Itemize
-The immediate 
-\end_layout
-
-\begin_layout Itemize
-Surprisingly,
- for models trained on the high intensities evaluate worse on lower intensities evalutaion sets.
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
+\noindent
+\align center
+\begin_inset Newpage clearpage
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsubsection
+Double Masking
 \end_layout
 
 \begin_layout Standard
@@ -2638,7 +3386,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:result-poisson-single-specialized-1"
+name "fig:result-poisson-double-0.2-0.4"
 
 \end_inset
 
@@ -2662,24 +3410,10 @@ name "fig:result-poisson-single-specialized-1"
 
 \end_layout
 
-\begin_layout Conclusion
-Double masks
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Within each channel:
- same story as single mask
-\end_layout
-
-\begin_layout Itemize
-Across channel:
- Two channels have very similar performance
-\end_layout
-
-\end_deeper
 \begin_layout Standard
-\begin_inset Separator plain
+\noindent
+\align center
+\begin_inset Newpage clearpage
 \end_inset
 
 
@@ -2764,6 +3498,15 @@ name "fig:result-poisson-double-0.4-0.6"
 \end_layout
 
 \begin_layout Standard
+\noindent
+\align center
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2780,6 +3523,9 @@ nolink "false"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 placement document
 alignment document
@@ -2839,7 +3585,10 @@ name "fig:result-poisson-double-0.6-0.8"
 \end_layout
 
 \begin_layout Standard
-This is thus the result.
+\begin_inset Newpage clearpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -2847,8 +3596,66 @@ Heat Equation
 \end_layout
 
 \begin_layout Standard
-In the following,
- the results of the other models are shown:
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:result-heat-0.2-0.4"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ shows the 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ performance graphs of the four networks trained on the heat equation dataset as defined in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Heat-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ post-processed with the random-style mask of with intensity sampled from the range 
+\begin_inset Formula $\left[20\%;40\%\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The three plots in the first row depict errors of the single-mask problem.
+ Here,
+ the locality effect is almost completely absent,
+ with CNO and UNet performing better in non-local,
+ out-of-distribution settings,
+ contrary to the locality theory.
+\end_layout
+
+\begin_layout Standard
+The double-masking scenario is represented on the two lower rows.
+ Here,
+ one observes that the additional channel to learn (channel 1 in figure title) significantly changes the overall performance of the first channel (channel 0).
+ In fact,
+ even the in-distribution performance on the left bears no semblance between the single and double masking variants.
+ Also,
+ for evaluation using the island and the ring style with double masking,
+ the errors increase steadily with higher masking intensities,
+ with all four networks performing similarly to each other.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2915,7 +3722,7 @@ name "fig:result-heat-0.2-0.4"
 \begin_inset Formula $L^{2}$
 \end_inset
 
- error:
+ error-plot:
  heat equation,
  masking intensity 
 \begin_inset Formula $\left[20\%;40\%\right]$
@@ -2938,6 +3745,61 @@ name "fig:result-heat-0.2-0.4"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:result-heat-0.4-0.6"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ shows the 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ performance graphs of the four networks trained on the heat equation dataset as defined in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Heat-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ post-processed with the random-style mask of with intensity sampled from the range 
+\begin_inset Formula $\left[40\%;60\%\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The typical U-shaped error curve is observed for the double-masking evaluation mode with random-style.
+ However,
+ also striking is the almost unvarying error curves of all models in the single mask mode,
+ in particular,
+ CNO and UNet both perform admirably,
+ with an almost constant error slightly exceeding 
+\begin_inset Formula $2.5\%$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -3006,8 +3868,8 @@ name "fig:result-heat-0.4-0.6"
 
  error-plot:
  heat-equation;
- double mask,
- 0.4-0.6
+ singe and double mask,
+ 40%-60%
 \end_layout
 
 \end_inset
@@ -3018,6 +3880,81 @@ name "fig:result-heat-0.4-0.6"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:result-heat-0.6-0.8"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ shows the 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ performance graphs of the four networks trained on the heat equation dataset as defined in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Heat-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ post-processed with the random-style mask of with intensity sampled from the range 
+\begin_inset Formula $\left[60\%;80\%\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+While the locality effect of masking is visible for the two lower plots on the left,
+ it it appears to have little effect for the single mask problem shown in the upper left corner.
+ Interestingly,
+ also for the single-mask problem,
+ KNO's common trend of steadily increasing error appears have been 
+\begin_inset Quotes xld
+\end_inset
+
+counter-acted
+\begin_inset Quotes xrd
+\end_inset
+
+ by the high masking intensity during training.
+\end_layout
+
+\begin_layout Standard
+Similar to previous observation as seen with Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:result-heat-0.4-0.6"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ the single-mask problem displays almost constant performance for all models (TODOO:
+ MAYBE REWRITE?)
 \end_layout
 
 \begin_layout Standard
@@ -3086,8 +4023,8 @@ name "fig:result-heat-0.6-0.8"
 
  error-plot:
  heat-equation;
- double mask,
- 0.6-0.8
+ single and double mask,
+ 60%-80%
 \end_layout
 
 \end_inset
@@ -3095,6 +4032,13 @@ name "fig:result-heat-0.6-0.8"
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
 \end_inset
 
 
@@ -3104,17 +4048,72 @@ name "fig:result-heat-0.6-0.8"
 Wave Equation
 \end_layout
 
+\begin_layout Example
+Wave equation,
+ single mask,
+ low-regime
+\end_layout
+
+\begin_deeper
 \begin_layout Standard
-The wave equation results follow the patterns observed previously.
- These are thus the results of the wave equation:
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:result-wave-special-0.4-0.6"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ shows the 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ performance graphs of the four networks trained on the heat equation dataset as defined in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Wave-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ post-processed with the random-style mask of with intensity sampled from the range 
+\begin_inset Formula $\left[20\%;40\%\right]$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-Some anomalies are to be observed here:
+The results follow the patterns observed previously:
+ for the plots on the left,
+ i.e.,
+ random-masks for both evaluation and training,
+ the errors are lowest in the shaded masking range,
+ conforming to the locality argument.
 \end_layout
 
-\begin_layout Enumerate
-ffdfas
+\begin_layout Standard
+It should be pointed out that FNO performs exceptionally well for the single mask regime,
+ with evaluation errors always below the lower baseline of 
+\begin_inset Formula $5\%$
+\end_inset
+
+ for both in and out-of-distribution evaluation.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3178,9 +4177,8 @@ name "fig:result-wave-special-0.2-0.4"
 \end_inset
 
 MSE% plots:
- Wave equation,
- double mask,
- 0.2-0.4.
+ Wave equation;
+ low intensity-regime 20%-40%
 \end_layout
 
 \end_inset
@@ -3188,6 +4186,74 @@ MSE% plots:
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+Wave equation,
+ single mask,
+ middle-regime
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:result-wave-special-0.4-0.6"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ shows the 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ performance graphs of the four networks trained on the heat equation dataset as defined in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Wave-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ post-processed with the random-style mask of with intensity sampled from the range 
+\begin_inset Formula $\left[40\%;60\%\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For the three plots on the left,
+ the locality effect of masking is again visible with the unmistakable U-shaped error curve.
+\end_layout
+
+\begin_layout Standard
+For evaluation with the island and the ring-style masks,
+ the errors generally increase with higher masking intensities.
+ Interestingly,
+ for the double-mask problem with the island-masks,
+ both CNO and UNet perform best around a 
+\begin_inset Formula $50\%$
+\end_inset
+
+ masking intensities,
+ indicating some semblance of locality-awareness even the masking type is different!
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
 \end_inset
 
 
@@ -3268,6 +4334,79 @@ name "fig:result-wave-special-0.4-0.6"
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+Wave equation,
+ single mask,
+ high-regime
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:result-wave-special-0.6-0.8"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ shows the 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ performance graphs of the four networks trained on the heat equation dataset as defined in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Wave-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ post-processed with the random-style mask of with intensity sampled from the range 
+\begin_inset Formula $\left[60\%;80\%\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Masking locality is seen with the considerable error decrease in the shaded area on the three plots on the left.
+\end_layout
+
+\begin_layout Standard
+Once again,
+ FNO performed very well on the single-mask problem,
+ delivering almost constant sub-
+\begin_inset Formula $2.5\%$
+\end_inset
+
+ errors in both in and out-of-distribution evaluation modes.
+\end_layout
+
+\begin_layout Standard
+Otherwise,
+ for the out-of-distribution errors with island and ring style are fairly sporadic.
+ However,
+ once again,
+ CNO and UNet display locality-awareness for the double-masking problem using island-style masks,
+ where the error dips around 70% to 80%.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
 \end_inset
 
 
@@ -3942,8 +5081,8 @@ Dynamic remasking
 \end_layout
 
 \begin_layout Standard
-A specific tactic is used to regulate the training process,
- which,
+A special tactic designed to leverage properties of the masking PDE learning is used to regulate the training process.
+ This technique,
  for reasons soon to become apparent,
  is referred to as 
 \begin_inset Quotes xld
@@ -3954,11 +5093,11 @@ dynamic remasking
 \end_inset
 
 .
- Here is a quick run-down:
+ This chapter explains the dynamic remasking procedure and provides evidence for its efficacy.
 \end_layout
 
 \begin_layout Standard
-Critical to dynamic remasking is the state of staleness when training the models:
+Critical to dynamic remasking is the state of staleness during the training phase:
 \end_layout
 
 \begin_layout Definition
@@ -3975,10 +5114,20 @@ stale
 \begin_inset Quotes xrd
 \end_inset
 
- epoch is defined as a training epoch,
+ 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+epoch
+\end_layout
+
+\end_inset
+
+ is defined as a training epoch,
  after which the model's performance on the validation dataset did not improve.
  Conversely,
- a non-stale epoch 
+ the model's performance will have improved after a non-stale epoch.
 \end_layout
 
 \begin_layout Itemize
@@ -4001,16 +5150,24 @@ stale
 \end_inset
 
 ,
- if a certain number of consecutive stale epochs have been accumulated.
+ if a certain number of 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+consecutive
+\end_layout
+
+\end_inset
+
+ stale epochs have been accumulated.
  This number is a hyper-parameter of the training process and is set to 
 \begin_inset Formula $30$
 \end_inset
 
  by default in this project.
  If any epoch yields improvement of model,
- the current number of consecutive stale epochs shall,
- per definition,
- be reset.
+ the current number of consecutive stale epochs is reset per definition.
 \end_layout
 
 \end_deeper
@@ -4021,23 +5178,83 @@ stale
 
 \end_layout
 
+\begin_layout Standard
+This leads to the definition of the dynamic remasking procedure:
+\end_layout
+
 \begin_layout Definition
-Dynamic remasking
+Dynamic remasking procedure
 \end_layout
 
 \begin_deeper
 \begin_layout Standard
-The dataset is remasked after every stale mask,
+During training,
+ the dataset is 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+remasked
+\end_layout
+
+\end_inset
+
+ after every stale mask,
  i.e.,
  
 \begin_inset Formula $30$
 \end_inset
 
  stale epochs by default.
- If no improvement is made after three consecutive remasking,
+ This value is also referred to as 
+\begin_inset Quotes xld
+\end_inset
+
+remasking-frequency
+\begin_inset Quotes xrd
+\end_inset
+
+.
+ The remasking procedure applies freshly sampled masking candidates per Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "conc:Masking-procedure"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ to all instances of the dataset.
+ Note that the underlying,
+ unmasked dataset is 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+not
+\end_layout
+
+\end_inset
+
+changed during this process.
+\end_layout
+
+\begin_layout Standard
+If no improvement is made after 
+\begin_inset Formula $3$
+\end_inset
+
+ consecutive remasking,
  the training process is terminated in advance.
  Otherwise,
- training is terminated at the expiration of the maximal number of training epochs.
+ training is terminated at the expiration of the maximal number of training epochs,
+ set at 
+\begin_inset Formula $1000$
+\end_inset
+
+ for this project.
 \end_layout
 
 \end_deeper
@@ -4049,13 +5266,11 @@ The dataset is remasked after every stale mask,
 \end_layout
 
 \begin_layout Standard
-The remainder of this chapter is dedicated to showcasing the effect of the dynamic-remasking during training on the final model performance.
- The following plot show-cases the 
+The remainder of this chapter showcases the effect of applying dynamic remasking during training:
 \end_layout
 
-\begin_layout Example
-Poisson,
- full-range masking
+\begin_layout Definition
+Plotting convention
 \end_layout
 
 \begin_deeper
@@ -4071,37 +5286,22 @@ nolink "false"
 
 \end_inset
 
- demonstrates the error-plot during the training process of the UNet network using the full-range mask on the Poisson equation.
- Similar to the error-plots for single-masks as seen before,
- the high and low baselines are indicated with grey dashed lines respectively.
+ demonstrates the error-plot during the training process of the UNet network using the full intensity range 
+\begin_inset Formula $\left[0\%;100\%\right]$
+\end_inset
+
+ on the single-mask Poisson equation.
+ Similar to the error-plots analyzed in previous chapters,
+ the high and low baselines are indicated with dashed lines.
  The 
 \begin_inset Formula $x$
 \end_inset
 
- axis of the plot now indicate the training epoch number for the entire duration of the training process.
+ axis of the plot now indicates the training epoch number during the training process.
 \end_layout
 
 \begin_layout Standard
 Vertical dotted lines indicate the epoch where a remask is triggered.
-\end_layout
-
-\begin_layout Standard
-An immediate rise of the training error is visible following every remask,
- indicating that:
- 1.
- remasking imports new knowledge,
- however,
- since the increase of the training error is not astronomical,
- existing model's capability is carried over.
-\end_layout
-
-\begin_layout Standard
-More importantly,
- the model is improved on three separate occasions after the remask,
- in particular,
- immediately after the first remask,
- a better model is discovered.
- One concludes that remasking will likely provide model improvement during training.
 \end_layout
 
 \end_deeper
@@ -4124,8 +5324,8 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename ../../bin/remask/sum_of_sine-train_1800--random_0.0_1.0--unet--remask_30.png
-	width 12cm
+	filename ../../bin/remask-unet.png
+	width 15cm
 
 \end_inset
 
@@ -4147,10 +5347,13 @@ name "fig:resample-unet"
 \begin_inset Formula $L^{2}$
 \end_inset
 
- error-plot:
- wave-equation;
- double mask,
- 0.2-0.4
+ error-log of UNet during training.
+ Remask frequency:
+ 30 stale epochs;
+ maximum remasking attempts:
+ 3.
+ Observe the improvements discovered due to remasking,
+ as well as the encircled bump of training-error immediately after every remask.
 \end_layout
 
 \end_inset
@@ -4163,148 +5366,944 @@ name "fig:resample-unet"
 
 \end_layout
 
-\begin_layout Conclusion
-Characteristics of dynamic masking
+\begin_layout Example
+Discovery of improvement
 \end_layout
 
 \begin_deeper
 \begin_layout Standard
-The dynamic masking procedure as defined above offers some desirable profits for the overall learning pipeline.
- Specifically,
- it serves as a sensible early-stopping criteria,
- allowing saving of time and resource during training.
-\end_layout
-
-\begin_layout Standard
-On the other hand,
- it is found on multiple occasions to provide fresh information for the learning model during training by infusing a controlled amount of new information at every remasking run.
- The
-\end_layout
-
-\begin_layout Standard
-However,
- dynamic masking finds its greatest limitation in network models with slow,
- yet constant ongoing improvement.
- In such cases,
- the remasking criteria is almost never triggered and the functionality of this technique vanishes almost fully,
- equating approximately to running the training process without remasking at all.
-\end_layout
-
-\begin_layout Standard
-It should also be noted that the remasking routine might be considered configurable,
- but to conclude its variable optimal values would require extensive testing,
- in particular in the sense of time,
- as the inner loop is the raw training loop itself.
- Use-cases not warrantying such tuning might consider relying on the default configuration values.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-allows significant reduction of the 
-\end_layout
-
-\begin_layout Plain Layout
-The dynamic-remasking strategy used during training as introduced in the previous Chapter 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO:
- REF
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Conclusion about dynamic remasking
-\end_layout
-
-\begin_layout Itemize
-Poisson:
- Single
-\end_layout
-
-\begin_layout Itemize
-Wave:
- Double 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO!
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-Table <TODO> shows the number of training epochs at termination.
- The immediate conclusion is the dramatic reduction of time
-\end_layout
-
-\begin_layout Enumerate
-It almost always saves you (massive) number of epochs
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-compare #steps at termination
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-It almost always never costs you performance
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-two examples:
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-Poisson,
- single:
- performance at end
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-KNO
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-It could likely gives a fresh perspective (found)
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-compare:
- number of new improvements after remask VS no remask
-\end_layout
-
-\end_deeper
-\end_inset
-
-
-\begin_inset Separator plain
-\end_inset
-
-
+More importantly,
+ the model is improved on three separate occasions after the remask,
+ in particular,
+ immediately after the first remask,
+ a better model is discovered.
+ One concludes that remasking will likely provide model improvement during training.
 \end_layout
 
 \end_deeper
 \begin_layout Standard
 \begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="9" columns="6">
+<features booktabs="true" islongtable="true" longtabularalignment="center">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="right" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Epoch
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\qquad\qquad$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MSE% (eval)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Rel.
+ improvement
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+22 (pre-remask)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+11.8167%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\times$
+\end_inset
+
+1.000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+53
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+11.2453%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\times$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0.952
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+54
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+11.1899%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\times$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0.947
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+71
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+11.0914%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\times$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0.939
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+72
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+10.6254%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\times$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0.899
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+73
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+9.9109%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\times$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0.839
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+74
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+9.1208%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\times$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0.772
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+91
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+8.8084%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\times$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0.745
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:remask-bests"
+
+\end_inset
+
+Epochs of model improvement.
+ Best before remasking:
+ epoch 22,
+ MSE 
+\begin_inset Formula $11.81\%$
+\end_inset
+
+.
+ Best after remasking (epoch 53):
+ epoch 91,
+ MSE 
+\begin_inset Formula $8.80\%$
+\end_inset
+
+,
+ aka relative improvement of 
+\begin_inset Formula $\times0.745$
+\end_inset
+
+ with remasking.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
 
@@ -4341,7 +6340,7 @@ nolink "false"
 
 \begin_layout Standard
 As discussed previously,
- KNO behaves in highly recognizable ways:
+ KNO behaves in an easily recognizable manner:
  it does not seem to demonstrate any locality attachment to masking and performs generally worse in similar conditions in comparison to its competitors such as FNO.
  Figure 
 \begin_inset CommandInset ref
@@ -4438,6 +6437,651 @@ name "fig:resample-kno"
 
 \end_layout
 
+\begin_layout Conclusion
+Post-remask error-bump
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+An immediate rise of the training error is visible following every remask,
+ indicating that:
+ 1.
+ remasking imports new knowledge,
+ however,
+ since the increase of the training error is not astronomical,
+ existing model's capability is carried over.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="6">
+<features booktabs="true" islongtable="true" longtabularalignment="center">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Epoch
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\qquad\qquad$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MSE%,
+ before
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MSE%,
+ after
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Rel.
+ bump
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+53
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+3.3016%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+3.7112%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\times$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+1.124
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+122
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+2.5086%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+3.3767%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\times$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+1.346
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+152
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+2.4430%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+2.6296%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\times$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+1.076
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:remask-train-bump"
+
+\end_inset
+
+Training error bump before and after every remask
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+err-eval-pre:
+ 12.6529%;
+ err-eval-post:
+ 11.2453%
+\end_layout
+
+\begin_layout Plain Layout
+err-eval-pre:
+ 12.3543%;
+ err-eval-post:
+ 11.6577%
+\end_layout
+
+\begin_layout Plain Layout
+err-eval-pre:
+ 13.0012%;
+ err-eval-post:
+ 12.7055%
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Conclusion
+Characteristics of dynamic remasking
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+allows significant reduction of the
+\end_layout
+
+\begin_layout Plain Layout
+The dynamic-remasking strategy used during training as introduced in the previous Chapter 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO:
+ REF
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Conclusion about dynamic remasking
+\end_layout
+
+\begin_layout Itemize
+Poisson:
+ Single
+\end_layout
+
+\begin_layout Itemize
+Wave:
+ Double 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO!
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Table <TODO> shows the number of training epochs at termination.
+ The immediate conclusion is the dramatic reduction of time
+\end_layout
+
+\begin_layout Enumerate
+It almost always saves you (massive) number of epochs
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+compare #steps at termination
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+It almost always never costs you performance
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+two examples:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Poisson,
+ single:
+ performance at end
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+KNO
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+It could likely gives a fresh perspective (found)
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+compare:
+ number of new improvements after remask VS no remask
+\end_layout
+
+\end_deeper
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The dynamic masking procedure as defined above offers some desirable profits for the overall learning pipeline.
+ Specifically,
+ it serves as a sensible early-stopping criteria,
+ allowing saving of time and resource during training.
+\end_layout
+
+\begin_layout Standard
+On the other hand,
+ it is found on multiple occasions to provide fresh information for the learning model during training by infusing a controlled amount of new information at every remasking run.
+ The
+\end_layout
+
+\begin_layout Standard
+It should also be noted that the remasking routine might be considered configurable,
+ but to conclude its variable optimal values would require extensive testing,
+ in particular in the sense of time,
+ as the inner loop is the raw training loop itself.
+ Use-cases not warrantying such tuning might consider relying on the default configuration values.
+\end_layout
+
+\begin_layout Standard
+However,
+ dynamic masking finds its greatest limitation in network models with slow,
+ yet constant ongoing improvement.
+ In such cases,
+ the remasking criteria is almost never triggered and the functionality of this technique vanishes almost fully,
+ equating approximately to running the training process without remasking at all.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 \begin_inset Newpage clearpage
 \end_inset
@@ -4518,12 +7162,8 @@ nolink "false"
 \end_inset
 
  depicts the direct inspection options available to user:
- as seen previously (TODO:
- REF:
- dataset raw pics),
+ as seen with previous visualization-related plots in this thesis,
  the second row provides a 3D surface-plot to complement the 2D contour-plot of the same underlying matrix.
- Here,
- the model is trained.
  The first three columns all depict the learning target,
  i.e.,
  the solution 

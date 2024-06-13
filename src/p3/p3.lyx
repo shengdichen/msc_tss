@@ -147,13 +147,10 @@ name "subsec:Network-candidates"
 \end_layout
 
 \begin_layout Standard
-The second critical component of the learning pipeline is the network model itself.
-\end_layout
-
-\begin_layout Standard
-This thesis deploys four network models,
- each with its distinct design motivations and characteristics.
- This section enumerates these networks and provides a quick overview of their respective properties.
+A critical component of any machine-learning pipeline is the underlying network model.
+ This thesis deploys four networks,
+ each with its own distinct design motivations and characteristics.
+ This section enumerates these four networks and provides a quick overview of their respective properties and configurations as used in this project.
  It should be noted that a thorough run-down of the individual algorithms is not the goal here;
  the interested reader is referred to the referenced papers for deeper investigation.
 \end_layout
@@ -905,6 +902,24 @@ depth
 \begin_inset Text
 
 \begin_layout Plain Layout
+computation mode
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 \begin_inset Flex Code
 status open
 
@@ -914,25 +929,7 @@ JIT
 
 \end_inset
 
- computation
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-enabled
+ 
 \end_layout
 
 \end_inset
@@ -3980,11 +3977,11 @@ The model evaluates the prediction
 
 \end_inset
 
-The loss as introduced previously is now enriched with the balancing hyper-parameter 
+The loss as introduced previously is now enriched with the hyper-parameter 
 \begin_inset Formula $\lambda$
 \end_inset
 
-:
+ to balance the two masked channels:
 \begin_inset Formula 
 \[
 \begin{alignedat}{2}\text{Loss} & = &  & \mathop{\sum_{i}\left\{ \text{Res}_{i}\right\} }\\

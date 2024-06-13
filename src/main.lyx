@@ -131,6 +131,16 @@ todonotes
 
 \begin_body
 
+\begin_layout Standard
+\begin_inset External
+	template PDFPages
+	filename eigen/eigen.pdf
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Title
 Masked PDE-Learning
 \end_layout
@@ -681,7 +691,7 @@ literal "true"
 
 
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Definition
 Summary
@@ -1082,7 +1092,7 @@ Thanks (DRAFT)
 
 
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Helpers:
