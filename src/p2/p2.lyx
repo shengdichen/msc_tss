@@ -127,6 +127,13 @@ todonotes
 
 \begin_layout Section
 Discretization
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Discretization"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -944,9 +951,10 @@ masking
 \end_inset
 
 ,
- the premier concept and the very namesake of this thesis,
+ the very namesake of this thesis,
  can now be introduced.
- This section formalizes the concept of masking with concrete definition and enumerates three distinct flavors of masking deployed in this thesis.
+ This section formalizes the concept of masking,
+ identifies its configuration options and enumerates the three distinct masking flavors deployed in this thesis.
 \end_layout
 
 \begin_layout Definition
@@ -2225,10 +2233,21 @@ This thesis continues upon this strategy of constant masking value,
 
 .
  The justification of this decision stipulates a sneak-peak to the dataset normalization technique deployed in this project,
- discussed furthered in Section 
+ discussed further in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Dataset-Setup"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ and Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:Masked-dataset-generation"
 plural "false"
 caps "false"
 noprefix "false"
@@ -2493,6 +2512,13 @@ Key elements concerning the implementation of masks are listed as follows:
 
 \begin_layout Definition
 Masking API and Implementation
+\begin_inset CommandInset label
+LatexCommand label
+name "def:Masking-API"
+
+\end_inset
+
+
 \end_layout
 
 \begin_deeper
@@ -3084,52 +3110,6 @@ in which case the configurations
 \end_inset
 
 are considered tunable hyper-parameters.
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-WHERE TO PUT THISS???????
-\end_layout
-
-\begin_layout Plain Layout
-On the other hand,
- since the coordinates matrices 
-\begin_inset Formula $x_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $x_{2}$
-\end_inset
-
- are constant among all 
-\begin_inset Flex Emph
-status open
-
-\begin_layout Plain Layout
-instances
-\end_layout
-
-\end_inset
-
-,
- they remain thus by extension invariant among all 
-\begin_inset Flex Emph
-status open
-
-\begin_layout Plain Layout
-samples
-\end_layout
-
-\end_inset
-
- as well.
- Hence,
- these grid-channels require no recomputation during the super-positioning process and can be reuse from some form of pre-computation.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \end_deeper

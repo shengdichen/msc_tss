@@ -270,7 +270,9 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-This project attempts to unify existing frameworks for PDE learning under the backdrop of datasets post-processed with different types and varying proportions of masking.
+This project attempts to unify existing established frameworks PDE learning with the general machine learning practice of masking.
+ By varying three configuration options of the masking procedure during various stages of the learning pipeline,
+ the impact of masking on the trained models is studied under diverse settings using both in and out-of-distribution evaluation regimes.
 \end_layout
 
 \begin_layout Subsection
@@ -283,15 +285,15 @@ This thesis opens with generic preludial material in Part 1,
 \end_layout
 
 \begin_layout Standard
-Part 2 begins with a run-down of the fundamental concepts of this project,
- including discretization techniques and masking procedures,
- and continues to build upon them by introducing the dataset structure of PDE models under the masked settings.
-\end_layout
+Part 2 commences with a run-down of the fundamental concepts of this project,
+ including discretization techniques and masking procedures.
+ Also,
+ the three fundamental PDE prototypes of this thesis are presented along with their representative respective datasets.
+\begin_inset Note Note
+status collapsed
 
-\begin_layout Standard
-Part 3 starts by introducing the three PDE prototypes,
- alongside their respective masking properties.
- Section 
+\begin_layout Plain Layout
+Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Poisson-Equation"
@@ -326,31 +328,46 @@ nolink "false"
 \end_inset
 
  showcase the heat and the wave equations respectively.
- This serves as the transition towards the presentation of the full learning pipeline,
- covering the process from dataset assembly in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Dataset-Setup"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
+ 
+\end_layout
 
 \end_inset
 
- to model evaluation.
+
 \end_layout
 
 \begin_layout Standard
-Part 4 collects the results from previous sections and present them in order of masking types and PDE models.
- Apart from these primary evaluation objectives,
- the dynamic remasking technique is studied and justified from the perspectives of time efficiency and performance comparison.
+The four network models deployed in this project are introduced in the beginning sections of Part 3.
+ Then,
+ the construction procedure of the masked datasets is introduced.
+ With focus on the single and double-masked tasks,
+ the full learning pipeline is then specified,
+ covering the process from dataset assembly to model evaluation.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+,
+ and continues to build upon them by introducing the dataset structure of PDE models under the masked settings.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Part 4 collects the results from the masked PDE learning problem statement and presents them in order of masking types and PDE models.
+ In addition,
+ a specific training scheduling technique is studied,
+ along with alternative masking practices to justify and contrast with the default choices.
+ Part 4 concludes with an executive summary,
+ collecting all findings of this thesis in a centralized manner.
 \end_layout
 
 \begin_layout Standard
 To round up the findings of this project,
- Part 5 summarizes the results presented so far,
- with extra documentation on general project execution,
+ Part 5 provides extra documentation on general project execution,
  including time allocation and development setup.
 \end_layout
 
@@ -414,11 +431,11 @@ Related research
 \begin_layout Standard
 As this project treads on both the field of machine learning and that of applied mathematics,
  a considerable number of researches from tangent areas are referenced during its execution.
- A selection of representative sources are listed as follows:
+ A selection of representative sources is listed here:
 \end_layout
 
 \begin_layout Standard
-Methods from traditional numerical methods are mostly referenced from standard textbooks,
+Methods from traditional numerical methods are mostly sourced from standard textbooks,
  such as 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -450,7 +467,7 @@ literal "false"
 \end_inset
 
 ,
- whereas techniques specific to deep learning are mostly sourced from 
+ whereas techniques specific to deep learning are mostly consulted from 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "ml-goodfellow"
@@ -459,10 +476,19 @@ literal "false"
 \end_inset
 
 .
+ Masking as a general means for inflicting noise onto dataset is also studied in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "multimae,videomae,videomae-published"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-Operator Learning as machine learning paradigm is introduced in 
+Operator-Learning as machine learning paradigm is introduced in 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "operator-learning-intro"
@@ -474,31 +500,13 @@ literal "false"
  Algorithms representative of this paradigm studied include 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "fno,fno-neural-operator"
+key "fno,fno-neural-operator,cno"
 literal "false"
 
 \end_inset
 
 ,
- UNet 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "unet"
-literal "false"
-
-\end_inset
-
-,
- all of which are used in this thesis as potential networks.
- Masking as a general means for inflicting noise into dataset is also studied in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "multimae,videomae,videomae-published"
-literal "false"
-
-\end_inset
-
-.
+ all of which are used in this thesis as networks candidates.
 \end_layout
 
 \begin_layout Standard
@@ -595,7 +603,18 @@ Python
 \end_inset
 
  language with global type-hinting.
- A virtual environment setup is provided with 
+ Python versions no earlier than 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+3.11
+\end_layout
+
+\end_inset
+
+ is required.
+ The virtual environment setup is managed with 
 \begin_inset Flex Code
 status open
 
@@ -614,51 +633,21 @@ literal "false"
 \end_inset
 
 .
- Python versions no earlier than 
+ Automatic module testing is provided with 
 \begin_inset Flex Code
 status open
 
 \begin_layout Plain Layout
-3.9
+pytest
 \end_layout
 
 \end_inset
 
- is required
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset CommandInset href
-LatexCommand href
-name "Version requirement"
-target "https://docs.python.org/3/library/typing.html#module-contents"
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "python-pytest"
 literal "false"
-
-\end_inset
-
- of 
-\begin_inset Flex Code
-status open
-
-\begin_layout Plain Layout
-Python
-\end_layout
-
-\end_inset
-
-'s 
-\begin_inset Flex Code
-status open
-
-\begin_layout Plain Layout
-typing
-\end_layout
-
-\end_inset
-
--Module
-\end_layout
 
 \end_inset
 
@@ -681,7 +670,7 @@ literal "false"
 
 \end_inset
 
- and thus implicitly conforms to the 
+ and implicitly conforms to the 
 \begin_inset Flex Code
 status open
 
@@ -692,6 +681,19 @@ PEP8
 \end_inset
 
  standard.
+ A run-down of other software and hardware requirements are found in the closing portions of this thesis,
+ notably in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Environment-Setup"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -751,6 +753,7 @@ nolink "false"
 \end_inset
 
 .
+ All other source code modules are implemented from scratch by the author.
 \end_layout
 
 \begin_layout Subsection
@@ -783,7 +786,20 @@ Source-Code-Pro
 \end_layout
 
 \begin_layout Subsection
-Version-Tracking
+Version Tracking
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+TODO:
+ make repo;
+ make it public;
+ change the hyperlink
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -841,20 +857,6 @@ LatexCommand href
 name "PDF"
 target "https://github.com/shengdichen/msc_tss/blob/main/src/main.pdf"
 literal "false"
-
-\end_inset
-
-.
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO:
- make repo;
- make it public;
- change the hyperlink
-\end_layout
 
 \end_inset
 

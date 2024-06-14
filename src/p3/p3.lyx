@@ -124,18 +124,6 @@ todonotes
 \begin_body
 
 \begin_layout Section
-Learning Pipeline
-\end_layout
-
-\begin_layout Standard
-This section builds upon the previous chapters on PDE models,
- dataset structures,
- as well as masking,
- to build the full learning pipeline of this project,
- covering the process from dataset generation to model evaluation.
-\end_layout
-
-\begin_layout Subsection
 Network candidates
 \begin_inset CommandInset label
 LatexCommand label
@@ -151,11 +139,14 @@ A critical component of any machine-learning pipeline is the underlying network 
  This thesis deploys four networks,
  each with its own distinct design motivations and characteristics.
  This section enumerates these four networks and provides a quick overview of their respective properties and configurations as used in this project.
- It should be noted that a thorough run-down of the individual algorithms is not the goal here;
- the interested reader is referred to the referenced papers for deeper investigation.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Standard
+It should be noted that a thorough run-down of the individual algorithms is not the goal here;
+ the interested reader shall consult the referenced papers for deeper investigation.
+\end_layout
+
+\begin_layout Subsection
 FNO
 \end_layout
 
@@ -317,9 +308,7 @@ literal "false"
 \end_inset
 
  approaches operator-learning with an attempt to parameterize and learn directly in function space.
- These ambitious goals are,
- however,
- contrasted by its exceedingly simple core design,
+ These goals are realized with an exceedingly simple core design,
  as conceptually captured by the following diagram:
 \begin_inset Formula 
 \[
@@ -386,7 +375,7 @@ literal "false"
 .
  One striking characteristics of this personal implementation is the requirement of non-channel major dataset orientation,
  where the channels form the last axis of the dataset,
- serving the purpose of demonstration of this particular dataset structure as discussed previously in Section 
+ serving the purpose of demonstration of this particular dataset structure and contrasting to the discussion in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Dataset"
@@ -409,8 +398,8 @@ literal "false"
 
 \end_inset
 
- is shipped as a dependency of this project and used for systematic training for reference purposes.
- 
+ is shipped as a dependency of this project and used for systematic training for reference purposes,
+ where:
 \end_layout
 
 \begin_layout Enumerate
@@ -445,10 +434,10 @@ for both
 \begin_layout Standard
 The unmentioned parameters inherit the default value as recommended by the author.
  The number of channels for input and output are naturally inferred from the concrete problem.
- For the double-masked Poisson Equation as introduced in Example 
+ For the single-masked Poisson Equation as introduced in Example 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "exa:poisson-mask-double"
+reference "exa:Masked-dataset-in-action"
 plural "false"
 caps "false"
 noprefix "false"
@@ -458,7 +447,7 @@ nolink "false"
 
 ,
  the number of channels are 
-\begin_inset Formula $4$
+\begin_inset Formula $8$
 \end_inset
 
  and 
@@ -476,7 +465,7 @@ nolink "false"
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 UNet
 \end_layout
 
@@ -490,7 +479,7 @@ name "def:network-unet"
 
 
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Itemize
 summary:
@@ -661,7 +650,7 @@ are applied to a layer with an even x- and y-size.
 
 \begin_deeper
 \begin_layout Standard
-Originally conceived for the purpose of image segmentation,
+Originally conceived for the purpose of efficient image segmentation,
  UNet 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -670,9 +659,7 @@ literal "false"
 
 \end_inset
 
- is designed to is a convolutional neural network architecture designed for image segmentation tasks,
- particularly biomedical image segmentation with localization requirement for the underlying classification problem.
- 
+ is a convolutional neural network architecture particularly suitable for tasks such as biomedical segmentation with localization requirement for the underlying classification problem.
 \end_layout
 
 \begin_layout Standard
@@ -1073,7 +1060,7 @@ nolink "false"
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 CNO
 \end_layout
 
@@ -1242,6 +1229,16 @@ literal "false"
 \end_inset
 
  by CNO's authors
+\end_layout
+
+\end_inset
+
+ in the source module 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+src/deepl/cno.py
 \end_layout
 
 \end_inset
@@ -1641,7 +1638,14 @@ nolink "false"
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
 KNO
 \end_layout
 
@@ -1753,12 +1757,7 @@ In summary,
 
 \begin_deeper
 \begin_layout Standard
-The KNO network as introduced in is conceived to capture behavior of complex evolution.
- A 
-\end_layout
-
-\begin_layout Standard
-Designed to tackle non-linear and possibly non-autonomous dynamic systems,
+Designed to simulate and capture the behavior non-linear and possibly non-autonomous dynamic systems,
  the KNO 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1772,8 +1771,8 @@ literal "false"
  aims to models these latent dynamics with a theoretically infinite-dimensional linear Koopman operator.
  Specifically,
  after linearizing the dynamics in some appropriate observation space of choice,
- a mapping shall be created to capture all possible observations of the underlying dynamic system,
- which is then iteratively updated linearly to capture the evolution behavior.
+ a mapping shall be created to represent all possible observations of the underlying dynamic system,
+ which is then iteratively updated in a linear fashion to capture the evolution behavior.
  KNO is verified by its authors in domains such as fluid dynamics and earth physics,
  providing a probabilistic approach with fast run-time.
 \end_layout
@@ -2171,7 +2170,7 @@ src/deepl/kno.py
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Network Factory
 \end_layout
 
@@ -2186,8 +2185,8 @@ factory
 \end_inset
 
  is written to provide a concise construction interface for all networks,
- configuring each to a reasonable default in the settings of the project.
- The call-site is relieved of extra configuration details of each individual network,
+ configuring each to default settings reasonable for this project.
+ The call-site is relieved of extra configuration details of the each individual network,
  enabling a clean abstraction for network construction:
  simply calling 
 \begin_inset Flex Code
@@ -2226,6 +2225,7 @@ RHS
 The network factory also contains utilities for automatic save-load management.
  The interested reader shall study the source for more details.
 \begin_inset listings
+lstparams "language=Python"
 inline false
 status open
 
@@ -2333,20 +2333,28 @@ class Network:
 \end_layout
 
 \begin_layout Section
-Prediction Model
+Learning Pipeline
+\end_layout
+
+\begin_layout Standard
+This section builds upon the previous chapters on network models and PDE prototypes paired with the masking procedure to build the full learning pipeline from dataset generation to model evaluation.
+ To commence,
+ the masked dataset is introduced:
 \end_layout
 
 \begin_layout Subsection
 Masked Dataset
 \end_layout
 
-\begin_layout Standard
-This section enumerates the PDE models investigated in this project alongside the construction of their respective datasets for the learning pipeline.
- The common procedure for such dataset construction is described as follows:
-\end_layout
-
 \begin_layout Definition
-Dataset structure
+Masked dataset structure
+\begin_inset CommandInset label
+LatexCommand label
+name "def:Dataset-masked-structure"
+
+\end_inset
+
+
 \begin_inset Note Note
 status collapsed
 
@@ -2373,7 +2381,7 @@ channels
 
 \begin_deeper
 \begin_layout Standard
-A dataset of size 
+A masked dataset of size 
 \begin_inset Formula $i$
 \end_inset
 
@@ -2450,20 +2458,41 @@ such that the prediction of some network
 \begin_inset Formula 
 \[
 \begin{alignedat}{3} & \; & \text{NN}\left(\texttt{LHS}\right) & \longrightarrow & \; & \;\;\,\hat{\texttt{RHS}}\\
-\Longrightarrow &  & \text{error} & \,\,\simeq &  & \left\Vert \;\hat{\texttt{RHS}}-\texttt{RHS}\;\right\Vert 
+\Longrightarrow &  & \text{error} & \,\,\simeq &  & \left\Vert \;\hat{\texttt{RHS}}-\texttt{RHS}\;\right\Vert _{\:\star}
 \end{alignedat}
 \]
 
 \end_inset
 
-Note that the formulation of the error-term is deliberately vague:
- this is studied more rigorously in the upcoming sections.
+Note that the 
+\begin_inset Formula $\star$
+\end_inset
+
+-formulation of the error-term is deliberately vague:
+ this is studied more rigorously later in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Single-VS-double-masked-learning"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-Both channel-groups are,
- as the name suggests,
- a concatenation of multiple channels,
+Both 
+\begin_inset Formula $\texttt{LHS}$
+\end_inset
+
+ and 
+\begin_inset Formula $\texttt{RHS}$
+\end_inset
+
+ channel-groups are a concatenation of multiple channels,
  which typically fall into two categories:
 \end_layout
 
@@ -2526,7 +2555,7 @@ grid-channels
 \end_layout
 
 \begin_layout Standard
-The following sections explain the constituents of these PDE and grid channels,
+The following subsections explain the constituents of these grid and PDE channels,
  before introducing the construction of the masked dataset for learning and evaluation.
 \end_layout
 
@@ -2551,12 +2580,74 @@ One shall note that the coordinates matrices
  This is intentional,
  as the coordinates are constant across all instances of the dataset and require thus no re-computation during the generation procedure.
 \begin_inset Note Note
-status open
+status collapsed
 
-\begin_layout Plain Layout
+\begin_layout Enumerate
 TODOOO:
  WHERE TO PUT THIS?
  This observation is further developed in the following:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+WHERE TO PUT THISS???????
+\end_layout
+
+\begin_layout Plain Layout
+On the other hand,
+ since the coordinates matrices 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ are constant among all 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+instances
+\end_layout
+
+\end_inset
+
+,
+ they remain thus by extension invariant among all 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+samples
+\end_layout
+
+\end_inset
+
+ as well.
+ Hence,
+ these grid-channels require no recomputation during the super-positioning process and can be reuse from some form of pre-computation.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+This property is further taken advantage of in (TODO)
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -2601,16 +2692,6 @@ where the first two channels correspond to the raw coordinates of the (two-dimen
 \begin_layout Standard
 As observed above,
  these grid-channels are constant for any specific spatial grid and can be saved as such via pre-computation.
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-This property is further taken advantage of in (TODO)
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \end_deeper
@@ -2917,7 +2998,7 @@ Masking Targets
 \end_layout
 
 \begin_layout Standard
-Recalling the previous code Listing 
+Recalling Listing 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "lis:dataset-raw"
@@ -2948,7 +3029,7 @@ DatasetPDE.solve_instance() -> Sequence[torch.Tensor]
 
 serves as the key implementation detail of a PDE prototype to provide the PDE-channels relevant to the PDE at hand.
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Unsurprisingly,
@@ -2979,8 +3060,77 @@ abstract
 
 \end_layout
 
-\begin_layout Subsection
-Dataset Setup
+\begin_layout Definition
+Masked and unmasked PDE-channels
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+All available PDE-channels 
+\begin_inset Formula $\mathbf{C}^{\text{PDE}}$
+\end_inset
+
+ generated by the underlying PDE prototype are divided into two categories:
+ those targeted for masking,
+ and those kept 
+\begin_inset Quotes xld
+\end_inset
+
+as-is
+\begin_inset Quotes xrd
+\end_inset
+
+ without masking.
+\end_layout
+
+\begin_layout Standard
+This leads to two mutually exclusive sub channel-groups:
+ the masking target-group 
+\begin_inset Formula $\mathbf{C}^{\text{PDE-m}}$
+\end_inset
+
+ containing the channels 
+\begin_inset Formula $\left\{ m_{1},m_{2},\cdots\right\} $
+\end_inset
+
+ and the 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+r
+\end_layout
+
+\end_inset
+
+aw group 
+\begin_inset Formula $\mathbf{C}^{\text{PDE-r}}\coloneqq\left\{ r_{1},r_{2},\cdots\right\} $
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\left\{ \begin{alignedat}{2}\mathbf{C}^{\text{PDE-m}}\cup\mathbf{C}^{\text{PDE-r}} & \coloneqq & \; & \mathbf{C}^{\text{PDE}}\\
+\mathbf{C}^{\text{PDE-m}}\cap\mathbf{C}^{\text{PDE-r}} & \equiv &  & \diameter
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Construction
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:Dataset-Setup"
@@ -3052,12 +3202,19 @@ normalize
 \end_layout
 
 \begin_layout Standard
-With the structure of the dataset seen above,
- the construction of the dataset is detailed as follows:
+With the PDE and grid channels defined above,
+ the masked dataset is constructed as follows:
 \end_layout
 
 \begin_layout Definition
-Dataset construction
+Masked Dataset construction
+\begin_inset CommandInset label
+LatexCommand label
+name "def:Masked-Dataset-construction"
+
+\end_inset
+
+
 \begin_inset Note Note
 status collapsed
 
@@ -3086,53 +3243,32 @@ z_{i}\coloneqq\Bigl(\overbrace{\;\;\;u_{i},\,\cdots\;\;\;}^{\mathbf{C}^{\text{PD
 
 \begin_deeper
 \begin_layout Standard
-All available PDE-channels generated by the PDE prototype are divided into two categories:
- those targeted for masking,
- and those kept 
-\begin_inset Quotes xld
-\end_inset
-
-as-is
-\begin_inset Quotes xrd
-\end_inset
-
- without masking.
- Notation-wise,
- this leads to two mutually exclusive sub channel-groups:
- the masking target-group 
-\begin_inset Formula $\mathbf{C}^{\text{PDE-m}}$
-\end_inset
-
- containing the channels 
-\begin_inset Formula $\left\{ m_{1},m_{2},\cdots\right\} $
-\end_inset
-
- and the 
-\begin_inset Flex Emph
-status open
-
-\begin_layout Plain Layout
-r
-\end_layout
+Per the structure of the masked dataset in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:Dataset-masked-structure"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
 
 \end_inset
 
-aw group 
-\begin_inset Formula $\mathbf{C}^{\text{PDE-r}}\coloneqq\left\{ r_{1},r_{2},\cdots\right\} $
+,
+ every instance of the dataset 
+\begin_inset Formula $z_{i}$
 \end_inset
 
-:
-\begin_inset Formula 
-\[
-\left\{ \begin{alignedat}{2}\mathbf{C}^{\text{PDE-m}}\cup\mathbf{C}^{\text{PDE-r}} & \equiv & \; & \mathbf{C}^{\text{PDE}}\\
-\mathbf{C}^{\text{PDE-m}}\cap\mathbf{C}^{\text{PDE-r}} & \eqqcolon &  & \diameter
-\end{alignedat}
-\right.
-\]
-
+ consists of the 
+\begin_inset Formula $\texttt{LHS}_{i}$
 \end_inset
 
+ and 
+\begin_inset Formula $\texttt{RHS}_{i}$
+\end_inset
 
+ groups,
+ defined as follows respectively:
 \end_layout
 
 \begin_layout Standard
@@ -3144,7 +3280,11 @@ The
 \end_layout
 
 \begin_layout Itemize
-the target-group after being masked with masks 
+the target-group 
+\begin_inset Formula $\mathbf{C}^{\text{PDE-m}}$
+\end_inset
+
+ after being masked with masks 
 \begin_inset Formula $\mathbf{M}_{1},\mathbf{M}_{2},\cdots$
 \end_inset
 
@@ -3153,6 +3293,11 @@ the target-group after being masked with masks
 \end_inset
 
  contained therein,
+ denoted as 
+\begin_inset Formula $\mathbf{C}^{\text{PDE-m},\mathbf{M}}$
+\end_inset
+
+;
 \end_layout
 
 \begin_layout Itemize
@@ -3168,7 +3313,7 @@ the grid-group
 \begin_inset Formula $\mathbf{C}^{\text{x}}$
 \end_inset
 
- (unmodifed)
+ (unmodifed):
 \end_layout
 
 \begin_layout Standard
@@ -3209,7 +3354,7 @@ truth
  for the network to learn:
 \begin_inset Formula 
 \[
-\texttt{RHS}\coloneqq\Bigl(\overbrace{\;\;\;m_{1},\,\cdots\;\;\;}^{\mathbf{C}^{\text{PDE-m}}}\Bigr)
+\texttt{RHS}\coloneqq\Bigl(\;\overbrace{\phantom{{\displaystyle \prod}}m_{1},m_{2}\,\cdots\;\;\;\;}^{\mathbf{C}^{\text{PDE-m}}}\;\Bigr)
 \]
 
 \end_inset
@@ -3225,13 +3370,149 @@ truth
 
 \end_layout
 
-\begin_layout Example
-Masking targets
+\begin_layout Definition
+Single and double masks
+\begin_inset CommandInset label
+LatexCommand label
+name "def:single-and-double-datasets"
+
+\end_inset
+
+
 \end_layout
 
 \begin_deeper
 \begin_layout Standard
-The masking targets are listed in Table 
+A dataset constructed per Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:Masked-Dataset-construction"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ with one channel in the target-group 
+\begin_inset Formula $\mathbf{C}^{\text{PDE-m}}$
+\end_inset
+
+ is referred to as 
+\begin_inset Quotes xld
+\end_inset
+
+single-masked
+\begin_inset Quotes xrd
+\end_inset
+
+,
+ and the target-group of a 
+\begin_inset Quotes xld
+\end_inset
+
+double-masked
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset contains two channels.
+\end_layout
+
+\begin_layout Standard
+In this thesis,
+ the mask used for the two channels of double-masked datasets are always configured the same,
+ but the masked results are calculated via two separate calls of the masking routine introduced in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:Masking-API"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+:
+\begin_inset listings
+lstparams "language=Python"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+# ...init some mask-object with strategy,
+ intensity and value
+\end_layout
+
+\begin_layout Plain Layout
+
+chan_1_masked = my_mask.mask(chan_1)
+\end_layout
+
+\begin_layout Plain Layout
+
+chan_2_masked = my_mask.mask(chan_2)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In particular,
+ for the random-style mask,
+ this ensures that the masking candidates are 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+recalculated
+\end_layout
+
+\end_inset
+
+ for both channels via sampling,
+ while guaranteeing the 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+same
+\end_layout
+
+\end_inset
+
+ masking intensity (range) and value.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+Masking target-group
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+It is up to the individual PDE provider to define an 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+ordered
+\end_layout
+
+\end_inset
+
+ sequence of channels as candidates for the masking target-group.
+ For the three PDE prototypes studied in this thesis,
+ the respective masking target channels are listed in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:masking-targets"
@@ -3243,6 +3524,14 @@ nolink "false"
 \end_inset
 
 .
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3301,7 +3590,7 @@ PDE
 \begin_inset Formula $\text{1}^{\text{st}}$
 \end_inset
 
- target
+ target channel
 \end_layout
 
 \end_inset
@@ -3313,7 +3602,7 @@ PDE
 \begin_inset Formula $\text{2}^{\text{nd}}$
 \end_inset
 
- target
+ target channel
 \end_layout
 
 \end_inset
@@ -3329,7 +3618,7 @@ PDE
 </cell>
 </row>
 <row>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3380,7 +3669,7 @@ Poisson eq.
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3525,7 +3814,7 @@ name "tab:masking-targets"
 
 \end_inset
 
-Masking Targets
+Masking targets of the three PDE prototypes of interest
 \end_layout
 
 \end_inset
@@ -3538,49 +3827,49 @@ Masking Targets
 
 \end_layout
 
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
+\begin_layout Example
+Masked dataset in action
+\begin_inset CommandInset label
+LatexCommand label
+name "exa:Masked-dataset-in-action"
+
 \end_inset
 
 
-\end_layout
-
-\begin_layout Definition
-Generation
 \end_layout
 
 \begin_deeper
 \begin_layout Standard
-The following diagram captures the dataset generation procedure:
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Example
+Dataset for the Poisson Equation
 \end_layout
 
-\begin_layout Standard
+\begin_deeper
+\begin_layout Plain Layout
+For the Poisson equation,
+ the solver provides each instance of source 
+\begin_inset Formula $f_{i}$
+\end_inset
+
+ and exact solution 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+ as a tuple:
 \begin_inset Formula 
 \[
-\xymatrix{ & \text{ch}^{\text{PDE}}\ar[rd]^{\text{C}}\\
-\text{grid}\ar[ru]^{\text{A}}\ar[rd]_{\text{B}} &  & \mathds{D}^{\dagger}\ar[r]^{\text{D}} & \mathds{D}^{\ddagger}\ar[r]^{\text{E}} & *+[F]{\mathds{D}}\\
- & \text{ch}^{\text{grid}}\ar[ru]_{\text{C}}
-}
+\text{solver}\longrightarrow\left(u_{i},f_{i}\right)
 \]
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-In step A,
- the (raw) dataset generation routine is called upon to generate 
-\begin_inset Formula $i$
-\end_inset
-
- instances of PDE-channels on the chosen spatial and optionally temporal grid,
- and the grid-related channels are fetched trivially in step B.
- These channels are then assembled by the procedure previously seen in Section 
+which is then masked with a masking algorithm conforming to specifications in 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sec:Dataset"
+reference "sec:Masking"
 plural "false"
 caps "false"
 noprefix "false"
@@ -3588,38 +3877,31 @@ nolink "false"
 
 \end_inset
 
- in step C to form the first fully-shaped dataset 
-\begin_inset Formula $\mathds{D}^{\dagger}$
-\end_inset
-
- in the sense of 
-\begin_inset Flex Code
-status open
-
-\begin_layout Plain Layout
-pytorch
-\end_layout
+:
+\begin_inset Formula 
+\[
+u_{i}\longrightarrow u_{i}^{\text{mask}}
+\]
 
 \end_inset
 
-.
-\end_layout
+For the Poisson equation discretized spatially as described above,
+ the dimensions of these components are easily observed as:
+\begin_inset Formula 
+\[
+z_{i}\coloneqq\left\langle \begin{alignedat}{3}\; & \texttt{LHS}_{i} & \simeq & \; & \Bigl(i,8,64,64\Bigr)\\
+ & \texttt{RHS}_{i} & \simeq &  & \Bigl(i,1,64,64\Bigr)
+\end{alignedat}
+\right.
+\]
 
-\begin_layout Standard
-After normalizing the dataset in step D to obtain 
-\begin_inset Formula $\mathds{D}^{\ddagger}$
 \end_inset
 
-,
- the masking procedure is applied to produce the final 
-\begin_inset Formula $\mathds{D}$
-\end_inset
 
- primed for the learning pipeline.
 \end_layout
 
 \end_deeper
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Separator plain
 \end_inset
 
@@ -3663,7 +3945,7 @@ pixel
 \end_layout
 
 \begin_deeper
-\begin_layout Standard
+\begin_layout Plain Layout
 Since each component of 
 \begin_inset Formula $z_{i}$
 \end_inset
@@ -3696,7 +3978,7 @@ Since each component of
  instances is four-dimensional.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Following standard dataset format,
  the first dimension denotes the number of instances.
  There exists,
@@ -3766,13 +4048,318 @@ literal "false"
  implementation expects the second.
 \end_layout
 
-\begin_layout Standard
-also require The official FNO repository 
+\begin_layout Plain Layout
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+This is captured in the following definition:
+\begin_inset Formula 
+\[
+\left\{ \begin{alignedat}{2}\texttt{LHS}_{i} & \simeq & \; & \Bigl(i,\left(6+\text{\#channels}\right),64,64\Bigr)\\
+\texttt{RHS}_{i} & \simeq &  & \Bigl(i,1,64,64\Bigr)
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\{ \begin{alignedat}{2}\texttt{LHS}_{i} & \simeq & \; & \Bigl(i,\left(6+\text{\#channels}\right),64,64\Bigr)\\
+\texttt{RHS}_{i} & \simeq &  & \Bigl(i,2,64,64\Bigr)
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Plain Layout
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Due to Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:masking-targets"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ and Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:raw-quickref"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ an instance of the single-masked dataset for the Poisson equation on the 
+\begin_inset Formula $64^{2}$
+\end_inset
+
+ spatial grid thus follows:
+\begin_inset Formula 
+\[
+z_{i}^{\text{Poisson, single}}\coloneqq\left\langle \begin{alignedat}{5} & \; & \texttt{LHS}_{i} & \coloneqq & \; & \left[\overbrace{\;\;\;u_{i}^{\mathbf{M}},f_{i}\;\;\;}^{\mathbf{C}^{\text{PDE}}}\;,\;\underbrace{\;x_{1,2},\:\sin_{1,2},\:\cos_{1,2}\;}_{\mathbf{C}^{\text{x}}}\right] & \quad\;\simeq & \; & \Bigl(8,64,64\Bigr)\\
+ &  & \texttt{RHS}_{i} & \simeq &  & \;\Bigl[\,u_{i}\,\Bigr] & \simeq &  & \Bigl(1,64,64\Bigr)
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+where the solution and source pair 
+\begin_inset Formula $\left(u_{i},f_{i}\right)$
+\end_inset
+
+ is provided by the (raw) Poisson solver in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Poisson-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ As an example,
+ the double-masked Wave equation dataset is structured as:
+\begin_inset Formula 
+\[
+z_{i}^{\text{wave, double}}\coloneqq\left\langle \begin{alignedat}{5} & \; & \texttt{LHS}_{i} & \coloneqq & \; & \left[\overbrace{\;\;\;u_{i,t=T}^{\mathbf{M}},u_{i,t=0}^{\mathbf{M}}\;\;\;}^{\mathbf{C}^{\text{PDE}}}\;,\;\underbrace{\;\;\;x\cdots\;\;\;}_{\mathbf{C}^{\text{x}}}\right] & \quad\;\simeq & \; & \Bigl(8,64,64\Bigr)\\
+ &  & \texttt{RHS}_{i} & \simeq &  & \;\Bigl[\,u_{i,t=T},u_{i,t=0}\,\Bigr] & \simeq &  & \Bigl(2,64,64\Bigr)
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+
 \end_layout
 
 \end_deeper
 \begin_layout Standard
 \begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Masked dataset generation
+\begin_inset CommandInset label
+LatexCommand label
+name "def:Masked-dataset-generation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The following diagram captures the dataset generation procedure:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\xymatrix{ & \mathbf{C}^{\text{PDE}}\ar[rd]^{\text{C}}\\
+\text{grid}\ar[ru]^{\text{A}}\ar[rd]_{\text{B}} &  & \mathds{D}^{\dagger}\ar[r]^{\text{D}} & \mathds{D}^{\ddagger}\ar[r]^{\text{E}} & *+[F]{\mathds{D}}\\
+ & \mathbf{C}^{\text{x}}\ar[ru]_{\text{C}}
+}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In step A,
+ the (raw) dataset generation routine is called upon to generate 
+\begin_inset Formula $i$
+\end_inset
+
+ instances of PDE-channels on the chosen spatial and optionally temporal grid,
+ and the grid-related channels are fetched trivially in step B.
+ These channels are then assembled in step C to form the first fully-shaped dataset 
+\begin_inset Formula $\mathds{D}^{\dagger}$
+\end_inset
+
+ in the sense of 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+pytorch
+\end_layout
+
+\end_inset
+
+ with the structure defined above.
+ Note that at this point,
+ the masking target channels in the 
+\begin_inset Formula $\texttt{LHS}$
+\end_inset
+
+ group are 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+not
+\end_layout
+
+\end_inset
+
+ masked.
+\end_layout
+
+\begin_layout Standard
+In step D,
+ the dataset is normalized.
+ As previously hinted at in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Masking-value"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ this thesis applies the linear 
+\begin_inset Formula $\left[0,1\right]$
+\end_inset
+
+ normalization 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ml-normalization-google,ml-elem-stats-learning,ml-goodfellow"
+literal "false"
+
+\end_inset
+
+ to obtain to obtain 
+\begin_inset Formula $\mathds{D}^{\ddagger}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+With all channels scaled within the desired 
+\begin_inset Formula $\left[0,1\right]$
+\end_inset
+
+ range,
+ the masking procedure is applied to the masking target channels,
+ in order to produce the final 
+\begin_inset Formula $\mathds{D}$
+\end_inset
+
+ primed for the learning pipeline.
+ By applying the masking value 
+\begin_inset Formula $v^{\text{mask}}$
+\end_inset
+
+ from dataset-mean 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+post
+\end_layout
+
+\end_inset
+
+-normalization:
+ 
+\begin_inset Formula 
+\[
+v^{\text{mask}}\coloneqq\text{Dataset}_{\mu}^{\text{norm}}\equiv0.5
+\]
+
+\end_inset
+
+the masking procedure is guaranteed to be (mean-)neutral with respect to the output dataset 
+\begin_inset Formula $\mathds{D}$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Prediction Model
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+As the primary artifact of PDE learning is the solution 
+\begin_inset Formula $u$
+\end_inset
+
+,
+ the immediate idea is to apply masks to 
+\begin_inset Formula $u$
+\end_inset
+
+ itself to form one extra channel of the left-hand side for training.
+ In the case of the Heat and Wave Equations,
+ the solution would be the 
+\begin_inset Formula $u_{T}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Plain Layout
+The masking candidates
+\end_layout
+
+\begin_layout Plain Layout
+Each individual PDE raw dataset must indicate the channels for masking in order of their appearance,
+ i.e.,
+ the first index will be masked in single masking mode,
+ whereas the first and the second index will be masked in double mask mode.
+\end_layout
+
 \end_inset
 
 
@@ -3802,340 +4389,11 @@ nolink "false"
 \end_inset
 
 ,
- the prediction model of masked learning can now be presented.
- In this thesis,
- two principle variants are studied:
- the single and the double-mask model.
- This section describes these two models with instructions on their respective setup.
+ the prediction model of masked learning can finally be presented.
 \end_layout
 
 \begin_layout Subsubsection
-Single (Solution-) masking
-\end_layout
-
-\begin_layout Standard
-As the primary artifact of PDE learning is the solution 
-\begin_inset Formula $u$
-\end_inset
-
-,
- the immediate idea is to apply masks to 
-\begin_inset Formula $u$
-\end_inset
-
- itself to form one extra channel of the left-hand side for training.
- In the case of the Heat and Wave Equations,
- the solution would be the 
-\begin_inset Formula $u_{T}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-The masking candidates
-\end_layout
-
-\begin_layout Standard
-Each individual PDE raw dataset must indicate the channels for masking in order of their appearance,
- i.e.,
- the first index will be masked in single masking mode,
- whereas the first and the second index will be masked in double mask mode.
-\end_layout
-
-\begin_layout Standard
-This is captured in the following definition:
-\begin_inset Formula 
-\[
-\left\{ \begin{alignedat}{2}\texttt{LHS}_{i} & \simeq & \; & \Bigl(i,\left(6+\text{\#channels}\right),64,64\Bigr)\\
-\texttt{RHS}_{i} & \simeq &  & \Bigl(i,1,64,64\Bigr)
-\end{alignedat}
-\right.
-\]
-
-\end_inset
-
-
-\begin_inset Formula 
-\[
-\left\{ \begin{alignedat}{2}\texttt{LHS}_{i} & \simeq & \; & \Bigl(i,\left(6+\text{\#channels}\right),64,64\Bigr)\\
-\texttt{RHS}_{i} & \simeq &  & \Bigl(i,2,64,64\Bigr)
-\end{alignedat}
-\right.
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Definition
-Dataset (TODOOO:
- rewrite)
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-Conforming to 
-\begin_inset Flex Code
-status open
-
-\begin_layout Plain Layout
-pytorch
-\end_layout
-
-\end_inset
-
-'s 
-\begin_inset Flex Code
-status open
-
-\begin_layout Plain Layout
-Dataset
-\end_layout
-
-\end_inset
-
- API,
- each instance of a dataset is provided as:
-\begin_inset Formula 
-\[
-\left\{ \begin{alignedat}{2}\texttt{LHS}_{i} & \coloneqq & \; & \Bigl[u_{i}^{\text{mask}},f_{i},x_{1},x_{2}\Bigr]\\
-\texttt{RHS}_{i} & \coloneqq &  & \Bigl[\,u_{i}\,\Bigr]
-\end{alignedat}
-\right.
-\]
-
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
-\begin_layout Example
-Dataset for the Poisson Equation
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-For the Poisson equation,
- the solver provides each instance of source 
-\begin_inset Formula $f_{i}$
-\end_inset
-
- and exact solution 
-\begin_inset Formula $u_{i}$
-\end_inset
-
- as a tuple:
-\begin_inset Formula 
-\[
-\text{solver}\longrightarrow\left(u_{i},f_{i}\right)
-\]
-
-\end_inset
-
-which is then masked with a masking algorithm conforming to specifications in 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Masking"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-:
-\begin_inset Formula 
-\[
-u_{i}\longrightarrow u_{i}^{\text{mask}}
-\]
-
-\end_inset
-
-For the Poisson equation discretized spatially as described above,
- the dimensions of these components are easily observed as:
-\begin_inset Formula 
-\[
-\left\{ \begin{alignedat}{2}\texttt{LHS}_{i} & \simeq & \; & \Bigl(i,8,64,64\Bigr)\\
-\texttt{RHS}_{i} & \simeq &  & \Bigl(i,1,64,64\Bigr)
-\end{alignedat}
-\right.
-\]
-
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
-\begin_layout Definition
-Prediction
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-The model evaluates the prediction 
-\begin_inset Formula $\hat{u}_{i}$
-\end_inset
-
- as follows:
-\begin_inset Formula 
-\[
-\begin{alignedat}{2}\Bigl(u_{i}^{\text{mask}},f_{i},x_{1},x_{2}\Bigr) & \stackrel{\text{model}}{\longrightarrow} & \; & \hat{u}_{i}\end{alignedat}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Using the prototypical 
-\begin_inset Formula $L^{2}$
-\end_inset
-
--residual,
- the loss is thus understood as:
-\begin_inset Formula 
-\[
-\begin{alignedat}{2}\text{Loss} & = &  & \mathop{\sum_{i}\left\{ \text{Res}_{i}\right\} }\\
- & \stackrel{L^{2}}{\equiv} &  & \mathop{\sum_{i}\Bigl\{\bigl|\,\hat{u}_{i}-u_{i}\bigr|_{2}\Bigr\}}
-\end{alignedat}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Multi-masking
-\end_layout
-
-\begin_layout Standard
-Apart from the main learning target solution 
-\begin_inset Formula $u$
-\end_inset
-
-,
- other components of the dataset can be subject to masking as well.
- This notion of 
-\begin_inset Quotes xld
-\end_inset
-
-multi-masking
-\begin_inset Quotes xrd
-\end_inset
-
- is introduced in this section with the Poisson Equation as case study:
-\end_layout
-
-\begin_layout Example
-Multi-masking on the Poisson Equation 
-\begin_inset CommandInset label
-LatexCommand label
-name "exa:poisson-mask-double"
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-The model evaluates the prediction 
-\begin_inset Formula $\hat{u}_{i}$
-\end_inset
-
- as follows:
-\begin_inset Formula 
-\[
-\begin{alignedat}{2}\Bigl(u_{i}^{\text{mask}},f_{i}^{\text{mask}},x_{1},x_{2}\Bigr) & \stackrel{\text{model}}{\longrightarrow} & \; & \Bigl(\hat{u}_{i},\hat{f}_{i}\Bigr)\end{alignedat}
-\]
-
-\end_inset
-
-The loss as introduced previously is now enriched with the hyper-parameter 
-\begin_inset Formula $\lambda$
-\end_inset
-
- to balance the two masked channels:
-\begin_inset Formula 
-\[
-\begin{alignedat}{2}\text{Loss} & = &  & \mathop{\sum_{i}\left\{ \text{Res}_{i}\right\} }\\
- & \stackrel{L^{2}}{\equiv} &  & \mathop{\sum_{i}\Bigl\{\bigl|\,\hat{u}_{i}-u_{i}\bigr|_{2}+\lambda\bigl|\,\hat{f}_{i}-f_{i}\bigr|_{2}\Bigr\}}
-\end{alignedat}
-\]
-
-\end_inset
-
-In this thesis,
- the 
-\begin_inset Formula $\lambda$
-\end_inset
-
- is chosen as:
-\begin_inset Formula 
-\[
-\lambda\coloneqq0.7
-\]
-
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Subsection
-Prediction Model
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Subsubsection
-Learning
-\end_layout
-
-\begin_layout Enumerate
-dataset
-\end_layout
-
-\begin_layout Enumerate
-pick prediction model:
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-loss function
-\end_layout
-
-\end_deeper
-\end_inset
-
-
+Setup
 \end_layout
 
 \begin_layout Definition
@@ -4193,7 +4451,7 @@ A word on batch-size
 
 \begin_deeper
 \begin_layout Standard
-It should be noted that the choice of batch-size has been a topic of major contention in the milieu of machine learning in general,
+It should be noted that the choice of batch-size has been a topic of major contention in the general milieu of machine learning,
  with researches including 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -4225,6 +4483,265 @@ The particular batch-size of
 
  as chosen in this thesis is purely decided upon via empirical observation and intuition.
  The interested reader is encourage to rerun the project code with other values for experimentation.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Single VS double-masked learning
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Single-VS-double-masked-learning"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The single and double-masked datasets in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:single-and-double-datasets"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ warrant separate treatments of their respective prediction models.
+ The case with the single-mask variant is fairly straight-forward:
+\end_layout
+
+\begin_layout Definition
+Single-masked prediction
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+\begin{alignedat}{3} & \; & \text{NN}\left(\texttt{LHS}\right) & \longrightarrow & \; & \;\;\,\hat{\texttt{RHS}}\\
+\Longrightarrow &  & \text{error} & \,\,\simeq &  & \left\Vert \;\hat{\texttt{RHS}}-\texttt{RHS}\;\right\Vert _{\:\star}
+\end{alignedat}
+\]
+
+\end_inset
+
+The model evaluates the prediction 
+\begin_inset Formula $\hat{u}_{i}$
+\end_inset
+
+ as follows:
+\begin_inset Formula 
+\[
+\begin{alignedat}{2}\Bigl(u_{i}^{\text{mask}},f_{i},x_{1},x_{2}\Bigr) & \stackrel{\text{model}}{\longrightarrow} & \; & \hat{u}_{i}\end{alignedat}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\;\left[\overbrace{\;\;\;u_{i}^{\mathbf{M}},f_{i}\;\;\;}^{\mathbf{C}^{\text{PDE}}}\;,\;\underbrace{\;x_{1,2},\:\sin_{1,2},\:\cos_{1,2}\;}_{\mathbf{C}^{\text{x}}}\right]\stackrel{\text{NN}}{\longrightarrow}\;\hat{u}_{i}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Using the prototypical 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+-residual,
+ the loss is thus understood as:
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+For the single-masked dataset,
+ the loss is calculated directly as the error of the one channel in the 
+\begin_inset Formula $\texttt{RHS}$
+\end_inset
+
+ channel group.
+ In this thesis,
+ the 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error-norm is used.
+\end_layout
+
+\begin_layout Standard
+Continuing with the single-masked Poisson equation dataset constructed in Example 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "exa:Masked-dataset-in-action"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ the model prediction of some network 
+\begin_inset Formula $\text{NN}$
+\end_inset
+
+ on this dataset is formulated as:
+\begin_inset Formula 
+\[
+\left[\:\overbrace{\;\;\;u_{i}^{\mathbf{M}},f_{i}\;\;\;}^{\mathbf{C}^{\text{PDE}}}\;,\;\underbrace{\;x_{1,2},\:\sin_{1,2},\:\cos_{1,2}\;}_{\mathbf{C}^{\text{x}}}\:\right]\;\stackrel{\text{NN}}{\longrightarrow}\;\underbrace{\;\;\;\hat{u}_{i}\;\;\;}_{\hat{\texttt{RHS}}_{i}}\qquad
+\]
+
+\end_inset
+
+Thus follows the loss function:
+\begin_inset Formula 
+\[
+\begin{alignedat}{2}\text{Loss} & = & \; & \mathop{\sum_{i}\;\biggl\{\:\left\Vert \;\hat{\texttt{RHS}}_{i}-\texttt{RHS}_{i}\;\right\Vert \:\biggr\}}\\
+ & \stackrel{L^{2}}{\equiv} &  & \mathop{\sum_{i}\;\biggl\{\:\Bigl|\:\hat{u}_{i}-u_{i}\:\Bigr|_{2}\:\biggr\}}
+\end{alignedat}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Double-mask prediction
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Subsubsection
+Multi-masking
+\end_layout
+
+\begin_layout Plain Layout
+Apart from the main learning target solution 
+\begin_inset Formula $u$
+\end_inset
+
+,
+ other components of the dataset can be subject to masking as well.
+ This notion of 
+\begin_inset Quotes xld
+\end_inset
+
+multi-masking
+\begin_inset Quotes xrd
+\end_inset
+
+ is introduced in this section with the Poisson Equation as case study:
+\end_layout
+
+\begin_layout Plain Layout
+The model evaluates the prediction 
+\begin_inset Formula $\hat{u}_{i}$
+\end_inset
+
+ as follows:
+\begin_inset Formula 
+\[
+\begin{alignedat}{2}\Bigl(u_{i}^{\text{mask}},f_{i}^{\text{mask}},x_{1},x_{2}\Bigr) & \stackrel{\text{model}}{\longrightarrow} & \; & \Bigl(\hat{u}_{i},\hat{f}_{i}\Bigr)\end{alignedat}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Due to the presence of two channels in the 
+\begin_inset Formula $\texttt{RHS}$
+\end_inset
+
+ channel group for a double-masked dataset,
+ the formulation of the error term must be adjusted accordingly.
+ To commence,
+ the dual-channel prediction of the double-masked wave equation dataset seen in Example 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "exa:Masked-dataset-in-action"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ is formulated as:
+\begin_inset Formula 
+\[
+\left[\:\overbrace{\;\;\;u_{i,t=T}^{\mathbf{M}},u_{i,t=0}^{\mathbf{M}}\;\;\;}^{\mathbf{C}^{\text{PDE}}}\;,\;\underbrace{\;\;\;x\cdots\;\;\;}_{\mathbf{C}^{\text{x}}}\:\right]\;\stackrel{\text{NN}}{\longrightarrow}\;\underbrace{\;\;\;\hat{u}_{i,t=T},\:\hat{u}_{i,t=0}\;\;\;}_{\hat{\texttt{RHS}}_{i}}\qquad
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The loss function as introduced above for the single-masked dataset is now enriched with the hyper-parameter 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ to balance the two masked channels:
+\begin_inset Formula 
+\[
+\begin{alignedat}{2}\text{Loss} & = &  & \sum_{i}\;\biggl\{\:\left\Vert \;\hat{\texttt{RHS}}_{i}-\texttt{RHS}_{i}\;\right\Vert \:\biggr\}\\
+ & \stackrel{L^{2}}{\equiv} &  & \mathop{\sum_{i}\;\biggl\{\:\Bigl|\:\hat{u}_{i,t=T}-u_{i,t=T}\:\Bigr|_{2}+\lambda\Bigl|\:\hat{u}_{i,t=0}-u_{i,t=0}\:\Bigr|_{2}\:\biggr\}}
+\end{alignedat}
+\]
+
+\end_inset
+
+In this thesis,
+ the 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ is chosen as:
+\begin_inset Formula 
+\[
+\lambda\coloneqq0.7
+\]
+
+\end_inset
+
+
 \end_layout
 
 \end_deeper

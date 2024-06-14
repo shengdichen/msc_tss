@@ -248,15 +248,28 @@ PDEs have historically been solved by numerical methods distilled from tradition
 \end_layout
 
 \begin_layout Abstract
-This project studies the effect of masking in the specific settings of PDE Learning.
- The masking procedure is formalized to identify three configuration aspects:
- the intensity,
- the sampling style,
- and the replacement value.
- Three distinct masking strategies are identified and implemented.
- Using one of the three masking strategies,
- an evaluation framework tailored for PDE Learning is established differentiating in and out-of-distribution evaluation modes.
- by modifying various combinations of the masking configurations.
+This project studies the effect of masking in the specific context of PDE Learning:
+ the procedure of generating PDE datasets incorporating multi-channel masking is streamlined,
+ allowing the formalization of a full experimentation pipeline for masked PDE learning.
+ A tailored evaluation framework is subsequently established,
+ differentiating in and out-of-distribution regimes by identifying and varying three key configuration vectors of the masking procedure.
+ Peripheral aspects of the masked learning paradigm are also explored,
+ including the deliberate usage of complimentary masking strategies targeting mutually exclusive masking patterns for training and inference,
+ as well as the deployment of a dynamic termination and scheduling mechanism.
+ Performance analyses are executed with flexible inspection tooling and plotting utilities to enable experimentation-friendly prototyping.
+\end_layout
+
+\begin_layout Abstract
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Enumerate
+intro
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+as one representative of intentional data contamination
 \end_layout
 
 \begin_layout Abstract
@@ -293,6 +306,12 @@ of work commences with a formalization of the masking concept and identifying th
 \end_layout
 
 \begin_layout Abstract
+While models trained on generic masking ranges perform better when evaluated with lower models,
+ those trained on specialized ranges display.
+ In double masking 
+\end_layout
+
+\begin_layout Abstract
 // extras
 \end_layout
 
@@ -304,22 +323,19 @@ Several tangential?
 \end_layout
 
 \begin_layout Abstract
-All source code except the network themselves are written from scratch and backed with test suites.
- Multiple tangent utilities are provided,
- including and with the goal of clean structure 
+All source code except the network themselves are implemented from scratch and backed with test suites.
+ Multiple peripheral utilities are provided,
+ including training error logging and model prediction plotting for fine-grained result inspection.
 \end_layout
 
 \begin_layout Abstract
-\begin_inset Note Note
-status open
-
-\begin_layout Enumerate
-intro
+and with the goal of clean structure 
 \end_layout
 
-\begin_deeper
 \begin_layout Enumerate
-as one representative of intentional data contamination
+The masking procedure is formalized:
+ the candidate sampling strategy,
+ the intensity range and the replacement value are identified as the three configuration vectors of the masking procedure.
 \end_layout
 
 \end_deeper
@@ -349,6 +365,11 @@ in & out of distribution
 \begin_layout Itemize
 dynamic remask:
  Effect of Masking on training
+\end_layout
+
+\begin_layout Itemize
+Using one of the three masking strategies,
+ 
 \end_layout
 
 \end_deeper
@@ -1655,7 +1676,7 @@ literal "true"
 \end_layout
 
 \begin_layout Part
-Models and Environment
+Models and Datasets
 \end_layout
 
 \begin_layout Standard
