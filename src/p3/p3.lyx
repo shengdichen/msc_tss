@@ -3432,7 +3432,19 @@ nolink "false"
 
 \end_inset
 
-:
+.
+ Listing 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lis:double-mask"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ demonstrates the syntax for performing such double masking:
 \begin_inset listings
 lstparams "language=Python"
 inline false
@@ -3452,6 +3464,21 @@ chan_1_masked = my_mask.mask(chan_1)
 \begin_layout Plain Layout
 
 chan_2_masked = my_mask.mask(chan_2)
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "lis:double-mask"
+
+\end_inset
+
+API calls for double masking
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -3484,6 +3511,35 @@ same
 \end_inset
 
  masking intensity (range) and value.
+ On the other hand,
+ for the island and the ring-style masks,
+ this recalculation step equates to resampling the masking intensity,
+ before calculating the masking candidates and setting them to the masking value.
+ Note that no resampling is necessary if the 
+\begin_inset Quotes xld
+\end_inset
+
+intensity-spread
+\begin_inset Quotes xrd
+\end_inset
+
+ is chosen as 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ See Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Masking-strategies"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ for details.
 \end_layout
 
 \end_deeper
@@ -4147,7 +4203,7 @@ nolink "false"
 \end_inset
 
 .
- As an example,
+ As another example,
  the double-masked Wave equation dataset is structured as:
 \begin_inset Formula 
 \[

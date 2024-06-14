@@ -3496,6 +3496,29 @@ nolink "false"
 :
  with both training and evaluation using random-masks,
  the in-distribution error is thus consistently lower than the out-of-distribution counterpart.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+This observation conforms well to the proposed differentiation between in and out-of-distribution discussed previously in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:in-vs-out-distribution"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+:
+ with both training and evaluation using random-masks,
+ the in-distribution error is thus consistently lower than the out-of-distribution counterpart.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_deeper
@@ -3521,10 +3544,6 @@ status open
 	filename ../../bin/poisson/sum_of_sine-train_1800--random_0.2_0.4.png
 	width 16cm
 
-\end_inset
-
-
-\begin_inset VSpace 5mm
 \end_inset
 
 
@@ -3586,15 +3605,6 @@ name "fig:result-poisson-single-specialized"
 
 \begin_layout Standard
 \begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\noindent
-\align center
-\begin_inset Newpage clearpage
 \end_inset
 
 
@@ -3868,6 +3878,13 @@ name "fig:result-poisson-double-0.4-0.6"
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
 \end_inset
 
 

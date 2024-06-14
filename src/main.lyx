@@ -238,7 +238,7 @@ ch | 17-943-358
 PDEs have historically been solved by numerical methods distilled from traditional applied mathematics.
  With the advent of the field of machine-learning as a whole,
  toolchains for PDE research now include the operator learning methodology structured around deep neural networks.
- Pertaining to machine-learning as a whole,
+ Pertaining to general machine-learning,
  on the other hand,
  much effort is expended to study algorithmic resistance to the intrinsic noisiness of data.
  Masking,
@@ -256,7 +256,7 @@ This project studies the effect of masking in the specific context of PDE Learni
  Peripheral aspects of the masked learning paradigm are also explored,
  including the deliberate usage of complimentary masking strategies targeting mutually exclusive masking patterns for training and inference,
  as well as the deployment of a dynamic termination and scheduling mechanism.
- Performance analyses are executed with flexible inspection tooling and plotting utilities to enable experimentation-friendly prototyping.
+ Performance analyses are carried out with flexible inspection tooling and plotting utilities to enable experimentation-friendly prototyping.
 \end_layout
 
 \begin_layout Abstract
