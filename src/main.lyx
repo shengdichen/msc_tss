@@ -249,14 +249,97 @@ PDEs have historically been solved by numerical methods distilled from tradition
 
 \begin_layout Abstract
 This project studies the effect of masking in the specific settings of PDE Learning.
- The work commences with a formalization of the masking concept and identifying three distinct masking strategies.
- By adjusting the 
+ The masking procedure is formalized to identify three configuration aspects:
+ the intensity,
+ the sampling style,
+ and the replacement value.
+ Three distinct masking strategies are identified and implemented.
+ Using one of the three masking strategies,
+ an evaluation framework tailored for PDE Learning is established differentiating in and out-of-distribution evaluation modes.
+ by modifying various combinations of the masking configurations.
+\end_layout
+
+\begin_layout Abstract
+Established algorithms for operator learning are deployed to solve three fundamental PDE datasets masked with either single or double masking modes.
+ Models are trained using different regimes of intensity ranges,
+ masking candidate strategy,
+ and finally different masking values.
+ 
+\begin_inset Quotes xld
+\end_inset
+
+
+\begin_inset Quotes xrd
+\end_inset
+
+of work commences with a formalization of the masking concept and identifying three distinct masking strategies.
+ By adjusting the
+\begin_inset Quotes xrd
+\end_inset
+
+
+\begin_inset Quotes xrd
+\end_inset
+
+
+\begin_inset Quotes xrd
+\end_inset
+
+
+\begin_inset Quotes xrd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+// extras
+\end_layout
+
+\begin_layout Abstract
+Several tangential?
+ aspects of masking are explored,
+ including a scheduling and termination policy to regulate the training procedure,
+ as well as toolkits for visualization of the masked dataset and the model prediction outputs for direct inspection.
+\end_layout
+
+\begin_layout Abstract
+All source code except the network themselves are written from scratch and backed with test suites.
+ Multiple tangent utilities are provided,
+ including and with the goal of clean structure 
+\end_layout
+
+\begin_layout Abstract
 \begin_inset Note Note
 status open
 
-\begin_layout Itemize
-intensity type;
- intensity range
+\begin_layout Enumerate
+intro
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+as one representative of intentional data contamination
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+On masks
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+remask
+\end_layout
+
+\begin_layout Enumerate
+intensity,
+ type,
+ value
+\end_layout
+
+\begin_layout Enumerate
+locality
 \end_layout
 
 \begin_layout Itemize
@@ -264,50 +347,44 @@ in & out of distribution
 \end_layout
 
 \begin_layout Itemize
-locality
-\end_layout
-
-\begin_layout Itemize
 dynamic remask:
  Effect of Masking on training
 \end_layout
 
-\begin_layout Plain Layout
-as one representative of intentional data contamination
+\end_deeper
+\begin_layout Enumerate
+To The concept of mask
 \end_layout
 
-\end_inset
-
-
+\begin_layout Enumerate
+On network:
 \end_layout
 
-\begin_layout Abstract
-To The concept of mask 
+\begin_deeper
+\begin_layout Enumerate
+Established networks for PDE 
 \end_layout
 
-\begin_layout Abstract
+\begin_layout Enumerate
 This project applies established models of PDE learning on datasets tainted with a diverse array of masking procedures.
- Systematic studies are conducted by varying the 
+ Systematic studies are conducted by varying the
 \end_layout
 
-\begin_layout Abstract
+\begin_layout Enumerate
+A special scheduling tactic for 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
 different masking strategies with varying intensities.
  Performance is gauged under application of different operator-learning algorithms on various quintessential PDE problems.
-\begin_inset Note Greyedout
-status open
-
-\begin_layout Plain Layout
-Conclusions drawn pertain to PDE analysis,
+ Conclusions drawn pertain to PDE analysis,
  continuous structure preservation,
  as well as robustness and accuracy benchmarking of solution operators for PDE-learning.
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Abstract
+\begin_layout Enumerate
+cutaway 
 \begin_inset Note Note
 status collapsed
 
@@ -459,6 +536,14 @@ status open
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
 \begin_inset VSpace 150baselineskip%
 \end_inset
 
@@ -1527,6 +1612,13 @@ character := {>,
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Newpage newpage
 \end_inset
 
@@ -1543,6 +1635,13 @@ LatexCommand input
 filename "p2/p2.lyx"
 literal "true"
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
 \end_inset
 
 
@@ -1571,6 +1670,13 @@ literal "true"
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Newpage newpage
 \end_inset
 
@@ -1593,6 +1699,13 @@ literal "true"
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Newpage newpage
 \end_inset
 
@@ -1609,6 +1722,13 @@ LatexCommand input
 filename "p5/p5.lyx"
 literal "true"
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
 \end_inset
 
 

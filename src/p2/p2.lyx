@@ -543,6 +543,13 @@ nolink "false"
 
 \begin_layout Example
 Space-grids in action
+\begin_inset CommandInset label
+LatexCommand label
+name "exa:Space-grids-in-action"
+
+\end_inset
+
+
 \end_layout
 
 \begin_deeper
@@ -551,8 +558,33 @@ This thesis uses a constant resolution of
 \begin_inset Formula $64$
 \end_inset
 
- for both for the purpose of spatial discretization.
- 
+ for both for the purpose of spatial discretization,
+ as also seen in existing researches including 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fno,fno-neural-operator,cno"
+pretextlist "cno"
+posttextlist "cno"
+literal "false"
+
+\end_inset
+
+.
+ This value is chosen consciously:
+ the exact 
+\begin_inset Formula $2$
+\end_inset
+
+-exponential facilitates efficient computation of the discrete Fourier transformation,
+ as explained in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fno,fno-neural-operator,cno"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -576,7 +608,7 @@ nolink "false"
  is defined as follows:
 \begin_inset Formula 
 \[
-\mathbb{R}^{64}\ni x_{1,2}^{\text{Poisson}}\coloneqq\;\left\{ \begin{alignedat}{2}\text{start} & \coloneqq0. & 0.00\\
+\mathbb{R}^{64}\ni x_{1,2}^{\text{Poisson}}\coloneqq\;\left\{ \begin{alignedat}{2}\text{start} & \coloneqq & 0.00\\
 \text{step-size} & \coloneqq & 0.01
 \end{alignedat}
 \right.
@@ -594,103 +626,6 @@ which translates to an end value of
 
 \begin_layout Standard
 The reader is referred to chapters dedicated to the specific PDE prototypes for their space grid specifications.
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
-\begin_layout Note
-Comparison with existing research
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-The space grid as deployed in existing research,
- such as 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "cno"
-literal "false"
-
-\end_inset
-
-,
- is of the same resolution of 
-\begin_inset Formula $64$
-\end_inset
-
- grid-points.
- This value is chosen consciously:
- the exact 
-\begin_inset Formula $2$
-\end_inset
-
--exponential facilitates efficient computation of the discrete Fourier transformation,
- as explained in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "fno,fno-neural-operator,cno"
-literal "false"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-In the particular example of the Poisson Equation as seen above,
- while 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "cno"
-literal "false"
-
-\end_inset
-
- also chooses the starting point of 
-\begin_inset Formula $0.0$
-\end_inset
-
- for each dimension,
- its end-point is set as 
-\begin_inset Formula $1.0$
-\end_inset
-
-.
- This thesis's space-grid specified above in Definition 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "def:Space-mesh"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
- uses a narrower grid,
- terminating at 
-\begin_inset Formula $0.63$
-\end_inset
-
-.
- This particular difference is justified in Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Poisson-Equation"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-.
 \end_layout
 
 \end_deeper
@@ -3778,7 +3713,7 @@ The
 \begin_inset Quotes xld
 \end_inset
 
-Sum-of-Sines
+sum-of-sines
 \begin_inset Quotes xrd
 \end_inset
 
@@ -3939,145 +3874,64 @@ where
 \end_layout
 
 \begin_layout Standard
-Visualization of several instances of this dataset is provided in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:dataset-poisson-sine"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-.
- This dataset is also deployed to study the Poisson Equation in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "cno"
-literal "false"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement document
-alignment document
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename ../../bin/raw_poisson_sine.png
-	width 16cm
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:dataset-poisson-sine"
-
-\end_inset
-
-Visualization of several instances of the 
-\begin_inset Quotes xld
-\end_inset
-
-Sum-of-Sines
-\begin_inset Quotes xrd
-\end_inset
-
- dataset,
- each constructed from 
-\begin_inset Formula $c_{k}\coloneqq4$
-\end_inset
-
- samples as specified in Definition 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "def:poisson-sum-of-sines"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-.
- First row:
- 
-\begin_inset Flex Code
-status open
-
-\begin_layout Plain Layout
-2D
-\end_layout
-
-\end_inset
-
- contour-plots of 
-\begin_inset Formula $4$
-\end_inset
-
- different instances of the solution 
-\begin_inset Formula $u$
-\end_inset
-
-.
- Second row:
- contour-plots and 
-\begin_inset Flex Code
-status open
-
-\begin_layout Plain Layout
-3D
-\end_layout
-
-\end_inset
-
- surface-plots of both the solution 
-\begin_inset Formula $u$
-\end_inset
-
- and the source-term 
-\begin_inset Formula $f$
-\end_inset
-
- of one (common) instance.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
+For this thesis,
+ the following configuration of these constants is used for the sum-of-sines dataset:
 \end_layout
 
 \begin_layout Example
-Configuration
+Configuration of 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-sins
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset
+\begin_inset CommandInset label
+LatexCommand label
+name "exa:raw-poisson-sines-config"
+
+\end_inset
+
+
 \end_layout
 
 \begin_deeper
 \begin_layout Standard
-For this thesis,
- the following configuration of these constants is used for the sum-of-sines dataset:
+As previewed in Example 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "exa:Space-grids-in-action"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ the following spatial grid of resolution 
+\begin_inset Formula $64$
+\end_inset
+
+ per axis is used:
+ 
+\begin_inset Formula 
+\[
+\mathbb{R}^{64}\ni x_{1,2}\coloneqq\;\left\{ \begin{alignedat}{2}\text{start} & \coloneqq & 0.00\\
+\text{step-size} & \coloneqq & 0.01
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Configurations pertaining to the dataset itself are as follows:
 \end_layout
 
 \begin_layout Itemize
@@ -4086,17 +3940,11 @@ each instance
 \end_inset
 
  is generated from 
-\begin_inset Formula $k=4$
+\begin_inset Formula $c_{k}\coloneqq4$
 \end_inset
 
  samples 
 \begin_inset Formula $u_{i}^{k\in\left\{ 1,2,3,4\right\} }$
-\end_inset
-
-,
- i.e.,
- 
-\begin_inset Formula $c_{k}\coloneqq4$
 \end_inset
 
 ;
@@ -4157,15 +4005,7 @@ manual scaling is kept neutral,
 \end_layout
 
 \begin_layout Note
-Properties of the 
-\begin_inset Quotes xld
-\end_inset
-
-Sum-of-Sines
-\begin_inset Quotes xrd
-\end_inset
-
- dataset
+Properties of the sum-of-sines dataset
 \end_layout
 
 \begin_deeper
@@ -4205,11 +4045,144 @@ u\left(x_{1}=0,\forall x_{2}\right)\equiv u\left(\forall x_{1},x_{2}=0\right)\eq
 \end_inset
 
 This dataset will thus incorporate both fixed (vanishing) and varying boundary-condition (BC) on different segments of the spatial boundary.
+ Note that this choice of mixed boundary condition is deliberate to contrast 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cno"
+literal "false"
+
+\end_inset
+
+,
+ which also used this dataset to represent the Poisson equation,
+ albeit with a uniform boundary condition with the end-point set to 
+\begin_inset Formula $1.0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Visualization of two instances of this dataset is provided in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:dataset-poisson-sine"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ where the first and the second columns depict the first 
+\begin_inset Formula $\left(u,f\right)$
+\end_inset
+
+ pair,
+ the third and fourth column the second respectively.
+ The first row shows the target matrices in a 2D contour-plot,
+ whereas the second in the corresponding 3D surface-plot.
 \end_layout
 
 \end_deeper
 \begin_layout Standard
 \begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../../bin/raw_poisson_sine.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:dataset-poisson-sine"
+
+\end_inset
+
+Visualization of the two instances of the 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of
+\begin_inset Quotes xrd
+\end_inset
+
+sines
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset for the Poisson equation given in in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:poisson-sum-of-sines"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ and configured as specified in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "exa:raw-poisson-sines-config"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ 
+\begin_inset Formula $c_{k}\coloneqq4$
+\end_inset
+
+ samples are super-positioned to generate one instance 
+\begin_inset Formula $u$
+\end_inset
+
+ as shown.
+ First instance shown in row 1 and 2,
+ second instance in 3 and 4.
+ First row:
+ 2D contour-plots,
+ second row:
+ corresponding 3D surface-plots.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
 
@@ -4225,11 +4198,11 @@ Another dataset for the Poisson equation is constructed by super-positioning the
 \begin_inset Quotes xld
 \end_inset
 
-Sum-of-Sines
+sum-of-sines
 \begin_inset Quotes xrd
 \end_inset
 
- distribution introduced previously.
+ dataset introduced previously.
 \end_layout
 
 \begin_layout Note
@@ -4239,7 +4212,7 @@ Sign modification
 \begin_deeper
 \begin_layout Standard
 In preparation of introducing this dataset,
- the target Poisson Equation as seen previously in Section 
+ the target Poisson equation as seen previously in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Poisson-Equation"
@@ -4273,7 +4246,22 @@ The reason for this adjustment is purely cosmetic and follows from the very defi
 \end_layout
 
 \begin_layout Definition
-Sum of Gaussians
+The 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-Gaussians
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset
+\begin_inset CommandInset label
+LatexCommand label
+name "def:raw-poisson-gaussian"
+
+\end_inset
+
+
 \end_layout
 
 \begin_deeper
@@ -4299,7 +4287,7 @@ where
 \begin_inset Formula $\text{Cov}^{k}$
 \end_inset
 
- are sampled from their respective random distributions 
+ are sampled from their respective (uniform) random distributions 
 \begin_inset Formula $\mathcal{U}^{\mu}\coloneqq\text{Unif}\left[c_{\text{low}}^{\mu};c_{\text{high}}^{\mu}\right]$
 \end_inset
 
@@ -4385,7 +4373,7 @@ nolink "false"
 
 ,
  
-\begin_inset Formula $4$
+\begin_inset Formula $c_{k}\coloneqq4$
 \end_inset
 
  samples of 
@@ -4427,7 +4415,11 @@ to construct the Gaussian PDFs
 \begin_inset Formula $\sigma^{k,\{1,2\}}$
 \end_inset
 
- of the diagonal covariance matrix are spawned from 
+ of the diagonal covariance matrix 
+\begin_inset Formula $\text{Cov}^{k}$
+\end_inset
+
+ are spawned from 
 \begin_inset Formula $\mathcal{U}^{\sigma}\left[0.04;0.13\right]$
 \end_inset
 
@@ -4456,7 +4448,7 @@ sum-of-sines
 \begin_inset Quotes xld
 \end_inset
 
-Sum-of-Gaussians
+sum-of-Gaussians
 \begin_inset Quotes xrd
 \end_inset
 
@@ -4510,7 +4502,7 @@ Visualization of the
 \begin_inset Quotes xld
 \end_inset
 
-Sum-of-Gaussians
+sum-of-Gaussians
 \begin_inset Quotes xrd
 \end_inset
 
@@ -4522,7 +4514,7 @@ Sum-of-Gaussians
  samples as specified in Definition 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "def:poisson-sum-of-sines"
+reference "def:raw-poisson-gaussian"
 plural "false"
 caps "false"
 noprefix "false"
@@ -4546,7 +4538,7 @@ nolink "false"
 \begin_inset Quotes xld
 \end_inset
 
-Sum-of-Sines
+sum-of-sines
 \begin_inset Quotes xrd
 \end_inset
 
@@ -4575,7 +4567,7 @@ name "subsec:Heuristic-comparisons-poisson-dataset"
 \end_layout
 
 \begin_layout Standard
-By inspecting the plots for the sum-of-sines and the sum-of-gaussians datasets in Figure 
+By inspecting the plots for the sum-of-sines and the sum-of-Gaussians datasets in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:dataset-poisson-sine"
@@ -4608,9 +4600,9 @@ smoother
 \end_inset
 
  in general,
- where instances of the sum-of-gaussians dataset are more jagged and display highly pronounced extrema.
+ where instances of the sum-of-Gaussians dataset are more jagged and display highly pronounced extrema.
  Also,
- the sum-of-gaussians dataset contains large areas of 
+ the sum-of-Gaussians dataset contains large areas of 
 \begin_inset Formula $0$
 \end_inset
 
@@ -4621,7 +4613,7 @@ smoother
 \begin_layout Standard
 For the purpose of this thesis,
  the sum-0f-sines dataset will be the primary representative of the Poisson equation from this point forward.
- The sum-of-gaussians variant provides an alternative for the interested reader if further experimentation is desired.
+ The sum-of-Gaussians variant provides an alternative for the interested reader if further experimentation is desired.
 \begin_inset Note Note
 status collapsed
 
@@ -4680,7 +4672,7 @@ Developed by Fourier in 1822,
 \end_layout
 
 \begin_layout Definition
-Dataset for Heat equation
+Dataset for heat equation
 \begin_inset CommandInset label
 LatexCommand label
 name "def:raw-heat"
@@ -4738,6 +4730,31 @@ nolink "false"
 .
 \end_layout
 
+\begin_layout Standard
+Due to the double sin-product term,
+ this dataset is internally named 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-sines
+\begin_inset Quotes xrd
+\end_inset
+
+ as well,
+ similar to the dataset for the Poisson equation seen in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:poisson-sum-of-sines"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+\end_layout
+
 \end_deeper
 \begin_layout Standard
 \begin_inset Separator plain
@@ -4778,7 +4795,7 @@ with the usual
 \end_inset
 
 .
- One thus collects the details of this dataset with the boundary conditions as follows:
+ One collects the details of this dataset with the boundary conditions as follows:
 \end_layout
 
 \begin_layout Standard
@@ -4798,7 +4815,18 @@ with the usual
 \end_layout
 
 \begin_layout Standard
-The super-positioning procedure is configured in a similar manner as for the Poisson equation datasets.
+The super-positioning procedure is configured in a similar manner as for the Poisson equation datasets in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "exa:raw-poisson-sines-config"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
  Notably,
  
 \begin_inset Formula $c_{k}\coloneqq4$
@@ -4845,7 +4873,7 @@ name "note:raw-heat-plot"
 
 \begin_deeper
 \begin_layout Standard
-Visualization of the dataset as specified as above is given in Figure 
+Visualization of the dataset as specified above is given in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:dataset-heat-raw"
@@ -5214,7 +5242,7 @@ u_{i}\coloneqq\mathop{\sum\sum\biggl\{\Bigl(\texttt{R}_{k_{1},k_{2}}\left(k_{1}^
 
 \end_inset
 
-which is easily verifiable using the Trig Laplacian property in Fact 
+which is easily verifiable using the Trig-Laplacian property in Fact 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fact:Laplacian-of-double-trig"
@@ -5244,6 +5272,22 @@ nolink "false"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Note that,
+ once again,
+ due to the presence of the double sin-product term,
+ this dataset is codenamed 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-sines
+\begin_inset Quotes xrd
+\end_inset
+
+,
+ just as the previous datasets for the Poisson and the heat equation.
 \end_layout
 
 \end_deeper
@@ -5680,11 +5724,11 @@ nolink "false"
 \begin_inset Formula $u_{t=2.5}$
 \end_inset
 
-and the final time 
+ and the final time 
 \begin_inset Formula $u_{t_{T}\coloneqq5.0}$
 \end_inset
 
-respectively.
+ respectively.
  Note that to aide the visualization of the wave-like character of the solution 
 \begin_inset Formula $u$
 \end_inset
@@ -5762,17 +5806,6 @@ class DatasetWave(DatasetPDE2d):
 
 \end_layout
 
-\begin_layout Plain Layout
-
-    def plot_animation(self) -> None:
-\end_layout
-
-\begin_layout Plain Layout
-
-        ...
-  # implementation detail not shown
-\end_layout
-
 \end_inset
 
 
@@ -5780,69 +5813,7 @@ class DatasetWave(DatasetPDE2d):
 
 \end_deeper
 \begin_layout Standard
-\begin_inset Float figure
-placement document
-alignment document
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename ../../bin/raw_wave.png
-	width 16cm
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:dataset-wave-raw"
-
-\end_inset
-
-Visualization of the wave equation dataset,
- defined in Definition 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "def:raw-wave"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
- and configured as specified in Table 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:raw-wave-config"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-.
- All figures shown are plotted using the same dynamic range.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
+\begin_inset Separator plain
 \end_inset
 
 
@@ -5927,6 +5898,82 @@ literal "false"
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../../bin/raw_wave.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:dataset-wave-raw"
+
+\end_inset
+
+Visualization of the wave equation dataset,
+ defined in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:raw-wave"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ and configured as specified in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:raw-wave-config"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ All figures shown are plotted using the same dynamic range.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Summary
 \end_layout
@@ -5936,7 +5983,7 @@ To summarize this section on the PDE models used in this thesis,
  Table 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "tab:datasets-raws"
+reference "tab:raw-quickref"
 plural "false"
 caps "false"
 noprefix "false"
@@ -5945,386 +5992,7 @@ nolink "false"
 \end_inset
 
  enumerates the three equations discussed above,
- along with their key properties.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float table
-placement document
-alignment document
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Tabular
-<lyxtabular version="3" rows="4" columns="8">
-<features booktabs="true" islongtable="true" longtabularalignment="center">
-<column alignment="left" valignment="top" width="0pt">
-<column alignment="left" valignment="top" width="0pt">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top" width="0pt">
-<column alignment="center" valignment="top" width="0pt">
-<column alignment="center" valignment="top" width="0pt">
-<column alignment="right" valignment="top" width="0pt">
-<column alignment="right" valignment="top" width="0pt">
-<row>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Equation
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\quad$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-super-pos.
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $t$
-\end_inset
-
- dependency
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\quad$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-key channels
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Poisson
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="3" alignment="center" valignment="middle" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\boxed{\text{Yes}}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-No
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-solution 
-\begin_inset Formula $u$
-\end_inset
-
-;
- source 
-\begin_inset Formula $f$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Heat
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="3" alignment="center" valignment="middle" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Yes
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="3" alignment="right" valignment="middle" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-init 
-\begin_inset Formula $u_{t=0}$
-\end_inset
-
-;
- end 
-\begin_inset Formula $u_{t=T}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Wave
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "tab:datasets-raws"
-
-\end_inset
-
-Quick summary PDE prototypes
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
+ along with a quick overview of their key properties.
 \begin_inset Note Note
 status collapsed
 
@@ -6503,14 +6171,531 @@ class ProblemWave(Problem):
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage clearpage
+\begin_inset Float table
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="9">
+<features booktabs="true" islongtable="true" longtabularalignment="center">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="right" valignment="top" width="0pt">
+<column alignment="right" valignment="top" width="0pt">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Equation
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\quad$
 \end_inset
 
 
 \end_layout
 
-\begin_layout Section
-Summary
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+super-pos.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+grid
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $t_{T}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\quad$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+key channels
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Poisson (Sine)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $c_{k}\coloneqq4$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[0.0,+0.63\right]^{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\diameter$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="3" alignment="right" valignment="middle" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+solution 
+\begin_inset Formula $u$
+\end_inset
+
+;
+ source 
+\begin_inset Formula $f$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Poisson (Gauss)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="center" valignment="middle" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Heat
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[-1.0,+1.0\right]^{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula $0.005$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="3" alignment="right" valignment="middle" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+init 
+\begin_inset Formula $u_{t=0}$
+\end_inset
+
+;
+ end 
+\begin_inset Formula $u_{t=T}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Wave
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[0.0,+1.0\right]^{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $5.0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:raw-quickref"
+
+\end_inset
+
+PDE prototypes quick reference
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

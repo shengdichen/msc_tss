@@ -5597,10 +5597,37 @@ Plotting convention
 
 \begin_deeper
 \begin_layout Standard
+Similar to the error-plots analyzed in previous chapters,
+ the high and low baselines are indicated with dashed lines.
+ The 
+\begin_inset Formula $x$
+\end_inset
+
+ axis of the plot now indicates the training epoch number during the training process.
+\end_layout
+
+\begin_layout Standard
+Vertical dotted lines indicate the epoch where a remask is triggered.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+Discovery of improvement
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
 Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:resample-unet"
+reference "fig:remask-unet"
 plural "false"
 caps "false"
 noprefix "false"
@@ -5613,17 +5640,43 @@ nolink "false"
 \end_inset
 
  on the single-mask Poisson equation.
- Similar to the error-plots analyzed in previous chapters,
- the high and low baselines are indicated with dashed lines.
- The 
-\begin_inset Formula $x$
-\end_inset
-
- axis of the plot now indicates the training epoch number during the training process.
 \end_layout
 
 \begin_layout Standard
-Vertical dotted lines indicate the epoch where a remask is triggered.
+While the red triangle at epoch 22 marks the best model without remasking,
+ the green stars mark all subsequent model improvements discovered after remasking is performed.
+\end_layout
+
+\begin_layout Standard
+One observes that the network is improved on seven (7) separate occasions after executing the first remask.
+ In particular,
+ immediately after the first remask at epoch 53,
+ a better model is discovered,
+ which is subsequently improved upon in epoch 54.
+ This is significant,
+ as no improvement has been made during 30 consecutive training epochs prior to remasking.
+\end_layout
+
+\begin_layout Standard
+Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:remask-bests"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ enumerates the MSE in percentage of all model improvements after remasking,
+ alongside the respective improvement relative to the initial best model found without remasking.
+ One observes the 
+\begin_inset Formula $25\%$
+\end_inset
+
+ decrease of MSE of the final best model discovered at epoch 91 compared to the original one found at epoch 22,
+ a testament to the positive impact of dynamic remasking.
 \end_layout
 
 \end_deeper
@@ -5661,7 +5714,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:resample-unet"
+name "fig:remask-unet"
 
 \end_inset
 
@@ -5688,21 +5741,6 @@ name "fig:resample-unet"
 
 \end_layout
 
-\begin_layout Example
-Discovery of improvement
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-More importantly,
- the model is improved on three separate occasions after the remask,
- in particular,
- immediately after the first remask,
- a better model is discovered.
- One concludes that remasking will likely provide model improvement during training.
-\end_layout
-
-\end_deeper
 \begin_layout Standard
 \begin_inset Separator plain
 \end_inset
@@ -6639,8 +6677,8 @@ Restrictions of dynamic remasking
 \begin_layout Standard
 There are,
  however,
- situations where the remasking strategy provides inconsequential training improvement.
- Figure 
+ situations where the benefits of the dynamic remasking strategy above diminishes significantly.
+ One such example is seen with Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:resample-kno"
@@ -6651,7 +6689,8 @@ nolink "false"
 
 \end_inset
 
- depicts the training progress of KNO on Wave Equation using masks of the full range,
+,
+ which depicts the training progress of KNO on Wave Equation using masks of the full range,
  i.e.,
  
 \begin_inset Formula $\left[0\%-100\%\right]$
@@ -6676,7 +6715,6 @@ nolink "false"
 \end_inset
 
  provides yet another curious insight to KNO:
- unlike other networks,
  KNO offers extended periods of continuous improvement:
  the example shows KNO terminating only at epoch 
 \begin_inset Formula $888$
@@ -6743,10 +6781,46 @@ name "fig:resample-kno"
 \begin_inset Formula $L^{2}$
 \end_inset
 
- error-plot:
- wave-equation;
- double mask,
- 0.2-0.4
+ error-log of KNO during training.
+ Due to the continuous (but slow) improvement of the network,
+ the green 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula ${\color{green}\star}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\nospellcheck default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ collapsed together to form two segments.
+ Training performed on single-mask wave equation with intensity 
+\begin_inset Formula $\left[0\%;100\%\right]$
+\end_inset
+
+.
 \end_layout
 
 \end_inset
@@ -6759,19 +6833,62 @@ name "fig:resample-kno"
 
 \end_layout
 
-\begin_layout Conclusion
+\begin_layout Example
 Post-remask error-bump
 \end_layout
 
 \begin_deeper
 \begin_layout Standard
-An immediate rise of the training error is visible following every remask,
- indicating that:
- 1.
- remasking imports new knowledge,
- however,
- since the increase of the training error is not astronomical,
- existing model's capability is carried over.
+Another consequence of the dynamic remasking procedure is seen by observing the three encircled points on the training error-curve in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:remask-unet"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ indicating the training errors at the onset of every remask.
+\end_layout
+
+\begin_layout Standard
+One observes a clear and immediate increase of the training error,
+ following every remask.
+ Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:remask-train-bump"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ enumerates these training-error 
+\begin_inset Quotes xld
+\end_inset
+
+bumps
+\begin_inset Quotes xrd
+\end_inset
+
+ induced by dynamic remasking.
+ This is intuitively understandable,
+ as the remasked dataset imparts previously unseen knowledge to the model currently in training,
+ leading to the immediate elevation of training error.
+ However,
+ since the underlying,
+ unmasked dataset remains the same,
+ the error bump remains modest.
+\end_layout
+
+\begin_layout Standard
+The positive effect of remasking can now also be understood as the infusion of new information through the new masking pattern,
+ allowing the model to expand on its current prediction capabilities to to potentially discover new optima.
 \end_layout
 
 \end_deeper
@@ -6823,7 +6940,7 @@ Epoch
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $\qquad\qquad$
+\begin_inset Formula $\qquad$
 \end_inset
 
 
@@ -6835,8 +6952,7 @@ Epoch
 \begin_inset Text
 
 \begin_layout Plain Layout
-MSE%,
- before
+MSE% (pre)
 \end_layout
 
 \end_inset
@@ -6845,8 +6961,7 @@ MSE%,
 \begin_inset Text
 
 \begin_layout Plain Layout
-MSE%,
- after
+MSE% (post)
 \end_layout
 
 \end_inset
@@ -7368,23 +7483,22 @@ compare:
 \begin_deeper
 \begin_layout Standard
 The dynamic masking procedure as defined above offers some desirable profits for the overall learning pipeline.
- Specifically,
+ Firstly,
  it serves as a sensible early-stopping criteria,
- allowing saving of time and resource during training.
+ allowing significant time and resource saving during the training step.
 \end_layout
 
 \begin_layout Standard
-On the other hand,
- it is found on multiple occasions to provide fresh information for the learning model during training by infusing a controlled amount of new information at every remasking run.
- The
+Additionally,
+ it provide the model in question with a controlled amount of new information during training,
+ allowing it to discover new improvements in continuation with the expansion its current knowledge.
 \end_layout
 
 \begin_layout Standard
 It should also be noted that the remasking routine might be considered configurable,
- but to conclude its variable optimal values would require extensive testing,
- in particular in the sense of time,
- as the inner loop is the raw training loop itself.
- Use-cases not warrantying such tuning might consider relying on the default configuration values.
+ but to conclude its variable optimal values would potentially require highly time-consuming testing,
+ as the inner loop would the raw training procedure itself.
+ Use-cases not warrantying such tuning might consider relying on the default configuration values specified at the beginning of this chapter.
 \end_layout
 
 \begin_layout Standard
@@ -9655,7 +9769,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename ../../bin/reconstruction-island.png
+	filename ../../bin/island-ring.png
 	width 16cm
 
 \end_inset
@@ -13184,10 +13298,6 @@ Average
 \uwave off
 \noun off
 \color none
-\begin_inset Formula $ $
-\end_inset
-
-
 \begin_inset Formula $\boxed{{\color{green}\text{10.0978\%}}}$
 \end_inset
 
@@ -13323,8 +13433,181 @@ With this,
 Executive Summary
 \end_layout
 
+\begin_layout Enumerate
+intro
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+After opening with a quick recap of the discretization techniques,
+ the masking procedure is introduced.
+\end_layout
+
+\begin_layout Enumerate
+This thesis opens with a run-down of the fundamental concepts of this project
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+masking
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Three configuration options are identified:
+ the masking intensity to dictate the number of masked entries,
+ the masking strategy,
+ which translates this to concrete masking candidates,
+ and finally,
+ the masking value used to modify those candidates.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+dataset
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Three 
+\end_layout
+
 \begin_layout Standard
-At th
+Central masking procedures,
+ and continues to build upon them by introducing the dataset structure of PDE models under the masked settings.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+results (random training)
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+full intensity masks:
+ higher error with error intensity
+\end_layout
+
+\begin_layout Enumerate
+generally:
+ extension to double mask:
+ same performance in both channels
+\end_layout
+
+\begin_layout Enumerate
+specialized range:
+ locality when using same random
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Other utilities
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+minimum,
+ maximal masking:
+ worse performance than neutral mean masking
+\end_layout
+
+\begin_layout Enumerate
+f
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A total of 
+\begin_inset Formula $3\left(\text{\#PDE}\right)\times4\left(\text{\#regimes}\right)\times4\left(\text{\#networks}\right)$
+\end_inset
+
+ for random style;
+ each with 
+\begin_inset Formula $30$
+\end_inset
+
+ evaluations
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $4$
+\end_inset
+
+ for island;
+ 2 for min+max masks
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Part 3 starts by introducing the three PDE prototypes,
+ alongside their respective masking properties.
+ Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Poisson-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ discusses the Poisson equation,
+ where as Sections 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Heat-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Wave-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ showcase the heat and the wave equations respectively.
+ This serves as the transition towards the presentation of the full learning pipeline,
+ covering the process from dataset assembly in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Dataset-Setup"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ to model evaluationa
+\end_layout
+
+\begin_layout Standard
+Part 4 collects the results from previous sections and present them in order of masking types and PDE models.
+ Apart from these primary evaluation objectives,
+ the dynamic remasking technique is studied and justified from the perspectives of time efficiency and performance comparison.
+\end_layout
+
+\begin_layout Standard
+To round up the findings of this project,
+ Part 5 summarizes the results presented so far,
+ with extra documentation on general project execution,
+ including time allocation and development setup.
 \end_layout
 
 \end_body

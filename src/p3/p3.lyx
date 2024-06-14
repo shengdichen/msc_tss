@@ -2550,7 +2550,18 @@ One shall note that the coordinates matrices
 .
  This is intentional,
  as the coordinates are constant across all instances of the dataset and require thus no re-computation during the generation procedure.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODOOO:
+ WHERE TO PUT THIS?
  This observation is further developed in the following:
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Definition
@@ -2590,7 +2601,16 @@ where the first two channels correspond to the raw coordinates of the (two-dimen
 \begin_layout Standard
 As observed above,
  these grid-channels are constant for any specific spatial grid and can be saved as such via pre-computation.
- This property is further taken advantage of in (TODO)
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+This property is further taken advantage of in (TODO)
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_deeper
@@ -2615,12 +2635,12 @@ PDE-channels
 
 \begin_deeper
 \begin_layout Standard
-Apparently,
- the PDE-channels are provided by the underlying PDE model.
+Unsurprisingly,
+ the PDE-channels are chiefly provided by the underlying PDE model.
  Table 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "tab:channels-pde"
+reference "tab:raw-quickref"
 plural "false"
 caps "false"
 noprefix "false"
@@ -2628,8 +2648,12 @@ nolink "false"
 
 \end_inset
 
- enumerates all the channels specific to the three PDEs of interest of this thesis.
+ in the previous chapter introducing the three PDE prototypes of this thesis provides a quick overview of their respective channels.
  
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Float table
 placement document
 alignment document
@@ -2887,6 +2911,11 @@ Masking Targets
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 Recalling the previous code Listing 
 \begin_inset CommandInset ref
@@ -2918,7 +2947,11 @@ DatasetPDE.solve_instance() -> Sequence[torch.Tensor]
 \end_inset
 
 serves as the key implementation detail of a PDE prototype to provide the PDE-channels relevant to the PDE at hand.
- Unsurprisingly,
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Unsurprisingly,
  the method is marked as 
 \begin_inset Flex Code
 status open
@@ -2931,6 +2964,11 @@ abstract
 
 ,
  requiring overload from subclasses.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_deeper
@@ -3060,19 +3098,16 @@ as-is
 
  without masking.
  Notation-wise,
- this leads to two mutually exclusive sub-groups 
+ this leads to two mutually exclusive sub channel-groups:
+ the masking target-group 
 \begin_inset Formula $\mathbf{C}^{\text{PDE-m}}$
 \end_inset
 
- and 
-\begin_inset Formula $\mathbf{C}^{\text{PDE-r}}$
+ containing the channels 
+\begin_inset Formula $\left\{ m_{1},m_{2},\cdots\right\} $
 \end_inset
 
- (r as in 
-\begin_inset Quotes xld
-\end_inset
-
-
+ and the 
 \begin_inset Flex Emph
 status open
 
@@ -3082,11 +3117,11 @@ r
 
 \end_inset
 
-aw
-\begin_inset Quotes xrd
+aw group 
+\begin_inset Formula $\mathbf{C}^{\text{PDE-r}}\coloneqq\left\{ r_{1},r_{2},\cdots\right\} $
 \end_inset
 
-):
+:
 \begin_inset Formula 
 \[
 \left\{ \begin{alignedat}{2}\mathbf{C}^{\text{PDE-m}}\cup\mathbf{C}^{\text{PDE-r}} & \equiv & \; & \mathbf{C}^{\text{PDE}}\\
@@ -3106,24 +3141,40 @@ The
 \end_inset
 
  channel-group is constructed as a three-fold concatenation:
- the 
-\begin_inset Flex Emph
-status open
-
-\begin_layout Plain Layout
-masked
 \end_layout
 
+\begin_layout Itemize
+the target-group after being masked with masks 
+\begin_inset Formula $\mathbf{M}_{1},\mathbf{M}_{2},\cdots$
 \end_inset
 
- target-group,
- the raw-group and the grid group.
+ for each of the channel 
+\begin_inset Formula $m_{1},m_{2},\cdots$
+\end_inset
+
+ contained therein,
+\end_layout
+
+\begin_layout Itemize
+the raw group 
+\begin_inset Formula $\mathbf{C}^{\text{PDE-r}}$
+\end_inset
+
+ (unmodifed);
+\end_layout
+
+\begin_layout Itemize
+the grid-group 
+\begin_inset Formula $\mathbf{C}^{\text{x}}$
+\end_inset
+
+ (unmodifed)
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\texttt{LHS}\coloneqq\biggl(\underbrace{\overbrace{\phantom{{\displaystyle \prod}}m_{1}^{\text{mask}},\,\cdots\;\;\;\;}^{\mathbf{C}^{\text{PDE-m, mask}}},\;\overbrace{\phantom{{\displaystyle \prod}}r_{1},\,\cdots\;\;\;\;}^{\mathbf{C}^{\text{PDE-r}}}}_{\mathbf{C}^{\text{PDE}}},\;\underbrace{\;x_{1},x_{2},\,\cdots\;}_{\mathbf{C}^{\text{x}}}\biggr)
+\texttt{LHS}\coloneqq\biggl(\overbrace{\phantom{{\displaystyle \prod}}m_{1}^{\mathbf{M}_{1}},m_{2}^{\mathbf{M}_{2}}\,\cdots\;\;\;\;}^{\mathbf{C}^{\text{PDE-m},\mathbf{M}}},\;\overbrace{\phantom{{\displaystyle \prod}}r_{1},\,\cdots\;\;\;\;}^{\mathbf{C}^{\text{PDE-r}}},\;\underbrace{\;x_{1},x_{2},\,\cdots\;}_{\mathbf{C}^{\text{x}}}\biggr)
 \]
 
 \end_inset
@@ -3155,7 +3206,7 @@ truth
 \begin_inset Quotes xrd
 \end_inset
 
- for the network:
+ for the network to learn:
 \begin_inset Formula 
 \[
 \texttt{RHS}\coloneqq\Bigl(\overbrace{\;\;\;m_{1},\,\cdots\;\;\;}^{\mathbf{C}^{\text{PDE-m}}}\Bigr)
@@ -4116,8 +4167,7 @@ i_{\text{eval}} & \coloneqq &  & 300
 
 \end_inset
 
-As usual,
- the testing dataset is unseen by the model during training phase and serves exclusively the purpose of evaluation to examine the adaptability of the trained models to generalize on data unseen during training.
+The testing dataset is unseen by the model during training and serves exclusively the purpose of evaluation to examine the adaptability of the trained models to generalize on data unseen during training without overfitting the training dataset.
  
 \end_layout
 
