@@ -254,7 +254,7 @@ This project studies the effect of masking in the specific context of PDE Learni
  A tailored evaluation framework is subsequently established,
  differentiating in and out-of-distribution regimes by identifying and varying three key configuration vectors of the masking procedure.
  Peripheral aspects of the masked learning paradigm are also explored,
- including the deliberate usage of complimentary masking strategies targeting mutually exclusive masking patterns for training and inference,
+ including the deliberate usage of complimentary masking strategies targeting mutually exclusive candidates for training and inference,
  as well as the deployment of a dynamic termination and scheduling mechanism.
  Performance analyses are carried out with flexible inspection tooling and plotting utilities to enable experimentation-friendly prototyping.
 \end_layout

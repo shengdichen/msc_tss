@@ -807,7 +807,7 @@ The source-code of this project is distributed under the following repositories:
 \end_layout
 
 \begin_layout Itemize
-The main repository contains all code necessary for inspecting and reproducing the training and testing results of this study and is published under:
+The main repository contains all code modules necessary for inspecting and reproducing the results of this study and is published under:
  
 \begin_inset Note Note
 status collapsed
@@ -823,7 +823,7 @@ TODO:
 \begin_inset CommandInset href
 LatexCommand href
 name "GitLab [ETH-Domain]"
-target "https://gitlab.ethz.ch/shenchen/sem_code/"
+target "https://gitlab.ethz.ch/shenchen/msc_code"
 literal "false"
 
 \end_inset
@@ -845,16 +845,16 @@ The thesis is tracked in a separate
 \begin_inset CommandInset href
 LatexCommand href
 name "GitHub repository"
-target "https://github.com/shengdichen/msc_code"
+target "https://github.com/shengdichen/msc_tss"
 literal "false"
 
 \end_inset
 
 .
- This very document is also available directly as pre-built 
+ This very document is also available directly as a pre-built 
 \begin_inset CommandInset href
 LatexCommand href
-name "PDF"
+name "PDF file"
 target "https://github.com/shengdichen/msc_tss/blob/main/src/main.pdf"
 literal "false"
 

@@ -4042,6 +4042,19 @@ literal "false"
 .
 \end_layout
 
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+Visualization of the sum-of-sines dataset
+\end_layout
+
+\begin_deeper
 \begin_layout Standard
 Visualization of two instances of this dataset is provided in Figure 
 \begin_inset CommandInset ref
@@ -4063,6 +4076,11 @@ nolink "false"
  the third and fourth column the second respectively.
  The first row shows the target matrices in a 2D contour-plot,
  whereas the second in the corresponding 3D surface-plot.
+\end_layout
+
+\begin_layout Standard
+Note that each subplot is scaled to its own dynamic range,
+ as indicated by the z-axis tick-labels of the surface-plots in the second row.
 \end_layout
 
 \end_deeper
@@ -4104,7 +4122,7 @@ name "fig:dataset-poisson-sine"
 
 \end_inset
 
-Visualization of the two instances of the 
+Visualization of two instances of the 
 \begin_inset Quotes xld
 \end_inset
 
@@ -4127,8 +4145,8 @@ nolink "false"
 
 \end_inset
 
-.
- and configured as specified in Definition 
+,
+ configured as specified in Definition 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "exa:raw-poisson-sines-config"
@@ -4144,18 +4162,18 @@ nolink "false"
 \begin_inset Formula $c_{k}\coloneqq4$
 \end_inset
 
- samples are super-positioned to generate one instance 
-\begin_inset Formula $u$
+ samples are super-positioned to generate one instance of 
+\begin_inset Formula $\left(u,f\right)$
 \end_inset
 
- as shown.
+.
  First instance shown in row 1 and 2,
  second instance in 3 and 4.
  First row:
  2D contour-plots,
  second row:
  corresponding 3D surface-plots.
- 
+ Each subplot scaled to its own dynamic range.
 \end_layout
 
 \end_inset
@@ -4523,6 +4541,7 @@ sum-of-sines
 \end_inset
 
  dataset.
+ Each subplot scaled to its own dynamic range.
 \end_layout
 
 \end_inset

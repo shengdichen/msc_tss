@@ -3589,8 +3589,17 @@ name "fig:result-poisson-single-specialized"
 \end_inset
 
  error-plot:
- poisson-equation;
- specialized ranges
+ Poisson equation;
+ single mask,
+ 
+\begin_inset Quotes xld
+\end_inset
+
+specialized
+\begin_inset Quotes xrd
+\end_inset
+
+ intensity-ranges
 \end_layout
 
 \end_inset
@@ -3725,9 +3734,9 @@ name "fig:result-poisson-double-0.2-0.4"
 \end_inset
 
  error-plot:
- poisson-equation;
+ Poisson equation;
  double mask,
- 0.2-0.4
+ 20%–40%
 \end_layout
 
 \end_inset
@@ -3863,9 +3872,33 @@ name "fig:result-poisson-double-0.4-0.6"
  Poisson equation,
  double mask,
  masking intensity 
-\begin_inset Formula $\left[40\%;60\%\right]$
-\end_inset
-
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+40%–60%
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\nospellcheck default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
 .
  Top row:
  first channel of double mask;
@@ -4014,9 +4047,33 @@ name "fig:result-poisson-double-0.6-0.8"
  Poisson equation,
  double mask,
  masking intensity 
-\begin_inset Formula $\left[60\%;80\%\right]$
-\end_inset
-
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+60%–80%
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\nospellcheck default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
 .
  Top row:
  first channel of double mask;
@@ -4173,11 +4230,7 @@ name "fig:result-heat-0.2-0.4"
 
  error-plot:
  heat equation,
- masking intensity 
-\begin_inset Formula $\left[20\%;40\%\right]$
-\end_inset
-
-.
+ masking intensity 20%–40%.
  Top row:
  single mask;
  second row:
@@ -4204,22 +4257,10 @@ name "fig:result-heat-0.2-0.4"
 \end_layout
 
 \begin_layout Standard
-Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:result-heat-0.4-0.6"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
- shows the 
 \begin_inset Formula $L^{2}$
 \end_inset
 
- performance graphs of the four networks trained on the heat equation dataset as defined in Section 
+ errors of the four networks trained on the heat equation dataset as defined in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Heat-Equation"
@@ -4230,8 +4271,20 @@ nolink "false"
 
 \end_inset
 
-,
- tainted with random-style masking with intensity uniformly sampled from the middle-strength range 
+ are presented in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:result-heat-0.4-0.6"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ Random-style masking is deployed,
+ with intensity uniformly sampled from the middle-strength range 
 \begin_inset Formula $\left[40\%;60\%\right]$
 \end_inset
 
@@ -4324,9 +4377,9 @@ name "fig:result-heat-0.4-0.6"
 \end_inset
 
  error-plot:
- heat-equation;
+ heat equation;
  single and double mask,
- 40%-60%
+ 40%–60%
 \end_layout
 
 \end_inset
@@ -4485,9 +4538,9 @@ name "fig:result-heat-0.6-0.8"
 \end_inset
 
  error-plot:
- heat-equation;
+ heat equation;
  single and double mask,
- 60%-80%
+ 60%–80%
 \end_layout
 
 \end_inset
@@ -4647,7 +4700,11 @@ name "fig:result-wave-special-0.2-0.4"
 
 \end_inset
 
-MSE% plots:
+
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error-plot:
  wave equation;
  low intensity-regime,
  20%-40%
@@ -4790,7 +4847,11 @@ name "fig:result-wave-special-0.4-0.6"
 
 \end_inset
 
-MSE% plots:
+
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error-plot:
  wave equation;
  middle intensity-regime,
  40%-60%
@@ -4946,7 +5007,11 @@ name "fig:result-wave-special-0.6-0.8"
 
 \end_inset
 
-MSE% plots:
+
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ error-plot:
  wave equation;
  high intensity-regime,
  60%-80%
@@ -5880,8 +5945,33 @@ name "fig:remask-unet"
 
  error-log of UNet during training.
  Remask epochs with vertical dotted lines.
- Observe the improvements discovered due to remasking,
- as well as the encircled bump of training-error immediately after every remask.
+ Observe the model improvements (green stars,
+ cf.
+ Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:remask-bests"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+) discovered due to dynamic remasking,
+ as well as the encircled blue bumps of training-error (cf.
+ Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:remask-train-bump"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+) immediately after every remask.
 \end_layout
 
 \end_inset
@@ -5980,7 +6070,7 @@ Rel.
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -6056,7 +6146,7 @@ Rel.
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -6843,10 +6933,10 @@ nolink "false"
 \end_inset
 
 ,
- which depicts the training progress of KNO on Wave Equation using masks of the full range,
+ which depicts the training progress of KNO on Wave equation using masks of the full range,
  i.e.,
  
-\begin_inset Formula $\left[0\%-100\%\right]$
+\begin_inset Formula $\left[0\%;100\%\right]$
 \end_inset
 
 .
@@ -8252,6 +8342,7 @@ Problem
 
  class:
 \begin_inset listings
+lstparams "language=Python"
 inline false
 status open
 
@@ -8266,7 +8357,18 @@ status open
 
 \begin_layout Plain Layout
 
-Problem.plot_reconstruction() -> None
+class Problem:
+\end_layout
+
+\begin_layout Plain Layout
+
+    def plot_reconstruction(self) -> None:
+\end_layout
+
+\begin_layout Plain Layout
+
+        ...
+  # detail omitted
 \end_layout
 
 \end_inset
@@ -8343,7 +8445,7 @@ This section studies the effect of this island-ring juxtaposition with the follo
 \end_layout
 
 \begin_layout Definition
-The Island-and-ring problem
+The island-and-ring problem
 \end_layout
 
 \begin_deeper
@@ -8423,7 +8525,7 @@ nolink "false"
 
 \end_layout
 
-\begin_layout Conclusion
+\begin_layout Example
 Island-and-ring problem with CNO
 \end_layout
 
@@ -9934,7 +10036,7 @@ nolink "false"
 
 \end_layout
 
-\begin_layout Solution
+\begin_layout Example
 Island-and-ring visualization with KNO
 \end_layout
 
@@ -11631,7 +11733,7 @@ Again,
 \begin_layout Standard
 Tangentially,
  one observes that the average errors using the island-masks are consistently lower than those with the ring-style masks.
- This aligns with the previous findings in 
+ This aligns with the previous findings in Conclusion 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "conc:Double-masks-full"
@@ -13685,7 +13787,7 @@ Out-of-distribution errors (island-style and ring-style) for masking values of
 \end_layout
 
 \begin_layout Standard
-\begin_inset VSpace 50baselineskip%
+\begin_inset Newpage clearpage
 \end_inset
 
 
@@ -13694,11 +13796,11 @@ Out-of-distribution errors (island-style and ring-style) for masking values of
 \begin_layout Standard
 With this,
  the analysis section of this thesis is concluded.
- An executive summary is given in the upcoming chapter to recapitulate the key findings of this chapter.
+ An executive summary is now given to recapitulate the key findings of this project.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage clearpage
+\begin_inset VSpace 50baselineskip%
 \end_inset
 
 
@@ -13736,7 +13838,8 @@ nolink "false"
  Three separate configuration options are identified:
  the masking intensity to dictate the number of masked entries,
  the masking strategy to translate the intensity to concrete masking candidates,
- and finally,
+ and,
+ finally,
  the masking value used to modify those candidates.
 \end_layout
 
@@ -13753,7 +13856,8 @@ nolink "false"
 \end_inset
 
  enumerates the three PDE prototypes of interest bundled with their respective raw datasets,
- formulated with the super-positioning technique summarized in Table 
+ formulated with the super-positioning technique.
+ Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:raw-quickref"
@@ -13764,12 +13868,12 @@ nolink "false"
 
 \end_inset
 
-.
+ summarizes these three PDE models.
 \end_layout
 
 \begin_layout Standard
 The full learning pipeline is then introduced,
- incorporating multi-channel masking with these PDE prototypes.
+ incorporating multi-channel masking with the PDE prototypes.
  In particular,
  the construction of single and double-masked datasets are streamlined in Definition 
 \begin_inset CommandInset ref
@@ -13809,7 +13913,7 @@ nolink "false"
 \end_inset
 
 ,
- guiding the subsequent analyses:
+ guiding subsequent analyses.
 \end_layout
 
 \begin_layout Standard
@@ -13825,9 +13929,34 @@ nolink "false"
 \end_inset
 
  illustrates that models trained on the generic,
- full range masks generalize fairly well out-of-distribution,
- where errors increase with higher masking intensities during evaluation.
- On the other hand,
+ 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+full
+\end_layout
+
+\end_inset
+
+ range masks generalize fairly well out-of-distribution,
+ although errors tend to increase with higher masking intensities during evaluation.
+ Conclusion 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "conc:Double-masks-full"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ points out that out-of-distribution performance is usually better with island-style masks than with ring-style ones.
+\end_layout
+
+\begin_layout Standard
+On the other hand,
  Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -13840,11 +13969,21 @@ nolink "false"
 \end_inset
 
  demonstrates that,
- if models are trained using datasets with specialized,
+ if models are trained using datasets with 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+specialized
+\end_layout
+
+\end_inset
+
+,
  concentrated ranges of masking intensities,
  they tend to display locality attachment to those intensities ranges,
- in that performance degrades visibly when evaluated on masking-intensity values outside those ranges used for training,
- an observation that sometimes applies to both in and out-of-distribution evaluation modes.
+ in that performance degrades visibly when evaluated on masking-intensities outside the training ranges.
+ This observation sometimes applies to both in and out-of-distribution evaluation modes.
  Per Conclusion 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -13875,8 +14014,8 @@ nolink "false"
 
 \end_inset
 
- to yield better result than min or max-masking,
- and the dynamic remasking technique is recognized in Conclusion 
+ to yield better result than min or max-masking.
+ The dynamic remasking technique is recognized in Conclusion 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "conc:dynamic-remask"
@@ -13888,7 +14027,7 @@ nolink "false"
 \end_inset
 
  as a nifty addition to the usual training loop,
- functioning both as an early termination criteria and as a source of new knowledge for models to achieve improvement when struggling with local optima.
+ functioning both as an early termination criteria and as a source of new knowledge for models to discover new improvements when struggling with local optima.
  Finally,
  experiments in Section 
 \begin_inset CommandInset ref
@@ -13911,7 +14050,7 @@ The above analyses are realized by training 100 models (4 of island-style and 96
  4 networks,
  4 intensity regimes,
  each in single and double-masked mode),
- each evaluated on 30 inference datasets,
+ each evaluated on 30 corresponding inference datasets,
  as documented in Definition 
 \begin_inset CommandInset ref
 LatexCommand ref
