@@ -1,0 +1,867 @@
+#LyX 2.4 created this file. For more info see https://www.lyx.org/
+\lyxformat 620
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass amsart
+\use_default_options true
+\master ../main.lyx
+\begin_removed_modules
+theorems-ams
+\end_removed_modules
+\begin_modules
+eqs-within-sections
+figs-within-sections
+tabs-within-sections
+theorems-ams-chap-bytype
+theorems-ams-extended-chap-bytype
+algorithm2e
+customHeadersFooters
+enumitem
+logicalmkup
+todonotes
+\end_modules
+\maintain_unincluded_children no
+\language english
+\language_package default
+\inputencoding auto-legacy
+\fontencoding auto
+\font_roman "default" "Libertinus Serif"
+\font_sans "default" "Avenir LT Std"
+\font_typewriter "default" "Source Code Pro"
+\font_math "auto" "default"
+\font_default_family default
+\use_non_tex_fonts true
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 93
+\use_microtype true
+\use_dash_ligatures true
+\graphics default
+\default_output_format pdf5
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 11
+\spacing other 1.09
+\use_hyperref true
+\pdf_title "Sample Thesis"
+\pdf_author "Shengdi »shc« Chen"
+\pdf_subject "Sample Thesis by Shengdi »shc« Chen, supervised by himself"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\pdf_quoted_options "linkcolor=black,  frenchlinks=true, citecolor=black, urlcolor=blue, filecolor=blue, pdfpagelayout=OneColumn, pdfnewwindow=true, pdfstartview=XYZ, plainpages=false"
+\papersize a4
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine biblatex
+\cite_engine_type numerical
+\biblatex_bibstyle nature
+\biblatex_citestyle alphabetic-verb
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_formatted_ref 0
+\use_minted 0
+\use_lineno 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 0.75in
+\topmargin 0.75in
+\rightmargin 0.75in
+\bottommargin 1in
+\headsep 0.3in
+\footskip 0.3in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side right
+\quotes_style danish
+\dynamic_quotes 1
+\papercolumns 1
+\papersides 2
+\paperpagestyle fancy
+\tablestyle default
+\listings_params "basicstyle={\ttfamily\normalsize},commentstyle={\sffamily},columns=fullflexible,numbers=left,numberstyle={\ttfamily\scriptsize},stepnumber=1,numberblanklines=false,firstline=1,numbersep=9pt,frame=tlb,framexleftmargin=3pt,framextopmargin=2pt,framexbottommargin=1pt,aboveskip={\medskipamount},belowskip={\medskipamount},captionpos=b,floatplacement=tbp,tabsize=4,resetmargins=false,breaklines=true,breakatwhitespace=false,breakautoindent=true,breakindent=0pt,prebreak={...},postbreak={...},extendedchars=true"
+\tracking_changes false
+\output_changes false
+\change_bars false
+\postpone_fragile_content false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Quick Start
+\end_layout
+
+\begin_layout Subsection
+Overview
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+WHY num-methods bad:
+\end_layout
+
+\begin_layout Itemize
+The error scales steeply with the resolution.
+ We need a high resolution to get good approximations.
+\end_layout
+
+\begin_layout Itemize
+The computation and storage steeply scale with the resolution (i.e.
+ the size of the grid).
+\end_layout
+
+\begin_layout Itemize
+When the equation is solved on one discretization,
+ we cannot change the discretization anymore.
+ (solution only holds for one particular discretization)
+\end_layout
+
+\begin_layout Itemize
+https://zongyi-li.github.io/blog/2020/fourier-pde/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Partial Differential Equations (PDEs) describe and model a multitude of phenomenon in diverse regimens of science and engineering.
+ Historically,
+ numerical methods distilled from traditional applied mathematics have been used to obtain their solutions 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "analysis-atkinson,analysis-burden,analysis-cheney,analysis-isaacson,königsberger,numerical-approx-pde"
+literal "false"
+
+\end_inset
+
+ with frequent references to analysis techniques 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "königsberger,numerical-approx-pde"
+literal "false"
+
+\end_inset
+
+ .
+ With the advent of machine-learning as a whole,
+ the novel direction of research for solving PDEs has gravitated towards operator learning using deep neural networks.
+ Notable success stories include the Unet 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "unet"
+literal "false"
+
+\end_inset
+
+,
+ DeepONet 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "deeponet"
+literal "false"
+
+\end_inset
+
+,
+ DeepM&Mnet 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "deepmmnet"
+literal "false"
+
+\end_inset
+
+,
+ KNO 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "kno,kno-publish"
+literal "false"
+
+\end_inset
+
+,
+ FNO 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fno,fno-neural-operator"
+literal "false"
+
+\end_inset
+
+ and CNO 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cno"
+literal "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+While traditional researches in machine-learning have generally been based on the assumption of data afflicted by some distribution-governed noise,
+ an emerging trend is the attempt of incorporating such noisy data further deliberated tainted with 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+masks
+\end_layout
+
+\end_inset
+
+.
+ In the field of image classification and object detection,
+ such masks would translate to patches of value 
+\begin_inset Formula $0$
+\end_inset
+
+ (zero) randomly applied to sections of the input channels,
+ as seen in researches such as 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "multimae,videomae,videomae-published"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This project attempts to unify existing established frameworks PDE learning with the general machine learning practice of masking.
+ By varying three configuration options of the masking procedure during various stages of the learning pipeline,
+ the impact of masking on the trained models is studied under diverse settings using both in and out-of-distribution evaluation regimes.
+\end_layout
+
+\begin_layout Subsection
+Thesis structure
+\end_layout
+
+\begin_layout Standard
+This thesis opens with generic preludial material in Part 1,
+ outlining the project as a whole and providing some technical specifications.
+\end_layout
+
+\begin_layout Standard
+Part 2 commences with a run-down of the fundamental concepts of this project,
+ including discretization techniques and masking procedures.
+ Also,
+ the three fundamental PDE prototypes of this thesis are presented along with their representative respective datasets.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Poisson-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ discusses the Poisson equation,
+ where as Sections 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Heat-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Wave-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ showcase the heat and the wave equations respectively.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The four network models deployed in this project are introduced in the beginning sections of Part 3.
+ Then,
+ the construction procedure of the masked datasets is introduced.
+ With focus on the single and double-masked tasks,
+ the full learning pipeline is then specified,
+ covering the process from dataset assembly to model evaluation.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+,
+ and continues to build upon them by introducing the dataset structure of PDE models under the masked settings.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Part 4 collects the results from the masked PDE learning problem statement and presents them in order of masking types and PDE models.
+ In addition,
+ a specific training scheduling technique is studied,
+ along with alternative masking practices to justify and contrast with the default choices.
+ Part 4 concludes with an executive summary,
+ collecting all findings of this thesis in a centralized manner.
+\end_layout
+
+\begin_layout Standard
+To round up the findings of this project,
+ Part 5 provides extra documentation on general project execution,
+ including time allocation and development setup.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Despite success stories in traditional machine-learning (ML) settings such as image classification and object detection,
+ convolutional neural-networks (CNN) have seen limited application for retrieving solution operators of partial differential equations (PDEs).
+ One notable adaptation of CNN in this context 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "raonić2023convolutional"
+literal "false"
+
+\end_inset
+
+ proposes the novel convolutional neural operators (CNOs) architecture,
+ achieving admirable results on various well-studied sample PDEs under several comparisons conditions.
+\end_layout
+
+\begin_layout Plain Layout
+This master-thesis shall primarily extend the CNO architecture through structural enrichment of its underlying model,
+ in particular,
+ the injection of established solutions in other branches of ML such as the Transformer architecture 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "vaswani2023attention"
+literal "false"
+
+\end_inset
+
+,
+ representative of the attention mechanism,
+ shall be studied to determine adaptability and flexibility of CNO,
+ as well as to further improve its performance.
+ The 
+\begin_inset Quotes xld
+\end_inset
+
+benchmarking suite
+\begin_inset Quotes xrd
+\end_inset
+
+ as proposed by the authors of CNO could also be studied to determine its adequacy in gauging both the accuracy and robustness of operator-learning algorithms in the backdrop of PDE-solving:
+ new sample PDEs models could be added,
+ training conditions and hyper-parameters modified,
+ and performance comparison criteria extended.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Related research
+\end_layout
+
+\begin_layout Standard
+As this project treads on both the field of machine learning and that of applied mathematics,
+ a considerable number of researches from tangent areas are referenced during its execution.
+ A selection of representative sources is listed here:
+\end_layout
+
+\begin_layout Standard
+Methods from traditional numerical methods are mostly sourced from standard textbooks,
+ such as 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "analysis-atkinson,analysis-burden,analysis-cheney,analysis-isaacson,königsberger,numerical-approx-pde"
+literal "false"
+
+\end_inset
+
+,
+ including the PDE models and their respective solving methods.
+ Fundamental analysis methods are referenced from 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "königsberger,analysis-amann"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Generic concepts of machine learning are taken from 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ml-murphy,ml-elem-stats-learning"
+literal "false"
+
+\end_inset
+
+,
+ whereas techniques specific to deep learning are mostly consulted from 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ml-goodfellow"
+literal "false"
+
+\end_inset
+
+.
+ Masking as a general means for inflicting noise onto dataset is also studied in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "multimae,videomae,videomae-published"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Operator-Learning as machine learning paradigm is introduced in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "operator-learning-intro"
+literal "false"
+
+\end_inset
+
+.
+ Algorithms representative of this paradigm studied include 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fno,fno-neural-operator,cno"
+literal "false"
+
+\end_inset
+
+,
+ all of which are used in this thesis as networks candidates.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Learning algorithms directly studied in this thesis include,
+ but are not limited to:
+ the Fourier Neural Operator (FNO) as introduced in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fno,fno-neural-operator"
+literal "false"
+
+\end_inset
+
+,
+ the Convolutional Neural Operators (CNO) as devised in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cno"
+literal "false"
+
+\end_inset
+
+.
+ Tutorials such as 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "operator-learning-intro"
+literal "false"
+
+\end_inset
+
+ provide general introductions to operator-learning.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Technical Details
+\end_layout
+
+\begin_layout Subsection
+Programming
+\end_layout
+
+\begin_layout Standard
+The source-code is packaged in one monolithic repository,
+ including the dataset generation,
+ test suites,
+ as well as statistical and visual analysis modules.
+ 
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
+an adapated implementation of the PW-IL algorithm based on the original open-source code published by the authors in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "main-paper-code"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The programming is performed with the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+Python
+\end_layout
+
+\end_inset
+
+ language with global type-hinting.
+ Python versions no earlier than 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+3.11
+\end_layout
+
+\end_inset
+
+ is required.
+ The virtual environment setup is managed with 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+poetry
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "python-poetry"
+literal "false"
+
+\end_inset
+
+.
+ Automatic module testing is provided with 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+pytest
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "python-pytest"
+literal "false"
+
+\end_inset
+
+.
+ The source-code is consistently processed by the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+black
+\end_layout
+
+\end_inset
+
+-formatter 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "black"
+literal "false"
+
+\end_inset
+
+ and implicitly conforms to the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+PEP8
+\end_layout
+
+\end_inset
+
+ standard.
+ A run-down of other software and hardware requirements are found in the closing portions of this thesis,
+ notably in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Environment-Setup"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Based on the published code of their original authors,
+ custom implementations for the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+FNO
+\end_layout
+
+\end_inset
+
+,
+ 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+CNO
+\end_layout
+
+\end_inset
+
+,
+ 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+UNet
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+KNO
+\end_layout
+
+\end_inset
+
+ algorithms are provided.
+ Implementation and configurations details are discussed when introducing the respective models in Chapter in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Network-candidates"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ All other source code modules are implemented from scratch by the author.
+\end_layout
+
+\begin_layout Subsection
+Formatting and Typesetting
+\end_layout
+
+\begin_layout Standard
+This paper is compiled by the Xe\SpecialChar TeX
+ typesetting-engine featuring the open-source font-packages 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+Libertinus
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+Source-Code-Pro
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Version Tracking
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+TODO:
+ make repo;
+ make it public;
+ change the hyperlink
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The source-code of this project is distributed under the following repositories:
+\end_layout
+
+\begin_layout Itemize
+The main repository contains all code modules necessary for inspecting and reproducing the results of this study and is published under:
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+TODO:
+ upload to github
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset href
+LatexCommand href
+name "GitLab [ETH-Domain]"
+target "https://gitlab.ethz.ch/shenchen/msc_code"
+literal "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset href
+LatexCommand href
+name "GitHub"
+target "https://github.com/shengdichen/msc_code"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The thesis is tracked in a separate 
+\begin_inset CommandInset href
+LatexCommand href
+name "GitHub repository"
+target "https://github.com/shengdichen/msc_tss"
+literal "false"
+
+\end_inset
+
+.
+ This very document is also available directly as a pre-built 
+\begin_inset CommandInset href
+LatexCommand href
+name "PDF file"
+target "https://github.com/shengdichen/msc_tss/blob/main/src/main.pdf"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,1777 @@
+#LyX 2.4 created this file. For more info see https://www.lyx.org/
+\lyxformat 620
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass amsart
+\begin_preamble
+% \renewcommand{\headrulewidth}{0.7pt}
+
+%\usepackage[%
+%	skip=0pt plus7pt minus7pt,%
+%	tocskip=10pt plus1pt minu1pt,%
+%	indent=13pt,%
+%]{parskip}
+\end_preamble
+\use_default_options true
+\begin_removed_modules
+theorems-ams
+\end_removed_modules
+\begin_modules
+eqs-within-sections
+figs-within-sections
+tabs-within-sections
+theorems-ams-chap-bytype
+theorems-ams-extended-chap-bytype
+algorithm2e
+customHeadersFooters
+enumitem
+logicalmkup
+todonotes
+\end_modules
+\maintain_unincluded_children no
+\language english
+\language_package default
+\inputencoding auto-legacy
+\fontencoding auto
+\font_roman "default" "Libertinus Serif"
+\font_sans "default" "Avenir LT Std"
+\font_typewriter "default" "Source Code Pro"
+\font_math "auto" "default"
+\font_default_family default
+\use_non_tex_fonts true
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 93
+\use_microtype true
+\use_dash_ligatures true
+\graphics default
+\default_output_format pdf4
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 11
+\spacing other 1.17
+\use_hyperref true
+\pdf_title "Sample Thesis"
+\pdf_author "Shengdi »shc« Chen"
+\pdf_subject "Sample Thesis by Shengdi »shc« Chen, supervised by himself"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered true
+\pdf_bookmarksopen true
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle false
+\pdf_quoted_options "linkcolor=black,  frenchlinks=true, citecolor=black, urlcolor=blue, filecolor=blue, pdfpagelayout=OneColumn, pdfnewwindow=true, pdfstartview=XYZ, plainpages=false"
+\papersize a4
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine biblatex
+\cite_engine_type numerical
+\biblatex_bibstyle nature
+\biblatex_citestyle alphabetic-verb
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_formatted_ref 0
+\use_minted 0
+\use_lineno 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2.5cm
+\topmargin 2.5cm
+\rightmargin 2.5cm
+\bottommargin 2.5cm
+\headsep 0.3in
+\footskip 0.3in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side right
+\quotes_style danish
+\dynamic_quotes 1
+\papercolumns 1
+\papersides 1
+\paperpagestyle fancy
+\tablestyle default
+\listings_params "basicstyle={\ttfamily\normalsize},commentstyle={\sffamily},columns=fullflexible,numbers=left,numberstyle={\ttfamily\scriptsize},stepnumber=1,numberblanklines=false,firstline=1,numbersep=9pt,frame=tlb,framexleftmargin=3pt,framextopmargin=2pt,framexbottommargin=1pt,aboveskip={\medskipamount},belowskip={\medskipamount},captionpos=b,floatplacement=tbp,tabsize=4,resetmargins=false,breaklines=true,breakatwhitespace=false,breakautoindent=true,breakindent=0pt,prebreak={...},postbreak={...},extendedchars=true"
+\tracking_changes false
+\output_changes false
+\change_bars false
+\postpone_fragile_content false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset External
+	template PDFPages
+	filename eigen/eigen.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Title
+Masked PDE-Learning
+\end_layout
+
+\begin_layout Author
+Shengdi Chen
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+\begin_inset Formula $\alpha$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Thanks
+RW/CSE,
+ D-MATH,
+ ETH Zürich:
+ 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+shenchen
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset space \textvisiblespace{}
+\end_inset
+
+ 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+AT
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset space \textvisiblespace{}
+\end_inset
+
+ 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+ethz
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset space \textvisiblespace{}
+\end_inset
+
+ 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+DOT
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset space \textvisiblespace{}
+\end_inset
+
+ 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+ch | 17-943-358
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+PDEs have historically been solved by numerical methods distilled from traditional applied mathematics.
+ With the advent of the field of machine-learning as a whole,
+ toolchains for PDE research now include the operator learning methodology structured around deep neural networks.
+ Pertaining to general machine-learning,
+ on the other hand,
+ much effort is expended to study algorithmic resistance to the intrinsic noisiness of data.
+ Masking,
+ as one established method to this end,
+ intentionally contaminates portions of a clean dataset by setting certain patches of its data channels to some noise value,
+ effectively concealing parts of the underlying dataset from the learning model.
+\end_layout
+
+\begin_layout Abstract
+This project studies the effect of masking in the specific context of PDE Learning:
+ the procedure of generating PDE datasets incorporating multi-channel masking is streamlined,
+ allowing the formalization of a full experimentation pipeline for masked PDE learning.
+ A tailored evaluation framework is subsequently established,
+ differentiating in and out-of-distribution regimes by identifying and varying three key configuration vectors of the masking procedure.
+ Peripheral aspects of the masked learning paradigm are also explored,
+ including the deliberate usage of complimentary masking strategies targeting mutually exclusive candidates for training and inference,
+ as well as the deployment of a dynamic termination and scheduling mechanism.
+ Performance analyses are carried out with flexible inspection tooling and plotting utilities to enable experimentation-friendly prototyping.
+\end_layout
+
+\begin_layout Abstract
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Enumerate
+intro
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+as one representative of intentional data contamination
+\end_layout
+
+\begin_layout Abstract
+Established algorithms for operator learning are deployed to solve three fundamental PDE datasets masked with either single or double masking modes.
+ Models are trained using different regimes of intensity ranges,
+ masking candidate strategy,
+ and finally different masking values.
+ 
+\begin_inset Quotes xld
+\end_inset
+
+
+\begin_inset Quotes xrd
+\end_inset
+
+of work commences with a formalization of the masking concept and identifying three distinct masking strategies.
+ By adjusting the
+\begin_inset Quotes xrd
+\end_inset
+
+
+\begin_inset Quotes xrd
+\end_inset
+
+
+\begin_inset Quotes xrd
+\end_inset
+
+
+\begin_inset Quotes xrd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+While models trained on generic masking ranges perform better when evaluated with lower models,
+ those trained on specialized ranges display.
+ In double masking 
+\end_layout
+
+\begin_layout Abstract
+// extras
+\end_layout
+
+\begin_layout Abstract
+Several tangential?
+ aspects of masking are explored,
+ including a scheduling and termination policy to regulate the training procedure,
+ as well as toolkits for visualization of the masked dataset and the model prediction outputs for direct inspection.
+\end_layout
+
+\begin_layout Abstract
+All source code except the network themselves are implemented from scratch and backed with test suites.
+ Multiple peripheral utilities are provided,
+ including training error logging and model prediction plotting for fine-grained result inspection.
+\end_layout
+
+\begin_layout Abstract
+and with the goal of clean structure 
+\end_layout
+
+\begin_layout Enumerate
+The masking procedure is formalized:
+ the candidate sampling strategy,
+ the intensity range and the replacement value are identified as the three configuration vectors of the masking procedure.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+On masks
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+remask
+\end_layout
+
+\begin_layout Enumerate
+intensity,
+ type,
+ value
+\end_layout
+
+\begin_layout Enumerate
+locality
+\end_layout
+
+\begin_layout Itemize
+in & out of distribution
+\end_layout
+
+\begin_layout Itemize
+dynamic remask:
+ Effect of Masking on training
+\end_layout
+
+\begin_layout Itemize
+Using one of the three masking strategies,
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+To The concept of mask
+\end_layout
+
+\begin_layout Enumerate
+On network:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Established networks for PDE 
+\end_layout
+
+\begin_layout Enumerate
+This project applies established models of PDE learning on datasets tainted with a diverse array of masking procedures.
+ Systematic studies are conducted by varying the
+\end_layout
+
+\begin_layout Enumerate
+A special scheduling tactic for 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+different masking strategies with varying intensities.
+ Performance is gauged under application of different operator-learning algorithms on various quintessential PDE problems.
+ Conclusions drawn pertain to PDE analysis,
+ continuous structure preservation,
+ as well as robustness and accuracy benchmarking of solution operators for PDE-learning.
+\end_layout
+
+\begin_layout Enumerate
+cutaway 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Notable success stories include the DeepONet 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "deeponet"
+literal "false"
+
+\end_inset
+
+,
+ DeepM&Mnet 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "deepmmnet"
+literal "false"
+
+\end_inset
+
+,
+ KNO 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "kno,kno-publish"
+literal "false"
+
+\end_inset
+
+,
+ FNO 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fno,fno-neural-operator"
+literal "false"
+
+\end_inset
+
+ and CNO 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cno"
+literal "false"
+
+\end_inset
+
+.
+ Despite success stories in traditional machine-learning (ML) settings such as image classification and object detection,
+ convolutional neural-networks (CNN) have seen limited application for retrieving solution operators of partial differential equations (PDEs).
+ One notable adaptation of CNN in this context 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cno"
+literal "false"
+
+\end_inset
+
+ proposes the novel convolutional neural operators (CNOs) architecture,
+ achieving admirable results on various well-studied sample PDEs under several comparisons conditions.
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset VSpace 75baselineskip%
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+The programming component of this thesis is executed in the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+python
+\end_layout
+
+\end_inset
+
+ programming language using various external Deep Learning (DL) libraries.
+\end_layout
+
+\begin_layout Plain Layout
+This project,
+ conducted under the supervision of 
+\begin_inset CommandInset href
+LatexCommand href
+name "Prof. Dr. S. Mishra"
+target "siddhartha.mishra@sam.math.ethz.ch"
+type "mailto:"
+literal "false"
+
+\end_inset
+
+,
+ is executed within the framework of a Master-Thesis under the catalogue identifier 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+401-4990-01L
+\end_layout
+
+\end_inset
+
+ at ETH Zürich.
+ 
+\begin_inset CommandInset href
+LatexCommand href
+name "Bogdan Raonić"
+target "bogdan.raonic@ai.ethz.ch"
+type "mailto:"
+literal "false"
+
+\end_inset
+
+ is the project advisor and primary correspondent.
+ The project is scheduled to commence on 
+\begin_inset Flex Strong
+status open
+
+\begin_layout Plain Layout
+04.12.2023
+\end_layout
+
+\end_inset
+
+,
+ with a nonnegotiable duration of six (
+\begin_inset Flex Strong
+status open
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+
+) months and the following projected timeline of major milestones:
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+\begin_inset VSpace 150baselineskip%
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+This project,
+ conducted under the supervision of 
+\begin_inset CommandInset href
+LatexCommand href
+name "Prof. Dr. S. Mishra"
+target "siddhartha.mishra@sam.math.ethz.ch"
+type "mailto:"
+literal "false"
+
+\end_inset
+
+,
+ is executed within the framework of a Master-Thesis under the catalogue identifier 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+401-4990-01L
+\end_layout
+
+\end_inset
+
+ at ETH Zürich.
+ 
+\begin_inset CommandInset href
+LatexCommand href
+name "Bogdan Raonić"
+target "bogdan.raonic@ai.ethz.ch"
+type "mailto:"
+literal "false"
+
+\end_inset
+
+ is the project advisor and primary correspondent.
+ The project commenced on 
+\begin_inset Flex Strong
+status open
+
+\begin_layout Plain Layout
+04.12.2023
+\end_layout
+
+\end_inset
+
+,
+ with a nonnegotiable duration of six (
+\begin_inset Flex Strong
+status open
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+
+) months.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand{
+\backslash
+headrulewidth}{0.7pt}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Left Header
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Center Header
+Masked PDE-Learning
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Masked PDE-Learning
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Right Header
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Left Footer
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Center Footer
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thepage
+\end_layout
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thepage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Right Footer
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+Prelude
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand input
+filename "p1/p1.lyx"
+literal "true"
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Definition
+Summary
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Quick-start
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+github
+\end_layout
+
+\begin_layout Enumerate
+style of document
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+show key API
+\end_layout
+
+\begin_layout Enumerate
+show command used
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
+Part 2
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+discretize
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+grid space (checked I)
+\end_layout
+
+\begin_layout Enumerate
+grid time (TODO:
+ rewrite code related)
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+mask (on one element)
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+plot:
+ any random matrix VS masked
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+dataset (raw)
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+underlying torch format
+\end_layout
+
+\begin_layout Enumerate
+super-position
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+super-positioning (4 samples per instance) (DRAFT)
+\end_layout
+
+\begin_layout Enumerate
+raw components (DRAFT)
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+other utils:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+plot raw
+\end_layout
+
+\begin_layout Enumerate
+save / load
+\end_layout
+
+\begin_layout Enumerate
+saveload naming format
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+raw examples
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+poisson (DRAFT)
+\end_layout
+
+\begin_layout Enumerate
+heat (DRAFT) (TODO:
+ make plot)
+\end_layout
+
+\begin_layout Enumerate
+wave (DRAFT) (TODO:
+ make plot)
+\end_layout
+
+\end_deeper
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
+Part 3
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+dataset generation (masked)
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+PDE channels:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+idea:
+ single mask;
+ double mask
+\end_layout
+
+\begin_layout Enumerate
+table of mask-channels and order
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Grid channels
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+channel padding:
+ x,
+ sinx,
+ cosx
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+assembly
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+shape
+\end_layout
+
+\begin_layout Enumerate
+source code
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+post process
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+normalization
+\end_layout
+
+\begin_layout Enumerate
+mask
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
+pipeline:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+3-way split:
+ train,
+ validation,
+ evaluation:
+ 1800:300:300
+\end_layout
+
+\begin_layout Enumerate
+masking type:
+\end_layout
+
+\begin_layout Enumerate
+train:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+mask:
+ all random;
+ 4 intensity bands:
+ 0-1,
+ 0.2-0.4,
+ 0.4-0.6,
+ 0.6-0.8
+\end_layout
+
+\begin_layout Enumerate
+batch-size
+\end_layout
+
+\begin_layout Enumerate
+dynamic remask
+\end_layout
+
+\begin_layout Enumerate
+saving:
+ best of validation
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+eval:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+out-of-distribution definition
+\end_layout
+
+\begin_layout Enumerate
+masking type:
+ random + island
+\end_layout
+
+\begin_layout Enumerate
+masking intensity:
+ 0.0-0.1;
+ 0.1-0.2;
+ ...
+ 0.9-1.0
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+single mask
+\end_layout
+
+\begin_layout Enumerate
+double mask
+\end_layout
+
+\end_deeper
+\end_deeper
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
+Part 4 training
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+eval
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+idea:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+intensity bands:
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+double:
+ same type,
+ same intensity;
+ duplicate
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+misc results
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+training time,
+ #episodes
+\end_layout
+
+\begin_layout Enumerate
+dynamic remasking
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+dramatic training time saving
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+virtually no performance impact
+\end_layout
+
+\begin_layout Enumerate
+result comparison
+\end_layout
+
+\end_deeper
+\end_deeper
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
+closer
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+setup
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+lab setup (DRAFT)
+\end_layout
+
+\begin_layout Enumerate
+environment,
+ poetry
+\end_layout
+
+\begin_layout Enumerate
+git tracking
+\end_layout
+
+\begin_layout Enumerate
+f
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+future
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+train on island
+\end_layout
+
+\begin_layout Enumerate
+double mask with mixed type and/or intensity
+\end_layout
+
+\begin_layout Enumerate
+beyond double masking (DRAFT)
+\end_layout
+
+\begin_layout Enumerate
+more problems (DRAFT)
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Thanks (DRAFT)
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Plain Layout
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Helpers:
+\end_layout
+
+\begin_layout Itemize
+Source Code:
+\begin_inset listings
+lstparams "language=Python"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+class MyClass:
+\end_layout
+
+\begin_layout Plain Layout
+
+    def __init__(self):
+\end_layout
+
+\begin_layout Plain Layout
+
+		pass
+\end_layout
+
+\begin_layout Plain Layout
+
+	...
+\end_layout
+
+\begin_layout Plain Layout
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "lis:Constructor-for-Field"
+
+\end_inset
+
+Constructor for 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+MyClass
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Xy tutorial
+\end_layout
+
+\begin_deeper
+\begin_layout Plain Layout
+Quick reference:
+\begin_inset Formula 
+\[
+\xymatrix{U\ar@(ul,ur)[rrd]\\
+ & A\ar[d]_{a\rightarrow d}\ar[r]^{a\rightarrow b} & B\ar[d]^{b\rightarrow d}\\
+ & C\ar[r]_{c\rightarrow d} & D
+}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+base
+\begin_inset Formula 
+\[
+\xymatrix{A\ar[rr] &  & B}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+label
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+vertical position
+\begin_inset Formula 
+\[
+\xymatrix{A\ar[rr]_{\text{text below}} &  & B}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\xymatrix{A\ar[rr]^{\text{text above}} &  & B}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+horizontal position
+\begin_inset Formula 
+\[
+\xymatrix{A\ar[rr]\sp(0.3){\text{up,left-shift}} &  & B}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\xymatrix{A\ar[rr]\sb(0.3){\text{down,left-shift}} &  & B}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+arrow
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+bend curve
+\begin_inset Formula 
+\[
+\xymatrix{A\ar@/^{1.5pc}/[rr]_{\text{bent up}} &  & B}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+\xymatrix{A\ar@/_{1pc}/[rr]_{\text{bent down}} &  & B}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+starting direction
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+@(<dir_leave>,
+ <dir_enter>)
+\end_layout
+
+\begin_layout Plain Layout
+
+where:
+\end_layout
+
+\begin_layout Plain Layout
+
+dir := {l,
+ r,
+ u,
+ ul,
+ ur,
+ d,
+ dl,
+ dr}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\xymatrix{A\ar@(d,l)[rr] &  & B}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+eye candy
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+[@<shaft_count>]@{[tip_style_start]<shaft_style>[<tip_style_end>]}
+\end_layout
+
+\begin_layout Plain Layout
+
+where:
+\end_layout
+
+\begin_layout Plain Layout
+
+shaft_count := {2,
+ 3}
+\end_layout
+
+\begin_layout Plain Layout
+
+shaft_style := {-,
+ ~,
+ --,
+ ..,
+ >-,
+ |-,}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+tip_style := {[<elevation>]<character>}
+\end_layout
+
+\begin_layout Plain Layout
+
+elevation := {_,
+ ^}
+\end_layout
+
+\begin_layout Plain Layout
+
+character := {>,
+ >>,
+ |,
+ (,
+ )}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\xymatrix{A\ar@2[rr] &  & B}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\xymatrix{A\ar@{--}[rr] &  & B}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\xymatrix{A\ar@2@{^{|}-->}[rr] &  & B}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+node
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+*[<size>][<round>]
+\begin_inset Quotes xrd
+\end_inset
+
+[
+\begin_inset Quotes xld
+\end_inset
+
+F[<frame_count>]
+\begin_inset Quotes xrd
+\end_inset
+
+]
+\begin_inset Quotes xrd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+where:
+\end_layout
+
+\begin_layout Plain Layout
+
+size := {+,
+ ++}
+\end_layout
+
+\begin_layout Plain Layout
+
+round := 
+\begin_inset Quotes xld
+\end_inset
+
+[o]
+\begin_inset Quotes xrd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+frame_count := {-,
+ =}
+\end_layout
+
+\begin_layout Plain Layout
+
+shaft_style := {-,
+ ~,
+ --,
+ ..,
+ >-,
+ |-,}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+tip_style := {[<elevation>]<character>}
+\end_layout
+
+\begin_layout Plain Layout
+
+elevation := {_,
+ ^}
+\end_layout
+
+\begin_layout Plain Layout
+
+character := {>,
+ >>,
+ |,
+ (,
+ )}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\xymatrix{*+[F]{\text{square, +1}}\ar[rr] &  & B}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\xymatrix{*++[o][F=]{\text{round, +2, double}}\ar[rr] &  & B}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Plain Layout
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+Background and Setup
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand input
+filename "p2/p2.lyx"
+literal "true"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+Models and Datasets
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand input
+filename "p3/p3.lyx"
+literal "true"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+Evaluation and Comparison
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand input
+filename "p4/p4.lyx"
+literal "true"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+Epilogue
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand input
+filename "p5/p5.lyx"
+literal "true"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintAll"
+bibfiles "bib/main,bib/misc"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

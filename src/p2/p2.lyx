@@ -1,0 +1,6711 @@
+#LyX 2.4 created this file. For more info see https://www.lyx.org/
+\lyxformat 620
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass amsart
+\use_default_options true
+\master ../main.lyx
+\begin_removed_modules
+theorems-ams
+\end_removed_modules
+\begin_modules
+eqs-within-sections
+figs-within-sections
+tabs-within-sections
+theorems-ams-chap-bytype
+theorems-ams-extended-chap-bytype
+algorithm2e
+customHeadersFooters
+enumitem
+logicalmkup
+todonotes
+\end_modules
+\maintain_unincluded_children no
+\language english
+\language_package default
+\inputencoding auto-legacy
+\fontencoding auto
+\font_roman "default" "Libertinus Serif"
+\font_sans "default" "Avenir LT Std"
+\font_typewriter "default" "Source Code Pro"
+\font_math "auto" "default"
+\font_default_family default
+\use_non_tex_fonts true
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 93
+\use_microtype true
+\use_dash_ligatures true
+\graphics default
+\default_output_format pdf4
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement class
+\float_alignment class
+\paperfontsize 11
+\spacing other 1.09
+\use_hyperref true
+\pdf_title "Sample Thesis"
+\pdf_author "Shengdi »shc« Chen"
+\pdf_subject "Sample Thesis by Shengdi »shc« Chen, supervised by himself"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\pdf_quoted_options "linkcolor=black,  frenchlinks=true, citecolor=black, urlcolor=blue, filecolor=blue, pdfpagelayout=OneColumn, pdfnewwindow=true, pdfstartview=XYZ, plainpages=false"
+\papersize a4
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine biblatex
+\cite_engine_type numerical
+\biblatex_bibstyle nature
+\biblatex_citestyle alphabetic-verb
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_formatted_ref 0
+\use_minted 0
+\use_lineno 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 0.75in
+\topmargin 0.75in
+\rightmargin 0.75in
+\bottommargin 1in
+\headsep 0.3in
+\footskip 0.3in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side right
+\quotes_style danish
+\dynamic_quotes 1
+\papercolumns 1
+\papersides 2
+\paperpagestyle fancy
+\tablestyle default
+\listings_params "basicstyle={\ttfamily\normalsize},commentstyle={\sffamily},columns=fullflexible,numbers=left,numberstyle={\ttfamily\scriptsize},stepnumber=1,numberblanklines=false,firstline=1,numbersep=9pt,frame=tlb,framexleftmargin=3pt,framextopmargin=2pt,framexbottommargin=1pt,aboveskip={\medskipamount},belowskip={\medskipamount},captionpos=b,floatplacement=tbp,tabsize=4,resetmargins=false,breaklines=true,breakatwhitespace=false,breakautoindent=true,breakindent=0pt,prebreak={...},postbreak={...},extendedchars=true"
+\tracking_changes false
+\output_changes false
+\change_bars false
+\postpone_fragile_content false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Discretization
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Discretization"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Numerical solutions of PDEs defined on continuous structures rely on the discretization of these domains.
+ This section explains the discretization strategy of both the spatial and the temporal domains deployed in this thesis.
+\end_layout
+
+\begin_layout Subsection
+Spatial discretization
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Section
+Backup
+\end_layout
+
+\begin_layout Itemize
+includes builtin construction method for both.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula 
+\[
+\begin{alignedat}{2}\mathbb{R}^{64}\ni x_{1,2} & \coloneqq & \; & \texttt{(}\left[\begin{alignedat}{4}\, &  & \text{start} & = & \; & 0.00 &  & \,\\
+ &  & \text{step} & = &  & 0.01\\
+ &  & \text{count} & = &  & 64
+\end{alignedat}
+\right]\texttt{)}\end{alignedat}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+,
+ each dimension of the spatial grid is discretized into 
+\begin_inset Formula $64$
+\end_inset
+
+ grid-points.
+ This resolution is also used in
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+This thesis deploys a standardized discretization scheme of the two-dimensional space with a resolution of 
+\begin_inset Formula $64$
+\end_inset
+
+ grid-points per dimension.
+ The exact The step-size is chosen as 
+\begin_inset Formula $0.01$
+\end_inset
+
+,
+ and the starting value is the origin for both dimensions:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+\begin{alignedat}{2}\mathbb{R}^{64}\ni x_{1,2} & \coloneqq & \; & \overbrace{\quad\:\texttt{grid}\;\quad}^{\texttt{<np|torch>.arange}}\texttt{(}\left[\begin{alignedat}{4}\, &  & \text{start} & = & \; & 0.00 &  & \,\\
+ &  & \text{step} & = &  & 0.01\\
+ &  & \text{count} & = &  & 64
+\end{alignedat}
+\right]\texttt{)}\end{alignedat}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+source code:
+\begin_inset listings
+lstparams "language=Python"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+# src/numerics/grid.py
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Grid:
+\end_layout
+
+\begin_layout Plain Layout
+
+    def __init__(self,
+ **kwargs):
+\end_layout
+
+\begin_layout Plain Layout
+
+        super().__init__(**kwargs)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def get_reward(self,
+ **kwargs) -> float:
+\end_layout
+
+\begin_layout Plain Layout
+
+        pass
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def get_reward_gameover(self,
+ **kwargs) -> float:
+\end_layout
+
+\begin_layout Plain Layout
+
+        pass
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Abstraction for General Reward-Functions
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As argued in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cno"
+literal "false"
+
+\end_inset
+
+ in sections establishing its benchmarking setup
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+referred to as 
+\begin_inset Quotes xld
+\end_inset
+
+Representative PDE Benchmarks (RPB)
+\begin_inset Quotes xrd
+\end_inset
+
+,
+ Page 8
+\end_layout
+
+\end_inset
+
+,
+ the two-dimensional space boasts of distinct merits for the purpose of gauging the performance of operator-learning:
+ in essence,
+ the learning landscape is sufficiently complex to challenge algorithms without inducing fearsome costs during training and evaluation,
+ which is critical for rapid iteration and prototyping.
+\end_layout
+
+\begin_layout Standard
+In this spirit,
+ this project focuses on the two-dimensional space as well,
+ with specifics of its discretization defined below:
+\end_layout
+
+\begin_layout Definition
+Space mesh
+\begin_inset CommandInset label
+LatexCommand label
+name "def:Space-mesh"
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Methods from the traditional discipline of numerical analysis stipulates the discretization as the transformation of any continuous space into a discrete mesh structure,
+ as demonstrated in textbooks such as:
+\begin_inset CommandInset citation
+LatexCommand cite
+key "analysis-atkinson,analysis-burden,analysis-cheney,analysis-isaacson"
+literal "false"
+
+\end_inset
+
+.
+ While the quest for domain-specific,
+ high-quality mesh generation is intensely contested in applied mathematics,
+ this thesis,
+ similar to other researches for PDE Learning such as 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fno,fno-neural-operator,cno"
+pretextlist "cno"
+posttextlist "cno"
+literal "false"
+
+\end_inset
+
+,
+ uses the generic grid-shaped mesh.
+ For the purpose of the two-dimensional space that this thesis dwells on,
+ this translates to 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+rectangular
+\end_layout
+
+\end_inset
+
+ elements.
+ Henceforth in this thesis,
+ the terms 
+\begin_inset Quotes xld
+\end_inset
+
+grid
+\begin_inset Quotes xrd
+\end_inset
+
+ and 
+\begin_inset Quotes xld
+\end_inset
+
+rectangular mesh
+\begin_inset Quotes xrd
+\end_inset
+
+ are used interchangeably.
+\end_layout
+
+\begin_layout Standard
+Implementation of such a rectangular mesh requires as basis the discretization of both dimensions 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+,
+ specified fully with the following four values:
+\begin_inset Formula 
+\[
+x_{1,2}^{\text{discrete}}\coloneqq\texttt{(}\left[\begin{alignedat}{4}\; &  & \text{start} & \triangleq & \; & \texttt{float} &  & \;\\
+ &  & \text{step-size} & \triangleq &  & \texttt{float}\\
+ &  & \text{end} & \triangleq &  & \texttt{float}\\
+ &  & \text{\#steps} & \triangleq &  & \texttt{int}
+\end{alignedat}
+\right]\texttt{)}
+\]
+
+\end_inset
+
+where 
+\begin_inset Quotes xld
+\end_inset
+
+#steps
+\begin_inset Quotes xrd
+\end_inset
+
+ denotes the number of grid-points for the dimension,
+ also referred to as 
+\begin_inset Quotes xld
+\end_inset
+
+resolution
+\begin_inset Quotes xrd
+\end_inset
+
+ in researches such as 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fno,fno-neural-operator,cno"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+Construction of rectangular mesh
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+It should be noted that the knowledge of three of any of the four variables in the definition above suffices to reconstruct the remaining one,
+ enabling thus the spatial discretization as a rectangular mesh.
+ This thesis uses the following two typical construction methods to describe spatial discretization:
+\end_layout
+
+\begin_layout Itemize
+the starting value,
+ the step-size,
+ and the number of steps;
+\end_layout
+
+\begin_layout Itemize
+the starting and the end value,
+ and the number of steps,
+\end_layout
+
+\begin_layout Standard
+each with its own merit:
+ the knowledge of the step-size allows direct control over specific constraints such as the CFL condition 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "analysis-atkinson,analysis-burden,analysis-cheney,analysis-isaacson"
+literal "false"
+
+\end_inset
+
+,
+ whereas explicit end value aides the tuning of spatial boundary conditions.
+ In this project,
+ specification of the spatial grid is provided by the more appropriate of these two construction variants specific to the PDE prototype at-hand.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+Quality of grid discretization
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+This square mesh,
+ though primitive compared to specialized mesh generation as deployed in the context of traditional numerical methods,
+ is,
+ as pointed out previously,
+ nevertheless common-place for the status-quo of PDE Learning.
+ A potential direction for future research involves investigation of more sophisticated discretization strategies,
+ as discussed in the closing section of this thesis in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Future-work"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+Space-grids in action
+\begin_inset CommandInset label
+LatexCommand label
+name "exa:Space-grids-in-action"
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+This thesis uses a constant resolution of 
+\begin_inset Formula $64$
+\end_inset
+
+ for both for the purpose of spatial discretization,
+ as also seen in existing researches including 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fno,fno-neural-operator,cno"
+pretextlist "cno"
+posttextlist "cno"
+literal "false"
+
+\end_inset
+
+.
+ This value is chosen consciously:
+ the exact 
+\begin_inset Formula $2$
+\end_inset
+
+-exponential facilitates efficient computation of the discrete Fourier transformation,
+ as explained in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fno,fno-neural-operator,cno"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+On the other hand,
+ the other three parameters of the grid are variable,
+ chosen specifically for each individual PDE model.
+ As an example,
+ the mesh used for solving the Poisson Equation,
+ seen later in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Poisson-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ is defined as follows:
+\begin_inset Formula 
+\[
+\mathbb{R}^{64}\ni x_{1,2}^{\text{Poisson}}\coloneqq\;\left\{ \begin{alignedat}{2}\text{start} & \coloneqq & 0.00\\
+\text{step-size} & \coloneqq & 0.01
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+which translates to an end value of 
+\begin_inset Formula $0.63$
+\end_inset
+
+:
+ be careful to avoid the off-by-one error!
+\end_layout
+
+\begin_layout Standard
+The reader is referred to chapters dedicated to the specific PDE prototypes for their space grid specifications.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Temporal discretization
+\end_layout
+
+\begin_layout Standard
+A similar procedure is applied to discretize the time axis,
+ with the apparent additional constraint that the starting value is non-negative.
+ As is typical for temporal discretization,
+ the initial time is set to 
+\begin_inset Formula $0.0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+The implementation is similar to that of the single-axis discretization and can be found under 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO:
+ code
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+Application of temporal discretization
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+It should be noted that the temporal discretization is not used to steady-state,
+ time-independent PDEs,
+ including,
+ in particular,
+ the Poisson Equation,
+ introduced in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Poisson-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ On the other hand,
+ PDEs such as Heat Equation and the Wave Equation,
+ introduced in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Heat-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ and Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Wave-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ respectively,
+ require temporal discretization as discussed in this section.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+API
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO:
+ write this chapter!
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Key API
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Listing 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lis:grid"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ provides an overview of the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+Grid
+\end_layout
+
+\end_inset
+
+ class.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+# src/numerics/grid.py
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Grid:
+\end_layout
+
+\begin_layout Plain Layout
+
+    def __init__(self,
+ n_pts:
+ int,
+ stepsize:
+ float,
+ start:
+ float = 0.0):
+\end_layout
+
+\begin_layout Plain Layout
+
+        ...
+  # detail omitted
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    @classmethod
+\end_layout
+
+\begin_layout Plain Layout
+
+    def from_start_end(cls,
+ n_pts:
+ int,
+ start:
+ float,
+ end:
+ float) -> "Grid":
+\end_layout
+
+\begin_layout Plain Layout
+
+        return cls(n_pts,
+ (end - start) / (n_pts - 1),
+ start)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def step(self,
+ with_start:
+ True,
+ with_end:
+ True) -> list[float]:
+\end_layout
+
+\begin_layout Plain Layout
+
+        ...
+  # detail omitted
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def is_on_boundary(self,
+ val:
+ float) -> bool:
+\end_layout
+
+\begin_layout Plain Layout
+
+        ...
+  # detail omitted
+\end_layout
+
+\begin_layout Plain Layout
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "lis:grid"
+
+\end_inset
+
+Essential API for grid
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Masking
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Masking"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Introduction
+\end_layout
+
+\begin_layout Standard
+With the formality of recalling discretization out of the way,
+ 
+\begin_inset Quotes xld
+\end_inset
+
+masking
+\begin_inset Quotes xrd
+\end_inset
+
+,
+ the very namesake of this thesis,
+ can now be introduced.
+ This section formalizes the concept of masking,
+ identifies its configuration options and enumerates the three distinct masking flavors deployed in this thesis.
+\end_layout
+
+\begin_layout Definition
+General masking procedure
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The output of applying masking to a matrix-like object 
+\begin_inset Formula $\mathbf{R}$
+\end_inset
+
+ is another matrix-like object 
+\begin_inset Formula $\mathbf{R}^{\text{mask}}$
+\end_inset
+
+ of the same shape:
+\begin_inset Formula 
+\[
+\mathbb{R}^{d_{1}\times d_{2}\times\cdots}\in\mathbf{R}\overset{\mathbf{M}}{\longrightarrow}\mathbf{R}^{\mathbf{M}}\in\mathbb{R}^{d_{1}\times d_{2}\times\cdots}
+\]
+
+\end_inset
+
+The masked object 
+\begin_inset Formula $\mathbf{R}^{\mathbf{M}}$
+\end_inset
+
+ is said to have been masked with mask 
+\begin_inset Formula $\mathbf{M}$
+\end_inset
+
+ from the original,
+ unmasked 
+\begin_inset Formula $\mathbf{R}$
+\end_inset
+
+.
+ Specifically,
+ the masking procedure is understood as the following three-step process:
+\end_layout
+
+\begin_layout Enumerate
+obtain the masking 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+intensity
+\end_layout
+
+\end_inset
+
+,
+ either as a constant value or from sampled from some random distribution;
+\end_layout
+
+\begin_layout Enumerate
+determine,
+ according to some masking 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+strategy
+\end_layout
+
+\end_inset
+
+,
+ the indexes 
+\begin_inset Formula $\texttt{idx}$
+\end_inset
+
+ of the mask-candidates,
+ possibly with some sampling routine as well;
+\end_layout
+
+\begin_layout Enumerate
+set the selected masking indexes to some masking 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+value
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $v$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\mathbf{R}^{\mathbf{M}}\coloneqq\biggl(\mathbf{R}\texttt{[idx]}\leftarrow v\biggr)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The remainder of this section elaborates on the masking procedure nominated above.
+\end_layout
+
+\begin_layout Subsection
+Masking intensity
+\end_layout
+
+\begin_layout Definition
+Masking intensity
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The masking intensity 
+\begin_inset Formula $i$
+\end_inset
+
+ denotes the 
+\begin_inset Quotes xld
+\end_inset
+
+strength
+\begin_inset Quotes xrd
+\end_inset
+
+ of the mask:
+ the higher the intensity 
+\begin_inset Formula $i$
+\end_inset
+
+,
+ the more masking indexes 
+\begin_inset Formula $\texttt{idx}$
+\end_inset
+
+ are selected:
+\begin_inset Formula 
+\[
+\text{\#}\texttt{idx}\propto i
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Intensity sampling
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+To infuse the masking operation with extra entropy,
+ the masking intensities 
+\begin_inset Formula $i$
+\end_inset
+
+ may be sampled from a uniform distribution to capture a 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+range
+\end_layout
+
+\end_inset
+
+ of acceptable intensity values:
+\begin_inset Formula 
+\[
+i\simeq\text{Unif}\left[i_{\min};i_{\max}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Similar to the convention of 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+scipy
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "scipy"
+literal "false"
+
+\end_inset
+
+,
+ the masking intensity can also be specified with a (center) location and a spread value
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+name "API"
+target "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.uniform.html"
+literal "false"
+
+\end_inset
+
+ for uniform distribution by 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+scipy
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+,
+ captured by the following (hand-wavy) notation:
+\begin_inset Formula 
+\[
+i\simeq\left\langle \begin{alignedat}{1}\; & \text{Unif}\left[i_{\min};i_{\max}\right]\\
+ & \text{Unif}\left[i_{\mu};i_{\sigma}\right]
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that an exact,
+ deterministic intensity value is naturally obtained by specifying a vanishing spread value 
+\begin_inset Formula $i_{\sigma}\equiv0.0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+Availability of intensity sampling
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+All three masking strategies of this thesis (to be introduced in the following section) support the intensity-sampling procedure above.
+ The reference implementation included in the source code provides a function that encapsulates the intensity resampling logic from the underlying uniform distribution,
+ see Listing 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lis:mask"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Masking intensity revisited
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Given some matrix defined on a space-grid,
+ once the masking intensity 
+\begin_inset Formula $i$
+\end_inset
+
+ is known,
+ the exact number of masking indexes 
+\begin_inset Formula $n$
+\end_inset
+
+ is calculated as follows:
+\begin_inset Formula 
+\[
+n\coloneqq\text{\#}\texttt{idx}\coloneqq\texttt{round}\left(i\times\text{\Bigl\Vert\;\text{grid}\;\Bigr\Vert}\,\right)
+\]
+
+\end_inset
+
+In other words,
+ a higher intensity value 
+\begin_inset Formula $i$
+\end_inset
+
+ translates to proportionally larger number of entries 
+\begin_inset Formula $n$
+\end_inset
+
+ tainted after masking,
+ with the proportionality factor understood as the number of grid-points of the spatial discretization.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It is now up to the masking 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+strategy
+\end_layout
+
+\end_inset
+
+ to obtain these 
+\begin_inset Formula $n$
+\end_inset
+
+ masking indexes 
+\begin_inset Formula $\texttt{idx}$
+\end_inset
+
+.
+ Three such 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+strategies
+\end_layout
+
+\end_inset
+
+ are implemented and utilized in this thesis,
+ to be introduced in the upcoming section:
+\end_layout
+
+\begin_layout Subsection
+Masking strategies
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Masking-strategies"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Random style
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:masking-random"
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+The implementation in this project accepts as argument the proportion of masked candidates.
+ Note that unlike the island-style mentioned above,
+ the random mask patch is generated anew during each call to its 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+.mask()
+\end_layout
+
+\end_inset
+
+ method,
+ guaranteeing random entropy of the resulting dataset.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As suggested by its namesake,
+ the mask indexes are selected randomly.
+ This style of masking is widely used,
+ in particular,
+ as seen in publications such as 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "videomae-published,videomae,multimae"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example
+Visualization of random-masking
+\begin_inset CommandInset label
+LatexCommand label
+name "exa:Visualization-of-random-masking"
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:masking-random"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ provides visualization of random-style masking at 
+\begin_inset Formula $50\%$
+\end_inset
+
+ intensity.
+ The intensity-spread is set to 
+\begin_inset Formula $0.0$
+\end_inset
+
+ to guarantee the exact intensity for this particular instance.
+\end_layout
+
+\begin_layout Standard
+The particular raw,
+ unmasked matrix 
+\begin_inset Formula $\mathbf{R}$
+\end_inset
+
+ is defined as:
+\begin_inset Formula 
+\[
+\mathbf{R}_{x_{1},\,x_{2}}\coloneqq\cos\left(\frac{1}{2}\pi\cdot x_{1}\right)\times\cos\left(\frac{1}{2}\pi\cdot x_{2}\right)\;\;,\quad x_{1,2}\in\Bigl[-1.0;+1.0\Bigr]^{2}
+\]
+
+\end_inset
+
+One observes that entries of 
+\begin_inset Formula $\mathbf{R}$
+\end_inset
+
+ is strictly within the range of 
+\begin_inset Formula $\left[0;1\right]$
+\end_inset
+
+ and form a perfect dome-like shape.
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:masking-random"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ is organized as follows:
+ every matrix is shown in a 2D contour-plot in the top row and a 3D surface-plot in the bottom row.
+ The raw,
+ unmasked 
+\begin_inset Formula $\mathbf{R}$
+\end_inset
+
+ is shown as the first column on the left,
+ whereas three outputs of this 
+\begin_inset Formula $50\%$
+\end_inset
+
+ random-mask as shown in the other three columns to the right:
+ from the second to the fourth column,
+ a masking value of 
+\begin_inset Formula $0.0$
+\end_inset
+
+,
+ 
+\begin_inset Formula $0.25$
+\end_inset
+
+ and 
+\begin_inset Formula $0.5$
+\end_inset
+
+ is used to calculate the masked 
+\begin_inset Formula $\mathbf{R}^{\mathbf{M}}$
+\end_inset
+
+ respectively.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../../bin/mask_random_0.5_0.5.png
+	width 15cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:masking-random"
+
+\end_inset
+
+Visualization of random masking of intensity 
+\begin_inset Formula $50\%$
+\end_inset
+
+,
+ using 
+\begin_inset Formula $\mathbf{R}\coloneqq\cos\left(\cdot\right)\times\cos\left(\cdot\right)$
+\end_inset
+
+ on 
+\begin_inset Formula $\left[-1;1\right]^{2}$
+\end_inset
+
+ in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "exa:Visualization-of-random-masking"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ Top row:
+ 2D contour-plots;
+ bottom row:
+ the corresponding 3D surface-plots.
+ From left to right:
+ the raw,
+ unmasked 
+\begin_inset Formula $\mathbf{R}$
+\end_inset
+
+,
+ followed by the masked results 
+\begin_inset Formula $\mathbf{R}^{\mathbf{M}}$
+\end_inset
+
+ with masking value 
+\begin_inset Formula $0.0$
+\end_inset
+
+,
+ 
+\begin_inset Formula $0.25$
+\end_inset
+
+ and 
+\begin_inset Formula $0.50$
+\end_inset
+
+ respectively,
+ plotted using a different color-theme.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Island style
+\end_layout
+
+\begin_layout Standard
+The island-style masking strategy keeps a centered portion,
+ or an 
+\begin_inset Quotes xld
+\end_inset
+
+
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+island
+\end_layout
+
+\end_inset
+
+
+\begin_inset Quotes xrd
+\end_inset
+
+,
+ of the input matrix in-tact,
+ while targeting its surrounding entries.
+ The masked candidates form a rectangular 
+\begin_inset Quotes xld
+\end_inset
+
+annulus
+\begin_inset Quotes xrd
+\end_inset
+
+,
+ or 
+\begin_inset Quotes xld
+\end_inset
+
+ring
+\begin_inset Quotes xrd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+Alternative interpretation of masking intensity
+\begin_inset CommandInset label
+LatexCommand label
+name "note:intensity-island"
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+In the case of island-masks,
+ the masking intensity 
+\begin_inset Formula $i$
+\end_inset
+
+ can also be understood as:
+\begin_inset Formula 
+\[
+i\equiv\frac{\text{Area}\left(\text{annulus}\right)}{\text{Area}\left(\text{grid}\right)}\equiv1-\frac{\text{Area}\left(\text{island}\right)}{\text{Area}\left(\text{grid}\right)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+On a 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+square
+\end_layout
+
+\end_inset
+
+ grid,
+ given some desired masking intensity 
+\begin_inset Formula $i$
+\end_inset
+
+,
+ the proportion 
+\begin_inset Formula $p$
+\end_inset
+
+ of the side-length of the island over that of the entire grid is calculated as follows:
+\begin_inset Formula 
+\[
+p=\left(1-i\right)^{\nicefrac{1}{2}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+Visualization of island-masking
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:masking-island"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ provides visualization of the island masks with the 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+same
+\end_layout
+
+\end_inset
+
+ underlying unmasked,
+ raw matrix 
+\begin_inset Formula $\mathbf{R}\coloneqq\cos\left(\cdot\right)\times\cos\left(\cdot\right)$
+\end_inset
+
+.
+ The masking intensity shown is 
+\begin_inset Formula $75\%$
+\end_inset
+
+.
+ Following the calculation in Note 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "note:intensity-island"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ the side-length of the center island is thus exactly half of that of the whole grid.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../../bin/mask_island_0.75_0.75.png
+	width 15cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:masking-island"
+
+\end_inset
+
+Visualization of the island-style mask at 
+\begin_inset Formula $75\%$
+\end_inset
+
+ intensity.
+ The same underlying,
+ unmasked matrix 
+\begin_inset Formula $\mathbf{R}\coloneqq\cos\left(\cdot\right)\times\cos\left(\cdot\right)$
+\end_inset
+
+ is used,
+ and all plotting conventions follow those of Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:masking-random"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ for random-masks.
+ Note that for the 
+\begin_inset Formula $75\%$
+\end_inset
+
+ overall intensity,
+ the side-length of the (center) island is half of that of the entire (outer) grid.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Ring style
+\end_layout
+
+\begin_layout Standard
+Conceived as the mirror-image of the island-masks,
+ ring-style masks apply the masking-value to the center proportion of the grid,
+ while leaving the surrounding ring untouched.
+\end_layout
+
+\begin_layout Note
+Interpretation of masking intensity
+\begin_inset CommandInset label
+LatexCommand label
+name "note:intensity-ring"
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The masking intensity of ring-style masks can also be understood as the ratio of the area of the (masked) center island over the area of the grid:
+\begin_inset Formula 
+\[
+i\equiv\frac{\text{Area}\left(\text{island}\right)}{\text{Area}\left(\text{grid}\right)}\equiv1-\frac{\text{Area}\left(\text{ring}\right)}{\text{Area}\left(\text{grid}\right)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Again,
+ on a square two-dimensional grid,
+ the proportion 
+\begin_inset Formula $p$
+\end_inset
+
+ of the side-length of the center island over that of the entire grid is calculated as:
+\begin_inset Formula 
+\[
+p=i^{\,\nicefrac{1}{2}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+Visualization of ring-masking
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:masking-ring"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ visualizes a 
+\begin_inset Formula $25\%$
+\end_inset
+
+ ring-style mask using the 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+same
+\end_layout
+
+\end_inset
+
+ underlying unmasked,
+ raw matrix 
+\begin_inset Formula $\mathbf{R}\coloneqq\cos\left(\cdot\right)\times\cos\left(\cdot\right)$
+\end_inset
+
+ seen previously.
+ Per Note 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "note:intensity-ring"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ the side-length of the center island is exactly half of that of the whole grid.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../../bin/mask_ring_0.25_0.25.png
+	width 15cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:masking-ring"
+
+\end_inset
+
+Visualization of the ring-style masks.
+ The underlying,
+ unmasked matrix,
+ as well as all plotting conventions follows those of Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:masking-random"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+island-style dataset with the Poisson Equation.
+ Ordering of the plots mimics that of Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:masking-random"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ for the random masking style.
+ First row:
+ contour-plots of three 
+\begin_inset Formula $u$
+\end_inset
+
+ instances.
+ Second row:
+ respective contour-plots proceeded with island-style keeping 
+\begin_inset Formula $70\%$
+\end_inset
+
+ of the spatial grid-points in each dimension.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+Complementary masks
+\begin_inset CommandInset label
+LatexCommand label
+name "note:Complementary-masks"
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The intensities of 
+\begin_inset Formula $75\%$
+\end_inset
+
+ and 
+\begin_inset Formula $25\%$
+\end_inset
+
+ for visualizing the island-style and ring-style masks above are chosen consciously:
+ one observes that the resulting,
+ masked objects are perfect 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+complements
+\end_layout
+
+\end_inset
+
+ of each other,
+ i.e.,
+ the masked portion of one corresponds directly to the unmasked portion of another.
+\end_layout
+
+\begin_layout Standard
+In fact,
+ any pairing of an island-mask with intensity 
+\begin_inset Formula $i$
+\end_inset
+
+ and a ring-mask with intensity 
+\begin_inset Formula $1-i$
+\end_inset
+
+ forms exact compliments of each other.
+ This specific complementary property of masking is further studied in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:The-island-ring-juxtaposition"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Obtaining masking candidates
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Once the masking strategy is decided upon,
+ the masking candidates are readily available:
+\end_layout
+
+\begin_layout Itemize
+for the random-style masks,
+ the candidates are calculated via random sampling from all indexes of the underlying matrix 
+\begin_inset Formula $\mathbf{R}$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Itemize
+for the island-style and ring-style masks,
+ the candidates are known deterministically with the calculation formula for the side-length proportion 
+\begin_inset Formula $p$
+\end_inset
+
+ of the embedded center square as specified above.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The final step of masking corresponds to setting the masking candidates to some masking value 
+\begin_inset Formula $v$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Subsection
+Masking value
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Masking-value"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A common masking value to apply to the masking candidates,
+ as deployed in researches such as 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "videomae-published,videomae,multimae"
+literal "false"
+
+\end_inset
+
+,
+ is to uniformly set the values of these entries to 
+\begin_inset Formula $0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This thesis continues upon this strategy of constant masking value,
+ but consciously adjusts the value to 
+\begin_inset Formula $0.5$
+\end_inset
+
+.
+ The justification of this decision stipulates a sneak-peak to the dataset normalization technique deployed in this project,
+ discussed further in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Dataset-Setup"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ and Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:Masked-dataset-generation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Proposition
+Dataset normalization
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+This thesis performs 
+\begin_inset Formula $\left[0,1\right]$
+\end_inset
+
+ normalization of the dataset per 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ml-normalization-google,ml-elem-stats-learning,ml-goodfellow"
+literal "false"
+
+\end_inset
+
+,
+ such that every channel is linearly scaled within the range of 
+\begin_inset Formula $\left[0,1\right]$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The adjustment of masking value from 
+\begin_inset Formula $0$
+\end_inset
+
+ to 
+\begin_inset Formula $0.5$
+\end_inset
+
+,
+ though insignificant at first glance,
+ brings forth a deep implication:
+ the masked value 
+\begin_inset Formula $v$
+\end_inset
+
+ now corresponds to the 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+mean
+\end_layout
+
+\end_inset
+
+ of the value-range of the data channels:
+\begin_inset Formula 
+\[
+v^{\text{mask}}\coloneqq\text{Dataset}_{\mu}^{\text{norm}}\equiv0.5
+\]
+
+\end_inset
+
+Masking performed with 
+\begin_inset Formula $v^{\text{mask}}\equiv0.5$
+\end_inset
+
+ can thus be considered 
+\begin_inset Quotes xld
+\end_inset
+
+dataset-neutral
+\begin_inset Quotes xrd
+\end_inset
+
+,
+ as it does not implicitly skew the resultant,
+ masked dataset towards the minimum,
+ as would be in the case of 
+\begin_inset Formula $v=0$
+\end_inset
+
+.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+The worrisome implication of the 
+\begin_inset Formula $0$
+\end_inset
+
+ masking values as seen in other publications is now apparent,
+ by adjusting the There are,
+ however,
+ apparent worrisome implications of this strategy:
+ for the 
+\begin_inset Formula $0$
+\end_inset
+
+ masking-value to correspond to white noise in the sense of expected value,
+ the dataset
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Later analyses in Chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:non-standard-masking-value"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ study the impact such 
+\begin_inset Quotes xld
+\end_inset
+
+non-neutral
+\begin_inset Quotes xrd
+\end_inset
+
+ masking-values,
+ using 
+\begin_inset Formula $0$
+\end_inset
+
+ and 
+\begin_inset Formula $1$
+\end_inset
+
+ as alternative masking values for comparison.
+\end_layout
+
+\begin_layout Note
+Non-constant masking values
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+It should be noted that masking value 
+\begin_inset Formula $v$
+\end_inset
+
+ need not be constant:
+ in fact,
+ the author considers the non-constant masks a future research direction,
+ see discussions in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Future-work"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Masking overview
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Collection-of-masks"
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+REWRITE FOR NEW MASKS
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Conclusion
+Masking procedure
+\begin_inset CommandInset label
+LatexCommand label
+name "conc:Masking-procedure"
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The following chart depicts a curt summary of the masking procedure explained in previous sections:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\xymatrix{ & \text{intensity}\ar@(ul,ur)^{\text{resample}}\ar[r]^{\;\;\;\;\star} & \texttt{idx}\ar[d]^{\text{select}}\\
+\mathbf{R}\ar@{-->}[rrrr] &  &  &  & \mathbf{R}^{\mathbf{M}}\\
+ &  &  & \text{value}\ar[u]_{\text{set}}
+}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\star$
+\end_inset
+
+ denotes the calculation step of the indexes 
+\begin_inset Formula $\texttt{idx}$
+\end_inset
+
+ of the masking candidates under application of the masking strategy of choice.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Key elements concerning the implementation of masks are listed as follows:
+\end_layout
+
+\begin_layout Definition
+Masking API and Implementation
+\begin_inset CommandInset label
+LatexCommand label
+name "def:Masking-API"
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The base 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+Masker
+\end_layout
+
+\end_inset
+
+ class provides the abstract method 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+mask()
+\end_layout
+
+\end_inset
+
+,
+ which accepts as argument a raw 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+tensor
+\end_layout
+
+\end_inset
+
+ of 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+pytorch
+\end_layout
+
+\end_inset
+
+,
+ and returns the masked matrix,
+ see Listing 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lis:mask"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ Subclasses of 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+Masker
+\end_layout
+
+\end_inset
+
+ are expected to provide corresponding implementations of the 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+mask()
+\end_layout
+
+\end_inset
+
+ method.
+ 
+\end_layout
+
+\begin_layout Standard
+A common utility 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+_sample_intensity()
+\end_layout
+
+\end_inset
+
+ is provided to obtain the masking intensity 
+\begin_inset Formula $i$
+\end_inset
+
+ sampled per uniform distribution as explained above.
+\end_layout
+
+\begin_layout Standard
+Note that the default construction yield a masker object of intensity range:
+\begin_inset Formula 
+\[
+\text{mask-intensity}\simeq\mathcal{P}\coloneqq\text{Unif}\left[c_{\text{low}}=0.4;c_{\text{high}}=0.6\right]
+\]
+
+\end_inset
+
+paired with the neutral masking value 
+\begin_inset Formula $v=0.5$
+\end_inset
+
+ as discussed previously.
+\end_layout
+
+\begin_layout Standard
+The three masking variants are implemented in the same module inheriting the common base 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+Masker
+\end_layout
+
+\end_inset
+
+.
+ The motivated reader is invited to implement its own class of masker class for alternative styles of masking other than those mentioned above.
+\begin_inset listings
+lstparams "language=Python"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+# src/util/dataset.py
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Masker:
+\end_layout
+
+\begin_layout Plain Layout
+
+    def __init__(
+\end_layout
+
+\begin_layout Plain Layout
+
+        self,
+\end_layout
+
+\begin_layout Plain Layout
+
+        intensity:
+ float = 0.5,
+\end_layout
+
+\begin_layout Plain Layout
+
+        intensity_spread:
+ float = 0.1,
+\end_layout
+
+\begin_layout Plain Layout
+
+        value_mask:
+ float = 0.5,
+\end_layout
+
+\begin_layout Plain Layout
+
+    ):
+\end_layout
+
+\begin_layout Plain Layout
+
+        pass  # detail omitted
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    @abc.abstractmethod
+\end_layout
+
+\begin_layout Plain Layout
+
+    def mask(self,
+ full:
+ torch.Tensor) -> torch.Tensor:
+\end_layout
+
+\begin_layout Plain Layout
+
+        raise NotImplementedError  # to be overloaded by subclasses
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def _sample_intensity(self) -> float:
+\end_layout
+
+\begin_layout Plain Layout
+
+        pass  # detail omitted
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class MaskerRandom(Masker):
+  # direct inheritance
+\end_layout
+
+\begin_layout Plain Layout
+
+	...
+  # detail omitted
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class MaskerIsland(Masker):
+  # ditto
+\end_layout
+
+\begin_layout Plain Layout
+
+	...
+  # detail omitted
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class MaskerRing(Masker):
+  # ditto
+\end_layout
+
+\begin_layout Plain Layout
+
+	...
+  # detail omitted
+\end_layout
+
+\begin_layout Plain Layout
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "lis:mask"
+
+\end_inset
+
+Essential API for masking
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus concludes this introductory chapter on masking,
+ which provides concrete definitions of the masking procedure,
+ showcasing three variants of masks with their respective configuration possibilities.
+ To conclude this section and as a sneak-peak into the upcoming section where concrete datasets are formed with masking,
+ the following masks are used in this thesis:
+\end_layout
+
+\begin_layout Example
+Masking ranges for learning pipeline
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+for 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+training
+\end_layout
+
+\end_inset
+
+:
+ four masking intensity-ranges,
+ all of random-style:
+ full-range 
+\begin_inset Formula $\left[0\%;100\%\right]$
+\end_inset
+
+,
+ as well as low,
+ mid and high regimes:
+ 
+\begin_inset Formula $\left[20\%;40\%\right]$
+\end_inset
+
+,
+ 
+\begin_inset Formula $\left[40\%;60\%\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $\left[60\%;80\%\right]$
+\end_inset
+
+ (4 masking intensity-ranges in total);
+\end_layout
+
+\begin_layout Itemize
+for 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+evaluation
+\end_layout
+
+\end_inset
+
+:
+ all three masking styles,
+ each with 
+\begin_inset Formula $10$
+\end_inset
+
+ intensities ranges:
+ 
+\begin_inset Formula $[0\%;10\%]$
+\end_inset
+
+,
+ 
+\begin_inset Formula $\left[10\%;20\%\right]$
+\end_inset
+
+ till 
+\begin_inset Formula $\left[90\%;100\%\right]$
+\end_inset
+
+ (30 masks in total).
+\end_layout
+
+\begin_layout Standard
+Thus,
+ for every model on each dataset,
+ a total of 
+\begin_inset Formula $4$
+\end_inset
+
+ masking iterations are performed for training,
+ and 
+\begin_inset Formula $30$
+\end_inset
+
+ for evaluation.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+The PDE Prototypes
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Dataset"
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Section
+TODO
+\end_layout
+
+\begin_layout Itemize
+find some quote on importance of data in ML
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Another central component of the setup work is the dataset generated by the PDEs,
+ typically revolving around solving the PDEs themselves.
+ This section introduces the three core PDE prototypes of the project and the respective datasets induced by them.
+ Some necessary setup steps are introduced in the following section:
+\end_layout
+
+\begin_layout Subsection
+Setup
+\end_layout
+
+\begin_layout Subsubsection
+Sample Super-positioning
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Sample-Super-positioning"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+One frequently seen paradigm for generating the PDE is discussed below:
+\end_layout
+
+\begin_layout Definition
+Super-positioning construction
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Assuming linearity of the underlying PDE model,
+ multiple 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+samples
+\end_layout
+
+\end_inset
+
+ can be linearly combined to construct one 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+instance
+\end_layout
+
+\end_inset
+
+,
+ as seen in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cno,analysis-atkinson"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Such super-positioning technique provides entropy critical to dataset generation while guaranteeing a common underlying distribution.
+ The critical relevance of these dataset properties is studied at length in textbooks of general machine-learning such as 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ml-elem-stats-learning,ml-murphy"
+literal "false"
+
+\end_inset
+
+ as well as those of traditional statistics including 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "stats-wasserman"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The following example illustrates this technique:
+\end_layout
+
+\begin_layout Example
+Sample super-positioning
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Each instance of the PDE solution 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+ is constructed via a linear combination of 
+\begin_inset Formula $k$
+\end_inset
+
+ samples 
+\begin_inset Formula $u_{i}^{k}$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+u_{i}\coloneqq\Biggl[\text{weights}\Biggr]\circ\Biggl[\text{samples}\Biggr]=\Biggl[\texttt{R}_{i}^{k}\Biggr]\circ\Biggl[u_{i}^{k}\Biggr]
+\]
+
+\end_inset
+
+where the weights 
+\begin_inset Formula $\texttt{R}_{i}^{k}$
+\end_inset
+
+ are drawn from some distribution 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+ chosen a priori,
+ which typically corresponds to a uniform distribution:
+\begin_inset Formula 
+\[
+\texttt{R}_{i}^{k}\simeq\mathcal{P}\coloneqq\text{Unif}\left[c_{\text{low}};c_{\text{high}}\right]
+\]
+
+\end_inset
+
+in which case the configurations 
+\begin_inset Formula $c_{\text{low}}$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{\text{high}}$
+\end_inset
+
+are considered tunable hyper-parameters.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+Scope of super-positioning
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Apparently,
+ such super-positioning construction shall be applied to all 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+channels
+\end_layout
+
+\end_inset
+
+ induced by the PDE dataset.
+ As an example,
+ for the case of the Poisson equation as introduced in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Poisson-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ both the solution 
+\begin_inset Formula $u$
+\end_inset
+
+ and the source term 
+\begin_inset Formula $f$
+\end_inset
+
+ must be linearly combined if super-positioning is used.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+Prerequisite for super-positioning
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The underlying PDE must be linear for the super-positioning technique above to be applicable 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "königsberger,analysis-amann"
+literal "false"
+
+\end_inset
+
+.
+ Thankfully,
+ the three PDE prototypes used in this thesis are all linear by nature,
+ leading handily to the applicability of this technique.
+ Reader should be also aware that more involved PDE models,
+ including the prominent Navier–Stokes equations,
+ are likely non-linear.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Design and Implementation
+\end_layout
+
+\begin_layout Note
+The programmer's perspective
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The remaining logic,
+ such as the randomly weighted linear combination and the final dataset assembly with the coordinates matrices,
+ can be reused to a substantial extent.
+\end_layout
+
+\begin_layout Standard
+This stipulates a clean overload structure:
+ the base-class offers those reusable utility functions,
+ and individual dataset providers shall overload this base to provide concrete implementation for the generation of the instance-samples of the underlying PDE prototype.
+ This design pattern is used throughout the code-base of this project,
+ and the interested reader is invited to inspect the details in the source repository.
+ Listing 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lis:dataset-raw"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ showcases this base-class 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+DatasetPDE
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Central to the API is the abstract method 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+solve_instance()
+\end_layout
+
+\end_inset
+
+,
+ which returns a sequence of matrices
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+here,
+ 
+\begin_inset Quotes xld
+\end_inset
+
+matrices
+\begin_inset Quotes xrd
+\end_inset
+
+ refer to 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+python
+\end_layout
+
+\end_inset
+
+ objects of type 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+torch.Tensor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ of some PDE.
+ Specific PDE models are to inherit this API and provide implementation of this method.
+\end_layout
+
+\begin_layout Standard
+The length of this sequence denotes the number of channels relevant to fully capture the PDE problem and saved in member 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+N_CHANNELS
+\end_layout
+
+\end_inset
+
+.
+ Continuing with the previous example of the Poisson equation,
+ its implementation would set 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+N_CHANNELS
+\end_layout
+
+\end_inset
+
+ to 
+\begin_inset Formula $2$
+\end_inset
+
+,
+ and have 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+solve_instance()
+\end_layout
+
+\end_inset
+
+ return the solution 
+\begin_inset Formula $u$
+\end_inset
+
+ and the source 
+\begin_inset Formula $f$
+\end_inset
+
+ as the two channels.
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+DatasetPDE.as_dataset()
+\end_layout
+
+\end_inset
+
+ method handles the low-level logic to assemble multiple instances into one dataset for 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+pytorch
+\end_layout
+
+\end_inset
+
+.
+\begin_inset listings
+lstparams "language=Python"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+# src/pde/dataset.py
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class DatasetPDE:
+\end_layout
+
+\begin_layout Plain Layout
+
+    N_CHANNELS:
+ int  # to be overwritten by individual PDEs
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def as_dataset(self,
+ n_instances:
+ int) -> T_DATASET:
+\end_layout
+
+\begin_layout Plain Layout
+
+		# assemble instances into dataset (common to all PDEs)
+\end_layout
+
+\begin_layout Plain Layout
+
+        ...
+  # implementation detail not shown
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    @abc.abstractmethod
+\end_layout
+
+\begin_layout Plain Layout
+
+    def solve_instance(self) -> Sequence[torch.Tensor]:
+\end_layout
+
+\begin_layout Plain Layout
+
+        raise NotImplementedError  # to be implemented by individual PDEs
+\end_layout
+
+\begin_layout Plain Layout
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "lis:dataset-raw"
+
+\end_inset
+
+Key methods of PDE-Dataset API
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+Where abstraction stops
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+From the perspective of API design,
+ the super-positioning pipeline described above would suggest further (that we further abstract the super-positioning logic)
+\end_layout
+
+\begin_layout Standard
+that the construction of such datasets requires only the implementation of generating one such sample of the instances.
+ However,
+ to allow extendability to other non-linear PDE models,
+ the abstraction stops at the instance-level:
+ the boilerplate of implementing super-positioning is fairly minimal with the natural matrix-operation capabilities of 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+pytorch
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "pytorch"
+literal "false"
+
+\end_inset
+
+ and 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+numpy
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "numpy"
+literal "false"
+
+\end_inset
+
+.
+ Alternatively,
+ non super-positioned datasets,
+ as justified in the discussion above,
+ are relieved from such unnecessary inheritance.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+Other functionalities of the dataset API
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+In addition to the core instance-solving and dataset-exporting methods mentioned above,
+ several peripheral functions are also instrumental to its workings.
+ These include,
+ among others,
+ a save-load utility.
+ In particular,
+ the save-load path is calculated as follows:
+\begin_inset Formula 
+\[
+\texttt{<BIN\_DIR>}\;\texttt{/}\;\texttt{<PDE\_name>}\texttt{\;\texttt{/}\;<dataset\_name>-<type>\_<n\_instances>.<suffix>}
+\]
+
+\end_inset
+
+where 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+<BIN_DIR>
+\end_layout
+
+\end_inset
+
+ is a project-wide constant for the path all binary outputs and 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+<type>
+\end_layout
+
+\end_inset
+
+ denotes the designated usage mode of training or evaluation for the dataset.
+ For the 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-sines
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset as introduced in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:poisson-sum-of-sines"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ an evaluation dataset of 300 samples is saved at:
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+bin
+\end_layout
+
+\begin_layout Plain Layout
+
+|-- poisson
+\end_layout
+
+\begin_layout Plain Layout
+
+    |-- sum_of_sine-eval_300.pth
+\end_layout
+
+\begin_layout Plain Layout
+
+    |-- ...
+\end_layout
+
+\begin_layout Plain Layout
+
+|-- heat
+\end_layout
+
+\begin_layout Plain Layout
+
+    |-- ...
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Other essential utilities of the PDE dataset API include those related to visualization:
+ which will be further detailed with concrete plot examples when the individual PDE prototypes are studied.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+With the setup work complete,
+ the individual PDE prototypes are now introduced:
+\end_layout
+
+\begin_layout Subsection
+Poisson Equation
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Poisson-Equation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Used to describe the potential field generated by some density distribution,
+ the Poisson equation generalizes the Laplace's equation with:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\begin{alignedat}{4} & \quad & \frac{\partial^{2}}{\partial x_{1}^{2}}u+\frac{\partial^{2}}{\partial x_{2}^{2}}u & = & \;- & f & \qquad\\
+\Longrightarrow &  & -\nabla^{2}u & = &  & f
+\end{alignedat}
+\]
+
+\end_inset
+
+This thesis provides the following two datasets for the Poisson equation.
+\end_layout
+
+\begin_layout Subsubsection
+Sum of Sines
+\end_layout
+
+\begin_layout Definition
+The 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-sines
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset 
+\begin_inset CommandInset label
+LatexCommand label
+name "def:poisson-sum-of-sines"
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Each instance of the solution 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+ is constructed as follows:
+\begin_inset Formula 
+\[
+u_{i}\coloneqq\frac{c_{c}}{\pi}\cdot\mathop{\underbrace{\:\sum_{k_{1}\in\left[1;c_{k}\right]}\,\sum_{k_{2}\in\left[1;c_{k}\right]}\;}_{\eqqcolon\;\sum\sum}\biggl\{\Bigl(\texttt{R}_{k_{1},k_{2}}\left(k_{1}^{2}+k_{2}^{2}\right)^{-c_{r}}\Bigr)\cdot\underbrace{\sin\left(k_{1}\pi x_{1}\right)\sin\left(k_{2}\pi x_{2}\right)}_{\eqqcolon\:\underline{\sin}}\biggr\}}
+\]
+
+\end_inset
+
+where:
+\end_layout
+
+\begin_layout Itemize
+the constant 
+\begin_inset Formula $c_{k}\in\mathbb{N}^{+}$
+\end_inset
+
+ determines the number of samples used to generate one such instance with the super-positioning technique introduced in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Sample-Super-positioning"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Itemize
+the sample-weights 
+\begin_inset Formula $\texttt{R}_{k_{1},k_{2}}$
+\end_inset
+
+ are drawn from a uniform distribution;
+\end_layout
+
+\begin_layout Itemize
+a configurable scaling constant 
+\begin_inset Formula $c_{c}\in\mathbb{R}^{+}$
+\end_inset
+
+ is provided to aid visualization and inspection of model data.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Due to Fact 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fact:Laplacian-of-double-trig"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ the corresponding source term 
+\begin_inset Formula $f_{i}$
+\end_inset
+
+ is easily obtained by super-positioning the Laplacian 
+\begin_inset Formula $\nabla^{2}$
+\end_inset
+
+ of 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left\{ \begin{alignedat}{3} & \, & u_{i} & \coloneqq &  & \frac{c_{c}}{\pi}\cdot\mathop{\sum\sum\biggl\{\Bigl(\texttt{R}_{k_{1},k_{2}}\left(k_{1}^{2}+k_{2}^{2}\right)^{c_{r}-1}\Bigr)\cdot\underline{\sin}\biggr\}}\\
+ &  & f_{i} & \coloneqq & \; & c_{c}\pi\cdot\mathop{\sum\sum\biggl\{\Bigl(\texttt{R}_{k_{1},k_{2}}\left(k_{1}^{2}+k_{2}^{2}\right)^{c_{r}}\Bigr)\cdot\underline{\sin}\biggr\}}\\
+ &  & \underline{\sin} & \coloneqq &  & \sin\left(k_{1}\pi x_{1}\right)\sin\left(k_{2}\pi x_{2}\right)
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Fact
+Laplacian of double trig-product
+\begin_inset CommandInset label
+LatexCommand label
+name "fact:Laplacian-of-double-trig"
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+It is readily verifiable that:
+\begin_inset Formula 
+\[
+\qquad\qquad\text{trig}\left(k_{1}\pi x_{1}\right)\text{trig}\left(k_{1}\pi x_{2}\right)\stackrel{\nabla^{2}}{\longmapsto}-\left(k_{1}^{2}+k_{2}^{2}\right)\pi^{2}\cdot\Bigl(\text{trig}\left(k_{1}\pi x_{1}\right)\text{trig}\left(k_{1}\pi x_{2}\right)\Bigr)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\text{trig}\left(\cdot\right)$
+\end_inset
+
+ denotes the sine or the cosine function.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For this thesis,
+ the following configuration of these constants is used for the sum-of-sines dataset:
+\end_layout
+
+\begin_layout Example
+Configuration of 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-sins
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset
+\begin_inset CommandInset label
+LatexCommand label
+name "exa:raw-poisson-sines-config"
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+As previewed in Example 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "exa:Space-grids-in-action"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ the following spatial grid of resolution 
+\begin_inset Formula $64$
+\end_inset
+
+ per axis is used:
+ 
+\begin_inset Formula 
+\[
+\mathbb{R}^{64}\ni x_{1,2}\coloneqq\;\left\{ \begin{alignedat}{2}\text{start} & \coloneqq & 0.00\\
+\text{step-size} & \coloneqq & 0.01
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Configurations pertaining to the dataset itself are as follows:
+\end_layout
+
+\begin_layout Itemize
+each instance 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+ is generated from 
+\begin_inset Formula $c_{k}\coloneqq4$
+\end_inset
+
+ samples 
+\begin_inset Formula $u_{i}^{k\in\left\{ 1,2,3,4\right\} }$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Itemize
+the weights 
+\begin_inset Formula $\texttt{R}_{k_{1},k_{2}}$
+\end_inset
+
+ are spawned uniformly from 
+\begin_inset Formula $\mathcal{U}\left[-1.0;+1.0\right]$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $c_{r}$
+\end_inset
+
+ is chosen as 
+\begin_inset Formula $0.85$
+\end_inset
+
+,
+ which is the negative of the 
+\begin_inset Formula $r$
+\end_inset
+
+ constant in its original form as proposed in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cno"
+literal "false"
+
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Itemize
+manual scaling is kept neutral,
+ i.e.,
+ 
+\begin_inset Formula $c_{c}\coloneqq1.0$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+Properties of the sum-of-sines dataset
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+One notes that the solution 
+\begin_inset Formula $u$
+\end_inset
+
+ will uniformly evaluate to 
+\begin_inset Formula $0$
+\end_inset
+
+ when either coordinate 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ or 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ is 
+\begin_inset Formula $0$
+\end_inset
+
+;
+ in the sense of the grid as chosen in this project,
+ this means that 
+\begin_inset Formula $u$
+\end_inset
+
+ will vanish on the lower boundary of either dimension:
+\begin_inset Formula 
+\[
+u\left(x_{1}=0,\forall x_{2}\right)\equiv u\left(\forall x_{1},x_{2}=0\right)\equiv0
+\]
+
+\end_inset
+
+This dataset will thus incorporate both fixed (vanishing) and varying boundary-condition (BC) on different segments of the spatial boundary.
+ Note that this choice of mixed boundary condition is deliberate to contrast 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cno"
+literal "false"
+
+\end_inset
+
+,
+ which also used this dataset to represent the Poisson equation,
+ albeit with a uniform boundary condition with the end-point set to 
+\begin_inset Formula $1.0$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+Visualization of the sum-of-sines dataset
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Visualization of two instances of this dataset is provided in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:dataset-poisson-sine"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ where the first and the second columns depict the first 
+\begin_inset Formula $\left(u,f\right)$
+\end_inset
+
+ pair,
+ the third and fourth column the second respectively.
+ The first row shows the target matrices in a 2D contour-plot,
+ whereas the second in the corresponding 3D surface-plot.
+\end_layout
+
+\begin_layout Standard
+Note that each subplot is scaled to its own dynamic range,
+ as indicated by the z-axis tick-labels of the surface-plots in the second row.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../../bin/raw_poisson_sine.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:dataset-poisson-sine"
+
+\end_inset
+
+Visualization of two instances of the 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of
+\begin_inset Quotes xrd
+\end_inset
+
+sines
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset for the Poisson equation given in in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:poisson-sum-of-sines"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ configured as specified in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "exa:raw-poisson-sines-config"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ 
+\begin_inset Formula $c_{k}\coloneqq4$
+\end_inset
+
+ samples are super-positioned to generate one instance of 
+\begin_inset Formula $\left(u,f\right)$
+\end_inset
+
+.
+ First instance shown in row 1 and 2,
+ second instance in 3 and 4.
+ First row:
+ 2D contour-plots,
+ second row:
+ corresponding 3D surface-plots.
+ Each subplot scaled to its own dynamic range.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Sum of Gaussians
+\end_layout
+
+\begin_layout Standard
+Another dataset for the Poisson equation is constructed by super-positioning the probability density functions (PDFs) of Gaussian Distributions.
+ This section describes its initialization and contrasts it with the 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-sines
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset introduced previously.
+\end_layout
+
+\begin_layout Note
+Sign modification
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+In preparation of introducing this dataset,
+ the target Poisson equation as seen previously in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Poisson-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ is slightly modified such that the negative of the right-hand side is taken:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\nabla^{2}u=f
+\]
+
+\end_inset
+
+The reason for this adjustment is purely cosmetic and follows from the very definition of this dataset:
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+The 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-Gaussians
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset
+\begin_inset CommandInset label
+LatexCommand label
+name "def:raw-poisson-gaussian"
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The following dataset is generated:
+\begin_inset Formula 
+\[
+u_{i}\coloneqq\mathop{\sum_{k\in\left[1;c_{k}\right]}\biggl\{\texttt{R}^{k}\cdot u_{i}^{k}\biggr\}}\coloneqq\mathop{\sum_{k\in\left[1;c_{k}\right]}\biggl\{\texttt{R}^{k}\cdot\mathcal{N}^{k}\biggr\}}\:,\quad\texttt{R}\in\mathbb{R}^{c_{k}}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathcal{N}^{k}$
+\end_inset
+
+ denotes the probability density function (PDF) of the two-dimensional normal distribution,
+ whose expected-value 
+\begin_inset Formula $\mu^{k}$
+\end_inset
+
+ and covariance-matrix 
+\begin_inset Formula $\text{Cov}^{k}$
+\end_inset
+
+ are sampled from their respective (uniform) random distributions 
+\begin_inset Formula $\mathcal{U}^{\mu}\coloneqq\text{Unif}\left[c_{\text{low}}^{\mu};c_{\text{high}}^{\mu}\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{U}^{\sigma}\coloneqq\text{Unif}\left[c_{\text{low}}^{\sigma};c_{\text{high}}^{\sigma}\right]$
+\end_inset
+
+ as follows:
+\begin_inset Formula 
+\[
+\mathcal{N}^{k}\simeq\left\{ \begin{alignedat}{4} & \: & \mathbb{R}^{2}\ni & \; & \mu^{k} & \coloneqq & \; & \left[\begin{array}{c}
+\mu^{k,1}\simeq\mathcal{U}^{\mu}\\
+\mu^{k,2}\simeq\mathcal{U}^{\mu}
+\end{array}\right]\\
+ &  & \mathbb{R}^{2\times2}\ni &  & \text{Cov}^{k} & \coloneqq &  & \left[\begin{array}{cc}
+\left(\sigma^{k,1}\simeq\mathcal{U}^{\sigma}\right)^{2} & 0\\
+0 & \left(\sigma^{k,2}\simeq\mathcal{U}^{\sigma}\right)^{2}
+\end{array}\right]
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+With the conscious choice of the diagonal covariance-matrix,
+ one could easily calculate the analytic expression for the corresponding source term 
+\begin_inset Formula $f_{i}^{k}$
+\end_inset
+
+.
+ Collecting the results,
+ one concludes:
+\begin_inset Formula 
+\[
+\left\{ \begin{alignedat}{2}u^{k} & \coloneqq & \; & \frac{1}{2\pi\sigma_{1}\sigma_{2}}\cdot\underline{\exp}\\
+f^{k} & \coloneqq &  & \frac{1}{2\pi\sigma_{1}\sigma_{2}}\cdot\left(\frac{1}{\sigma_{1}^{4}}\left(x_{1}-\mu_{1}\right)^{2}-\frac{1}{\sigma_{1}^{2}}+\frac{1}{\sigma_{2}^{4}}\left(x_{2}-\mu_{2}\right)^{2}-\frac{1}{\sigma_{2}^{2}}\right)\cdot\underline{\exp}\\
+\underline{\exp} & \coloneqq &  & \exp\left(-\frac{1}{2}\left(\frac{1}{\sigma_{1}^{2}}\left(x_{1}-\mu_{1}\right)^{2}+\frac{1}{\sigma_{2}^{2}}\left(x_{2}-\mu_{2}\right)^{2}\right)\right)
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+Note that the sub-index 
+\begin_inset Formula $i$
+\end_inset
+
+ is omitted above for notational convenience.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+Choice of constants
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+similar to the 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-sines
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset as introduced in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:poisson-sum-of-sines"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ 
+\begin_inset Formula $c_{k}\coloneqq4$
+\end_inset
+
+ samples of 
+\begin_inset Formula $u_{i}^{k}$
+\end_inset
+
+ are used to generate one instance of the solution 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Itemize
+the sample-weights 
+\begin_inset Formula $\texttt{R}^{k}$
+\end_inset
+
+ are drawn from a uniform distribution:
+ 
+\begin_inset Formula $\texttt{R}_{i}^{k}\simeq\mathcal{U}\left[0.3;0.7\right]$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Itemize
+to construct the Gaussian PDFs 
+\begin_inset Formula $\mathcal{N}^{k}$
+\end_inset
+
+,
+ expected-values 
+\begin_inset Formula $\mu^{k}$
+\end_inset
+
+ are sampled (uniformly) from the entire grid,
+ and values of 
+\begin_inset Formula $\sigma^{k,\{1,2\}}$
+\end_inset
+
+ of the diagonal covariance matrix 
+\begin_inset Formula $\text{Cov}^{k}$
+\end_inset
+
+ are spawned from 
+\begin_inset Formula $\mathcal{U}^{\sigma}\left[0.04;0.13\right]$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In similar fashion to the 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-sines
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset,
+ two instances of the 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-Gaussians
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset are plotted in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:dataset-poisson-gauss"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../../bin/raw_poisson_gauss.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:dataset-poisson-gauss"
+
+\end_inset
+
+Visualization of the 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-Gaussians
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset,
+ each constructed from 
+\begin_inset Formula $c_{k}\coloneqq4$
+\end_inset
+
+ samples as specified in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:raw-poisson-gaussian"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ Plotting convention follows that of Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:dataset-poisson-sine"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ for the 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-sines
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset.
+ Each subplot scaled to its own dynamic range.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Heuristic comparisons
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Heuristic-comparisons-poisson-dataset"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+By inspecting the plots for the sum-of-sines and the sum-of-Gaussians datasets in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:dataset-poisson-sine"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ and Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:dataset-poisson-gauss"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ respectively,
+ one draws the following conclusion:
+ the sum-of-sines dataset appears 
+\begin_inset Quotes xld
+\end_inset
+
+smoother
+\begin_inset Quotes xrd
+\end_inset
+
+ in general,
+ where instances of the sum-of-Gaussians dataset are more jagged and display highly pronounced extrema.
+ Also,
+ the sum-of-Gaussians dataset contains large areas of 
+\begin_inset Formula $0$
+\end_inset
+
+,
+ whereas instances of the sum-of-sines dataset are generally non-vanishing.
+\end_layout
+
+\begin_layout Standard
+For the purpose of this thesis,
+ the sum-0f-sines dataset will be the primary representative of the Poisson equation from this point forward.
+ The sum-of-Gaussians variant provides an alternative for the interested reader if further experimentation is desired.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+These heuristics will be further expanded upon in later analysis,
+ see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Eval-Poisson-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Heat Equation
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Heat-Equation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Developed by Fourier in 1822,
+ the parabolic heat equation describes the diffusion process of physics quantities such as its namesake through a certain region:
+\begin_inset Formula 
+\[
+\begin{alignedat}{3} & \; & \frac{\partial}{\partial t}u & = & \; & \frac{\partial^{2}}{\partial x_{1}^{2}}u+\frac{\partial^{2}}{\partial x_{2}^{2}}u\\
+\Longrightarrow &  & \dot{u} & = &  & \nabla^{2}u
+\end{alignedat}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Dataset for heat equation
+\begin_inset CommandInset label
+LatexCommand label
+name "def:raw-heat"
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The dataset is constructed with the same super-positioning technique as seen previously:
+\begin_inset Formula 
+\[
+u_{i}\coloneqq\mathop{\sum_{k\in\left[1;c_{k}\right]}\biggl\{\texttt{R}^{k}\cdot u_{i}^{k}\biggr\}}\:,\quad\texttt{R}\in\mathbb{R}^{c_{k}}
+\]
+
+\end_inset
+
+where each instance-sample 
+\begin_inset Formula $u_{i}^{k}$
+\end_inset
+
+ is defined as:
+\begin_inset Formula 
+\[
+u_{i}^{k}\coloneqq\exp\left(-2k^{2}\pi^{2}t\right)\underbrace{\sin\left(k_{1}\pi x_{1}\right)\sin\left(k_{2}\pi x_{2}\right)}_{\eqqcolon\:\underline{\sin}}
+\]
+
+\end_inset
+
+The validity of the construction is easily checked with the property of the squared trig-terms Laplacian stated in Fact 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fact:Laplacian-of-double-trig"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ previously seen when defining the sum-of-sines dataset for the Poisson equation in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:poisson-sum-of-sines"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Due to the double sin-product term,
+ this dataset is internally named 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-sines
+\begin_inset Quotes xrd
+\end_inset
+
+ as well,
+ similar to the dataset for the Poisson equation seen in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:poisson-sum-of-sines"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+Configuration of heat equation dataset
+\begin_inset CommandInset label
+LatexCommand label
+name "exa:raw-heat-config"
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The dataset above is defined on the following (two-dimensional) grid:
+ 
+\begin_inset Formula 
+\[
+x_{1,2}\in\left[-1.0,+1.0\right]^{2}
+\]
+
+\end_inset
+
+with the usual 
+\begin_inset Formula $64$
+\end_inset
+
+ grid-points resolution.
+ The end-time is defined as 
+\begin_inset Formula $t_{T}\coloneqq0.0050$
+\end_inset
+
+.
+ One collects the details of this dataset with the boundary conditions as follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left\{ \begin{alignedat}{3} & \, & u_{i}^{k} & \coloneqq & \; & \exp\left(-2k^{2}\pi^{2}t\right)\cdot\mathop{\underline{\sin}}\\
+ &  & u_{i}^{k}\left(0,\forall x_{1},\forall x_{2}\right) & \coloneqq &  & \mathop{\underline{\sin}}\quad\text{[Temporal Bound.]}\\
+ &  & u_{i}^{k}\left(\forall t,\partial_{x_{1}},\partial_{x_{2}}\right) & \equiv &  & 0\qquad\text{[Spatial Bound.]}\\
+ &  & \underline{\sin} & \coloneqq &  & \sin\left(k\pi x_{1}\right)\sin\left(k\pi x_{2}\right)
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The super-positioning procedure is configured in a similar manner as for the Poisson equation datasets in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "exa:raw-poisson-sines-config"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ Notably,
+ 
+\begin_inset Formula $c_{k}\coloneqq4$
+\end_inset
+
+ samples are included in each instance,
+ and sample weights 
+\begin_inset Formula $\texttt{R}^{k}$
+\end_inset
+
+ are drawn from the usual uniform distribution 
+\begin_inset Formula $\text{Unif}\left[-1.0;+1.0\right]$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\texttt{R}_{k}\simeq\mathcal{U}\left[-1.0;+1.0\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+Visualization of dataset
+\begin_inset CommandInset label
+LatexCommand label
+name "note:raw-heat-plot"
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Visualization of the dataset as specified above is given in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:dataset-heat-raw"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ Subplots in the three columns depict,
+ from left to right,
+ snapshots of the solution 
+\begin_inset Formula $u$
+\end_inset
+
+ at the initial time 
+\begin_inset Formula $u_{t_{0}\equiv0.0}$
+\end_inset
+
+,
+ the middle 
+\begin_inset Formula $u_{t=0.0025}$
+\end_inset
+
+ and the final time 
+\begin_inset Formula $u_{t_{T}\coloneqq0.0050}$
+\end_inset
+
+respectively.
+\end_layout
+
+\begin_layout Standard
+Note that to visualize the diffusion-process of the solution 
+\begin_inset Formula $u$
+\end_inset
+
+,
+ all subplots are plotted against the 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+same
+\end_layout
+
+\end_inset
+
+ dynamic range.
+ In particular,
+ one observes the common 
+\begin_inset Formula $z$
+\end_inset
+
+-axis value range among all three 3D surface plots.
+\end_layout
+
+\begin_layout Standard
+The plotting routine is provided as a method of the dataset-provider class directly.
+ An extra utility function is provided to plot the evolution of 
+\begin_inset Formula $u$
+\end_inset
+
+ as an animated film.
+\begin_inset listings
+lstparams "language=Python"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+# src/pde/heat/dataset.py
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class DatasetHeat(DatasetPDE2d):
+\end_layout
+
+\begin_layout Plain Layout
+
+    def plot_snapshots(self) -> None:
+\end_layout
+
+\begin_layout Plain Layout
+
+        ...
+  # implementation detail not shown
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def plot_animation(self) -> None:
+\end_layout
+
+\begin_layout Plain Layout
+
+        ...
+  # implementation detail not shown
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../../bin/raw_heat.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:dataset-heat-raw"
+
+\end_inset
+
+Visualization of the heat equation dataset,
+ defined in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:raw-heat"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ and configured as specified in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "exa:raw-heat-config"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ 
+\begin_inset Formula $c_{k}\coloneqq4$
+\end_inset
+
+ samples are super-positioned to generate the instance 
+\begin_inset Formula $u$
+\end_inset
+
+ as shown.
+ All figures are plotted using the same dynamic range.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+REWRITE!
+\end_layout
+
+\begin_layout Plain Layout
+samples as specified in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:poisson-sum-of-sines"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ Ordering of the plots mimics that of Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:dataset-poisson-sine"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ for the 
+\begin_inset Quotes xld
+\end_inset
+
+Sum-of-Sines
+\begin_inset Quotes xrd
+\end_inset
+
+ dataset.
+ First row:
+ contour-plots of 
+\begin_inset Formula $4$
+\end_inset
+
+ different instances of the solution 
+\begin_inset Formula $u$
+\end_inset
+
+.
+ Second row:
+ contour-plots and 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+3D
+\end_layout
+
+\end_inset
+
+ surface-plots of both the solution 
+\begin_inset Formula $u$
+\end_inset
+
+ and the source-term 
+\begin_inset Formula $f$
+\end_inset
+
+ of one (common) instance.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mathop{\sum_{k\in\left[1;c_{k}\right]}\biggl\{\cdot\exp\left(-2m^{2}\pi^{2}t\right)\sin\left(m\pi x_{1}\right)\sin\left(m\pi x_{2}\right)\biggr\}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Wave Equation
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Wave-Equation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Mathematically,
+ it is expressed as ∂2u∂t2=c2∇2u∂t2∂2u=c2∇2u,
+ where uu represents the wave function,
+ tt is time,
+ cc is the wave speed,
+ and ∇2∇2 is the Laplacian operator.
+ The wave equation captures how disturbances travel over time and space,
+ playing a crucial role in fields like physics,
+ engineering,
+ and applied mathematics.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A fundamental PDE model to describe wave propagation through mediums,
+ the wave equation is formulated as:
+\begin_inset Formula 
+\[
+\begin{alignedat}{3} & \; & \frac{\partial}{\partial t^{2}}u & = & \; & c_{c}^{2}\biggl(\frac{\partial^{2}}{\partial x_{1}^{2}}u+\frac{\partial^{2}}{\partial x_{2}^{2}}u\biggr)\\
+\Longrightarrow &  & \ddot{u} & = &  & c_{c}^{2}\;\nabla^{2}u
+\end{alignedat}
+\]
+
+\end_inset
+
+The particular dataset for the wave equation as deployed in this thesis is defined as:
+\end_layout
+
+\begin_layout Definition
+Dataset wave equation
+\begin_inset CommandInset label
+LatexCommand label
+name "def:raw-wave"
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Each instance of the solution 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+ is calculated as:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+u_{i}\coloneqq\mathop{\sum\sum\biggl\{\Bigl(\texttt{R}_{k_{1},k_{2}}\left(k_{1}^{2}+k_{2}^{2}\right)^{-c_{r}}\Bigr)\cdot\cos\left(c_{c}\sqrt{k_{1}^{2}+k_{2}^{2}}\pi t\right)\cdot\underbrace{\sin\left(k_{1}\pi x_{1}\right)\sin\left(k_{2}\pi x_{2}\right)}_{\eqqcolon\:\underline{\sin}}\biggr\}}
+\]
+
+\end_inset
+
+which is easily verifiable using the Trig-Laplacian property in Fact 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fact:Laplacian-of-double-trig"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ Plugging in the initial time 
+\begin_inset Formula $t_{o}\equiv0.0$
+\end_inset
+
+,
+ one obtains the following formulation of the dataset with the temporal boundary condition:
+\begin_inset Formula 
+\[
+\left\{ \begin{alignedat}{3} & \, & u_{i} & \coloneqq & \; & \mathop{\sum\sum\biggl\{\Bigl(\texttt{R}_{k_{1},k_{2}}\left(k_{1}^{2}+k_{2}^{2}\right)^{-c_{r}}\Bigr)\cdot\cos\left(c_{c}\sqrt{k_{1}^{2}+k_{2}^{2}}\pi t\right)\cdot\underline{\sin}\biggr\}}\\
+ &  & u_{i}^{k}\left(0,\forall x_{1},\forall x_{2}\right) & \coloneqq &  & \mathop{\sum\sum\biggl\{\Bigl(\texttt{R}_{k_{1},k_{2}}\left(k_{1}^{2}+k_{2}^{2}\right)^{-c_{r}}\Bigr)\cdot\underline{\sin}\biggr\}}\\
+ &  & \underline{\sin} & \coloneqq &  & \sin\left(k_{1}\pi x_{1}\right)\sin\left(k_{2}\pi x_{2}\right)
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that,
+ once again,
+ due to the presence of the double sin-product term,
+ this dataset is codenamed 
+\begin_inset Quotes xld
+\end_inset
+
+sum-of-sines
+\begin_inset Quotes xrd
+\end_inset
+
+,
+ just as the previous datasets for the Poisson and the heat equation.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The constants of the above dataset are configured as follows:
+\end_layout
+
+\begin_layout Example
+Configuration of wave equation dataset
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:raw-wave-config"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ enlists the values of the configuration options of the wave equation dataset above,
+ leading to the following spatial boundary condition:
+\begin_inset Formula 
+\[
+u_{i}^{k}\left(\forall t,\partial_{x_{1}},\partial_{x_{2}}\right)\coloneqq0\qquad\text{[Spatial Bound.]}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Similar to the construction of the heat equation dataset seen previously,
+ the super-positioning routine is performed on 
+\begin_inset Formula $c_{k}\coloneqq4$
+\end_inset
+
+ samples per instance.
+ The weights of each sample are sampled from the usual uniform distribution spanning 
+\begin_inset Formula $\left[-1.0;+1.0\right]$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\texttt{R}_{k_{1},k_{2}}\simeq\mathcal{U}\left[-1.0;+1.0\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="5">
+<features booktabs="true" islongtable="true" longtabularalignment="center">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="center" valignment="top">
+<column alignment="right" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Configuration
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\qquad\qquad\qquad$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Value
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Space grid
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $x_{1,2}\in\left[0.0,+1.0\right]^{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+End time
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $t_{T}\coloneqq5.0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Constant 
+\begin_inset Formula $c^{r}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula $0.85$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Constant 
+\begin_inset Formula $c^{c}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0.1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:raw-wave-config"
+
+\end_inset
+
+Default configuration of the dataset for the wave equation,
+ seen in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:raw-wave"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Note
+Visualization of dataset
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Visualization of the dataset as specified as above is given in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:dataset-wave-raw"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ Following the plotting convention as established for the heat equation,
+ the three columns depict snapshots of the solution 
+\begin_inset Formula $u$
+\end_inset
+
+ at the initial time 
+\begin_inset Formula $u_{t_{0}\equiv0.0}$
+\end_inset
+
+,
+ the middle 
+\begin_inset Formula $u_{t=2.5}$
+\end_inset
+
+ and the final time 
+\begin_inset Formula $u_{t_{T}\coloneqq5.0}$
+\end_inset
+
+ respectively.
+ Note that to aide the visualization of the wave-like character of the solution 
+\begin_inset Formula $u$
+\end_inset
+
+,
+ all subplots are plotted against the 
+\begin_inset Flex Emph
+status open
+
+\begin_layout Plain Layout
+same
+\end_layout
+
+\end_inset
+
+ dynamic range.
+ In particular,
+ one observes the common 
+\begin_inset Formula $z$
+\end_inset
+
+-axis value range among all three 3D surface plots.
+\end_layout
+
+\begin_layout Standard
+Similar to the visualization mechanism of the heat equation dataset in Note 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "note:raw-heat-plot"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ the plotting routine is embedded directly in the dataset class.
+ However,
+ an extra option is provided for the snapshot-plots:
+ the reader is encouraged to run the function with non-uniform scaling for the snapshot subplots to be scaled separately.
+\begin_inset listings
+lstparams "language=Python"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+# src/pde/wave/dataset.py
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class DatasetWave(DatasetPDE2d):
+\end_layout
+
+\begin_layout Plain Layout
+
+    def plot_snapshots(self,
+ uniform_scale:
+ bool = True) -> None:
+\end_layout
+
+\begin_layout Plain Layout
+
+        ...
+  # implementation detail not shown
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+\left\{ \begin{alignedat}{2}u_{i} & \coloneqq & \; & \sum_{m,n\in\left[1;c_{k}\right]}\biggl\{\left(m^{2}+n^{2}\right)^{-c_{r}}\,\texttt{A}_{m,n}\cdot\sin\left(m\pi x_{1}\right)\sin\left(n\pi x_{2}\right)\biggr\}\\
+u_{i}\left(0,x_{1},x_{2}\right) & \coloneqq &  & \sum_{m,n\in\left[1;c_{k}\right]}\biggl\{\left(m^{2}+n^{2}\right)^{-c_{r}}\,\texttt{A}_{m,n}\cdot\sin\left(m\pi x_{1}\right)\sin\left(n\pi x_{2}\right)\biggr\}\\
+u_{i}\left(t,\partial_{1},\partial_{2}\right) & \equiv &  & 0
+\end{alignedat}
+\right.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Subsection
+Darcy Flow
+\end_layout
+
+\begin_layout Plain Layout
+The Darcy PDE is a non-linear elliptic PDE of second order
+\begin_inset Formula 
+\[
+-\nabla\circ\left(k\left(\mathbf{x}\right)\nabla u\right)=f
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $k\left(\mathbf{x}\right)$
+\end_inset
+
+ denotes the permeability field,
+ as well as solution 
+\begin_inset Formula $u$
+\end_inset
+
+ and the force source 
+\begin_inset Formula $f$
+\end_inset
+
+ as previously introduced with the Poisson Equation in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Poisson-Equation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ The Darcy Flow problem is discussed in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "darcy-nvidia,fno,fno-neural-operator"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../../bin/raw_wave.png
+	width 16cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:dataset-wave-raw"
+
+\end_inset
+
+Visualization of the wave equation dataset,
+ defined in Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:raw-wave"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ and configured as specified in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:raw-wave-config"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ All figures shown are plotted using the same dynamic range.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Summary
+\end_layout
+
+\begin_layout Standard
+To summarize this section on the PDE models used in this thesis,
+ Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:raw-quickref"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ enumerates the three equations discussed above,
+ along with a quick overview of their key properties.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+# src/problem.py
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class ProblemHeat(Problem):
+\end_layout
+
+\begin_layout Plain Layout
+
+    def __init__(self):
+\end_layout
+
+\begin_layout Plain Layout
+
+        super().__init__(n_channels_raw=dataset_heat.DatasetHeat.N_CHANNELS)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def _dataset_raw(self) -> dataset_heat.DatasetHeat:
+\end_layout
+
+\begin_layout Plain Layout
+
+        grids = grid.Grids(
+\end_layout
+
+\begin_layout Plain Layout
+
+            [
+\end_layout
+
+\begin_layout Plain Layout
+
+                grid.Grid.from_start_end(64,
+ start=-1.0,
+ end=1.0),
+\end_layout
+
+\begin_layout Plain Layout
+
+                grid.Grid.from_start_end(64,
+ start=-1.0,
+ end=1.0),
+\end_layout
+
+\begin_layout Plain Layout
+
+            ],
+\end_layout
+
+\begin_layout Plain Layout
+
+        )
+\end_layout
+
+\begin_layout Plain Layout
+
+        grid_time = grid.GridTime.from_start_end_only(end=0.005)
+\end_layout
+
+\begin_layout Plain Layout
+
+        return dataset_heat.DatasetHeat(grids,
+ grid_time)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class ProblemWave(Problem):
+\end_layout
+
+\begin_layout Plain Layout
+
+    def __init__(self):
+\end_layout
+
+\begin_layout Plain Layout
+
+        super().__init__(n_channels_raw=dataset_wave.DatasetWave.N_CHANNELS)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    def _dataset_raw(self) -> dataset_wave.DatasetWave:
+\end_layout
+
+\begin_layout Plain Layout
+
+        grids = grid.Grids(
+\end_layout
+
+\begin_layout Plain Layout
+
+            [
+\end_layout
+
+\begin_layout Plain Layout
+
+                grid.Grid.from_start_end(64,
+ start=0.0,
+ end=1.0),
+\end_layout
+
+\begin_layout Plain Layout
+
+                grid.Grid.from_start_end(64,
+ start=0.0,
+ end=1.0),
+\end_layout
+
+\begin_layout Plain Layout
+
+            ],
+\end_layout
+
+\begin_layout Plain Layout
+
+        )
+\end_layout
+
+\begin_layout Plain Layout
+
+        grid_time = grid.GridTime.from_start_end_only(end=5.0)
+\end_layout
+
+\begin_layout Plain Layout
+
+        return dataset_wave.DatasetWave(grids,
+ grid_time)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="9">
+<features booktabs="true" islongtable="true" longtabularalignment="center">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="right" valignment="top" width="0pt">
+<column alignment="right" valignment="top" width="0pt">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Equation
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\quad$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+super-pos.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+grid
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $t_{T}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\quad$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+key channels
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Poisson (Sine)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $c_{k}\coloneqq4$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[0.0,+0.63\right]^{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="3" alignment="center" valignment="middle" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\diameter$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="3" alignment="right" valignment="middle" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+solution 
+\begin_inset Formula $u$
+\end_inset
+
+;
+ source 
+\begin_inset Formula $f$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Poisson (Gauss)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="center" valignment="middle" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Heat
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[-1.0,+1.0\right]^{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula $0.005$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="3" alignment="right" valignment="middle" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+init 
+\begin_inset Formula $u_{t=0}$
+\end_inset
+
+;
+ end 
+\begin_inset Formula $u_{t=T}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Wave
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[0.0,+1.0\right]^{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $5.0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:raw-quickref"
+
+\end_inset
+
+PDE prototypes quick reference
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus concludes this introductory chapter on essential concepts used in this thesis:
+ key concepts including spatial and temporal discretization is are revisited and formalized,
+ masking as a concept is defined,
+ and the dataset generation routine is laid out.
+ In the upcoming chapter,
+ three concretes PDE models are introduced in the context of masked dataset generation,
+ before moving along towards the actual learning procedure and result evaluation.
+\end_layout
+
+\end_body
+\end_document
